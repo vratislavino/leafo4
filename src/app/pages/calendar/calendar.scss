@@ -1,0 +1,132 @@
+page-calendar {
+
+    .circ {
+        border-radius: 50%;
+        min-width: 7vh;
+        min-height: 7vh;
+        background-color: map-get($map: $colors, $key: 'orangeNormal');
+        float: left;
+        margin-right: 8px;
+        color: white;
+    }
+
+    .review-buttons {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0px!important;
+        left: 0px!important;
+        font-size: 0.8em;
+
+        .grid {
+            padding: 0px;
+        }
+        .circ {
+            margin-right: 0px;
+            /*background-color: rgba(0, 0, 0, 0.6);*/
+            box-shadow: 2px 2px 2px black;
+        }
+    }
+
+    ion-icon.fab-close-icon.icon.icon-md.ion-md-close {
+        display: none;
+    }
+
+    .fab-close-active .button-inner {
+        opacity: 1!important;
+        -webkit-transform: unset!important;
+        transform: unset!important;
+        background-color: map-get($map: $colors, $key: 'orangeNormal');
+    }
+
+    .fab {
+        background-color: map-get($map: $colors, $key: 'orangeNormal');
+    }
+
+    .review {
+        bottom: unset;
+    }
+
+    ion-fab-list, ion-fab {
+        //background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .fab-list-active button {
+        padding: 24px;
+    }
+
+    .calendar {
+        max-width: 600px;
+        margin: 0 auto;
+
+        .today {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .selected {
+            background-color: rgba(42, 105, 140, 0.6);
+            text-shadow: 2px 2px 2px black;
+        }
+    }
+
+    .item-divider {
+        background-color: map-get($map: $colors, $key: 'orangeNormal') !important;
+    }
+
+    .review {
+        line-height: 3em;
+        font-size: 1em;
+        font-weight: 900;
+    }
+
+    .main-day {
+        padding-top: 12px;
+        width: 8vh;
+        height: 8vh;
+        font-size: 1.2em;
+        line-height: 1em;
+
+        .day-num {
+            font-weight: 900;
+        }
+
+        .day-in-week {
+            font-size: 0.8em;
+        }
+    }
+
+    .review-buttons {
+        position: absolute !important;
+        overflow: visible;
+        top: -30px;
+        left: 17px;
+    }
+
+
+    .notes {
+        ion-icon {
+            margin:0 !important;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .item-inner {
+            margin: 0 !important;
+            margin-left: 6px !important;
+        }
+    }
+
+
+}
+.card-md {
+    background: map-get($colors, orangeNormal);  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, map-get($colors, orangeNormal), map-get($colors, orangeDark));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, map-get($colors, orangeNormal), map-get($colors, orangeDark)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.item-md {
+    background-color: white!important;
+    color: black;
+}

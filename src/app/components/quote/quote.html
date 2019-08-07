@@ -1,0 +1,26 @@
+<!-- Generated template for the QuoteComponent component -->
+<ion-item-sliding class="quote" no-lines>
+  <ion-item>
+    <p class="quote-text ma-centered" text-wrap>"{{ quoteObj.text }}"</p>
+    <p style="text-align: center; color: white; margin-top: 8px;">- Jarda99</p>
+    <!--<div class="action-icons ma-centered">
+      <button ion-button><ion-icon name="share"></ion-icon></button>
+      <button ion-button><ion-icon name="image"></ion-icon></button>
+      <button ion-button (click)="onFavedClicked()">
+          <ion-icon *ngIf='quoteObj.faved==1' name="star"></ion-icon>
+          <ion-icon *ngIf='quoteObj.faved==0' name="star-outline"></ion-icon>        
+      </button>
+    </div>-->
+  </ion-item>
+  <ion-item-options side="start">
+    <button ion-button color="dark" (click)="unread(item)"><ion-icon name="image"></ion-icon></button>
+  </ion-item-options>
+  <ion-item-options side="end">
+    <button ion-button color="light" (click)="onFavedClicked()">
+          <!--<ion-icon *ngIf='quoteObj.faved==1' name="star"></ion-icon>
+          <ion-icon *ngIf='quoteObj.faved==0' name="star-outline"></ion-icon>
+          Favorite-->
+    </button>
+    <button ion-button color="danger"><ion-icon name="share"></ion-icon>Share</button>
+  </ion-item-options>
+</ion-item-sliding>

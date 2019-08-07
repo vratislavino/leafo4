@@ -9,11 +9,39 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
+  },
+  {
+    path: 'quotes',
+    loadChildren: () => import('./pages/quotes/quotes.module').then(m => m.QuotesPageModule)
+  },
+  {
+    path: 'advices',
+    loadChildren: () => import('./pages/advices/advices.module').then(m => m.AdvicesPageModule)
+  },
+  {
+    path: 'calendar',
+    loadChildren: () => import('./pages/calendar/calendar.module').then(m => m.CalendarPageModule)
+  },
+  {
+    path: 'tree',
+    loadChildren: () => import('./pages/tree/tree.module').then(m => m.TreePageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsPageModule)
+  },
+  {
+    path: 'quote-popup/:autor',
+    loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsPageModule)
   }
 ];
 

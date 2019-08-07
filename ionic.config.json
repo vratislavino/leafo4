@@ -1,5 +1,8 @@
 {
   "name": "Leafo",
-  "integrations": {},
-  "type": "angular"
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "da26811d"
 }

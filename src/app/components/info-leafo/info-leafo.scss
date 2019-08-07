@@ -1,0 +1,57 @@
+info-leafo {
+	.hide {
+	display:none;
+	}
+
+    #leafo-info {
+		width: calc(100% - 32px);
+		min-height: 200px;
+		display: none;
+		position: absolute;
+		top: calc(50% - 100px);
+		left: 0px;
+		padding: 15px;
+		opacity: 1;
+		animation: opacka 0.5s linear;
+		z-index: 1000;
+		.logo {
+			float: left;
+			width: 20%;
+			height: auto;
+		}
+		.text {
+			float: right;
+			width: 80%;
+			height: auto;
+			padding: 10px;
+			border: 2px solid wheat;
+			border-radius: 8px;
+			background-color: white;
+			color: #333333;
+			opacity: 0.8;
+			h2 {
+				margin-bottom: 0px;
+				font-size: 18px;
+				font-weight: bold;
+			}
+			p {
+				margin-top: 0.5em;
+				font-size: 14px;
+				line-height: 1.5em;
+			}
+			p.note {
+				margin-bottom: 0px;
+				font-size: 0.8em;
+				font-style: italic;
+			}
+		}
+	}
+}
+@keyframes opacka {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

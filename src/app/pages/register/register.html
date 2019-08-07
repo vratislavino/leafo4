@@ -1,0 +1,104 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="primDark">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Registrovat se</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+      <ion-label color="primNormal" floating>Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primNormal" floating>Heslo</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primNormal" floating>Heslo znovu</ion-label>
+      <ion-input type="password" [(ngModel)]="passwordA"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primNormal" floating>Přesdívka</ion-label>
+      <ion-input type="text" [(ngModel)]="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primNormal" floating>Oslovení</ion-label>
+      <ion-input type="text" [(ngModel)]="addressing"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primNormal" floating>Jméno</ion-label>
+      <ion-input type="text" [(ngModel)]="firstname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primNormal" floating>Příjmení</ion-label>
+      <ion-input type="text" [(ngModel)]="surname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primNormal" floating>Znamení</ion-label>
+      <ion-select [(ngModel)]="sign">
+        <ion-option value="1">Kozoroh</ion-option>
+        <ion-option value="2">Vodnář</ion-option>
+        <ion-option value="3" selected>Ryby</ion-option>
+        <ion-option value="4">Beran</ion-option>
+        <ion-option value="5">Býk</ion-option>
+        <ion-option value="6">Blíženec</ion-option>
+        <ion-option value="7">Rak</ion-option>
+        <ion-option value="8">Lev</ion-option>
+        <ion-option value="9">Panna</ion-option>
+        <ion-option value="10">Váhy</ion-option>
+        <ion-option value="11">Štír</ion-option>
+        <ion-option value="12">Střelec</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primNormal" floating>Pohlaví</ion-label>
+      <ion-select [(ngModel)]="sex">
+        <ion-option value="1">Muž</ion-option>
+        <ion-option value="2">Žena</ion-option>
+        <ion-option value="3" selected>Jiné</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-lines>
+      <button ion-button color="primDark" full large (click)="register()">Registrovat se</button>
+    </ion-item>
+
+    <ion-item class="toppadding0" no-lines>
+        <button ion-button color="primDark" full>Registrovat se přes Facebook</button>
+    </ion-item>
+    <ion-item class="toppadding0" no-lines>
+        <button ion-button color="primDark" full>Registrovat se přes Google+</button>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>
+<ion-footer padding>
+    <ion-list class="bottom-menu">
+        <ion-item class="no-acc" menuClose routerLink="/login" color="primNormal" >
+            <ion-icon name="person-add" item-start></ion-icon>
+            <ion-icon name="arrow-forward" item-end></ion-icon>
+            Již mám účet
+          </ion-item>
+      </ion-list>
+</ion-footer>

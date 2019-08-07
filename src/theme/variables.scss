@@ -74,4 +74,66 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --ion-color-orange: #F77F00;
+  --ion-color-orange-rgb: 247,127,0;
+  --ion-color-orange-contrast: #000000;
+  --ion-color-orange-contrast-rgb: 0,0,0;
+  --ion-color-orange-shade: #d97000;
+  --ion-color-orange-tint: #FF9F1C;
+
+  --ion-color-yellow: #FDE74C;
+  --ion-color-yellow-rgb: 253,231,76;
+  --ion-color-yellow-contrast: #000000;
+  --ion-color-yellow-contrast-rgb: 0,0,0;
+  --ion-color-yellow-shade: #F5CB5C;
+  --ion-color-yellow-tint: #fcb010;
+
+  --ion-color-red: #D62828;
+  --ion-color-red-rgb: 214,40,40;
+  --ion-color-red-contrast: #ffffff;
+  --ion-color-red-contrast-rgb: 255,255,255;
+  --ion-color-red-shade: #c10a21;
+  --ion-color-red-tint: #F43366;
+
+  --ion-color-green: #5a9913;
+  --ion-color-green-rgb: 90,153,19;
+  --ion-color-green-contrast: #ffffff;
+  --ion-color-green-contrast-rgb: 255,255,255;
+  --ion-color-green-shade: #5a9913;
+  --ion-color-green-tint: #70bc1a;
 }
+
+.ion-color-yellow {
+  --ion-color-base: var(--ion-color-yellow);
+  --ion-color-base-rgb: var(--ion-color-yellow-rgb);
+  --ion-color-contrast: var(--ion-color-yellow-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-yellow-contrast-rgb);
+  --ion-color-shade: var(--ion-color-yellow-shade);
+  --ion-color-tint: var(--ion-color-yellow-tint);
+}
+.ion-color-red {
+  --ion-color-base: var(--ion-color-red);
+  --ion-color-base-rgb: var(--ion-color-red-rgb);
+  --ion-color-contrast: var(--ion-color-red-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-red-contrast-rgb);
+  --ion-color-shade: var(--ion-color-red-shade);
+  --ion-color-tint: var(--ion-color-red-tint);
+}
+.ion-color-green {
+  --ion-color-base: var(--ion-color-green);
+  --ion-color-base-rgb: var(--ion-color-green-rgb);
+  --ion-color-contrast: var(--ion-color-green-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-green-contrast-rgb);
+  --ion-color-shade: var(--ion-color-green-shade);
+  --ion-color-tint: var(--ion-color-green-tint);
+}
+.ion-color-orange {
+  --ion-color-base: var(--ion-color-orange);
+  --ion-color-base-rgb: var(--ion-color-orange-rgb);
+  --ion-color-contrast: var(--ion-color-orange-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-orange-contrast-rgb);
+  --ion-color-shade: var(--ion-color-orange-shade);
+  --ion-color-tint: var(--ion-color-orange-tint);
+}
+

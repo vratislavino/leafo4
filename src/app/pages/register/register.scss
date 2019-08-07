@@ -1,0 +1,27 @@
+page-register {
+    .toppadding0 ion-label {
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top:0;
+        margin-bottom: 0;
+    }
+
+    ion-item h5 {
+        margin-top: 4vh !important;
+        text-align: center;
+    } 
+    
+    .no-acc {
+        background-color: map-get($colors, primNormal) !important;
+        color: map-get($colors, secLightText);
+    }
+
+    .login-button.item-md, .bottom-menu .item-md {
+        background-color: map-get($colors, primDark) !important;
+        color: map-get($colors, secLightText);
+    }
+
+    .item-md {
+        background-color: transparent!important;
+    }
+}

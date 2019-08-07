@@ -1,0 +1,132 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="primDark">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Nastavení</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+  <ion-slides #slider (ionSlideWillChange)="justChanged()">
+    <ion-slide>
+      <ion-item no-lines>
+        <ion-label>
+          <ion-icon name="contact"></ion-icon> Přihlašovací údaje
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primNormal" stacked>
+          E-mail
+        </ion-label>
+        <ion-input type="email" value="{{ currentUserData.email }}" (input)='onInput("email", $event.target.value);'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primNormal" stacked>
+          Heslo
+        </ion-label>
+        <ion-input type="password" value="12345"></ion-input>
+      </ion-item>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-item no-lines>
+        <ion-label>
+          <ion-icon name="contact"></ion-icon> Úprava profilu
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primNormal" stacked>
+          Křestní jméno
+        </ion-label>
+        <ion-input type="text" value="{{ currentUserData.firstname }}" (input)='onInput("firstname", $event.target.value);'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primNormal" stacked>
+          Oslovení
+        </ion-label>
+          <ion-input type="text" value="{{ currentUserData.addressing }}" (input)='onInput("addressing", $event.target.value);'></ion-input>
+      </ion-item>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-item no-lines>
+        <ion-label>
+          Znamení
+        </ion-label>
+      </ion-item>
+      <ion-item no-lines>
+        <ion-select [(ngModel)]="currentUserData.sign">
+          <ion-option value="1">Kozoroh</ion-option>
+          <ion-option value="2">Vodnář</ion-option>
+          <ion-option value="3" selected>Ryby</ion-option>
+          <ion-option value="4">Beran</ion-option>
+          <ion-option value="5">Býk</ion-option>
+          <ion-option value="6">Blíženec</ion-option>
+          <ion-option value="7">Rak</ion-option>
+          <ion-option value="8">Lev</ion-option>
+          <ion-option value="9">Panna</ion-option>
+          <ion-option value="10">Váhy</ion-option>
+          <ion-option value="11">Štír</ion-option>
+          <ion-option value="12">Střelec</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item style="margin-top: 20px;" no-lines>
+        <ion-label>Pohlaví</ion-label>
+      </ion-item>
+        <ion-item no-lines>
+          <ion-select [(ngModel)]="currentUserData.sex">
+          <ion-option value="1" selected>Muž</ion-option>
+          <ion-option value="2">Žena</ion-option>
+          <ion-option value="3">Jiné</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-item>
+        <ion-label>Charakteristika</ion-label>
+      </ion-item>
+      <ion-grid>
+        <ion-row *ngFor="let row of vysledek">
+          <ion-col *ngFor="let col of row">
+            <button ion-button [ngClass]="{'active': col.active}" (click)="updateBckg(col)">
+              {{ col.name }}
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-item no-lines>
+        <ion-label>
+          Změna avatara
+        </ion-label>
+      </ion-item>
+      <ion-card (click)="upload()">
+      
+        <ion-card-header>
+          <img [src]="userImage">
+        </ion-card-header>
+      
+        <ion-card-content>
+          Tapni pro změnu profilové fotky
+        </ion-card-content>
+      
+      </ion-card>
+      <!--<button ion-button color="primNormal" (click)="upload()">Nahrát avatara</button>-->
+    </ion-slide>
+
+  </ion-slides>
+  <div class="bigBtn">
+    <button ion-button color="primNormal" (click)="slideRight()">{{ nextText }}<ion-icon name="ios-arrow-forward"></ion-icon></button>
+  </div>
+</ion-content>

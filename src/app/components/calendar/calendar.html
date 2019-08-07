@@ -1,0 +1,35 @@
+<div class="calendar" text-center>
+    <ion-grid class="calendar-grid">
+
+      <ion-row class="navigation">
+          <ion-col col-3> <button ion-button icon-only clear full (click)="prevMonth()"><ion-icon color="orangeNormal" name="arrow-back"></ion-icon></button></ion-col>
+          
+          <ion-col col-6 class="current-month"><h2 no-margin>{{ currentDate.format('MMMM') }} {{ currentDate.format('YYYY') }}</h2></ion-col>
+
+          <ion-col col-3> <button ion-button icon-only clear full (click)="nextMonth()"><ion-icon  color="orangeNormal" name="arrow-forward"></ion-icon></button></ion-col>
+      </ion-row>
+
+      <ion-row class="day-names">
+        <ion-col *ngFor="let name of dayNames">{{ name }}</ion-col>
+      </ion-row>
+      <div *ngIf="downloaded">
+        <ion-row *ngFor="let week of weeks" class="day-nums">
+          <ion-col *ngFor="let day of week">
+          	<div class="day-apple" *ngIf="day.details!=undefined">
+          		<img *ngIf="getApple(day.details, 'id_ra')" src="./../assets/imgs/aNormal.png" />
+          		<img *ngIf="getApple(day.details, 'id_ga')" src="./../assets/imgs/aGolden.png" />
+          	</div>
+            <div class="day-num disabled-days" *ngIf="!isSelectedMonth(day.mDate)" (click)="selectDate(day)">
+              <span class="date-text">{{ day.mDate.date() }} </span>
+            </div>
+            <div class="day-num"
+                 *ngIf="isSelectedMonth(day.mDate)"
+                 (click)="selectDate(day)"
+                 [ngClass]="{ today: day.today, selected: day.selected, rated: day.details==undefined ? false : day.details.rating >= 0 }">
+              <span class="date-text">{{ day.mDate.date() }}</span>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-grid>
+  </div>

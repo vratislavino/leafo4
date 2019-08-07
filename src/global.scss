@@ -24,3 +24,116 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+/*
+@import "ionic.globals";
+@import "ionic.theme.default";
+@import "ionic.ionicons";
+*/
+
+$colors: (
+  primary:    #488aff,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+
+/* GREEN */
+  primNormal: #5a9913,
+  primLight:  #70bc1a,
+  primDark:   #5a9913,
+  secNormal:  #D5C500,
+  secLight:   #EEE6C6, 
+  secDark:    #c8b900,
+  secLightText: #fffaea,
+
+/* RED */
+  redNormal: #D62828,
+  redLight: #F43366,
+  redDark: #c10a21,
+
+/* ORANGE */
+  orangeNormal: #F77F00,
+  orangeLight: #FF9F1C,
+  orangeDark: #F77F00,
+
+/* YELLOW */
+  yellowNormal: #FDE74C,
+  yellowLight: #F5CB5C,
+  yellowDark: #fcb010
+
+/*
+  BLUE
+  primNormal: #5a9913,
+  primLight:  #3D99CC,
+  primDark:   #2980b9,
+  secNormal:  #D5C500,
+  secLight:   #EEE6C6, 
+  secDark:    #c8b900,
+  secLightText: #fffaea
+*/
+  
+/*
+  primNormal: #4caf50,
+  primLight:  #80e27e,
+  primDark:   #087f23,
+  secNormal:  #bdbdbd,
+  secLight:   #efefef, 
+  secDark:    #8d8d8d*/
+);
+
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: url("./assets/fonts/opensans/OpenSans-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: 'KabanaBook';
+    src: url('./assets/fonts/KABANAN.ttf');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+$font-family-md-base: 'Open Sans';
+$font-family-ios-base: 'Open Sans';
+$font-family-wp-base: 'Open Sans';
+
+
+$segment-button-ios-text-color: nth($colors, 5);
+$segment-button-md-text-color-activated:nth($colors, 5);
+$segment-button-wp-text-color-activated:nth($colors, 5);
+
+/* Přepínaní mezi klasickými a oblíbenými */
+$segment-button-md-border-bottom-width: 6px;
+//$segment-button-md-border-bottom-color: map-get($colors, redNormal);
+//$segment-button-md-border-color-activated: map-get($colors, orangeDark);
+$segment-button-md-border-bottom-color: map-get($colors, primNormal);
+$segment-button-md-border-color-activated: map-get($colors, primDark);
+
+
+
+// ##### INPUTS ##### 
+
+$ma-label-text-color: map-get($colors, primNormal);
+$ma-label-text-color-focused: map-get($colors, secDark);
+
+
+$text-input-ios-highlight-color: $ma-label-text-color;
+$text-input-md-highlight-color: $ma-label-text-color-focused;
+
+$label-ios-text-color: $ma-label-text-color;
+$label-ios-text-color-focused: $ma-label-text-color-focused;
+
+$label-md-text-color: $ma-label-text-color;
+$label-md-text-color-focused: $ma-label-text-color-focused;
+
+$label-wp-text-color:$ma-label-text-color;
+$label-wp-text-color-focused:$ma-label-text-color-focused;
+
+$toolbar-md-button-color: map-get($colors, secLight);
+$toolbar-md-title-text-color: map-get($colors, secLight);
+/*$item-md-sliding-content-background: map-get($colors, primDark);*/
+$item-md-divider-color: map-get($colors, secDark);
+

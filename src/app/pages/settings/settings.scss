@@ -1,0 +1,87 @@
+page-settings {
+	.noBorder, .list-md .noBorder.item-block .item-inner, .noBorder.item-ios.item-block .item-inner, .list-ios .noBorder.item-block .item-inner {
+		border: none;
+		border-top: none;
+		border-right: none;
+		border-bottom: none;
+		border-left: none;
+	}
+	.noMargin .item-inner .item-wrapper .label h2 {
+		margin: 0px;
+		margin-top: 0px;
+		margin-right: 0px;
+		margin-bottom: 0px;
+		margin-left: 0px;
+	}
+	.item-list {
+		border-top: none;
+	}
+	.list-ios > .item-block:first-child {
+		border-top: none;
+	}
+	.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+		border: none;
+	}
+	ion-col {
+		text-align: left;
+		font-size: 14px;
+	}
+	ion-grid .item-md.item-block .item-inner {
+		padding-right: 0px;
+		border-bottom: 0px solid transparent;
+	}
+	.item.item-md ion-checkbox.checkbox-md {
+		margin: 0px;
+		font-size: 12px;
+	}
+	.item.item-md ion-checkbox .checkbox-icon {
+		display: none;
+	}
+	.item-checkbox ion-label {
+		margin: 0px;
+		padding: 4px;
+		border-radius: 2px;
+		font-size: 12px;
+		transition: 0.5s;
+	}
+	ion-col .item-block {
+		min-height: auto;
+		padding-left: 0px;
+	}
+	.col button.active, .col button.active:hover {
+		background-color: map-get($map: $colors, $key: 'primNormal');
+		color: white;
+	}
+	.col button {
+		width: 100%;
+		height: 20px;
+		margin: 0px;
+		padding: 0px;
+		background-color: rgba(0, 0, 0, 0.3);
+		color: white;
+		box-shadow: none;
+		font-size: 12px;
+		text-transform: none;
+	}
+	.bigBtn button, .bigBtn button.button-md-primary {
+		display: block;
+		padding: 20px 40px;
+		font-size: 16px;
+		margin: 0 auto;
+		background-color: map-get($colors, primNormal);
+	}
+	.bigBtn {
+		width: calc(100% - 16px);
+		position: absolute;
+		margin: 13px 0px;
+		bottom: 0px;
+		z-index: 2;
+	}
+	.bigBtn ion-icon {
+		margin-left: 8px;
+	}
+	.item-md {
+		background-color: transparent!important;
+		color: white;
+	}
+}
