@@ -6,9 +6,9 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-toolbar>
     <ion-title>Přidat poznámku</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 
 </ion-header>
 
@@ -25,6 +25,6 @@
   		<ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="myDate"></ion-datetime>
 	</ion-item>
 	<ion-item no-lines>
-		<button ion-button (click)="addNote();" color="orangeNormal">Přidat</button>
+		<ion-button (click)="addNote();" color="orangeNormal">Přidat</ion-button>
 	</ion-item>
 </ion-content>

@@ -1,4 +1,3 @@
-import { LeafoInfoProvider } from './../../providers/leafo-info/leafo-info';
 import { Component } from '@angular/core';
 
 /**

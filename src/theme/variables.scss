@@ -2,6 +2,8 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+
+
 :root {
   /** primary **/
   --ion-color-primary: #3880ff;
@@ -102,6 +104,35 @@
   --ion-color-green-contrast-rgb: 255,255,255;
   --ion-color-green-shade: #5a9913;
   --ion-color-green-tint: #70bc1a;
+
+  /// OTHER COLORS
+  --ion-color-sec: #D5C500;
+  --ion-color-sec-light: #EEE6C6;
+  --ion-color-sec-dark: #D5C500;
+  --ion-color-sec-light-text: #fffaea;
+  --ion-color-prim: #5a9913;
+  --ion-color-prim-light: #70bc1a;
+  --ion-color-prim-dark: #5a9913;
+
+  /// APPLICATION STYLES!
+  --ion-background-color: transparent;
+  --ion-font-family: 'Open Sans';
+
+  
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/fonts/opensans/OpenSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'KabanaBook';
+  src: url('../assets/fonts/KABANAN.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .ion-color-yellow {

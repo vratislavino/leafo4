@@ -13,6 +13,7 @@ import { User } from '../../model/UserModel';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
+  styleUrls: ['home.scss'],
   providers: [AccountProvider]
 })
 export class HomePage {

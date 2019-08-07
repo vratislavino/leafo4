@@ -1,4 +1,4 @@
-import { ComponentsModule } from '../../components/components.module';
+import { CalendarComponentModule } from '../../components/calendar/calendar.module';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ import { CalendarPage } from './calendar';
     CommonModule,
     FormsModule,
     IonicModule,
-    ComponentsModule,
+    CalendarComponentModule,
     RouterModule.forChild([
       {
         path: '',

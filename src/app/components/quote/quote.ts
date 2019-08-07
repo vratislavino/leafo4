@@ -9,7 +9,8 @@ import { QuoteModel } from '../../model/QuoteModel.interface';
  */
 @Component({
   selector: 'quote',
-  templateUrl: 'quote.html'
+  templateUrl: 'quote.html',
+  styleUrls: ['quote.scss']
 })
 export class QuoteComponent { 
 

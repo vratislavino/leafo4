@@ -1,73 +1,72 @@
-:host {
+p {
+  font-style: italic;
+  margin-top: 0;
+}
 
-    p {
-        font-style: italic;
-        margin-top: 0;
-    }
+.grid button {
+  width: 100%;
+  padding: 28px 18px;
+  font-size: 18px;
+  text-transform: none;
+  text-align: left;
+}
 
-    .grid button {
-        width: 100%;
-        padding: 28px 18px;
-        font-size: 18px;
-        text-transform: none;
-        text-align: left;
-    }
+.grid button span {
+  justify-content: flex-start;
+}
 
-    .grid button span {
-        justify-content: flex-start;
-    }
+.grid button ion-icon {
+  position: absolute;
+  right: 18px;
+  font-size: 24px;
+}
 
-    .grid button ion-icon {
-        position: absolute;
-        right: 18px;
-        font-size: 24px;
-    }
+.grid button.tree {
+  background-color: #5a9913;
+}
 
-    .grid button.tree {
-        background-color: #5a9913;
-    }
+.grid button.callendar {
+  background-color: var(--ion-color-yellow-shade);
+}
 
-    .grid button.callendar {
-        background-color: map-get($colors, yellowDark);
-    }
+.grid button.profile {
+}
 
-    .grid button.profile {
-    }
+.grid button.quotes {
+  background-color: var(--ion-color-red);
+}
 
-    .grid button.quotes {
-        background-color: map-get($colors, redNormal);
-    }
+.no-acc {
+  background-color: var(--ion-color-prim);
+  color: var(--ion-color-sec-light-text);
+}
 
-    .no-acc {
-        background-color: map-get($colors, primNormal) !important;
-        color: map-get($colors, secLightText);
-    }
+.login-button,
+.login-button.item-md,
+.bottom-menu .item-md {
+  background-color: var(--ion-color-prim-dark);
+  color: var(--ion-color-sec-light-text);
+}
 
-    .login-button, .login-button.item-md, .bottom-menu .item-md {
-        background-color: map-get($colors, primDark) !important;
-        color: map-get($colors, secLightText);
-    }
+.jc {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-    .jc {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+.jc h1 {
+  margin-bottom: 5rem;
+  text-shadow: 2px 2px 2px black;
+  font-size: 36px;
+}
 
-    .jc h1 {
-        margin-bottom: 5rem;
-        text-shadow: 2px 2px 2px black;
-        font-size: 36px;
-    }
+.jc ion-label h2,
+[padding] h2:first-child {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 
-    .jc ion-label h2, [padding] h2:first-child {
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-
-    .item-md {
-        background-color: transparent!important;
-    }
-
+.item-md {
+  background-color: transparent !important;
 }

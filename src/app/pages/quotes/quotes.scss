@@ -1,7 +1,8 @@
-page-quotes {
-
     .list-md ion-item-sliding {
         background-color: transparent;
     }
     
+ion-segment-button {
+    --color: red;
+    --border-style: 6px solid red;
 }

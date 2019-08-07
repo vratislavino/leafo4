@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'quote-popup/:autor',
     loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsPageModule)
+  },
+  {
+    path: 'graph',
+    loadChildren: () => import('./pages/graph/graph.module').then(m => m.GraphPageModule)
   }
 ];
 

@@ -7,7 +7,7 @@ quote {
     .quote-text {
         font-family: 'KabanaBook';
         //color: white;
-        color: map-get($colors, secLightText) !important;
+        color: var(--ion-color-sec-light-text);
     }
 
     .action-icons {
@@ -16,7 +16,7 @@ quote {
     }
 
     .action-icons ion-icon {
-        color: map-get($colors, secLightText);
+        color: var(--ion-color-sec-light-text);
         font-size: 2em;
         padding: 5px;
     }
@@ -32,9 +32,9 @@ quote {
 
     /* HERE THE QUOTES GO */
     .item-md {
-        background: map-get($colors, primNormal);  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, map-get($colors, primNormal), map-get($colors, primDark));  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, map-get($colors, primNormal), map-get($colors, primDark)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: var(--ion-color-prim);  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, var(--ion-color-prim), var(--ion-color-prim-dark));  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, var(--ion-color-prim), var(--ion-color-prim-normal)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         /*background-color: map-get($map: $colors, $key: primDark) !important;*/
     }
     .action-icons .button-md {

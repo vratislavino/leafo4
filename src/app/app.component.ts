@@ -115,7 +115,7 @@ export class AppComponent implements OnInit {
 
   private setPageForUser(authData: any) {
     //this.router.setRoot(TestingPage);
-    this.router.navigate(this.isUserLoggedIn ? ["/home", {"user": authData}] : ["/login"], );
+    //this.router.navigate(this.isUserLoggedIn ? ["/home", {"user": authData}] : ["/login"], );
   }
 
   isLoggedIn(): boolean {

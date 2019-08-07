@@ -1,87 +1,90 @@
-calendar {
+.calendar-component {
+  .calendar-grid {
+  }
 
-    .calendar {
+  ion-col {
+    padding: 0px;
+  }
 
-        .calendar-grid {
-        }
+  .navigation {
+    padding: 6px;
+    margin-bottom: 4px;
+    line-height: 2em;
+  }
 
-        ion-col {
-            padding: 0px;
-        }
+  .current-month {
+    padding-top: 5px;
+  }
 
-        .navigation {
-            padding: 6px;
-            margin-bottom: 4px;
-            line-height: 2em;
-        }
+  .current-month h2 {
+    color: red !important;
+    margin: 0;
+  }
 
-        .current-month{
-            padding-top: 5px;
-        }
+  .day-names {
+    font-weight: 900;
+    background-color: var(--ion-color-orange);
+    padding: 4px;
+  }
 
-        .day-names {
-            font-weight: 900;
-            background-color: map-get($map: $colors, $key: 'orangeNormal');
-            padding: 4px;
-        }
+  .day-apple {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    img {
+      width: 60%;
+      height: auto;
+    }
+  }
 
-        .day-apple {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            z-index: -1;
-            img {
-                width: 60%;
-                height: auto;
-            }
-        }
-
-        .day-num {
-            padding: 12px 6px;
-            border-left: 0px solid map-get($map: $colors, $key: 'orangeLight');
-            border-bottom: 0px solid map-get($map: $colors, $key: 'orangeLight');
-        }
-        /*.day-nums:nth-child(odd) {
+  .day-num {
+    padding: 12px 6px;
+    border-left: 0px solid var(--ion-color-orange-tint);
+    border-bottom: 0px solid var(--ion-color-orange-tint);
+  }
+  /*.day-nums:nth-child(odd) {
             background-color: #e1e1e1;
         }*/
 
-        .day-nums {
-            border-right: 0px solid map-get($map: $colors, $key: 'orangeLight');
-        }
+  .day-nums {
+    border-right: 0px solid var(--ion-color-orange-tint);
+  }
 
-        .today {
-            font-weight: 900;
-            background-color: map-get($map: $colors, $key: 'secLight');
-        }
+  .today {
+    font-weight: 900;
+    background-color: var(--ion-color-sec-light);
+  }
 
-        .selected {
-            background-color: map-get($map: $colors, $key: 'orangeNormal');
-        }
+  .selected {
+    background-color: var(--ion-color-orange);
+  }
 
-        .rated {
-            color: map-get($map: $colors, $key: 'orangeNormal');
-            //background-color: map-get($map: $colors, $key: "orangeLight");
-        }
+  .rated {
+    color: var(--ion-color-orange);
+    //background-color: map-get($map: $colors, $key: "orangeLight");
+  }
 
-        .date-text {
-        }
+  .date-text {
+  }
 
+  .disabled-days {
+    color: --ion-color-sec-normal;
+  }
 
-
-        .disabled-days {
-            color: map-get($map: $colors, $key: 'secNormal');
-        }
-
-        ion-content ion-card.card-md.card-md-primLight.card {
-            background: #373B44;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        }
-    }
+  ion-content ion-card.card-md.card-md-primLight.card {
+    background: #373b44; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373b44); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #4286f4,
+      #373b44
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
 }

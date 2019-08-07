@@ -1,9 +1,9 @@
 <ion-header>
 
-  <ion-toolbar color="orangeDark">
-    <ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </ion-button>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
     <ion-title>Kalendář</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,46 +17,51 @@
       <ion-col col-5 class="day-review">
         <h5 *ngIf="!visibleRatings">Hodnocení dne</h5>
         <div class="circ main-day" text-center *ngIf="!visibleRatings">
-          <span class="day-num">&nbsp;{{ currentDay.dayNumberToShow }}</span> 
+          <span class="day-num">&nbsp;{{ currentDay.dayNumberToShow }}</span>
           <br>
-          <span class="day-in-week"> {{                                                           currentDay.dayNameToShow }} </span>
+          <span class="day-in-week">
+            {{ currentDay.dayNameToShow }} </span>
         </div>
         <ion-fab bottom right #fab color="primary" class="review">
-          <button ion-fab (click)='chooseReview(101, fab)' color="primary">{{ reviewText }}</button>
-          <ion-fab-list side="top" *ngIf="visibleRatings">
-            <button ion-fab (click)='chooseReview(100, fab)' color="primary">100%</button>
+          <ion-fab-button (click)='chooseReview(101, fab)' color="orange">{{ reviewText }}</ion-fab-button>
+          <ion-fab-list>
+            <ion-fab side="top" *ngIf="visibleRatings">
+              <ion-fab-button (click)='chooseReview(100, fab)' color="orange">100%</ion-fab-button>
+            </ion-fab>
+            <ion-fab side="end" *ngIf="visibleRatings">
+              <ion-fab-button (click)='chooseReview(25, fab)' color="orange">25%</ion-fab-button>
+            </ion-fab>
+            <ion-fab side="bottom" *ngIf="visibleRatings">
+              <ion-fab-button (click)='chooseReview(50, fab)' color="orange">50%</ion-fab-button>
+            </ion-fab>
+            <ion-fab side="start" *ngIf="visibleRatings">
+              <ion-fab-button (click)='chooseReview(75, fab)' color="orange">75%</ion-fab-button>
+            </ion-fab>
           </ion-fab-list>
-          <ion-fab-list side="right" *ngIf="visibleRatings">
-            <button ion-fab (click)='chooseReview(25, fab)' color="primary">25%</button>
-          </ion-fab-list>
-          <ion-fab-list side="bottom" *ngIf="visibleRatings">
-            <button ion-fab (click)='chooseReview(50, fab)' color="primary">50%</button>
-          </ion-fab-list>
-          <ion-fab-list side="left" *ngIf="visibleRatings">
-            <button ion-fab (click)='chooseReview(75, fab)' color="primary">75%</button>
-          </ion-fab-list>
+
         </ion-fab>
       </ion-col>
       <ion-col col-7 class="notes">
         <!--<h5>Poznámky</h5>-->
         <ion-list no-lines *ngIf="currentDay.details != undefined">
-            <ion-item-divider>
-                Upozornění
-              </ion-item-divider>
-            <ion-item text-wrap *ngFor="let notif of currentDay.details.notifications">
-                <ion-icon name="time" item-start></ion-icon>
-                <p> {{ notif.text }} </p>
-              </ion-item>
-              <ion-item-divider>
-                  Poznámky
-                </ion-item-divider>
+          <ion-item-divider>
+            Upozornění
+          </ion-item-divider>
+          <ion-item text-wrap *ngFor="let notif of currentDay.details.notifications">
+            <ion-icon name="time" item-start></ion-icon>
+            <p> {{ notif.text }} </p>
+          </ion-item>
+          <ion-item-divider>
+            Poznámky
+          </ion-item-divider>
           <ion-item text-wrap *ngFor="let note of currentDay.details.notes">
             <ion-icon [name]="note.icon" item-start></ion-icon>
             <p> {{ note.text }} </p>
           </ion-item>
 
           <ion-item text-wrap *ngIf="currentDay.details.apple != null">
-            <ion-icon name="logo-apple" item-start [ngStyle]="{ 'color': (currentDay.details.apple.id_ra==undefined ? 'yellow' : 'red') }"></ion-icon>
+            <ion-icon name="logo-apple" item-start
+              [ngStyle]="{ 'color': (currentDay.details.apple.id_ra==undefined ? 'yellow' : 'red') }"></ion-icon>
             <p> {{ currentDay.details.apple.text }} </p>
           </ion-item>
         </ion-list>
@@ -64,16 +69,24 @@
     </ion-row>
   </ion-grid>
 
-  <ion-fab left bottom #enterPopUp>
-      <button ion-fab color="orangeNormal"><ion-icon name="arrow-dropup"></ion-icon></button>
-      <ion-fab-list side="top">
-        <button ion-fab color="orangeDark" (click)="openAddNote();"><ion-icon name="create"></ion-icon></button>
-        <button ion-fab color="orangeDark" (click)="openAddNotification();"><ion-icon name="time"></ion-icon></button>
-      </ion-fab-list>
-    </ion-fab>
+  <ion-fab horizontal="start" vertical="bottom">
+    <ion-fab-button color="orange">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="orange" (click)="openAddNote();">
+        <ion-icon name="create"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="orange" (click)="openAddNotification();">
+        <ion-icon name="time"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 
-    <ion-fab right bottom>
-        <button ion-fab color="orangeNormal" (click)="openGraph()"><ion-icon name="stats"></ion-icon></button>
-      </ion-fab>
+  <ion-fab horizontal="end" vertical="bottom">
+    <ion-fab-button color="orange" (click)="openGraph()">
+      <ion-icon name="stats"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

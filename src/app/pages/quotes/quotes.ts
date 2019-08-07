@@ -15,6 +15,7 @@ import { QuoteProvider } from '../../providers/quote/quote';
 @Component({
   selector: 'page-quotes',
   templateUrl: 'quotes.html',
+  styleUrls: ['quotes.scss'],
   providers: [AccountProvider, QuoteProvider]
 })
 export class QuotesPage {

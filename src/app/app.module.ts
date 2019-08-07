@@ -43,12 +43,6 @@ import { LeafoInfoProvider } from './providers/leafo-info/leafo-info';
 import { NotificationProvider } from './providers/notification/notification';
 
 
-/*
-import localeCs from '@angular/common/locales/cs';
-import { registerLocaleData } from '@angular/common';
-registerLocaleData(localeCs);
-*/
-
 @NgModule({
   declarations: [
     AppComponent
@@ -56,7 +50,6 @@ registerLocaleData(localeCs);
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    //ChartsModule,
     IonicStorageModule.forRoot(),
     BrowserModule,
     AppRoutingModule,

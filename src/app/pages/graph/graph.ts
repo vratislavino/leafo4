@@ -29,18 +29,19 @@ export class GraphPage {
   constructor(public tc: ToastController, public ac: AccountProvider, public ratingProvider: RatingProvider) {
 
     Chart.defaults.global.defaultFontColor = "white";
+    this.ionViewDidLoad();
   }
 
   ionViewDidLoad() {
-
+    console.log("WWW");
     var dateToGet = D.toKeyDate(new Date())
-    //var userId = 1;
-    //if(AccountProvider.user != undefined)
     var userId = AccountProvider.user.id;
 
     this.createMonthChart(dateToGet, userId);
     this.createWeekChart(dateToGet, userId);
-    this.ratingProvider.getWeekData(1, dateToGet, false).subscribe(data => { console.log("done") });
+    this.ratingProvider.getWeekData(userId, dateToGet, false).subscribe(data => { console.log("done") }, (err)=> {
+      console.log(err);
+    });
   }
 
   fillMonthCanvas() {

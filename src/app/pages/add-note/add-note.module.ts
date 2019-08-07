@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { AddNotePage } from './add-note';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AddNotePage } from './add-note';
     CommonModule,
     FormsModule,
     IonicModule,
+    BrowserModule,
     RouterModule.forChild([
       {
         path: '',

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'page-calendar',
   templateUrl: 'calendar.html',
+  styleUrls: ['calendar.scss'],
   providers: [AccountProvider]
 })
 export class CalendarPage {
@@ -21,6 +22,7 @@ export class CalendarPage {
   /*@ViewChild("enterPopUp") enterPopUp: FabContainer;*/
 
   constructor(public router: Router, private alertCtrl: AlertController, public ac: AccountProvider, private rp: RatingProvider) {
+    this.ionViewDidEnter();
   }
   
   ionViewDidEnter() {
