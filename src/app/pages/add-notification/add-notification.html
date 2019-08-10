@@ -5,12 +5,13 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Přidat upomínku</ion-title>
-  </ion-navbar>
-
-</ion-header>
+		<ion-toolbar color="primDark">
+			<ion-buttons slot="start">
+				<ion-back-button></ion-back-button>
+			  </ion-buttons>
+		  <ion-title>Přidat upomínku</ion-title>
+		</ion-toolbar>
+	  </ion-header>
 
 
 <ion-content padding>
@@ -29,6 +30,6 @@
   		<ion-datetime displayFormat="HH:mm" [(ngModel)]="myTime"></ion-datetime>
 	</ion-item>
 	<ion-item no-lines>
-		<button ion-button (click)="addNotification();" color="orangeNormal">Přidat</button>
+		<ion-button (click)="addNotification();" color="orange">Přidat</ion-button>
 	</ion-item>
 </ion-content>

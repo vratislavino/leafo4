@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'page-settings',
+    styleUrls: ['settings.scss'],
     templateUrl: 'settings.html',
     providers: [AccountProvider]
 })
@@ -45,17 +46,19 @@ export class SettingsPage {
         public infoLeafo: LeafoInfoProvider
         ) {
 
-        this.loading = this.loadingCtrl.create({
-            spinner: 'crescent'
-        });
-        this.loading.present();
+        //this.loading = this.loadingCtrl.create({
+        //    spinner: 'crescent'
+        //});
+
+
+        //this.loading.present();
         this.currentUserData = AccountProvider.user.copy();
         this.ac.getProfileImage().then((data: string) => {
             this.userImage = data;
         });
         console.log(this.currentUserData);
         this.fillArray();
-        this.loading.dismiss();
+        //this.loading.dismiss();
     }
 
     ionViewDidLoad() {
@@ -193,33 +196,13 @@ export class SettingsPage {
         
         if(!checkbox.active){
             if(this.getCountOfActive() >= this.minActive)
-                this.infoLeafo.createAndShowLeafoBubble(this.vc, "Vlastníte již maximum charakteristik", "Chyba", LeafoInfoType.Normal);
-            else
+                //this.infoLeafo.createAndShowLeafoBubble(this.vc, "Vlastníte již maximum charakteristik", "Chyba", LeafoInfoType.Normal);
+            //else
                 checkbox.active = !checkbox.active;
         }
-
-        /*
-        if (!checkbox.active) {
-            if (this.currentCols.length < min) {
-                this.currentCols.push(checkbox);
-                checkbox.active = !checkbox.active;
-                for (var i = 0; i < this.userCols.length; i++) {
-                    console.log(this.userCols[i]);
-                }
-                if (!isStart) {
-                    this.userCols.push(checkbox);
-                }
-            } else {
-                this.showToast("Vlastníte již maximum charakteristických typů.");
-            }
-            console.log(this.currentCols.length);
-        } else {
-            this.currentCols.splice(this.currentCols.findIndex(v => v.name === checkbox.name), 1);
-            checkbox.active = !checkbox.active;
-        }*/
     }
 
-    uploadForMobile() {
+    upload() {
         let options = {
             quality: 50,
             destinationType: this.camera.DestinationType.DATA_URL,
@@ -248,30 +231,6 @@ export class SettingsPage {
             console.log(err.message);
             this.showToast(err.message);
         });
-    }
-/*
-    uploadForDesktop() {
-        let imageData = this.img;
-        let base64Image = 'data:image/jpeg;base64,' + imageData;
-        this.userService.setProfileImage(base64Image).subscribe(mess => {
-            this.ac.setProfileImage(base64Image).then(() =>
-                this.userImage = base64Image
-            );
-            console.log(mess);
-            this.showToast(mess);
-        }, err => {
-            console.log(err);
-            this.showToast(err);
-        });
-    }*/
-
-    upload() {
-        //console.log(this.platform.is("android"));
-        //if (this.platform.is("android")) {
-            //this.uploadForDesktop();
-        //} else {
-            this.uploadForMobile();
-        //}
     }
 
     async showToast(message) {

@@ -12,6 +12,7 @@ import { AccountProvider } from '../../providers/account/account';
 
 @Component({
   selector: 'page-register',
+  styleUrls: ['register.scss'],
   templateUrl: 'register.html',
   providers: [AccountProvider]
 })

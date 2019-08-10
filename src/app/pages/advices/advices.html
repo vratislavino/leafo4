@@ -5,11 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
     <ion-toolbar color="primDark">
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+  
       <ion-title>Rady</ion-title>
     </ion-toolbar>
   </ion-header>
@@ -17,7 +17,7 @@
 
 <ion-content padding>
 
-  <ion-list no-lines>
+  <ion-list lines="none">
     <ion-item>
       <h1 class="ma-centered">Od koho potřebuješ poradit?</h1>
     </ion-item>
@@ -28,7 +28,7 @@
     </ion-item>
 
     <ion-item routerLink='/quote-popup/mother' routerDirection="forward">
-        <button ion-button large full color="primDark" (click)="adviceMother()">Máma</button>
+        <ion-button size="large" expand="full" color="green" (click)="adviceMother()">Máma</ion-button>
     </ion-item>
     
     <ion-item class=" ma-centered">
@@ -36,7 +36,7 @@
     </ion-item>
 
     <ion-item routerLink='/quote-popup/friend' routerDirection="forward">
-      <button ion-button large full color="primDark" (click)="adviceFriend()">Přítel</button>
+      <ion-button size="large" expand="full" color="green" (click)="adviceFriend()">Přítel</ion-button>
     </ion-item>
     
   </ion-list>

@@ -5,12 +5,13 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar color="primDark">
-    <ion-title>Úprava profilu</ion-title>
-  </ion-navbar>
-
-</ion-header>
+    <ion-toolbar color="primDark">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Úprava profilu</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 
 <ion-content padding>
@@ -20,7 +21,7 @@
   <ion-list>
     <ion-row>
       <ion-col col-4>
-        <img class="ma-centered avatar" src="{{ photo }}" style="width: 100%; height: auto;" />
+        <img class="ma-centered avatar" [src]="photo" style="width: 100%; height: auto;" />
       </ion-col>
       <ion-col col-8>
         <ion-row>
@@ -48,29 +49,29 @@
           Znamení
         </ion-label>
         <ion-select [(ngModel)]="currentUserData.sign">
-          <ion-option value="1">Kozoroh</ion-option>
-          <ion-option value="2">Vodnář</ion-option>
-          <ion-option value="3" selected>Ryby</ion-option>
-          <ion-option value="4">Beran</ion-option>
-          <ion-option value="5">Býk</ion-option>
-          <ion-option value="6">Blíženec</ion-option>
-          <ion-option value="7">Rak</ion-option>
-          <ion-option value="8">Lev</ion-option>
-          <ion-option value="9">Panna</ion-option>
-          <ion-option value="10">Váhy</ion-option>
-          <ion-option value="11">Štír</ion-option>
-          <ion-option value="12">Střelec</ion-option>
+          <ion-select-option value="1">Kozoroh</ion-select-option>
+          <ion-select-option value="2">Vodnář</ion-select-option>
+          <ion-select-option value="3" selected>Ryby</ion-select-option>
+          <ion-select-option value="4">Beran</ion-select-option>
+          <ion-select-option value="5">Býk</ion-select-option>
+          <ion-select-option value="6">Blíženec</ion-select-option>
+          <ion-select-option value="7">Rak</ion-select-option>
+          <ion-select-option value="8">Lev</ion-select-option>
+          <ion-select-option value="9">Panna</ion-select-option>
+          <ion-select-option value="10">Váhy</ion-select-option>
+          <ion-select-option value="11">Štír</ion-select-option>
+          <ion-select-option value="12">Střelec</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label floating>Pohlaví</ion-label>
         <ion-select [(ngModel)]="currentUserData.sex">
-          <ion-option value="1" selected>Muž</ion-option>
-          <ion-option value="2">Žena</ion-option>
-          <ion-option value="3">Jiné</ion-option>
+          <ion-select-option value="1" selected>Muž</ion-select-option>
+          <ion-select-option value="2">Žena</ion-select-option>
+          <ion-select-option value="3">Jiné</ion-select-option>
         </ion-select>
       </ion-item>
-    <button ion-button color="redNormal" (click)="save();" style="margin-top: 20px; margin-left: 16px;">Uložit</button>
+    <ion-button color="yellow" (click)="save();" style="margin-top: 20px; margin-left: 16px;">Uložit</ion-button>
   </ion-list>
 
 </ion-content>

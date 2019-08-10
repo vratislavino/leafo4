@@ -14,6 +14,7 @@ import { User } from '../../model/UserModel';
 
 @Component({
   selector: 'page-login',
+  styleUrls: ['login.scss'],
   templateUrl: 'login.html',
   providers: [AccountProvider]
 })

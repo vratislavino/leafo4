@@ -6,12 +6,9 @@
 -->
 <ion-header>
 
-    <ion-navbar color="primDark">
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
+    <ion-toolbar color="primDark">
       <ion-title>Registrovat se</ion-title>
-    </ion-navbar>
+    </ion-toolbar>
   </ion-header>
 
 <ion-content padding>
@@ -55,39 +52,39 @@
     <ion-item>
       <ion-label color="primNormal" floating>Znamení</ion-label>
       <ion-select [(ngModel)]="sign">
-        <ion-option value="1">Kozoroh</ion-option>
-        <ion-option value="2">Vodnář</ion-option>
-        <ion-option value="3" selected>Ryby</ion-option>
-        <ion-option value="4">Beran</ion-option>
-        <ion-option value="5">Býk</ion-option>
-        <ion-option value="6">Blíženec</ion-option>
-        <ion-option value="7">Rak</ion-option>
-        <ion-option value="8">Lev</ion-option>
-        <ion-option value="9">Panna</ion-option>
-        <ion-option value="10">Váhy</ion-option>
-        <ion-option value="11">Štír</ion-option>
-        <ion-option value="12">Střelec</ion-option>
+        <ion-select-option value="1">Kozoroh</ion-select-option>
+        <ion-select-option value="2">Vodnář</ion-select-option>
+        <ion-select-option value="3" selected>Ryby</ion-select-option>
+        <ion-select-option value="4">Beran</ion-select-option>
+        <ion-select-option value="5">Býk</ion-select-option>
+        <ion-select-option value="6">Blíženec</ion-select-option>
+        <ion-select-option value="7">Rak</ion-select-option>
+        <ion-select-option value="8">Lev</ion-select-option>
+        <ion-select-option value="9">Panna</ion-select-option>
+        <ion-select-option value="10">Váhy</ion-select-option>
+        <ion-select-option value="11">Štír</ion-select-option>
+        <ion-select-option value="12">Střelec</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label color="primNormal" floating>Pohlaví</ion-label>
       <ion-select [(ngModel)]="sex">
-        <ion-option value="1">Muž</ion-option>
-        <ion-option value="2">Žena</ion-option>
-        <ion-option value="3" selected>Jiné</ion-option>
+        <ion-select-option value="1">Muž</ion-select-option>
+        <ion-select-option value="2">Žena</ion-select-option>
+        <ion-select-option value="3" selected>Jiné</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item no-lines>
-      <button ion-button color="primDark" full large (click)="register()">Registrovat se</button>
+      <ion-button color="green" expand="full" (click)="register()">Registrovat se</ion-button>
     </ion-item>
 
     <ion-item class="toppadding0" no-lines>
-        <button ion-button color="primDark" full>Registrovat se přes Facebook</button>
+        <ion-button color="green" expand="full">Registrovat se přes Facebook</ion-button>
     </ion-item>
     <ion-item class="toppadding0" no-lines>
-        <button ion-button color="primDark" full>Registrovat se přes Google+</button>
+        <ion-button color="green" expand="full">Registrovat se přes Google+</ion-button>
     </ion-item>
   </ion-list>
 

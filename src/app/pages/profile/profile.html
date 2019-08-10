@@ -5,21 +5,18 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar color="primDark">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Profil</ion-title>
-
-
-    <ion-buttons end>
-      <button ion-button icon-only routerLink="/profile-edit">
-        <ion-icon name='create'></ion-icon>
-      </button>
+  <ion-toolbar color="primDark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
     </ion-buttons>
 
-  </ion-navbar>
+    <ion-title>Profil</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button routerLink="/profile-edit">
+        <ion-icon name='create'></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 
@@ -27,30 +24,31 @@
 
   <ion-grid>
     <ion-row>
-        <ion-col col-3 text-center>
-            <div class="apple-wrapper">5</div>
-        </ion-col>
+      <ion-col col-3 text-center>
+        <div class="apple-wrapper"> {{ level }}</div>
+      </ion-col>
 
-        <ion-col col-6 text-center padding-top>
-            <h2><b>{{ username }}</b></h2>
-        </ion-col>
+      <ion-col col-6 text-center padding-top>
+        <h2><b>{{ username }}</b></h2>
+      </ion-col>
 
-        <ion-col col-3>
-          <div class="depka-wrapper"><button ion-button (click)="depkaClick()" [disabled]="depkaActive">DEPKA</button></div>
-        </ion-col>
-        
+      <ion-col col-3>
+        <div class="depka-wrapper"><ion-button routerLink="/depression" routerDirection="forward" [disabled]="diffDates < 30" color="yellow">DEPKA</ion-button>
+        </div>
+      </ion-col>
+
     </ion-row>
 
     <ion-row>
       <ion-col text-center>
 
-          <img class="ma-centered avatar" [src]="photo">
+        <img class="ma-centered avatar" [src]="photo">
 
       </ion-col>
     </ion-row>
-</ion-grid>    
-    
-        <div *ngFor="let quote of quotes">
-            <quote [quoteObj]="quote"></quote>
-        </div>
+  </ion-grid>
+
+  <div *ngFor="let quote of quotes">
+    <quote [quoteObj]="quote"></quote>
+  </div>
 </ion-content>

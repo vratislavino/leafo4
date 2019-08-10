@@ -7,10 +7,9 @@
 <ion-header>
 
     <ion-toolbar color="primDark">
-      <!--
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>-->
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
       <ion-title>Strom štěstí</ion-title>
     </ion-toolbar>
   </ion-header>
@@ -21,10 +20,10 @@
     <ion-col size="12"><p text-center>Zalito dne: {{ wateredAt }}</p></ion-col>
   </ion-row>
 
-  <ion-row>
-    <ion-col col-4><p text-left><ion-input [(ngModel)]="newWatering"></ion-input></ion-col>
-    <ion-col col-4><p text-center><button ion-button (click)="setWatering()">Set Watering</button></ion-col>
-    <ion-col col-4><p text-right><button ion-button (click)="goToCalendar()">Ohodnotit den!</button></ion-col>
+  <ion-row nowrap>
+    <ion-col col-4><ion-input [(ngModel)]="newWatering"></ion-input></ion-col>
+    <ion-col col-4><ion-button  size="small" (click)="setWatering()">Set Watering</ion-button></ion-col>
+    <ion-col col-4><ion-button size="small" (click)="goToCalendar()">Ohodnotit den!</ion-button></ion-col>
   </ion-row>
 
     <div class="tree" id="treediv">

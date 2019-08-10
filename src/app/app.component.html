@@ -9,7 +9,7 @@
       <ion-content>
         <ion-list lines="none">
           <ion-menu-toggle class="menuitem" auto-hide="false" *ngFor="let p of pages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+            <ion-item [routerDirection]="p.url=='home' ? 'root' : 'forward'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}
@@ -20,7 +20,7 @@
       </ion-content>
       <ion-footer>
         <ion-list>
-          <ion-item class="menuitem bottom-menu" (click)="onLogout();">
+          <ion-item class="menuitem bottom-menu" (click)="onLogout()">
             <ion-icon slot="start" name="log-out"></ion-icon>
             Odhlásit se
           </ion-item>

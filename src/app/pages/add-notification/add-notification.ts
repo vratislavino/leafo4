@@ -18,21 +18,21 @@ import { AccountProvider } from '../../providers/account/account';
 })
 export class AddNotificationPage {
 	notification;
-	myDate: Date;
+	myDate;
 	myTime;
 
   constructor(private route:ActivatedRoute, private router:Router, public ac: AccountProvider, public rp: RatingProvider) {
 
 	let a = this.route.snapshot.paramMap.get('date');
 		if(a != undefined) {
-			this.myDate = new Date(a);
+			this.myDate = new Date(a).toISOString();
 			console.log(this.myDate);
 		} else {
 			console.log("Date not set");
 		}
 
   	var date = new Date();
-	this.myTime = date;
+	this.myTime = date.toISOString();
 	console.log("Cas: " + this.myTime);
   }
 

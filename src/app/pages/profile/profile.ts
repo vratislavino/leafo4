@@ -8,6 +8,7 @@ import { AccountProvider } from '../../providers/account/account';
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
+  styleUrls: ['profile.scss'],
   providers: [AccountProvider]
 })
 export class ProfilePage {
@@ -16,7 +17,9 @@ export class ProfilePage {
   quotes: QuoteModel[];
   photo:string = "assets/imgs/avatar.png";
   loading;
+  level = 0;
 
+  diffDates = 1000;
   depkaActive = false;
 
   constructor(
@@ -25,13 +28,38 @@ export class ProfilePage {
     public loadingCtrl: LoadingController,
     public userService: UserProvider) {
 
-    
-    this.ac.getProfileImage().then((data)=> {
-      this.photo = <string>data;
-    });
+      //this.presentLoading().then();
+
     this.getUsername();
     this.getQuotes();
     this.getPhoto();
+    this.initDepka();
+  }
+
+  initDepka() {
+    this.userService.getLastDepression().subscribe((data)=> {
+      const date = data["date"];
+      if(date != undefined) {
+        let dat = new Date(date);
+        let today = new Date();
+
+        let timeDiff = today.getTime() - dat.getTime();
+        this.diffDates = Math.ceil(timeDiff/(1000*3600*24));
+        console.log(this.diffDates);
+      } else {
+        console.error("date is undefined!");
+      }
+    }, (err)=> {
+      console.error(err);
+    });
+  }
+
+  getDepkaText() {
+    if(this.diffDates > 30) {
+      return 'DEPKA';
+    } else {
+      return `DEPKA za ${30-this.diffDates} dní`;
+    }
   }
 
   depkaClick() {
@@ -50,10 +78,10 @@ export class ProfilePage {
       });
       
       
-      this.loading.dismiss();
+      this.dismissLoading();
     }, (err) => {
       console.log("Nejsou žádné výsledky!");
-      this.loading.dismiss();
+      this.dismissLoading();
     });
   }
 
@@ -77,6 +105,11 @@ export class ProfilePage {
     
   }
 
+  dismissLoading() {
+    if(this.loading != undefined)
+      this.loading.dismiss();
+  }
+
   async presentLoading() {
     this.loading = await this.loadingCtrl.create({
       spinner: 'crescent'
@@ -85,10 +118,11 @@ export class ProfilePage {
   }
 
   ionViewDidEnter() {
-    this.presentLoading();
+    //this.presentLoading();
   }
 
   getUsername() {
     this.username = AccountProvider.user.username;
+    this.level = AccountProvider.user.level;
   }
 }

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'page-advices',
+  styleUrls: ['advices.scss'],
   templateUrl: 'advices.html',
   providers: [AccountProvider]
 })

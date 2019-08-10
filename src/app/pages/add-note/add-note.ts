@@ -18,13 +18,14 @@ import { AccountProvider } from '../../providers/account/account';
 export class AddNotePage {
 
 	note;
-	myDate: Date;
+	myDate;
 
   constructor(private router :Router, private route :ActivatedRoute, public ac: AccountProvider, public rp: RatingProvider) {
 
 		let date = this.route.snapshot.paramMap.get("date");
+		console.log(date);
 		if(date != undefined) {
-			this.myDate = new Date(date); // date.keyDate
+			this.myDate = new Date(date).toISOString(); // date.keyDate
 			console.log(this.myDate);
 		} else {
 			console.log("Date not set");

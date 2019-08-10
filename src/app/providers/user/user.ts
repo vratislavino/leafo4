@@ -94,13 +94,27 @@ export class UserProvider {
 			'/getCharacteristics.php', {
 				'user_id': AccountProvider.user.id
 			}
-		)
+		);
 	}
 
 	public getAllCharacteristics() {
 		return this.apiRequest.post(
 			'/getAllCharacteristics.php', {}
-		)
+		);
+	}
+
+	public getDepressionData() {
+		return this.apiRequest.post(
+			'/getDepression.php', {
+				id_u: AccountProvider.user.id
+			});
+	}
+	
+	public getLastDepression() {
+		return this.apiRequest.post(
+			'/getLastDepression.php', {
+				id_u: AccountProvider.user.id
+			});
 	}
 	/*
 	  updateDeviceToken(userUuid: string, token: string) {

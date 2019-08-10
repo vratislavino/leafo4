@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
   },
@@ -46,7 +50,22 @@ const routes: Routes = [
   {
     path: 'graph',
     loadChildren: () => import('./pages/graph/graph.module').then(m => m.GraphPageModule)
-  }
+  },
+  {
+    path: 'profile-edit',
+    loadChildren: () => import('./pages/profile-edit/profile-edit.module').then(m => m.ProfileEditPageModule)
+  },
+  {
+    path: 'add-note',
+    loadChildren: () => import('./pages/add-note/add-note.module').then(m => m.AddNotePageModule)
+  },
+  {
+    path: 'add-notification',
+    loadChildren: () => import('./pages/add-notification/add-notification.module').then(m => m.AddNotificationPageModule)
+  },
+  { path: 'depression', 
+    loadChildren: () => import('./pages/depression/depression.module').then(m => m.DepressionPageModule) }
+
 ];
 
 @NgModule({

@@ -1,3 +1,4 @@
+import { InfoLeafoComponentModule } from './../../components/info-leafo/info-leafo.module';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
@@ -8,12 +9,13 @@ import { SettingsPage } from './settings';
 
 @NgModule({
   declarations: [
-    SettingsPage,
+    SettingsPage
   ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    InfoLeafoComponentModule,
     RouterModule.forChild([
       {
         path: '',

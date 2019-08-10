@@ -1,4 +1,3 @@
-page-login {
     .toppadding0 ion-label {
         padding-top: 0;
         padding-bottom: 0;
@@ -12,17 +11,17 @@ page-login {
     } 
     
     .no-acc {
-        background-color: map-get($colors, primNormal) !important;
-        color: map-get($colors, secLightText);
+        background-color: var(--ion-color-green-shade);
+        color: var(--ion-color-sec-light-text);
     }
 
     .login-button.item-md, .bottom-menu .item-md {
-        background-color: map-get($colors, primDark) !important;
-        color: map-get($colors, secLightText);
+        background-color: var(--ion-color-green-shade);
+        color: var(--ion-color-sec-light-text);
     }
 
     .item-md {
         background-color: transparent!important;
         color: white;
     }
-}
+

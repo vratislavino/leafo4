@@ -1,6 +1,5 @@
 <ion-header>
-
-  <ion-toolbar>
+  <ion-toolbar color="primDark">
       <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
         </ion-buttons>
@@ -47,22 +46,22 @@
           <ion-item-divider>
             Upozornění
           </ion-item-divider>
-          <ion-item text-wrap *ngFor="let notif of currentDay.details.notifications">
+          <ion-item text-wrap *ngFor="let notif of currentDay.details['notifications']">
             <ion-icon name="time" item-start></ion-icon>
             <p> {{ notif.text }} </p>
           </ion-item>
           <ion-item-divider>
             Poznámky
           </ion-item-divider>
-          <ion-item text-wrap *ngFor="let note of currentDay.details.notes">
+          <ion-item text-wrap *ngFor="let note of currentDay.details['notes']">
             <ion-icon [name]="note.icon" item-start></ion-icon>
             <p> {{ note.text }} </p>
           </ion-item>
 
-          <ion-item text-wrap *ngIf="currentDay.details.apple != null">
+          <ion-item text-wrap *ngIf="currentDay.details['apple'] != null">
             <ion-icon name="logo-apple" item-start
               [ngStyle]="{ 'color': (currentDay.details.apple.id_ra==undefined ? 'yellow' : 'red') }"></ion-icon>
-            <p> {{ currentDay.details.apple.text }} </p>
+            <p> {{ currentDay.details['apple'].text }} </p>
           </ion-item>
         </ion-list>
       </ion-col>

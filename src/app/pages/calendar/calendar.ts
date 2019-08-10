@@ -118,12 +118,12 @@ export class CalendarPage {
 
   openAddNote() {
     
-    this.router.navigate(["/add-note", { date: this.currentDay }]);
+    this.router.navigate(["/add-note", { date: this.currentDay.keyDate }]);
     //this.enterPopUp.close();
   }
 
   openAddNotification() {
-    this.router.navigate(["/add-notification", { date: this.currentDay }]);
+    this.router.navigate(["/add-notification", { date: this.currentDay.keyDate }]);
     //this.enterPopUp.close();
   }
 }

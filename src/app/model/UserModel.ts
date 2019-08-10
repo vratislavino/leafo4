@@ -1,6 +1,7 @@
 export class User {
 	
     public id: number;
+    public level: number;
     public email: string;
     public username: string;
     public firstname: string;
@@ -35,6 +36,7 @@ export class User {
     public extractUser(data: any) {
         this.fillUser(
             data.id,
+            data.level,
             data.username,
             data.addressing,
             data.firstname,
@@ -44,8 +46,9 @@ export class User {
         );
     }
 
-    public fillUser(id: number, username: string, addressing: string, firstname: string, lastname: string, sign: number, sex: number) {
+    public fillUser(id: number, level: number, username: string, addressing: string, firstname: string, lastname: string, sign: number, sex: number) {
         this.id = id;
+        this.level = level;
     	this.username = username;
     	this.firstname = firstname;
     	this.lastname = lastname;
@@ -64,6 +67,14 @@ export class User {
 
     public getEmail(): string {
         return this.email;
+    }
+
+    public setLevel(val: number) {
+        this.level = val;
+    }
+
+    public getLevel():number {
+        return this.level;
     }
 
     public setAddressing(val: string) {

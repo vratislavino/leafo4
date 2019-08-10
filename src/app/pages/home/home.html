@@ -7,10 +7,10 @@
 <ion-header>
 
   <ion-toolbar color="primDark">
-    <!--
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>-->
+    <ion-buttons slot="start">
+      <ion-menu-button>
+      </ion-menu-button>
+    </ion-buttons>
     <ion-title>Domů</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -22,18 +22,18 @@
       <ion-grid>
         <ion-row>
           <ion-col routerLink="/tree">
-            <ion-button color="green" class="tree" expand="full" size="large">Strom <ion-icon name="leaf"></ion-icon></ion-button>
+            <ion-button color="green" class="tree" expand="full">Strom <ion-icon name="leaf"></ion-icon></ion-button>
           </ion-col>
           <ion-col routerLink="/quotes">
-            <ion-button color="red" class="quotes" expand="full" size="large">Citáty <ion-icon name="clipboard"></ion-icon></ion-button>
+            <ion-button color="red" class="quotes" expand="full">Citáty <ion-icon name="clipboard"></ion-icon></ion-button>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col routerLink="/profile">
-            <ion-button color="yellow" class="profile" expand="full" size="large">Profil <ion-icon name="contact" ></ion-icon></ion-button>
+            <ion-button color="yellow" class="profile" expand="full">Profil <ion-icon name="contact" ></ion-icon></ion-button>
           </ion-col>
           <ion-col routerLink="/calendar">
-            <ion-button color="orange" class="calendar" expand="full" size="large">Kalendář <ion-icon name="calendar"></ion-icon></ion-button>
+            <ion-button color="orange" class="calendar" expand="full">Kalendář <ion-icon name="calendar"></ion-icon></ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

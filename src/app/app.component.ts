@@ -68,12 +68,13 @@ export class AppComponent implements OnInit {
   private listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
       this.isUserLoggedIn = true;
-      this.setPageForUser(this.ac.getAuthData());
+      this.router.navigate(['/home']);
       this.setUpTasksForUser(this.ac.getAuthData());
     });
     this.events.subscribe('user:logout', () => {
       this.isUserLoggedIn = false;
-      this.setPageForUser(this.ac.getAuthData());
+      this.router.navigate(['/login']);
+      //this.setPageForUser(this.ac.getAuthData());
       this.tearDownTasksForUser();
     });
   }
@@ -111,6 +112,7 @@ export class AppComponent implements OnInit {
 
   onLogout(event: any) {
     this.ac.logout();
+    console.log("LOGGING OUT");
   }
 
   private setPageForUser(authData: any) {

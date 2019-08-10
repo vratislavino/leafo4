@@ -48,7 +48,6 @@ import { NotificationProvider } from './providers/notification/notification';
     AppComponent
   ],
   imports: [
-    BrowserModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     BrowserModule,
@@ -56,7 +55,8 @@ import { NotificationProvider } from './providers/notification/notification';
     HttpClientModule
   ],
   bootstrap: [AppComponent],
-  entryComponents: [],
+  entryComponents: [
+  ],
   providers: [
     Camera,
     AppVersion,
