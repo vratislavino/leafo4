@@ -23,16 +23,16 @@
 <ion-content padding>
 
   <ion-grid>
-    <ion-row>
-      <ion-col col-3 text-center>
+    <ion-row class="jc">
+      <ion-col size="3" text-center>
         <div class="apple-wrapper"> {{ level }}</div>
       </ion-col>
 
-      <ion-col col-6 text-center padding-top>
+      <ion-col size="6" text-center padding-top>
         <h2><b>{{ username }}</b></h2>
       </ion-col>
 
-      <ion-col col-3>
+      <ion-col size="3">
         <div class="depka-wrapper"><ion-button routerLink="/depression" routerDirection="forward" [disabled]="diffDates < 30" color="yellow">DEPKA</ion-button>
         </div>
       </ion-col>
@@ -48,7 +48,9 @@
     </ion-row>
   </ion-grid>
 
-  <div *ngFor="let quote of quotes">
-    <quote [quoteObj]="quote"></quote>
-  </div>
+  <ion-list>
+    <div *ngFor="let quote of quotes">
+      <quote [quoteObj]="quote"></quote>
+    </div>
+  </ion-list>
 </ion-content>

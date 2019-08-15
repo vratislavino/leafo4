@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'page-profile-edit',
   templateUrl: 'profile-edit.html',
+  styleUrls: ['profile-edit.scss'],
   providers: [AccountProvider]
 })
 export class ProfileEditPage {

@@ -18,8 +18,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'page-settings',
-    styleUrls: ['settings.scss'],
     templateUrl: 'settings.html',
+    styleUrls: ['settings.scss'],
     providers: [AccountProvider]
 })
 export class SettingsPage {

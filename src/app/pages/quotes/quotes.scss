@@ -1,8 +1,10 @@
-    .list-md ion-item-sliding {
-        background-color: transparent;
-    }
+.list-md ion-item-sliding {
+    background-color: transparent;
+}
     
 ion-segment-button {
-    --color: red;
-    --border-style: 6px solid red;
+    --color: #A2A2A2;
+    --color-activated: var(--ion-color-red-contrast);
+    --color-checked: var(--ion-color-red-contrast);
+    --indicator-color-checked: var(--ion-color-red);
 }

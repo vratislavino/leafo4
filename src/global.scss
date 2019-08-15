@@ -33,14 +33,18 @@
 
 
 .menu-tree {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
   text-align: center;
+  overflow: hidden;
 
   img {
-    margin-top: -18px;
-    position: absolute;
-    left: 29%;
-    bottom: 0px;
     width: 42%;
+    position: relative;
+    margin-top: -18px;
+    bottom: -16px;
   }
 
 }
@@ -49,16 +53,50 @@
   //border-bottom: 1px solid map-get($map: $colors, $key: secDark) !important;
 }
 
-ion-menu .item-md {
-  background-color: transparent!important;
+ion-input {
+  --highlight-color-focused: white;
+  --highlight-color-valid: white;
+  --highlight-color-invalid: white;
+}
+
+ion-item {
+  --color: white;
+  --color-activated: white;
+  --color-focused: white;
+  --highlight-color-focused: #E2E2E2;
+  --background-focused: black;
+}
+
+.item-has-focus.label-floating.sc-ion-label-md-h, .item-has-focus .label-floating.sc-ion-label-md-h, .item-has-focus.label-stacked.sc-ion-label-md-h, .item-has-focus .label-stacked.sc-ion-label-md-h {
   color: white;
 }
-ion-menu .menuitem {
-border-bottom: 1px solid white!important;
+
+ion-picker {
+  --background: rgba(268, 268, 268, 0.6)!important;
+  --color: white;
 }
+
+.picker-button.sc-ion-picker-md, .picker-button.activated.sc-ion-picker-md {
+  color: white;
+}
+
+.picker-opt.picker-opt-selected, .picker-prefix, .picker-suffix {
+  color: rgba(268, 268, 268, 1);
+}
+
+ion-menu ion-item {
+  background-color: transparent!important;
+  color: #E2E2E2;
+  ion-icon {
+    color: rgba(226, 226, 226, 0.9);
+  }
+}
+/*ion-menu .menuitem {
+ border-bottom: 1px solid white!important;
+}*/
 ion-menu .bottom-menu .menuitem {
-box-shadow: 2px 0px 8px white;
-border-bottom: none!important;
+  box-shadow: 2px 0px 8px white;
+  border-bottom: none!important;
 }
 
 
@@ -96,11 +134,11 @@ ion-item.menuitem ion-icon {
     //color: map-get($colors, secLightText) !important;
   }
   
-  .menu-inner .scroll-content:after {
+  ion-menu ion-content:after {
     width: 100%;
     height: 61px;
     position: absolute;
-    bottom: -28px;
+    bottom: -24px;
     left: 0px;
     content: "";
     background: transparent url("./assets/imgs/trava.png");
@@ -141,7 +179,7 @@ ion-item.menuitem ion-icon {
     background-color: transparent;
   }
   
-  .menu-inner .header, .menu-inner .content, .menu-inner .scroll-content, .menu-inner .footer {
+  ion-menu ion-header, ion-menu ion-content, ion-menu .scroll-content, ion-menu ion-footer {
     //background: #373B44 url("../assets/imgs/pozadi3.png");  /* fallback for old browsers */
     background: linear-gradient(
             rgba(0, 0, 0, 0.2), 
@@ -158,7 +196,7 @@ ion-item.menuitem ion-icon {
     margin: 0px auto;
   }
   
-  .menu-inner .item-md-primDark {
+  ion-menu .item-md-primDark {
     background-color: transparent!important;
   }
   

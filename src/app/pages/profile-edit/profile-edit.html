@@ -20,16 +20,16 @@
 
   <ion-list>
     <ion-row>
-      <ion-col col-4>
+      <ion-col size="4">
         <img class="ma-centered avatar" [src]="photo" style="width: 100%; height: auto;" />
       </ion-col>
-      <ion-col col-8>
+      <ion-col size="8">
         <ion-row>
-          <ion-col col-6>
+          <ion-col size="6">
             <p>{{ currentUserData.username }}</p>
             <small>Muž</small>
           </ion-col>
-          <ion-col col-6>
+          <ion-col size="6">
             <p>{{ currentUserData.firstname }}</p>
             <small>{{ currentUserData.addressing }}</small>
           </ion-col>
@@ -37,15 +37,15 @@
       </ion-col>
     </ion-row>
     <ion-item>
-      <ion-label color="primNormal" floating>Křestní jméno</ion-label>
+      <ion-label color="primNormal" position="floating">Křestní jméno</ion-label>
       <ion-input type="text" value="{{ currentUserData.firstname }}" (input)='onInput("firstname", $event.target.value);'></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label color="primNormal" floating>Oslovení</ion-label>
+      <ion-label color="primNormal" position="floating">Oslovení</ion-label>
       <ion-input type="text" value="{{ currentUserData.addressing }}" (input)='onInput("addressing", $event.target.value);'></ion-input>
     </ion-item>
       <ion-item>
-        <ion-label floating>
+        <ion-label position="floating">
           Znamení
         </ion-label>
         <ion-select [(ngModel)]="currentUserData.sign">
@@ -64,7 +64,7 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label floating>Pohlaví</ion-label>
+        <ion-label position="floating">Pohlaví</ion-label>
         <ion-select [(ngModel)]="currentUserData.sex">
           <ion-select-option value="1" selected>Muž</ion-select-option>
           <ion-select-option value="2">Žena</ion-select-option>

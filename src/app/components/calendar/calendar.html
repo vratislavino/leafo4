@@ -2,11 +2,11 @@
     <ion-grid class="calendar-grid">
 
       <ion-row class="navigation">
-          <ion-col col-3> <ion-button fill="clear" expand="full" (click)="prevMonth()"><ion-icon color="orange" name="arrow-back"></ion-icon></ion-button></ion-col>
+          <ion-col size="3"> <ion-button fill="clear" expand="full" (click)="prevMonth()"><ion-icon color="orange" name="arrow-back"></ion-icon></ion-button></ion-col>
           
-          <ion-col col-6 class="current-month"><h2>{{ currentDate.format('MMMM') }} {{ currentDate.format('YYYY') }}</h2></ion-col>
+          <ion-col size="6" class="current-month"><h2>{{ currentDate.format('MMMM') }} {{ currentDate.format('YYYY') }}</h2></ion-col>
 
-          <ion-col col-3> <ion-button fill="clear" expand="full" (click)="nextMonth()"><ion-icon  color="orange" name="arrow-forward"></ion-icon></ion-button></ion-col>
+          <ion-col size="3"> <ion-button fill="clear" expand="full" (click)="nextMonth()"><ion-icon  color="orange" name="arrow-forward"></ion-icon></ion-button></ion-col>
       </ion-row>
 
       <ion-row class="day-names">

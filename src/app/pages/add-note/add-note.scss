@@ -1,16 +1,8 @@
-page-add-note {
-	.item-md {
-		background-color: transparent!important;
-		color: white;
-	}
-
-	.item-inner {
-		background-color: transparent;
-		color: white;
-	}
-
-	.item-md .button-md {
-		padding: 20px 20px;
-		font-size: 15px;
-	}
+ion-item ion-button {
+	height: auto;
+	--padding-top: 12px;
+	--padding-start: 12px;
+	--padding-bottom: 12px;
+	--padding-end: 12px;
+	font-size: 14px;
 }

@@ -1,9 +1,7 @@
-page-profile-edit {
-	.item-md {
-		background-color: transparent!important;
-	}
+.item-md {
+	background-color: transparent!important;
+}
 
-	.item-input .label-md, .item-select .label-md, .item-datetime .label-md {
-		color: white!important;
-	}
+ion-item item-input .native-input.sc-ion-input-md {
+	color: white!important;
 }

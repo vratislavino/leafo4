@@ -1,15 +1,36 @@
-    .avatar {
-        width: 50% !important;
+.avatar {
+    width: 120px;
+    height: 120px;
+    margin-top: 12px!important;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.apple-wrapper {
+    font-weight: 800;
+    font-size: 1.5em;
+    color: black;
+    padding: 14px;
+    line-height: 1.5em;
+    height: 55px;
+    width: 50px;
+    background-image: url("../../../assets/imgs/aGolden.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #1F1F1F;
+}
+
+
+.jc {
+    ion-col {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        h2 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            color: white;
+        }
     }
-    .apple-wrapper {
-        font-weight: 800;
-        font-size: 1.5em;
-        color: black;
-        padding: 14px;
-        line-height: 1.5em;
-        height: 55px;
-        width: 50px;
-        background-image: url("../../../assets/imgs/aGolden.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+}

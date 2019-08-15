@@ -8,7 +8,8 @@ import {DAYS_LIST} from '../../mocks/days.mocks';
 
 @Component({
   selector: 'calendar',
-  templateUrl: 'calendar.html'
+  templateUrl: 'calendar.html',
+  styleUrls: ['calendar.scss'],
 })
 export class CalendarComponent implements OnInit, OnChanges {
 

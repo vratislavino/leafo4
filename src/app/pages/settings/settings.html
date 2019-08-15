@@ -19,21 +19,16 @@
     <ion-slide>
       <ion-list lines="none">
         <ion-list-header>
-          Základní údaje
+          <ion-icon name="contact"></ion-icon> Přihlašovací údaje
         </ion-list-header>
       <ion-item>
-        <ion-label>
-          <ion-icon name="contact"></ion-icon> Přihlašovací údaje
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label color="primNormal" stacked>
+        <ion-label color="primNormal" position="floating">
           E-mail
         </ion-label>
         <ion-input type="email" value="{{ currentUserData.email }}" (input)='onInput("email", $event.target.value);'></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color="primNormal" stacked>
+        <ion-label color="primNormal" position="floating">
           Heslo
         </ion-label>
         <ion-input type="password" value="12345"></ion-input>
@@ -47,13 +42,13 @@
               Úprava profilu
             </ion-list-header>
       <ion-item>
-        <ion-label color="primNormal" stacked>
+        <ion-label color="primNormal" position="floating">
           Křestní jméno
         </ion-label>
         <ion-input type="text" value="{{ currentUserData.firstname }}" (input)='onInput("firstname", $event.target.value);'></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color="primNormal" stacked>
+        <ion-label color="primNormal" position="floating">
           Oslovení
         </ion-label>
           <ion-input type="text" value="{{ currentUserData.addressing }}" (input)='onInput("addressing", $event.target.value);'></ion-input>
@@ -102,7 +97,7 @@
             </ion-list-header>
       <ion-grid>
         <ion-row *ngFor="let row of vysledek">
-          <ion-col *ngFor="let col of row">
+          <ion-col size="4" *ngFor="let col of row">
             <ion-button size="small" [ngClass]="{'active': col.active}" (click)="updateBckg(col)">
               {{ col.name }}
             </ion-button>
@@ -117,17 +112,7 @@
         <ion-list-header>
           Změna avatara
         </ion-list-header>
-      <ion-card (click)="upload()">
-      
-        <ion-card-header>
-          <img [src]="userImage">
-        </ion-card-header>
-      
-        <ion-card-content>
-          Tapni pro změnu profilové fotky
-        </ion-card-content>
-      
-      </ion-card>
+        <img class="profile-img" [src]="userImage" (click)="upload()">
       <!--<button ion-button color="primNormal" (click)="upload()">Nahrát avatara</button>-->
       </ion-list>
     </ion-slide>

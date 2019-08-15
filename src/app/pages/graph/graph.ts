@@ -8,6 +8,7 @@ import { D } from '../../../D';
 @Component({
   selector: 'page-graph',
   templateUrl: 'graph.html',
+  styleUrls: ['graph.scss'],
 })
 export class GraphPage {
 //TODO---

@@ -21,19 +21,30 @@
       <h1>Vítej, {{ getAddressing() }}</h1>
       <ion-grid>
         <ion-row>
-          <ion-col routerLink="/tree">
-            <ion-button color="green" class="tree" expand="full">Strom <ion-icon name="leaf"></ion-icon></ion-button>
+          <ion-col routerLink="/tree" size="6">
+            <ion-button color="green" class="tree" expand="full">
+              <span>Strom</span>
+              <ion-icon name="leaf"></ion-icon>
+            </ion-button>
           </ion-col>
-          <ion-col routerLink="/quotes">
-            <ion-button color="red" class="quotes" expand="full">Citáty <ion-icon name="clipboard"></ion-icon></ion-button>
+          <ion-col routerLink="/quotes" size="6">
+            <ion-button color="red" class="quotes" expand="full">
+              <span>Citáty</span>
+              <ion-icon name="clipboard"></ion-icon>
+            </ion-button>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col routerLink="/profile">
-            <ion-button color="yellow" class="profile" expand="full">Profil <ion-icon name="contact" ></ion-icon></ion-button>
+          <ion-col routerLink="/profile" size="6">
+            <ion-button color="yellow" class="profile" expand="full">
+              <span>Profil</span><ion-icon name="contact" ></ion-icon>
+            </ion-button>
           </ion-col>
-          <ion-col routerLink="/calendar">
-            <ion-button color="orange" class="calendar" expand="full">Kalendář <ion-icon name="calendar"></ion-icon></ion-button>
+          <ion-col routerLink="/calendar" size="6">
+            <ion-button color="orange" class="calendar" expand="full">
+              <span>Kalendář</span>
+              <ion-icon name="calendar"></ion-icon>
+            </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

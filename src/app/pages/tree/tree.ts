@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'page-tree',
   templateUrl: 'tree.html',
+  styleUrls: ['tree.scss'],
   providers: [AccountProvider]
 })
 export class TreePage {

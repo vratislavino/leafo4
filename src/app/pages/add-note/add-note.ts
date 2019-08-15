@@ -13,6 +13,7 @@ import { AccountProvider } from '../../providers/account/account';
 @Component({
   selector: 'page-add-note',
   templateUrl: 'add-note.html',
+  styleUrls: ['add-note.scss'],
   providers: [AccountProvider]
 })
 export class AddNotePage {

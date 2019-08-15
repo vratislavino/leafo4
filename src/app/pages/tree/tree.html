@@ -16,25 +16,27 @@
 
 
 <ion-content padding>
-  <ion-row>
-    <ion-col size="12"><p text-center>Zalito dne: {{ wateredAt }}</p></ion-col>
-  </ion-row>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12"><p text-center>Zalito dne: {{ wateredAt }}</p></ion-col>
+    </ion-row>
 
-  <ion-row nowrap>
-    <ion-col col-4><ion-input [(ngModel)]="newWatering"></ion-input></ion-col>
-    <ion-col col-4><ion-button  size="small" (click)="setWatering()">Set Watering</ion-button></ion-col>
-    <ion-col col-4><ion-button size="small" (click)="goToCalendar()">Ohodnotit den!</ion-button></ion-col>
-  </ion-row>
+    <ion-row nowrap>
+      <ion-col size="4"><ion-input [(ngModel)]="newWatering"></ion-input></ion-col>
+      <ion-col size="4"><ion-button  size="small" (click)="setWatering()">Set Watering</ion-button></ion-col>
+      <ion-col size="4"><ion-button size="small" (click)="goToCalendar()">Ohodnotit den!</ion-button></ion-col>
+    </ion-row>
 
-    <div class="tree" id="treediv">
-        <img [src]="getCurrentTree()">
-        <img *ngFor = "let ap of apples" [src]="getSrc(ap)" class="apple" [id]="'ap'+ap.id_da" (click)="appleClick(ap)" [ngStyle]="{ 'top': getY(ap.y), 'left': getX(ap.x) }"/>
-    </div>
-    <div class="konvicka">
-        <img src="../assets/imgs/konvicka.png" (click)="zalij()">
-    </div>
-    <div class="kapky">
-        <img src="../assets/imgs/kapky.png">
-    </div>
-    
+      <div class="tree" id="treediv">
+          <img [src]="getCurrentTree()">
+          <img *ngFor = "let ap of apples" [src]="getSrc(ap)" class="apple" [id]="'ap'+ap.id_da" (click)="appleClick(ap)" [ngStyle]="{ 'top': getY(ap.y), 'left': getX(ap.x) }"/>
+      </div>
+      <div class="konvicka">
+          <img src="../assets/imgs/konvicka.png" (click)="zalij()">
+      </div>
+      <div class="kapky">
+          <img src="../assets/imgs/kapky.png">
+      </div>
+      <img src="../assets/imgs/trava.png" class="grass" />
+    </ion-grid>
 </ion-content>

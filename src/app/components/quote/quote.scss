@@ -1,43 +1,44 @@
-quote {
-    .quote {
-        margin: 12px 0px;
-        /*border-left: 12px solid map-get($colors, secDark) !important;*/
-    }
-    
-    .quote-text {
-        font-family: 'KabanaBook';
-        //color: white;
-        color: var(--ion-color-sec-light-text);
-    }
+.quote {
+    margin-bottom: 12px;
+}
 
-    .action-icons {
-        padding: 0px;
-        padding-top: 6px;
-    }
+.quote-text {
+    width: 100%;
+    text-align: center;
+    font-family: 'KabanaBook';
+}
 
-    .action-icons ion-icon {
-        color: var(--ion-color-sec-light-text);
-        font-size: 2em;
-        padding: 5px;
-    }
+ion-label.quote-text p {
+    color: var(--ion-color-sec-light-text);
+}
 
-    .action-icons button {
-        padding: 0;
-        box-shadow: 0;
-    }
+.action-icons {
+    padding: 0px;
+    padding-top: 6px;
+}
 
-    .item-md.item-block .item-inner {
-        border-bottom: none;
-    }
+.action-icons ion-icon {
+    color: var(--ion-color-sec-light-text);
+    font-size: 2em;
+    padding: 5px;
+}
 
-    /* HERE THE QUOTES GO */
-    .item-md {
-        background: var(--ion-color-prim);  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, var(--ion-color-prim), var(--ion-color-prim-dark));  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, var(--ion-color-prim), var(--ion-color-prim-normal)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        /*background-color: map-get($map: $colors, $key: primDark) !important;*/
-    }
-    .action-icons .button-md {
-        background-color: transparent;
-    }
+.action-icons button {
+    padding: 0;
+    box-shadow: 0;
+}
+
+.item-md.item-block .item-inner {
+    border-bottom: none;
+}
+
+/* HERE THE QUOTES GO */
+.item.md {
+    background: var(--ion-color-red);  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, var(--ion-color-red), var(--ion-color-red-tint));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, var(--ion-color-red), var(--ion-color-red-tint)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /*background-color: map-get($map: $colors, $key: primDark) !important;*/
+}
+.action-icons .button-md {
+    background-color: transparent;
 }

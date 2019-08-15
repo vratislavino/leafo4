@@ -1,3 +1,8 @@
-:host {
-
+ion-card.ion-color.sc-ion-card-md-h {
+	background: var(--ion-color-orange);
+    background: -webkit-linear-gradient(to right, var(--ion-color-orange), var(--ion-color-orange-tint));
+    background: linear-gradient(to right, var(--ion-color-orange), var(--ion-color-orange-tint));
+	ion-card-header {
+		color: var(--ion-color-orange-contrast);
+	}
 }

@@ -1,53 +1,52 @@
 page-tree {
-	.scroll-content {
-		overflow: hidden;
-	}
-	
-	.tree {
-		width: 80%;
-		margin: 0px auto;
-		position: absolute;
-		bottom: -20px;
-		left: 10%;
-	}
+	overflow: hidden;
+}
+.scroll-content {
+	overflow: hidden;
+}
 
-	.tree:after {
-		width: 100vw;
-		height: 61px;
-		position: absolute;
-		bottom: 16px;
-		left: -36px;
-		content: "";
-		background: transparent url("../assets/imgs/trava.png");
-	}
+.tree {
+	width: 80%;
+	margin: 0px auto;
+	position: absolute;
+	bottom: -20px;
+	left: 10%;
+}
 
-	.konvicka {
-		width: 80px;
-		height: 80px;
-		position: absolute;
-		bottom: 15px;
-		right: 15px;
-		transform: rotate(50deg);
-		transition: 0.5s;
-	}
+.grass {
+	width: 100vw;
+	height: 61px;
+	position: absolute;
+	bottom: -20px;
+	left: 0px;
+	object-fit: cover;
+}
 
-	.kapky {
-		width: 80px;
-		height: 160px;
-		display: none;
-		position: absolute;
-		bottom: 50%;
-		right: 100px;
-	}
+.konvicka {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+	transform: rotate(50deg);
+	transition: 0.5s;
+}
 
-	/* JABLKA */
+.kapky {
+	width: 80px;
+	height: 160px;
+	display: none;
+	position: absolute;
+	bottom: 50%;
+	right: 100px;
+}
 
-	.apple {
-		width: 30px;
-		height: 30px;
-		position: absolute;
-	}
-	
+/* JABLKA */
+
+.apple {
+	width: 30px;
+	height: 30px;
+	position: absolute;
 }
 
 @keyframes opacka {

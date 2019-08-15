@@ -1,90 +1,103 @@
-.calendar-component {
-  .calendar-grid {
-  }
+.calendar-grid {
+}
 
-  ion-col {
-    padding: 0px;
-  }
+.navigation ion-col {
+  display: flex;
+  padding: 0px;
+  justify-content: center;
+  align-items: center;
+}
 
-  .navigation {
-    padding: 6px;
-    margin-bottom: 4px;
-    line-height: 2em;
-  }
+h2 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 
-  .current-month {
-    padding-top: 5px;
-  }
+.navigation {
+  padding: 6px;
+  margin-bottom: 4px;
+  line-height: 2em;
+}
 
-  .current-month h2 {
-    color: red !important;
-    margin: 0;
-  }
+.current-month {
+  padding-top: 5px;
+}
 
-  .day-names {
-    font-weight: 900;
-    background-color: var(--ion-color-orange);
-    padding: 4px;
-  }
+.current-month h2 {
+  color: white;
+  margin: 0;
+}
 
-  .day-apple {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: -1;
-    img {
-      width: 60%;
-      height: auto;
-    }
-  }
+.day-names {
+  padding: 0px;
+  background-color: var(--ion-color-orange);
+  color: white;
+  font-weight: 300;
+}
 
-  .day-num {
-    padding: 12px 6px;
-    border-left: 0px solid var(--ion-color-orange-tint);
-    border-bottom: 0px solid var(--ion-color-orange-tint);
+.day-apple {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  img {
+    width: 60%;
+    height: auto;
   }
-  /*.day-nums:nth-child(odd) {
-            background-color: #e1e1e1;
-        }*/
+}
 
-  .day-nums {
-    border-right: 0px solid var(--ion-color-orange-tint);
-  }
+.day-num {
+  padding: 8px 6px;
+  border-left: 0px solid var(--ion-color-orange-tint);
+  border-bottom: 0px solid var(--ion-color-orange-tint);
+  background-color: transparent;
+  color: white;
+  font-weight: 300;
+  transition: 0.5s;
+}
+/*.day-nums:nth-child(odd) {
+  background-color: #e1e1e1;
+}*/
 
-  .today {
-    font-weight: 900;
-    background-color: var(--ion-color-sec-light);
-  }
+.day-nums {
+  border-right: 0px solid var(--ion-color-orange-tint);
+}
 
-  .selected {
-    background-color: var(--ion-color-orange);
-  }
+.today {
+  font-weight: 900;
+  background-color: var(--ion-color-sec-light);
+}
 
-  .rated {
-    color: var(--ion-color-orange);
-    //background-color: map-get($map: $colors, $key: "orangeLight");
-  }
+.selected {
+  background-color: var(--ion-color-orange);
+  color: var(--ion-color-orange-contrast)!important;
+}
 
-  .date-text {
-  }
+.rated {
+  color: var(--ion-color-orange);
+  //background-color: map-get($map: $colors, $key: "orangeLight");
+}
 
-  .disabled-days {
-    color: --ion-color-sec-normal;
-  }
+.date-text {
+  font-size: 14px;
+}
 
-  ion-content ion-card.card-md.card-md-primLight.card {
-    background: #373b44; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4286f4, #373b44); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-      to right,
-      #4286f4,
-      #373b44
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
+.disabled-days {
+  color: --ion-color-sec-normal;
+}
+
+ion-content ion-card.card-md.card-md-primLight.card {
+  background: #373b44; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #4286f4, #373b44); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #4286f4,
+    #373b44
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

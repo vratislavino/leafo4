@@ -72,6 +72,7 @@ export class CalendarPage {
   } 
 
   chooseReview(review, fab) {
+    console.log("Here");
     console.log(new Date(this.currentDay.keyDate + " 0:0").getTime());
     console.log(new Date().getTime());
     if(this.currentDay.details == null || this.currentDay.details == undefined)
@@ -82,13 +83,11 @@ export class CalendarPage {
       if(this.visibleRatings) {
         this.visibleRatings = false;
         this.reviewText = "Tap!";
-        fab.close();
         notes.setAttribute("style", "visibility: visible;");
         this.rp.setDayReview(this.currentDay.keyDate, review).subscribe((data)=> {
           console.log(data);
           if(review == 101) {
             review = 0;
-            fab.close();
           }
           if(this.currentDay)
           this.currentDay.details["rating"] = review;
@@ -108,7 +107,6 @@ export class CalendarPage {
       }
     } else {
       console.log("Jeste brzo bracho..");
-      fab.close();
     }
   }
 

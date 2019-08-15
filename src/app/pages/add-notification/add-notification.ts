@@ -14,6 +14,7 @@ import { AccountProvider } from '../../providers/account/account';
 @Component({
   selector: 'page-add-notification',
   templateUrl: 'add-notification.html',
+  styleUrls: ['add-notification.scss'],
   providers: [AccountProvider]
 })
 export class AddNotificationPage {

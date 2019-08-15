@@ -13,36 +13,27 @@
 
   <ion-grid *ngIf="currrentDayDownloaded">
     <ion-row text-left padding>
-      <ion-col col-5 class="day-review">
+      <ion-col size="5" class="day-review">
         <h5 *ngIf="!visibleRatings">Hodnocení dne</h5>
         <div class="circ main-day" text-center *ngIf="!visibleRatings">
-          <span class="day-num">&nbsp;{{ currentDay.dayNumberToShow }}</span>
-          <br>
-          <span class="day-in-week">
-            {{ currentDay.dayNameToShow }} </span>
+          <span class="day-num">{{ currentDay.dayNumberToShow }}</span>
+          <span class="day-in-week">{{ currentDay.dayNameToShow }}</span>
         </div>
-        <ion-fab bottom right #fab color="primary" class="review">
-          <ion-fab-button (click)='chooseReview(101, fab)' color="orange">{{ reviewText }}</ion-fab-button>
-          <ion-fab-list>
-            <ion-fab side="top" *ngIf="visibleRatings">
-              <ion-fab-button (click)='chooseReview(100, fab)' color="orange">100%</ion-fab-button>
-            </ion-fab>
-            <ion-fab side="end" *ngIf="visibleRatings">
-              <ion-fab-button (click)='chooseReview(25, fab)' color="orange">25%</ion-fab-button>
-            </ion-fab>
-            <ion-fab side="bottom" *ngIf="visibleRatings">
-              <ion-fab-button (click)='chooseReview(50, fab)' color="orange">50%</ion-fab-button>
-            </ion-fab>
-            <ion-fab side="start" *ngIf="visibleRatings">
-              <ion-fab-button (click)='chooseReview(75, fab)' color="orange">75%</ion-fab-button>
-            </ion-fab>
-          </ion-fab-list>
 
-        </ion-fab>
+        <div class="review">
+          <div (click)='chooseReview(101)' class="close">{{ reviewText }}</div>
+          <div class="list" *ngIf="visibleRatings">
+            <div (click)='chooseReview(100)'>100%</div>
+            <div (click)='chooseReview(25)'>25%</div>
+            <div (click)='chooseReview(50)'>50%</div>
+            <div (click)='chooseReview(75)'>75%</div>
+          </div>
+        </div>
+
       </ion-col>
-      <ion-col col-7 class="notes">
+      <ion-col size="7" class="notes">
         <!--<h5>Poznámky</h5>-->
-        <ion-list no-lines *ngIf="currentDay.details != undefined">
+        <ion-list lines="none" *ngIf="currentDay.details != undefined">
           <ion-item-divider>
             Upozornění
           </ion-item-divider>

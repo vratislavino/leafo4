@@ -16,7 +16,7 @@
 
 <ion-content padding>
 	<ion-item>
-		<ion-label stacked>
+		<ion-label position="floating">
 			Poznámka
 		</ion-label>
 		<ion-input type="text" (input)='onInput("note", $event.target.value);'></ion-input>
@@ -25,7 +25,7 @@
   		<ion-label>Date</ion-label>
   		<ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="myDate"></ion-datetime>
 	</ion-item>
-	<ion-item no-lines>
+	<ion-item lines="none">
 		<ion-button (click)="addNote();" color="orange">Přidat</ion-button>
 	</ion-item>
 </ion-content>
