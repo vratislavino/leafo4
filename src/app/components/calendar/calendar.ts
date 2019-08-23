@@ -137,7 +137,17 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.generateCalendar();
   }
 
+  getClassByRating(day) {
+    if(day.details == undefined)
+      return "r-1";
+    if(day.mDate.month() != this.currentDate.month())
+      return "r-1";
+
+    return "r"+ day.details.rating;
+  }
+
   getApple(details, app) {
+
     if(details.apple == null)
       return false;
 

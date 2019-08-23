@@ -28,6 +28,8 @@
                  [ngClass]="{ today: day.today, selected: day.selected, rated: day.details==undefined ? false : day.details.rating >= 0 }">
               <span class="date-text">{{ day.mDate.date() }}</span>
             </div>
+            <div class="circle" [ngClass]='getClassByRating(day)'>
+              </div>
           </ion-col>
         </ion-row>
       </div>

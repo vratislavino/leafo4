@@ -71,6 +71,10 @@ export class CalendarPage {
     console.log(date.mDate);
   } 
 
+  getRatingClass() {
+    return "r" + this.currentDay.details["rating"];
+  }
+
   chooseReview(review, fab) {
     console.log("Here");
     console.log(new Date(this.currentDay.keyDate + " 0:0").getTime());

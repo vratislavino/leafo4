@@ -13,6 +13,7 @@ import { LeafoInfoType } from '../../components/info-leafo/info-leafo';
 @Component({
   selector: 'page-testing',
   templateUrl: 'testing.html',
+  styleUrls:['testing.scss']
 })
 export class TestingPage {
 

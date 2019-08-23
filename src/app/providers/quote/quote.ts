@@ -37,6 +37,21 @@ export class QuoteProvider {
     );
   }
 
+  getProfileQuotes(num?:number) : Observable<{}> {
+    return this.reqProvider.post(
+      '/quotesApi.php', num == null ? {
+        faved: false,
+        horoscope: true,
+        id_u: AccountProvider.user.id,
+      } : {
+        faved: false,
+        count: num, 
+        horoscope: true,
+        id_u: AccountProvider.user.id,
+      }
+    );
+  }
+
 /*
     return new Promise((resolve, reject) => {
       var qmp = [];
@@ -125,10 +140,6 @@ export class QuoteProvider {
           reject("Error while attemping to set faved!. " + error);
         });
     });*/
-  }
-
-  getProfileQuotes() {
-
   }
 /*
   getAdvice(author: string): Observable<QuoteModel> {

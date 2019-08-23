@@ -67,7 +67,7 @@ export class ProfilePage {
   }
 
   getQuotes() {
-    this.quoteProvider.getHistoryQuotes(3).subscribe((data) => {
+    this.quoteProvider.getProfileQuotes(2).subscribe((data) => {
       this.quotes = [];
       var keys = Object.keys(data);
 

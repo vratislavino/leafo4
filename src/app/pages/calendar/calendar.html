@@ -13,7 +13,7 @@
 
   <ion-grid *ngIf="currrentDayDownloaded">
     <ion-row text-left padding>
-      <ion-col size="5" class="day-review">
+      <ion-col size="12" class="day-review">
         <h5 *ngIf="!visibleRatings">Hodnocení dne</h5>
         <div class="circ main-day" text-center *ngIf="!visibleRatings">
           <span class="day-num">{{ currentDay.dayNumberToShow }}</span>
@@ -30,8 +30,11 @@
           </div>
         </div>
 
+        
+        <div class="circle" [ngClass]="getRatingClass()"></div>
+
       </ion-col>
-      <ion-col size="7" class="notes">
+      <ion-col size="12" class="notes">
         <!--<h5>Poznámky</h5>-->
         <ion-list lines="none" *ngIf="currentDay.details != undefined">
           <ion-item-divider>

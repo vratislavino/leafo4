@@ -64,7 +64,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/add-notification/add-notification.module').then(m => m.AddNotificationPageModule)
   },
   { path: 'depression', 
-    loadChildren: () => import('./pages/depression/depression.module').then(m => m.DepressionPageModule) }
+    loadChildren: () => import('./pages/depression/depression.module').then(m => m.DepressionPageModule) 
+  },
+  { path: 'testing', 
+    loadChildren: () => import('./pages/testing/testing.module').then(m => m.TestingPageModule) 
+  }
 
 ];
 
