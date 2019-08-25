@@ -1,17 +1,16 @@
 export class QuoteModel {
-    // mandatory 
-    id : number;
+    // mandatory
+    id: number;
     text: string;
     faved: boolean;
 
-    //optional
+    // optional
     category?: string;
     name?: string;
 
     tags?: string[];
-    
-    constructor(id, text, faved, category?, name?, tags?)
-    {
+
+    constructor(id, text, faved, category?, name?, tags?) {
         this.id = id;
         this.text = text;
         this.faved = faved;
@@ -21,13 +20,12 @@ export class QuoteModel {
 
         if(tags == undefined)
             this.tags = [];
-        
-            /*
-        if(name != undefined) {
+
+        /* if(name != undefined) {
             this.complete();
         } */
     }
-    
+
     setFaved(newfaved) {
         this.faved = newfaved;
     }
@@ -47,7 +45,7 @@ export class QuoteModel {
 export class QuoteModel {
     // all set functions should be used as decorators (return this)
 
-    
+
 
     public constructor(id:number, text:string, faved:boolean) {
         this.id = id;
@@ -67,6 +65,4 @@ export class QuoteModel {
         this.text = this.text.replace("-n-", name);
         return this;
     }
-}
-
-*/ 
+}*/

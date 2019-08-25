@@ -34,7 +34,7 @@
         <div class="circle" [ngClass]="getRatingClass()"></div>
 
       </ion-col>
-      <ion-col size="12" class="notes">
+      <ion-col size="10" offset="1" class="notes">
         <!--<h5>Poznámky</h5>-->
         <ion-list lines="none" *ngIf="currentDay.details != undefined">
           <ion-item-divider>
@@ -62,7 +62,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-fab horizontal="start" vertical="bottom">
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
     <ion-fab-button color="orange">
       <ion-icon name="arrow-dropup"></ion-icon>
     </ion-fab-button>
@@ -76,7 +76,7 @@
     </ion-fab-list>
   </ion-fab>
 
-  <ion-fab horizontal="end" vertical="bottom">
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button color="orange" (click)="openGraph()">
       <ion-icon name="stats"></ion-icon>
     </ion-fab-button>

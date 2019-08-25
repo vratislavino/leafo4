@@ -90,7 +90,7 @@ h2 {
 }
 
 .day-num {
-  padding: 8px 6px;
+  padding: 12px 8px;
   border-left: 0px solid var(--ion-color-orange-tint);
   border-bottom: 0px solid var(--ion-color-orange-tint);
   background-color: transparent;
@@ -107,6 +107,7 @@ h2 {
 .day-nums {
   border-right: 0px solid var(--ion-color-orange-tint);
   ion-col {
+    padding: 0px;
     border: 1px solid rgba(247, 128, 0, 0.2) !important;
   }
 }
@@ -131,7 +132,7 @@ h2 {
 }
 
 .disabled-days {
-  color: --ion-color-sec-normal;
+  color: var(--ion-color-yellow-shade);
 }
 
 ion-content ion-card.card-md.card-md-primLight.card {

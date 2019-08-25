@@ -34,10 +34,15 @@ ion-label.quote-text p {
 
 /* HERE THE QUOTES GO */
 .item.md {
-    background: var(--ion-color-red);  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, var(--ion-color-red), var(--ion-color-red-tint));  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, var(--ion-color-red), var(--ion-color-red-tint)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    /*background-color: map-get($map: $colors, $key: primDark) !important;*/
+    /* CERVENA */
+    background: var(--ion-color-red);
+    background: -webkit-linear-gradient(to right, var(--ion-color-red), var(--ion-color-red-tint));
+    background: linear-gradient(to right, var(--ion-color-red), var(--ion-color-red-tint));
+
+    /* ZELENA */
+    background: var(--ion-color-green);
+    background: -webkit-linear-gradient(to right, var(--ion-color-green), var(--ion-color-green-tint));
+    background: linear-gradient(to right, var(--ion-color-green), var(--ion-color-green-tint));
 }
 .action-icons .button-md {
     background-color: transparent;
