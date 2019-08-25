@@ -41,6 +41,8 @@ import { RequestProvider } from './providers/request/request';
 import { SystemInfoProvider } from './providers/system-info/system-info';
 import { LeafoInfoProvider } from './providers/leafo-info/leafo-info';
 import { NotificationProvider } from './providers/notification/notification';
+import { InfoLeafoComponentModule } from './components/info-leafo/info-leafo.module';
+import { InfoLeafoComponent } from './components/info-leafo/info-leafo';
 
 
 @NgModule({
@@ -52,10 +54,12 @@ import { NotificationProvider } from './providers/notification/notification';
     IonicStorageModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    InfoLeafoComponentModule
   ],
   bootstrap: [AppComponent],
   entryComponents: [
+    InfoLeafoComponent
   ],
   providers: [
     Camera,

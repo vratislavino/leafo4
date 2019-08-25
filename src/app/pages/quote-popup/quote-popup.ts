@@ -17,7 +17,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class QuotePopupPage {
 
   author: string = "";
-  quote: QuoteModel = new QuoteModel(8, 'Kup si něco hezkého na sebe!', false, '', 'Vráťo', ['friend']);
+  quote: QuoteModel = new QuoteModel(8, 'Kup si něco hezkého na sebe!', "Já", false, '', 'Vráťo', ['friend']);
 
   constructor(private router:Router, private route:ActivatedRoute, private quoteProvider: QuoteProvider) {
     

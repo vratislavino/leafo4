@@ -8,7 +8,8 @@ import { Component } from '@angular/core';
  */
  @Component({
   selector: 'info-leafo',
-  templateUrl: 'info-leafo.html'
+  templateUrl: 'info-leafo.html',
+  styleUrls: ["info-leafo.scss"]
 })
  export class InfoLeafoComponent {
 

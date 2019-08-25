@@ -2,6 +2,7 @@ export class QuoteModel {
     // mandatory
     id: number;
     text: string;
+    author: string;
     faved: boolean;
 
     // optional
@@ -10,9 +11,10 @@ export class QuoteModel {
 
     tags?: string[];
 
-    constructor(id, text, faved, category?, name?, tags?) {
+    constructor(id, text, author, faved, category?, name?, tags?) {
         this.id = id;
         this.text = text;
+        this.author = author;
         this.faved = faved;
         this.category = category;
         this.name = name;

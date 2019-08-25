@@ -73,7 +73,7 @@ export class ProfilePage {
 
       keys.forEach((key) => {
         var quoteObj = data[key];
-        var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["faved"]).complete(AccountProvider.user.addressing);
+        var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(AccountProvider.user.addressing);
         this.quotes.push(qm);
       });
       

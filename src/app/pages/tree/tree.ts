@@ -45,6 +45,7 @@ export class TreePage {
     private vc: ViewContainerRef,
     private rp: RatingProvider,
     private toastCtrl: ToastController) {
+      this.ionViewDidLoad();
   }
 
   ionViewDidLoad() {

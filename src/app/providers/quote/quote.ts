@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
-import { QuoteModel } from '../../model/QuoteModel.interface';
 import { QUOTE_LIST } from '../../mocks/quote.mocks';
 import { AccountProvider } from '../account/account';
 
