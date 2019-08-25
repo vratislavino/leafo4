@@ -1,50 +1,69 @@
-	.hide {
+.hide {
 	display:none;
-	}
+}
 
-    #leafo-info {
-		width: calc(100% - 32px);
-		min-height: 200px;
-		display: none;
-		position: absolute;
-		top: calc(50% - 100px);
-		left: 0px;
-		padding: 15px;
-		opacity: 1;
-		animation: opacka 0.5s linear;
-		z-index: 1000;
-		.logo {
-			float: left;
-			width: 20%;
-			height: auto;
+#leafo-info {
+	min-width: calc(100% - 32px);
+	min-height: 200px;
+	display: none;
+	position: absolute;
+	top: calc(50% - 100px);
+	left: 0px;
+	padding: 15px;
+	opacity: 1;
+	animation: opacka 0.5s linear;
+	z-index: 1000;
+	.logo {
+		float: left;
+		width: 15%;
+		height: auto;
+	}
+	.text {
+		float: right;
+		width: 80%;
+		height: auto;
+		margin-left: 5%;
+		padding: 10px;
+		border: 2px solid wheat;
+		border-radius: 8px;
+		background-color: #EAEAEA;
+		color: #333333;
+		h2 {
+			margin-bottom: 0px;
+			font-size: 18px;
+			font-weight: bold;
 		}
-		.text {
-			float: right;
-			width: 80%;
-			height: auto;
-			padding: 10px;
-			border: 2px solid wheat;
-			border-radius: 8px;
-			background-color: white;
-			color: #333333;
-			opacity: 0.8;
-			h2 {
-				margin-bottom: 0px;
-				font-size: 18px;
-				font-weight: bold;
-			}
-			p {
-				margin-top: 0.5em;
-				font-size: 14px;
-				line-height: 1.5em;
-			}
-			p.note {
-				margin-bottom: 0px;
-				font-size: 0.8em;
-				font-style: italic;
-			}
+		p {
+			margin-top: 0.5em;
+			font-size: 14px;
+			line-height: 1.5em;
+		}
+		p.note {
+			margin-bottom: 0px;
+			font-size: 0.8em;
+			font-style: italic;
 		}
 	}
+	button {
+		width: 100%;
+		margin-top: 12px;
+		padding: 16px 0px;
+		border-radius: 4px;
+		font-size: 16px;
+	}
+	.success {
+		background-color: var(--ion-color-green);
+		color: var(--ion-color-green-contrast);
+	}
+	.warning {
+		background-color: var(--ion-color-orange);
+		color: var(--ion-color-orange-contrast);
+	}
+	.danger {
+		background-color: var(--ion-color-danger);
+		color: var(--ion-color-danger-contrast);
+	}
+}
 
 @keyframes opacka {
 	0% {

@@ -4,61 +4,48 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
-    <ion-toolbar color="primDark">
-      <ion-title>Přihlásit se</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
 <ion-content padding>
-
-  <ion-list no-lines>
+  <div class="avatar">
+    <!--<h2 class="text-center">Leafo Login</h2>-->
+    <img src="../../assets/imgs/leafo.png" />
+  </div>
+  <ion-list>
     <ion-item>
-      <ion-label color="primNormal" floating>Email</ion-label>
+      <ion-label color="primNormal" position="floating">Email</ion-label>
       <ion-input type="email" [(ngModel)]="email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label color="primNormal" floating>Heslo</ion-label>
+      <ion-label color="primNormal" position="floating">Heslo</ion-label>
       <ion-input type="password" [(ngModel)]="password"></ion-input>
     </ion-item>
+  </ion-list>
 
-    <ion-item >
-
-      </ion-item>
+  <ion-list lines="none">
     <ion-item class="login-button" color="primDark" large (click)="login()">
         <ion-icon name="person" item-start></ion-icon>
         Přihlásit se
     </ion-item>
     
-    <ion-item >
-
-    </ion-item>
-
-    <ion-item-divider>
-        <ion-icon name="people" item-start></ion-icon>
-        Sociální sítě
-      </ion-item-divider>
-    
-
-    <ion-item class="login-button" color="primDark" large (click)="testLeafo()">
-        <ion-icon name="star" item-start></ion-icon>
-        Přihlásit se přes Facebook
-    </ion-item>
-    
-    <ion-item class="login-button" color="primDark" large (click)="login()">
-        <ion-icon name="star" item-start></ion-icon>
-        Přihlásit se přes Google+
+    <ion-item>
+      <p>Zapomenuté <span color="green">heslo</span></p>
     </ion-item>
   </ion-list>
-    <ion-list class="bottom-menu">
-        <ion-item class="no-acc" menuClose routerLink="/register" color="primNormal" >
-            <ion-icon name="person-add" item-start></ion-icon>
-            <ion-icon name="arrow-forward" item-end></ion-icon>
-            Ještě nemám účet
-          </ion-item>
-      </ion-list>
+
+  <ion-list class="no-acc" lines="none">
+    <ion-item class="no-acc" menuClose routerLink="/register" color="primNormal" >
+      <ion-icon name="person-add" item-start></ion-icon>
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+      Ještě nemám účet
+    </ion-item>
+  </ion-list>
+  <ion-row class="logos">
+    <ion-col size="12">
+      <ion-icon name="logo-facebook" item-start (click)="testLeafo()"></ion-icon>
+      <ion-icon name="logo-googleplus" item-start (click)="login()"></ion-icon>
+    </ion-col>
+  </ion-row>
 </ion-content>
 <ion-footer>
 </ion-footer>

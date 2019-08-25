@@ -7,19 +7,19 @@
     <h2>{{ headline }}</h2>
     <div *ngIf="leafoInfoType == 0 || leafoInfoType == 1 || leafoInfoType == 2"> 
       <p>{{ text }}</p>
-      <button ion-button full large (click)="callFunc(callback1)">OK</button>
+      <button ion-button full large (click)="callFunc(callback1)" class="success">OK</button>
     </div>
     
     <div *ngIf="leafoInfoType == 3">
       <p>{{ text }}</p>
-      <button ion-button full large (click)="callFunc(callback1)">Splnil jsem úkol!</button>
-      <button ion-button full small (click)="callFunc(callback2)">Teď ne!</button>
+      <button ion-button full large (click)="callFunc(callback1)" class="success">Splnil jsem úkol!</button>
+      <button ion-button full small (click)="callFunc(callback2)" class="warning">Teď ne!</button>
     </div>
 
     <div [class.hide]="leafoInfoType != 4">
       <div id="complete"></div>
-      <button ion-button full large (click)="callFunc(callback1)">Odeslat odpověď!</button>
-      <button ion-button full small (click)="callFunc(callback2)">Teď ne!</button>
+      <button ion-button full large (click)="callFunc(callback1)" class="success">Odeslat odpověď!</button>
+      <button ion-button full small (click)="callFunc(callback2)" class="warning">Teď ne!</button>
     </div>
 
   </div>
