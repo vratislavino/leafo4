@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import {ENV, ENV_PROD, ENV_DEV, API_ENDPOINT_PROD, API_ENDPOINT_DEV, API_TIMEOUT} from '../../../config';
 import { UserProvider } from '../user/user';
 import { SystemInfoProvider } from '../system-info/system-info';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class RequestProvider {
@@ -32,7 +33,7 @@ export class RequestProvider {
     // body: '' is a quick fix for a timeout issue
     return this.http.get(this.apiEndpoint + url, { headers: headers})
       //.timeout(API_TIMEOUT)
-      //.map(this.extractData)
+      .pipe(map(this.extractData))
       //.catch(this.handleError);
   }
 
@@ -42,7 +43,7 @@ export class RequestProvider {
     let body = data ? JSON.stringify(data) : '';
     return this.http.post(this.apiEndpoint + url, body, {headers: headers})
       //.timeout(API_TIMEOUT)
-      //.map(this.extractData)
+      .pipe(map(this.extractData))
       //.catch(this.handleError);
   }
 
@@ -52,7 +53,7 @@ export class RequestProvider {
     let body = data ? JSON.stringify(data) : '';
     return this.http.put(this.apiEndpoint + url, body, {headers: headers})
       //.timeout(API_TIMEOUT)
-      //.map(this.extractData)
+      .pipe(map(this.extractData))
       //.catch(this.handleError);
   }
 

@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { TreePage } from './tree';
-
 @NgModule({
   declarations: [
     TreePage,

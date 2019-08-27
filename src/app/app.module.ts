@@ -1,5 +1,6 @@
 // Ionic basic imports
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -44,6 +45,14 @@ import { NotificationProvider } from './providers/notification/notification';
 import { InfoLeafoComponentModule } from './components/info-leafo/info-leafo.module';
 import { InfoLeafoComponent } from './components/info-leafo/info-leafo';
 
+import * as Hammer from 'hammerjs';
+import {HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any>{
+    'pan': {direction: Hammer.DIRECTION_ALL }
+  }
+}
 
 @NgModule({
   declarations: [
@@ -53,6 +62,7 @@ import { InfoLeafoComponent } from './components/info-leafo/info-leafo';
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     InfoLeafoComponentModule
@@ -76,7 +86,8 @@ import { InfoLeafoComponent } from './components/info-leafo/info-leafo';
     RequestProvider,
     SystemInfoProvider,
     LeafoInfoProvider,
-    NotificationProvider
+    NotificationProvider,
+    {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}
   ]
 })
 export class AppModule { }

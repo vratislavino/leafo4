@@ -61,10 +61,20 @@ import { Component } from '@angular/core';
 
       let t = this.text.split("***");
       for(var i = 0; i < t.length-1; i++) {
+        this.tryToCreateABreak(i, t);
         this.createPart(t[i]);
         this.createInput();
       }
+
+      this.tryToCreateABreak(t.length-1, t);
       this.createPart(t[t.length-1]);
+  }
+
+  private tryToCreateABreak(index, arr) {
+    if(arr[index].startsWith("/n")) {
+      arr[index] = arr[index].substr(2);
+      this.createBreak();
+    }
   }
 
   public isUndefined():boolean{
@@ -133,6 +143,11 @@ import { Component } from '@angular/core';
     this.initCompAgain();
     this.comp.insertAdjacentHTML('beforeend', '<input type="text" class="part">');
     console.log("Adding input!");
+  }
+
+  createBreak() {
+    this.initCompAgain();
+    this.comp.insertAdjacentHTML('beforeend', '<br>');
   }
 }
 

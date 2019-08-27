@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ɵisListLikeIterable } from '@angular/core';
 import { AlertController/*, FabContainer */} from '@ionic/angular';
 import { CalendarDate } from '../../model/CalendarDate.interface';
 import * as moment from 'moment';
@@ -6,24 +6,49 @@ import { AccountProvider } from '../../providers/account/account';
 import { RatingProvider } from '../../providers/rating/rating';
 import { D } from '../../../D';
 import { Router } from '@angular/router';
+import 'hammerjs';
+import {trigger, keyframes, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'page-calendar',
   templateUrl: 'calendar.html',
   styleUrls: ['calendar.scss'],
-  providers: [AccountProvider]
+  providers: [AccountProvider],
+  animations: [
+    trigger('animator', [
+      transition('* => pulse', animate(300, keyframes([
+        style({transform: 'scale3d(1, 1, 1)', offset: 0}),
+        style({transform: 'scale3d(1.2, 1.2, 1.2)', offset: .3}),
+        style({transform: 'scale3d(1, 1, 1)', offset: 1}),
+      ])))
+    ])]
 })
 export class CalendarPage {
 
   currentDay : CalendarDate;
   currrentDayDownloaded = false;
-  visibleRatings = false;
-  reviewText = "Tap!";
-  /*@ViewChild("enterPopUp") enterPopUp: FabContainer;*/
+  visibleRatings = true;
+  reviewText = "Press!";
+  
+  animationState:string;
 
+  /*@ViewChild("enterPopUp") enterPopUp: FabContainer;*/
+  
   constructor(public router: Router, private alertCtrl: AlertController, public ac: AccountProvider, private rp: RatingProvider) {
     this.ionViewDidEnter();
   }
+
+  startAnimation(state) {
+    console.log(state);
+    //if(!this.animationState) {
+      this.animationState = state;
+    //}
+  }
+
+  resetAnimationState() {
+    this.animationState = '';
+  }
+
   
   ionViewDidEnter() {
     this.currrentDayDownloaded = false;
@@ -32,6 +57,8 @@ export class CalendarPage {
     else
       this.refreshCurrentDateData();
     console.log("IM BACK HERE!");
+
+    this.visibleRatings = false;
   }
 
   ionViewDidLoad() {
@@ -75,15 +102,52 @@ export class CalendarPage {
     return "r" + this.currentDay.details["rating"];
   }
 
+  openReviewButtons() {
+    this.visibleRatings = true;
+    this.reviewText = "0%";
+  }
+  
+  bla() {
+  console.log('asdasd');
+  }
+
+  closeReviewButtons() {
+    this.visibleRatings = false;
+  }
+
+  chooseReview(review) {
+    console.log(review + " _ " + this.visibleRatings);
+    if(review==101 && !this.visibleRatings) {
+      this.openReviewButtons();
+    } else {
+      if(review = 101)
+        review = 0;
+      if(new Date(this.currentDay.keyDate + " 0:0").getTime() <= new Date().getTime()) { 
+        this.reviewText = "Tap!";
+        this.rp.setDayReview(this.currentDay.keyDate, review).subscribe((data)=> { 
+          console.log(data);
+          if(this.currentDay)
+            this.currentDay.details["rating"] = review;
+            this.reviewText = review + "%";
+        }, (err)=> {
+          console.log("Error");
+          console.log(err);
+          this.visibleRatings = false;
+        });
+      }
+      this.closeReviewButtons();
+    }
+  }
+
+
+/*
   chooseReview(review, fab) {
-    console.log("Here");
-    console.log(new Date(this.currentDay.keyDate + " 0:0").getTime());
-    console.log(new Date().getTime());
+
     if(this.currentDay.details == null || this.currentDay.details == undefined)
       return;
       
-    if(new Date(this.currentDay.keyDate + " 0:0").getTime() <= new Date().getTime()) {
-      let notes: HTMLElement = <HTMLElement>document.getElementsByClassName('notes')[0];
+    if(new Date(this.currentDay.keyDate + " 0:0").getTime() <= new Date().getTime()) { // pokud je starší než dnešek
+      //let notes: HTMLElement = <HTMLElement>document.getElementsByClassName('notes')[0];
       if(this.visibleRatings) {
         this.visibleRatings = false;
         this.reviewText = "Tap!";
@@ -91,6 +155,7 @@ export class CalendarPage {
         this.rp.setDayReview(this.currentDay.keyDate, review).subscribe((data)=> {
           console.log(data);
           if(review == 101) {
+            this.openReviewButtons();
             review = 0;
           }
           if(this.currentDay)
@@ -112,7 +177,7 @@ export class CalendarPage {
     } else {
       console.log("Jeste brzo bracho..");
     }
-  }
+  }*/
 
   openGraph() {
     this.router.navigate(["/graph"]);

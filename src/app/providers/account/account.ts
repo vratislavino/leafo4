@@ -6,7 +6,7 @@ import { Events } from '@ionic/angular';
 @Injectable()
 export class AccountProvider {
 
-	public static user: User;
+	public static user: User = null;
 	private readyPromise: Promise<void> = null;
 	private events: Events;
 	private motStorage: MotStorageProvider;
@@ -64,7 +64,7 @@ export class AccountProvider {
 	}
 
 	isLoggedIn(): boolean {
-		return this.getAuthData() ? true : false;
+		return this.getAuthData();
 	}
 
 	getUserName(): string {

@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { AccountProvider } from '../../providers/account/account';
 import { LeafoInfoType } from '../../components/info-leafo/info-leafo';
 import { Router } from '@angular/router';
+
 /**
  * Generated class for the TreePage page.
  *
@@ -147,6 +148,8 @@ export class TreePage {
     var appleId = apple.id_da;
     var color = apple.id_ra != undefined ? 1 : 2;
 
+    console.log(apple);
+
     this.leafoInfo.createAndShowLeafoBubble(this.vc, apple.text,
       color == 1 ? "Červené jablko" : "Zlaté jablko",
       color == 1 ? LeafoInfoType.RedApple : LeafoInfoType.GoldenApple, () => {
@@ -202,6 +205,7 @@ export class TreePage {
         console.log("Set tree state: error");
       });
     } else {
+      this.leafoInfo.createAndShowLeafoBubble(this.vc, "Konvice je prázdná, nelze zalít, ohodnoť nejdříve den!", "Pozor!", LeafoInfoType.Sad);
       console.log("Nezalivej s prazdnou konvici... To upe nefunguje hele.");
     }
   }
