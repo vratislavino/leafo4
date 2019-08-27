@@ -14,19 +14,19 @@
   <ion-grid *ngIf="currrentDayDownloaded">
     <ion-row text-left padding>
       <ion-col size="12" class="day-review">
-        <h5 (mouseup)="bla()">Hodnocení dne</h5>
+        <h5>Hodnocení dne</h5>
         <div class="circ main-day" text-center *ngIf="!visibleRatings">
           <span class="day-num">{{ currentDay.dayNumberToShow }}</span>
           <span class="day-in-week">{{ currentDay.dayNameToShow }}</span>
         </div><!--(click)='chooseReview(0)'-->
         
         <div [className]="visibleRatings ? 'review list-visible' : 'review list-invisible'">
-          <div (press)='chooseReview(101)' class="close" (mouseup)='chooseReview(0)'>{{ reviewText }}</div>
+          <div (press)='chooseReview(101)' class="close review-button" (mousedown)="prevDef($event)" (mousemove)="prevDef($event)" (mouseup)='chooseReview(0)'>{{ reviewText }}</div>
           <div class="list" *ngIf="visibleRatings">
-            <div class="review-button" (mouseover)="startAnimation('pulse')" [@animator]="animationState" (mouseup)='chooseReview(25)'>25%</div>
-            <div class="review-button" (mouseover)="startAnimation('pulse')" [@animator]="animationState" (mouseup)='chooseReview(50)'>50%</div>
-            <div class="review-button" (mouseover)="startAnimation('pulse')" [@animator]="animationState" (mouseup)='chooseReview(75)'>75%</div>
-            <div class="review-button" (mouseover)="startAnimation('pulse')" [@animator]="animationState" (mouseup)='chooseReview(100)'>100%</div>
+            <div class="review-button" (mouseenter)="startAnimation('pulse')" (mousedown)="prevDef($event)"  (mousemove)="prevDef($event)" [@animator]="animationState" (mouseup)='chooseReview(25)'>25%</div>
+            <div class="review-button" (mouseenter)="startAnimation('pulse')" (mousedown)="prevDef($event)"  (mousemove)="prevDef($event)" [@animator]="animationState" (mouseup)='chooseReview(50)'>50%</div>
+            <div class="review-button" (mouseenter)="startAnimation('pulse')" (mousedown)="prevDef($event)"  (mousemove)="prevDef($event)" [@animator]="animationState" (mouseup)='chooseReview(75)'>75%</div>
+            <div class="review-button" (mouseenter)="startAnimation('pulse')" (mousedown)="prevDef($event)"  (mousemove)="prevDef($event)" [@animator]="animationState" (mouseup)='chooseReview(100)'>100%</div>
           </div>
         </div>
 

@@ -36,6 +36,8 @@ export class CalendarPage {
   
   constructor(public router: Router, private alertCtrl: AlertController, public ac: AccountProvider, private rp: RatingProvider) {
     this.ionViewDidEnter();
+    this.ionViewDidLoad();
+    
   }
 
   startAnimation(state) {
@@ -58,12 +60,21 @@ export class CalendarPage {
       this.refreshCurrentDateData();
     console.log("IM BACK HERE!");
 
-    this.visibleRatings = false;
   }
 
   ionViewDidLoad() {
     this.refreshCurrentDateData();
-    console.log('ionViewDidLoad CalendarPage');
+    var btns = document.getElementsByClassName("review-button");
+    console.log(btns);
+    for(var i = 0; i <btns.length; i++) {
+      btns[i].addEventListener('mouseup', this.myListener);
+    }
+
+    console.log("added events");
+  }
+
+  myListener(elm) {
+    console.log(elm);
   }
 
   refreshCurrentDateData(mDate = moment()) {
@@ -102,6 +113,10 @@ export class CalendarPage {
     return "r" + this.currentDay.details["rating"];
   }
 
+  prevDef(ev) {
+    ev.preventDefault();
+  }
+
   openReviewButtons() {
     this.visibleRatings = true;
     this.reviewText = "0%";
@@ -116,7 +131,7 @@ export class CalendarPage {
     if(review==101 && !this.visibleRatings) {
       this.openReviewButtons();
     } else {
-      if(review = 101)
+      if(review == 101)
         review = 0;
       if(new Date(this.currentDay.keyDate + " 0:0").getTime() <= new Date().getTime()) { 
         this.reviewText = "Tap!";

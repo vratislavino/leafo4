@@ -3,6 +3,12 @@ h2 {
   margin-bottom: 0px;
 }
 
+* {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
 .circ {
   border-radius: 50%;
   min-width: 7vh;
