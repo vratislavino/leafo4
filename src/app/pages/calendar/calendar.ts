@@ -106,10 +106,6 @@ export class CalendarPage {
     this.visibleRatings = true;
     this.reviewText = "0%";
   }
-  
-  bla() {
-  console.log('asdasd');
-  }
 
   closeReviewButtons() {
     this.visibleRatings = false;
