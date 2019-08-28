@@ -21,12 +21,12 @@
         </div><!--(click)='chooseReview(0)'-->
         
         <div [className]="visibleRatings ? 'review list-visible' : 'review list-invisible'">
-          <div (press)='chooseReview(101)' class="close review-button" (mousedown)="prevDef($event)" (mousemove)="prevDef($event)" (mouseup)='chooseReview(0)'>{{ reviewText }}</div>
-          <div class="list" *ngIf="visibleRatings">
-            <div class="review-button" (mouseenter)="startAnimation('pulse')" (mousedown)="prevDef($event)"  (mousemove)="prevDef($event)" [@animator]="animationState" (mouseup)='chooseReview(25)'>25%</div>
-            <div class="review-button" (mouseenter)="startAnimation('pulse')" (mousedown)="prevDef($event)"  (mousemove)="prevDef($event)" [@animator]="animationState" (mouseup)='chooseReview(50)'>50%</div>
-            <div class="review-button" (mouseenter)="startAnimation('pulse')" (mousedown)="prevDef($event)"  (mousemove)="prevDef($event)" [@animator]="animationState" (mouseup)='chooseReview(75)'>75%</div>
-            <div class="review-button" (mouseenter)="startAnimation('pulse')" (mousedown)="prevDef($event)"  (mousemove)="prevDef($event)" [@animator]="animationState" (mouseup)='chooseReview(100)'>100%</div>
+          <div id="review-changer" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)" class="close review-button" [@animator]="animationState" (@animator.done)="resetAnimationState()">{{ reviewText }}</div>
+          <div [className]="visibleRatings ? 'list' : 'list hidden'">
+            <div class="review-button" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)" [@animator]="animationState" (@animator.done)="resetAnimationState()">25%</div>
+            <div class="review-button" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)" [@animator]="animationState" (@animator.done)="resetAnimationState()">50%</div>
+            <div class="review-button" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)" [@animator]="animationState" (@animator.done)="resetAnimationState()">75%</div>
+            <div class="review-button" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)" [@animator]="animationState" (@animator.done)="resetAnimationState()">100%</div>
           </div>
         </div>
 
