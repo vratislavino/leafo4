@@ -15,7 +15,7 @@
   </ion-header>
 
 <ion-content padding>
-  <ion-slides #slider (ionSlideWillChange)="justChanged()">
+  <ion-slides #slider>
     <ion-slide>
       <ion-list lines="none">
         <ion-list-header>
@@ -98,7 +98,7 @@
       <ion-grid>
         <ion-row *ngFor="let row of vysledek">
           <ion-col size="4" *ngFor="let col of row">
-            <ion-button size="small" [ngClass]="{'active': col.active}" (click)="updateBckg(col)">
+            <ion-button size="small" [color]="col.active ? 'green' : 'dark'" [ngClass]="{'active': col.active}" (click)="updateBckg(col)">
               {{ col.name }}
             </ion-button>
           </ion-col>
@@ -119,6 +119,6 @@
 
   </ion-slides>
   <div class="bigBtn">
-    <ion-button color="green" (click)="slideRight()">{{ nextText }}<ion-icon name="ios-arrow-forward"></ion-icon></ion-button>
+    <ion-button color="green" (click)="slideRight()">{{ getNextButtonText() }}<ion-icon name="ios-arrow-forward"></ion-icon></ion-button>
   </div>
 </ion-content>

@@ -9,7 +9,7 @@ import { User } from '../../model/UserModel';
 export class UserProvider {
 	private apiRequest: RequestProvider;
 
-	constructor(apiRequest: RequestProvider) {
+	constructor(apiRequest: RequestProvider, private ac:AccountProvider) {
 		this.apiRequest = apiRequest;
 	}
 
@@ -23,13 +23,13 @@ export class UserProvider {
 
 	public downloadImage() {
 		return this.apiRequest.post('downloadImage.php', {
-			id_u: AccountProvider.user.id
+			id_u: this.ac.getUserId()
 		});
 	}
 
 	public register(email, pass, passA, username, fName, sName, addressing, sign, sex) {
 		return this.apiRequest.post(
-			'/userApi.php', {
+			'/registerApi.php', {
 				email: email,
 				pass: pass,
 				passA: passA,
@@ -47,7 +47,7 @@ export class UserProvider {
 		
 		return this.apiRequest.post(
 			'/updateSettingsApi.php', {
-				id_u: AccountProvider.user.id,
+				id_u: this.ac.getUserId(),
 				firstname: data.firstname,
 				email: data.email,
 				addressing: data.addressing,
@@ -60,7 +60,7 @@ export class UserProvider {
 	public setProfileImage(base64Image: string) {
 		return this.apiRequest.post(
 			'/uploadImage.php', {
-				id_u: AccountProvider.user.id,
+				id_u: this.ac.getUserId(),
 				data: base64Image
 			}
 		)
@@ -69,7 +69,7 @@ export class UserProvider {
 	public setWatering(watering:number) {
 		return this.apiRequest.post(
 			'/setCustomWatering.php', {
-				'id_u': AccountProvider.user.id,
+				'id_u': this.ac.getUserId(),
 				'num': watering 
 			}
 		);
@@ -78,21 +78,21 @@ export class UserProvider {
 	public getTreeState() {
 		return this.apiRequest.post(
 			'/getTreeState.php', {
-				id_u: AccountProvider.user.id
+				id_u: this.ac.getUserId()
 			});
 	}
 
 	public setTreeState() {
 		return this.apiRequest.post(
 			'/setStates.php', {
-				id_u: AccountProvider.user.id
+				id_u: this.ac.getUserId()
 			});
 	}
 
 	public getCharacteristics() {
 		return this.apiRequest.post(
 			'/getCharacteristics.php', {
-				'user_id': AccountProvider.user.id
+				'user_id': this.ac.getUserId()
 			}
 		);
 	}
@@ -106,14 +106,14 @@ export class UserProvider {
 	public getDepressionData() {
 		return this.apiRequest.post(
 			'/getDepression.php', {
-				id_u: AccountProvider.user.id
+				id_u: this.ac.getUserId()
 			});
 	}
 	
 	public getLastDepression() {
 		return this.apiRequest.post(
 			'/getLastDepression.php', {
-				id_u: AccountProvider.user.id
+				id_u: this.ac.getUserId()
 			});
 	}
 	/*

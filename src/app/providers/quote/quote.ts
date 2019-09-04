@@ -9,7 +9,7 @@ import { AccountProvider } from '../account/account';
 export class QuoteProvider {
 
   reqProvider:RequestProvider = null;
-  constructor(public tC: ToastController, reqProvider:RequestProvider) {
+  constructor(public tC: ToastController, reqProvider:RequestProvider, private ac:AccountProvider) {
     this.reqProvider = reqProvider;
   }
 
@@ -17,7 +17,7 @@ export class QuoteProvider {
     return this.reqProvider.post(
       '/quotesApi.php', {
         faved: true,
-        id_u: AccountProvider.user.id,
+        id_u: this.ac.getUserId(),
       }
     );
   }
@@ -26,11 +26,11 @@ export class QuoteProvider {
     return this.reqProvider.post(
       '/quotesApi.php', num == null ? {
         faved: false,
-        id_u: AccountProvider.user.id,
+        id_u: this.ac.getUserId(),
       } : {
         faved: false,
         count: num, 
-        id_u: AccountProvider.user.id,
+        id_u: this.ac.getUserId(),
       }
     );
   }
@@ -40,12 +40,12 @@ export class QuoteProvider {
       '/quotesApi.php', num == null ? {
         faved: false,
         horoscope: true,
-        id_u: AccountProvider.user.id,
+        id_u: this.ac.getUserId(),
       } : {
         faved: false,
         count: num, 
         horoscope: true,
-        id_u: AccountProvider.user.id,
+        id_u: this.ac.getUserId(),
       }
     );
   }
@@ -109,7 +109,7 @@ export class QuoteProvider {
     return this.reqProvider.post(
       '/faveQuoteApi.php', {
         id_q: qid,
-        id_u: AccountProvider.user.id,
+        id_u: this.ac.getUserId(),
         faved: faved
       }
     );

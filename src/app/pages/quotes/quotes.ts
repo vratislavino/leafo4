@@ -71,7 +71,7 @@ export class QuotesPage {
 
       keys.forEach((key) => {
         var quoteObj = data[key];
-        var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(AccountProvider.user.addressing);
+        var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(this.ac.getAddressing());
         this.favoriteQuotes.push(qm);
       });
 
@@ -88,7 +88,7 @@ export class QuotesPage {
       keys.forEach((key) => {
         var quoteObj = data[key];
         console.log(data[key]);
-        var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(AccountProvider.user.addressing);
+        var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(this.ac.getAddressing());
         this.historyQuotes.push(qm);
       });
     }, (err) => {

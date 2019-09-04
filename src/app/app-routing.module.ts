@@ -40,7 +40,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tree/tree.module').then(m => m.TreePageModule)
   },
   {
-    path: 'settings',
+    path: 'settings/:fromRegister',
     loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsPageModule)
   },
   {

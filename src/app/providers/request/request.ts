@@ -68,7 +68,7 @@ export class RequestProvider {
   }
 
   private extractData(res: any) {
-    console.log(res)
+    console.log(res);
     return res;
   }
 

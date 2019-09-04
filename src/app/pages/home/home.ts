@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { ModalController, Platform } from '@ionic/angular';
 import { AccountProvider } from '../../providers/account/account';
 import { User } from '../../model/UserModel';
+import { Router } from '@angular/router';
 
 /**
  * Generated class for the HomePage page.
@@ -16,28 +17,28 @@ import { User } from '../../model/UserModel';
   styleUrls: ['home.scss'],
   providers: [AccountProvider]
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  
 
-  user:User = null;
+  addressing = "";
   private subscription;
 
-  constructor(public modalCtrl: ModalController, 
-    public ac: AccountProvider) {
-
-    this.user = AccountProvider.user;
+  constructor(private platform: Platform, private router:Router, public ac: AccountProvider) {
   }
 
-  ionViewDidEnter() {
-    this.user = AccountProvider.user;
-  }
+  ngOnInit(): void {
 
-  getAddressing() {
-    if(this.user == null)
-      return "kamaráde";
-    return this.user.addressing;
-  }
+    this.ac.ready().then(()=> {
+      
 
-  logout() {
-    this.ac.logout();
+        console.log(this.ac.test());
+  
+        if(!this.ac.isLoggedIn()) {
+          this.router.navigate(["/login"]);
+        } else {
+          this.addressing = this.ac.getAddressing();
+        }
+    })
+    
   }
 }

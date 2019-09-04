@@ -36,11 +36,10 @@ export class GraphPage {
   ionViewDidLoad() {
     console.log("WWW");
     var dateToGet = D.toKeyDate(new Date())
-    var userId = AccountProvider.user.id;
 
-    this.createMonthChart(dateToGet, userId);
-    this.createWeekChart(dateToGet, userId);
-    this.ratingProvider.getWeekData(userId, dateToGet, false).subscribe(data => { console.log("done") }, (err)=> {
+    this.createMonthChart(dateToGet);
+    this.createWeekChart(dateToGet);
+    this.ratingProvider.getWeekData(dateToGet, false).subscribe(data => { console.log("done") }, (err)=> {
       console.log(err);
     });
   }
@@ -113,8 +112,8 @@ export class GraphPage {
     });
   }
 
-  createMonthChart(dateToGet, userId) {
-    this.ratingProvider.getMonthData(userId, dateToGet, true).subscribe((data) => {
+  createMonthChart(dateToGet) {
+    this.ratingProvider.getMonthData(dateToGet, true).subscribe((data) => {
 
       var orderedData = {};
       Object.keys(data).sort().forEach(function (key) {
@@ -139,8 +138,8 @@ export class GraphPage {
     });
   }
 
-  createWeekChart(dateToGet, userId) {
-    this.ratingProvider.getWeekData(userId, dateToGet, true).subscribe((data) => {
+  createWeekChart(dateToGet) {
+    this.ratingProvider.getWeekData(dateToGet, true).subscribe((data) => {
 
       var orderedData = {};
       Object.keys(data).sort().forEach(function (key) {

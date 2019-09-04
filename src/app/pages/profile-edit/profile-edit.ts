@@ -14,8 +14,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'page-profile-edit',
   templateUrl: 'profile-edit.html',
-  styleUrls: ['profile-edit.scss'],
-  providers: [AccountProvider]
+  styleUrls: ['profile-edit.scss']
 })
 export class ProfileEditPage {
 
@@ -23,19 +22,15 @@ export class ProfileEditPage {
   photo = "./assets/imgs/avatar.png";
 
   constructor(private router:Router, public ac: AccountProvider, public userService: UserProvider) {
-      this.currentUserData = AccountProvider.user.copy();
+      this.currentUserData = ac.getCopyOfUser();//AccountProvider.user.copy();
 
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfileEditPage');
   }
 
   save() {
     this.userService.updateSettings(this.currentUserData, null).subscribe(val => {
       console.log("Updating settings message: " + val);
-      AccountProvider.user = this.currentUserData;
-      this.ac.saveLocal();
+      //AccountProvider.user = this.currentUserData;
+      this.ac.saveLocal(this.currentUserData);
       this.router.navigate(["/profile"]);
     }, error => {
         console.log("Updating settings message: " + error);

@@ -1,13 +1,13 @@
 import { LeafoInfoType } from './../../components/info-leafo/info-leafo';
 import { UserProvider } from './../../providers/user/user';
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, OnInit } from '@angular/core';
 import { ToastController, LoadingController, Platform } from '@ionic/angular';
 import { AccountProvider } from '../../providers/account/account';
 import { User } from '../../model/UserModel';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 //import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { LeafoInfoProvider } from '../../providers/leafo-info/leafo-info';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ActivatedRouteSnapshot, Params } from '@angular/router';
 
 /**
  * Generated class for the SettingsPage page.
@@ -22,7 +22,7 @@ import { Router } from '@angular/router';
     styleUrls: ['settings.scss'],
     providers: [AccountProvider]
 })
-export class SettingsPage {
+export class SettingsPage implements OnInit {
 
     currentUserData: User;
     characteristic: string[] = [];
@@ -36,6 +36,7 @@ export class SettingsPage {
     @ViewChild('slider', null) slider;
 
     constructor(private router: Router,
+        private route: ActivatedRoute,
         public ac: AccountProvider,
         public tC: ToastController,
         public camera: Camera,
@@ -46,13 +47,18 @@ export class SettingsPage {
         public infoLeafo: LeafoInfoProvider
         ) {
 
-        //this.loading = this.loadingCtrl.create({
-        //    spinner: 'crescent'
-        //});
+            
+
+        /*
+            const fromReg = this.route.snapshot.paramMap.get("fromRegistration");
+            if(!(fromReg == undefined || fromReg == "false")) {
+                
+            }    */
 
 
         //this.loading.present();
-        this.currentUserData = AccountProvider.user.copy();
+        this.currentUserData = this.ac.getCopyOfUser();
+
         this.ac.getProfileImage().then((data: string) => {
             this.userImage = data;
         });
@@ -61,21 +67,38 @@ export class SettingsPage {
         //this.loading.dismiss();
     }
 
+    ngOnInit() {
+        this.route.params.subscribe((params:Params) => {
+            const fromReg = parseInt(params["fromRegister"]);
+            console.log(fromReg);
+            if(fromReg===1) {
+                console.log("slideRight called twice");
+                this.slideToIndex(3);
+            }
+        })
+    }
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad SettingsPage');
     }
 
     private isWorthUpdating(characteristics) : boolean {
-        return this.currentUserData.firstname != AccountProvider.user.getFirstName() ||
-        this.currentUserData.email != AccountProvider.user.getEmail() ||
-        this.currentUserData.addressing != AccountProvider.user.getAddressing() ||
-        this.currentUserData.sex != AccountProvider.user.getSex() ||
-        this.currentUserData.sign != AccountProvider.user.getSign() ||
+        var user = this.ac.getCopyOfUser();
+
+        return this.currentUserData.firstname != user.getFirstName() ||
+        this.currentUserData.email != user.getEmail() ||
+        this.currentUserData.addressing != user.getAddressing() ||
+        this.currentUserData.sex != user.getSex() ||
+        this.currentUserData.sign != user.getSign() ||
 			characteristics != null
     }
 
     private filterCols(): Array<any> {
         return this.cols.filter((col)=>col.active);
+    }
+
+    public slideToIndex(slide) {
+        this.slider.slideTo(slide);
     }
 
     public slideRight() {
@@ -89,8 +112,7 @@ export class SettingsPage {
                 console.log(array);
                 this.userService.updateSettings(this.currentUserData, array).subscribe(val => {
                     console.log("Updating settings message: " + val);
-                    AccountProvider.user = this.currentUserData;
-                    this.ac.saveLocal();
+                    this.ac.saveLocal(this.currentUserData);
                 }, error => {
                     console.log("Updating settings message: " + error);
                 });
@@ -107,12 +129,8 @@ export class SettingsPage {
         this.slider.slideTo(index);
     }
 
-    justChanged() {
-        if (this.slider.isEnd()) {
-            this.nextText = "Uložit";
-        } else {
-            this.nextText = "Další";
-        }
+    getNextButtonText() {
+        return this.slider.isEnd() ? "Uložit" : "Další";
     }
 
     vysledek = [];
@@ -127,14 +145,27 @@ export class SettingsPage {
             this.cols = [];
             for (var i = 0; i < keys.length; i++) {
                 var obj = {
+                    id_ch: val[keys[i]]["id_ch"],
                     name: val[keys[i]]["name"],
                     active: false
                 };
                 this.cols.push(obj);
             }
-            console.log("HERE!");
-            console.log(this.cols);
+            console.log("Creattiong buttons!");
+            for (var i = 0; i < this.cols.length; i++) {
+                if (i % 3 == 0 && i !== 0) {
+                    this.vysledek.push(this.temp);
+                    this.temp = [];
+                }
+                this.temp.push(this.cols[i]);
+            }
+
+            console.log(this.vysledek);
+
             this.userService.getCharacteristics().subscribe((valU) => {
+                if(valU == undefined || valU == null) {
+                    return;
+                }
                 var keysU = Object.keys(valU);
                 if (keysU.length > 0) {
                     for (var j = 0; j < keysU.length; j++) {
@@ -150,13 +181,7 @@ export class SettingsPage {
                         }
                     }
                     console.log(this.userCols);
-                    for (var i = 0; i < this.cols.length; i++) {
-                        if (i % 3 == 0 && i !== 0) {
-                            this.vysledek.push(this.temp);
-                            this.temp = [];
-                        }
-                        this.temp.push(this.cols[i]);
-                    }
+                    
                 }
             }, (err) => {
                 console.log("ErrorUserArray: " + err);
@@ -189,6 +214,8 @@ export class SettingsPage {
 
     updateBckg(checkbox, isStart = false) {
 
+        console.log("Is Checkbox acive: " + checkbox.active);
+
         if(checkbox.active) {
             checkbox.active = !checkbox.active;
             return;
@@ -196,8 +223,8 @@ export class SettingsPage {
         
         if(!checkbox.active){
             if(this.getCountOfActive() >= this.minActive)
-                //this.infoLeafo.createAndShowLeafoBubble(this.vc, "Vlastníte již maximum charakteristik", "Chyba", LeafoInfoType.Normal);
-            //else
+                this.infoLeafo.createAndShowLeafoBubble(this.vc, "Vlastníte již maximum charakteristik", "Chyba", LeafoInfoType.Normal);
+            else
                 checkbox.active = !checkbox.active;
         }
     }
