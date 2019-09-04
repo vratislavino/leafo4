@@ -1,5 +1,6 @@
-import { Component, ViewChild, ɵisListLikeIterable } from '@angular/core';
-import { AlertController/*, FabContainer */} from '@ionic/angular';
+import { Component } from '@angular/core';
+import { AlertController,/*, FabContainer */
+Platform} from '@ionic/angular';
 import { CalendarDate } from '../../model/CalendarDate.interface';
 import * as moment from 'moment';
 import { AccountProvider } from '../../providers/account/account';
@@ -27,22 +28,26 @@ export class CalendarPage {
 
   currentDay : CalendarDate;
   currrentDayDownloaded = false;
-  visibleRatings = true;
+  visibleRatings = false;
   reviewText = "Press!";
   
   animationState:string;
 
   /*@ViewChild("enterPopUp") enterPopUp: FabContainer;*/
   
-  constructor(public router: Router, private alertCtrl: AlertController, public ac: AccountProvider, private rp: RatingProvider) {
-    this.ionViewDidEnter();
+  constructor(public router: Router, private platform:Platform, private alertCtrl: AlertController, public ac: AccountProvider, private rp: RatingProvider) {
+    this.platform.ready().then(() => {
+      this.ionViewDidEnter();
+      this.ionViewDidLoad();
+    });
+    
   }
 
   startAnimation(state) {
     console.log(state);
-    //if(!this.animationState) {
+    if(!this.animationState) {
       this.animationState = state;
-    //}
+    }
   }
 
   resetAnimationState() {
@@ -58,12 +63,53 @@ export class CalendarPage {
       this.refreshCurrentDateData();
     console.log("IM BACK HERE!");
 
-    this.visibleRatings = false;
   }
 
   ionViewDidLoad() {
     this.refreshCurrentDateData();
-    console.log('ionViewDidLoad CalendarPage');
+    
+    console.log("added events");
+  }
+
+  onTouchStart(event) {
+    this.chooseReview(101);
+    console.log(event);
+  }
+
+  onTouchMove(event) {
+    if(this.visibleRatings) {
+      var html = this.getElementByTouch(event.changedTouches[0]);
+      this.startAnimation('pulse');
+    }
+  }
+
+  getElementByPoint(x, y) : HTMLElement {
+    return <HTMLElement>document.elementFromPoint(x, y);
+  }
+
+  getElementByTouch(touch) : HTMLElement {
+
+      var x = touch.clientX;
+      var y = touch.clientY;
+      return this.getElementByPoint(x,y);
+  }
+
+  onTouchEnd(event) {
+      var doc = this.getElementByTouch(event.changedTouches[0]);
+      var html = doc.innerHTML;
+      
+      if(html.indexOf("%") > -1) 
+      {
+        html = html.replace("%", "");
+        this.chooseReview(parseInt(html));
+      } else {
+        console.log("NENÍ PROCENTO!");
+      }
+
+  }
+
+  myListener(elm) {
+    console.log(elm);
   }
 
   refreshCurrentDateData(mDate = moment()) {
@@ -71,6 +117,7 @@ export class CalendarPage {
     this.rp.getDayData(keyDate, false).subscribe(data => {
       this.currentDay = new CalendarDate(mDate, keyDate, data[keyDate], true, true);
       this.currrentDayDownloaded = true;
+
       if(this.currentDay.details != null && this.currentDay.details != undefined)
         this.reviewText = this.currentDay.details["rating"] + "%";
     });
@@ -102,6 +149,10 @@ export class CalendarPage {
     return "r" + this.currentDay.details["rating"];
   }
 
+  prevDef(ev) {
+    ev.preventDefault();
+  }
+
   openReviewButtons() {
     this.visibleRatings = true;
     this.reviewText = "0%";
@@ -116,7 +167,7 @@ export class CalendarPage {
     if(review==101 && !this.visibleRatings) {
       this.openReviewButtons();
     } else {
-      if(review = 101)
+      if(review == 101)
         review = 0;
       if(new Date(this.currentDay.keyDate + " 0:0").getTime() <= new Date().getTime()) { 
         this.reviewText = "Tap!";

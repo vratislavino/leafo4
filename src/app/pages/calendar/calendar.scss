@@ -3,6 +3,12 @@ h2 {
   margin-bottom: 0px;
 }
 
+* {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
 .circ {
   border-radius: 50%;
   min-width: 7vh;
@@ -51,6 +57,10 @@ ion-fab-list,
 ion-fab {
   //background-color: rgba(0, 0, 0, 0.6);
   color: white;
+}
+
+.hidden {
+  display:none;
 }
 
 .list-visible {

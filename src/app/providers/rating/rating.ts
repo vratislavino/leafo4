@@ -109,6 +109,7 @@ getMonthDataByMoment(start, end, ratingOnly):Observable<{}> {
     if(new Date(date + " 0:0") <= new Date()) {
         callThisFunc()
     */
+   console.log(date + " : " + rating);
     return this.apiRequest.post(
       '/setRatings.php', {
         id_u: this.ac.getUserId(),
