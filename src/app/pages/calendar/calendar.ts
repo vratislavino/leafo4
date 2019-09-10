@@ -30,6 +30,7 @@ export class CalendarPage {
   currrentDayDownloaded = false;
   visibleRatings = false;
   reviewText = "Press!";
+  isWoman = true;
   
   animationState:string;
 
@@ -234,6 +235,10 @@ export class CalendarPage {
     
     this.router.navigate(["/add-note", { date: this.currentDay.keyDate }]);
     //this.enterPopUp.close();
+  }
+
+  openPeriodSettings() {
+    this.router.navigate(["/calendar/period"]);
   }
 
   openAddNotification() {

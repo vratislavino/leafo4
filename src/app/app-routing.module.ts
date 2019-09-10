@@ -71,9 +71,10 @@ const routes: Routes = [
   },
   { path: 'tree/how-to',  
   loadChildren: () => import('./pages/how-to/how-to.module').then(m=>m.HowToPageModule) 
-}
-
-
+  },
+  { path: 'calendar/period',  
+  loadChildren: () => import('./pages/period/period.module').then(m=>m.PeriodPageModule) 
+  }
 ];
 
 @NgModule({
