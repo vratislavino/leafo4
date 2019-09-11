@@ -116,6 +116,24 @@ export class UserProvider {
 				id_u: this.ac.getUserId()
 			});
 	}
+
+	public getOvulationData() {
+		console.log(this.ac.getUserId());
+		return this.apiRequest.post(
+			'/getOvulationData.php', {
+				id_u: this.ac.getUserId()
+			});
+	}
+
+	public setOvulationData(date, length, lasting) {
+		return this.apiRequest.post(
+			'/setOvulationData.php', {
+				id_u: this.ac.getUserId(),
+				date: date, 
+				length: length,
+				lasting: lasting
+			});
+	}
 	/*
 	  updateDeviceToken(userUuid: string, token: string) {
 		return this.apiRequest.put(
