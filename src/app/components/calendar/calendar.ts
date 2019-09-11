@@ -51,14 +51,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     const start = moment(this.currentDate).startOf('month').format("YYYY-MM-DD");
     const end = moment(this.currentDate).endOf('month').format("YYYY-MM-DD");
 
-    
-
-    var userId = 1;
-    if(AccountProvider.user != undefined)
-      userId = AccountProvider.user.id;
-
-
-    this.rp.getMonthDataByMoment(userId, start, end, false).subscribe(data => {
+    this.rp.getMonthDataByMoment(start, end, false).subscribe(data => {
 
       const dates = this.fillDates(this.currentDate, firstDayOfGrid, data);
       const weeks: CalendarDate[][] = [];

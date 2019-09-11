@@ -11,21 +11,21 @@ export class RatingProvider {
 
   private apiRequest: RequestProvider;
   
-  constructor(apiRequest: RequestProvider) {
+  constructor(apiRequest: RequestProvider, private ac: AccountProvider) {
 		this.apiRequest = apiRequest;
 	}
 
   getApplesForCurrentTree() {
     return this.apiRequest.post(
       '/getApples.php', {
-        id_u: AccountProvider.user.id
+        id_u: this.ac.getUserId()
       });
   }
 
   collectApple(appleId, answers) {
     return this.apiRequest.post(
       '/collectApple.php', {
-        id_u: AccountProvider.user.id,
+        id_u: this.ac.getUserId(),
         id_da: appleId,
         answers: answers 
       })
@@ -34,7 +34,7 @@ export class RatingProvider {
   getDayData(date, ratingOnly) {
     return this.apiRequest.post(
       '/getRatings.php', {
-        id_u: AccountProvider.user.id,
+        id_u: this.ac.getUserId(),
         startDate: date,
         endDate: date,
         ratingOnly: ratingOnly
@@ -42,31 +42,31 @@ export class RatingProvider {
     });
   }
 
-  getWeekData(userId, date, ratingOnly):Observable<{}> {
+  getWeekData(date, ratingOnly):Observable<{}> {
     let startDate = new Date(date);
     let endDate = new Date(date);
     startDate=D.addWeek(startDate,-1);
 
     return this.apiRequest.post(
       '/getRatings.php', {
-        id_u: userId,
+        id_u: this.ac.getUserId(),
         startDate: D.toKeyDate(startDate),
         endDate: D.toKeyDate(endDate),
         ratingOnly: ratingOnly
       });
   }
 
-getMonthDataByMoment(userId, start, end, ratingOnly):Observable<{}> {
+getMonthDataByMoment(start, end, ratingOnly):Observable<{}> {
   return this.apiRequest.post(
     '/getRatings.php', {
-      id_u: userId,
+      id_u: this.ac.getUserId(),
       startDate: start,
       endDate: end,
       ratingOnly: ratingOnly
   });
 } 
 
-  getMonthData(userId, date, ratingOnly):Observable<{}> {
+  getMonthData(date, ratingOnly):Observable<{}> {
 
     let startDate = new Date(date);
     let endDate = new Date(date);
@@ -75,7 +75,7 @@ getMonthDataByMoment(userId, start, end, ratingOnly):Observable<{}> {
 
     return this.apiRequest.post(
       '/getRatings.php', {
-        id_u: userId,
+        id_u: this.ac.getUserId(),
         startDate: D.toKeyDate(startDate),
         endDate: D.toKeyDate(endDate),
         ratingOnly: ratingOnly
@@ -85,7 +85,7 @@ getMonthDataByMoment(userId, start, end, ratingOnly):Observable<{}> {
   addNotification(date, time, text):Observable<{}> {
     return this.apiRequest.post(
       '/addNotification.php', {
-        id_u: AccountProvider.user.id,
+        id_u: this.ac.getUserId(),
         date: date,
         time: time,
         text: text
@@ -95,7 +95,7 @@ getMonthDataByMoment(userId, start, end, ratingOnly):Observable<{}> {
   addNote(date, text, icon="star"):Observable<{}> {
     return this.apiRequest.post(
       '/addNote.php', {
-        id_u: AccountProvider.user.id,
+        id_u: this.ac.getUserId(),
         date: date,
         text: text,
         icon: icon
@@ -112,17 +112,17 @@ getMonthDataByMoment(userId, start, end, ratingOnly):Observable<{}> {
    console.log(date + " : " + rating);
     return this.apiRequest.post(
       '/setRatings.php', {
-        id_u: AccountProvider.user.id,
+        id_u: this.ac.getUserId(),
         date: date,
         rating: rating
       });
   }
-
+/*
   sendChangeRequest(postData) { 
 
     return this.apiRequest.post(
       'setRatings.php', postData);
-
+*/
     /*
     return new Promise((resolve, reject) => {
       const httpOptions = {
@@ -150,13 +150,13 @@ getMonthDataByMoment(userId, start, end, ratingOnly):Observable<{}> {
           reject(str);
         })
     });*/
-  }
-
+ // }
+/*
   sendRequest(postData) {
     //return new Promise((resolve, reject) => {
       
       return this.apiRequest.post(
-        '/getRatings.php', postData);
+        '/getRatings.php', postData);*/
       /*
       const httpOptions = {
         headers: new HttpHeaders({
@@ -190,5 +190,5 @@ getMonthDataByMoment(userId, start, end, ratingOnly):Observable<{}> {
           reject(str);
         });*/
     //});
-  }
+  //}
 }

@@ -73,7 +73,7 @@ export class ProfilePage {
 
       keys.forEach((key) => {
         var quoteObj = data[key];
-        var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(AccountProvider.user.addressing);
+        var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(this.ac.getAddressing());
         this.quotes.push(qm);
       });
       
@@ -122,7 +122,8 @@ export class ProfilePage {
   }
 
   getUsername() {
-    this.username = AccountProvider.user.username;
-    this.level = AccountProvider.user.level;
+    var data = this.ac.getAuthData();
+    this.username = data.username;
+    this.level = data.level;
   }
 }

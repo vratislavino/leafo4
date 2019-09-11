@@ -27,6 +27,7 @@
             <div class="review-button" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)" [@animator]="animationState" (@animator.done)="resetAnimationState()">50%</div>
             <div class="review-button" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)" [@animator]="animationState" (@animator.done)="resetAnimationState()">75%</div>
             <div class="review-button" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)" [@animator]="animationState" (@animator.done)="resetAnimationState()">100%</div>
+            <div class="review-button" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)" [@animator]="animationState" (@animator.done)="resetAnimationState()">0%</div>
           </div>
         </div>
 
@@ -63,10 +64,14 @@
   </ion-grid>
 
   <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+      
     <ion-fab-button color="orange">
       <ion-icon name="arrow-dropup"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
+        <ion-fab-button *ngIf="isWoman" color="orange" (click)="openPeriodSettings();">
+            <ion-icon name="woman"></ion-icon>
+          </ion-fab-button>
       <ion-fab-button color="orange" (click)="openAddNote();">
         <ion-icon name="create"></ion-icon>
       </ion-fab-button>

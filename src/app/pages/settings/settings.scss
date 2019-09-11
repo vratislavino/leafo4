@@ -47,10 +47,12 @@ ion-col .item-block {
 	min-height: auto;
 	padding-left: 0px;
 }
-.col button.active, .col button.active:hover {
-	background-color: var(--ion-color-green);
-	color: white;
+
+.active {
+	//background-color: rgba(var(--ion-color-green-rgb), 0);
+	//color: white;
 }
+
 ion-col ion-button {
 	width: 100%;
 	height: 20px;

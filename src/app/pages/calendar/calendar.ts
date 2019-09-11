@@ -30,6 +30,8 @@ export class CalendarPage {
   currrentDayDownloaded = false;
   visibleRatings = false;
   reviewText = "Press!";
+  isWoman = true;
+  htmlMove;
   
   animationState:string;
 
@@ -56,6 +58,25 @@ export class CalendarPage {
 
   
   ionViewDidEnter() {
+    var mensStart: Date = new Date(2019, 7, 18);
+    var mensDate: Date = new Date();
+    const period: number = 27;
+    const activeDays: number = 4;
+    mensDate.setDate(mensDate.getDate() + period);
+    console.log("===========");
+    console.log("Mens Start");
+    console.log(mensStart);
+    //console.log(mensStart.getTime());
+    console.log("Date");
+    console.log(mensDate);
+    //console.log(mensDate.getTime());
+    while(mensStart < mensDate) {
+      mensStart.setDate(mensStart.getDate() + period);
+    }
+    console.log("Next menses");
+    console.log(mensStart);
+    //console.log(mensStart.getTime());
+    console.log("===========");
     this.currrentDayDownloaded = false;
     if(this.currentDay != undefined)
       this.refreshCurrentDateData(this.currentDay.mDate);
@@ -78,8 +99,16 @@ export class CalendarPage {
 
   onTouchMove(event) {
     if(this.visibleRatings) {
-      var html = this.getElementByTouch(event.changedTouches[0]);
-      this.startAnimation('pulse');
+      let nula: HTMLElement = <HTMLElement>document.getElementById('review-changer');
+      nula.setAttribute("style", "display: none;");
+      var current = this.getElementByTouch(event.changedTouches[0]);
+      if(this.htmlMove != undefined && this.htmlMove != null && this.htmlMove != current) {
+        this.htmlMove.classList.remove("active");
+      }
+      this.htmlMove = current;
+      this.htmlMove.classList.add("active");
+      //console.log(html);
+      //this.startAnimation('pulse');
     }
   }
 
@@ -97,6 +126,11 @@ export class CalendarPage {
   onTouchEnd(event) {
       var doc = this.getElementByTouch(event.changedTouches[0]);
       var html = doc.innerHTML;
+      let nula: HTMLElement = <HTMLElement>document.getElementById('review-changer');
+      nula.setAttribute("style", "display: flex;");
+      if(this.htmlMove != undefined && this.htmlMove != null) {
+        this.htmlMove.classList.remove("active");
+      }
       
       if(html.indexOf("%") > -1) 
       {
@@ -234,6 +268,10 @@ export class CalendarPage {
     
     this.router.navigate(["/add-note", { date: this.currentDay.keyDate }]);
     //this.enterPopUp.close();
+  }
+
+  openPeriodSettings() {
+    this.router.navigate(["/calendar/period"]);
   }
 
   openAddNotification() {

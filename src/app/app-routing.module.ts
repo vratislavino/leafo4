@@ -40,7 +40,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tree/tree.module').then(m => m.TreePageModule)
   },
   {
-    path: 'settings',
+    path: 'settings/:fromRegister',
     loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsPageModule)
   },
   {
@@ -71,9 +71,10 @@ const routes: Routes = [
   },
   { path: 'tree/how-to',  
   loadChildren: () => import('./pages/how-to/how-to.module').then(m=>m.HowToPageModule) 
-}
-
-
+  },
+  { path: 'calendar/period',  
+  loadChildren: () => import('./pages/period/period.module').then(m=>m.PeriodPageModule) 
+  }
 ];
 
 @NgModule({

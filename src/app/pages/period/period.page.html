@@ -1,0 +1,49 @@
+<ion-header>
+		<ion-toolbar color="primDark">
+			<ion-buttons slot="start">
+				<ion-back-button></ion-back-button>
+			  </ion-buttons>
+		  <ion-title>Nastavení ovulačního cyklu</ion-title>
+		</ion-toolbar>
+	  </ion-header>
+
+
+<ion-content padding>
+	<ion-item>
+  		<ion-label>Začátek ovulace</ion-label>
+  		<ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="myDate"></ion-datetime>
+	</ion-item>
+	<ion-item>
+		<ion-label>
+			Délka ovulačního cyklu
+    </ion-label>
+    <ion-select value="28" [(ngModel)]="period_length"okText="Okay" cancelText="Dismiss">
+        <ion-select-option value="22">22</ion-select-option>
+        <ion-select-option value="23">23</ion-select-option>
+        <ion-select-option value="24">24</ion-select-option>
+        <ion-select-option value="25">25</ion-select-option>
+        <ion-select-option value="26">26</ion-select-option>
+        <ion-select-option value="27">27</ion-select-option>
+        <ion-select-option value="28">28</ion-select-option>
+        <ion-select-option value="29">29</ion-select-option>
+        <ion-select-option value="30">30</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+	<ion-item>
+      <ion-label>
+        Délka trvání ovulace
+      </ion-label>
+      <ion-select value="4" [(ngModel)]="period_lasting" okText="Okay" cancelText="Dismiss">
+          <ion-select-option value="2">2</ion-select-option>
+          <ion-select-option value="3">3</ion-select-option>
+          <ion-select-option value="4">4</ion-select-option>
+          <ion-select-option value="5">5</ion-select-option>
+          <ion-select-option value="6">6</ion-select-option>
+          <ion-select-option value="7">7</ion-select-option>
+      </ion-select>
+    </ion-item>
+	<ion-item lines="none">
+		<ion-button (click)="saveData()" color="orange">Uložit</ion-button>
+	</ion-item>
+</ion-content>

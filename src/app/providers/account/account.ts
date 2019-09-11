@@ -6,7 +6,6 @@ import { Events } from '@ionic/angular';
 @Injectable()
 export class AccountProvider {
 
-	public static user: User = null;
 	private readyPromise: Promise<void> = null;
 	private events: Events;
 	private motStorage: MotStorageProvider;
@@ -21,15 +20,21 @@ export class AccountProvider {
 		return this.readyPromise;
 	}
 
-	login(data) {
+	login(user:User, data, nav:boolean) {
 
-		AccountProvider.user.extractUser(data);
-		this.motStorage.set('auth', AccountProvider.user);
-		this.events.publish('user:login');
+		user.extractUser(data);
+		this.motStorage.set('auth', user);
+		console.log("SAVED USER TO STORAGE AFTER LOGIN");
+		console.log(this.getAuthData());
+
+		this.events.publish('user:login', nav);
 	}
 
-	saveLocal() {
-		this.motStorage.set('auth', AccountProvider.user);
+	saveLocal(user:User) {
+		this.motStorage.set('auth', user);
+
+		console.log("SAVED USER TO STORAGE FROM saveLocal");
+		console.log(this.getAuthData());
 	}
 
 	getProfileImage() {
@@ -50,12 +55,11 @@ export class AccountProvider {
 		});
 	}
 
-	initUser() {
-		AccountProvider.user = User.createWholeUser(this.getAuthData())
-	}
-
 	logout() {
 		this.motStorage.remove('auth');
+		
+		console.log("REMOVED USER FROM STORAGE FROM LOGOUT");
+		console.log(this.getAuthData());
 		this.events.publish('user:logout');
 	}
 
@@ -63,8 +67,33 @@ export class AccountProvider {
 		return this.motStorage.get('auth');
 	}
 
+	test() {
+		return this.motStorage.exists("auth");
+	}
+
 	isLoggedIn(): boolean {
 		return this.getAuthData();
+	}
+
+	getCopyOfUser():User {
+		var usr = this.getAuthData();
+		var copy = new User(usr.email);
+		copy.extractUser(usr);
+
+
+		return copy;
+	}
+
+	getUserId():number {
+		var auth = this.getAuthData();
+
+		return auth.id;
+	}
+
+	getAddressing():string {
+		var auth = this.getAuthData();
+
+		return auth.addressing;
 	}
 
 	getUserName(): string {

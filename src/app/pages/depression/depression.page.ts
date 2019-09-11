@@ -13,11 +13,12 @@ export class DepressionPage implements OnInit {
   characteristics = "Jsi ";
   addressing ="";
   constructor(
-    private userProvider: UserProvider
+    private userProvider: UserProvider,
+    private ac:AccountProvider
   ) { 
 
     this.userProvider.getDepressionData().subscribe((data)=> {
-      this.addressing = AccountProvider.user.addressing;
+      this.addressing = this.ac.getAddressing();
       this.horoscope = this.addressing + ', ' + data['horoscope'];
       
       const chars = data['characteristics'];
