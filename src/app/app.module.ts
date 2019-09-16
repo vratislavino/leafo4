@@ -18,6 +18,12 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+
+//3rd party for video capture
+import { MediaCapture } from '@ionic-native/media-capture/ngx';
+import { Media } from '@ionic-native/media/ngx';
+import { File } from '@ionic-native/file/ngx';
+
 /*
 import { HomePageModule } from './pages/home/home.module';
 import { LoginPageModule } from './pages/login/login.module';
@@ -73,6 +79,9 @@ export class MyHammerConfig extends HammerGestureConfig {
   ],
   providers: [
     Camera,
+    MediaCapture,
+    Media, 
+    File,
     AppVersion,
     LocalNotifications,
     StatusBar,

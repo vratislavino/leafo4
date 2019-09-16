@@ -5,9 +5,12 @@ import { ToastController, LoadingController, Platform } from '@ionic/angular';
 import { AccountProvider } from '../../providers/account/account';
 import { User } from '../../model/UserModel';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-//import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { LeafoInfoProvider } from '../../providers/leafo-info/leafo-info';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot, Params } from '@angular/router';
+import { MotStorageProvider } from 'src/app/providers/mot-storage/mot-storage';
+import { MediaCapture, CaptureVideoOptions, MediaFile } from '@ionic-native/media-capture/ngx';
+import { Media } from '@ionic-native/media/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 /**
  * Generated class for the SettingsPage page.
@@ -32,8 +35,11 @@ export class SettingsPage implements OnInit {
     user: string;
 
     loading;
-
+    mediaFile;
+    
     @ViewChild('slider', null) slider;
+    @ViewChild('ownvideo', null) ownVideo;
+    
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -44,7 +50,11 @@ export class SettingsPage implements OnInit {
         public platform: Platform,
         public userService: UserProvider,
         public vc: ViewContainerRef,
-        public infoLeafo: LeafoInfoProvider
+        public infoLeafo: LeafoInfoProvider,
+        private storage:MotStorageProvider,
+        private mediaCapture : MediaCapture,
+        private media : Media,
+        private file : File
         ) {
 
             
@@ -75,7 +85,11 @@ export class SettingsPage implements OnInit {
                 console.log("slideRight called twice");
                 this.slideToIndex(3);
             }
-        })
+        });
+
+        this.storage.get("video").then(res=> {
+            this.mediaFile = JSON.parse(res) || {};
+        });
     }
 
     ionViewDidLoad() {
@@ -127,6 +141,49 @@ export class SettingsPage implements OnInit {
             index++;
         }
         this.slider.slideTo(index);
+    }
+
+    useDefaultVideo() {
+
+    }
+
+    playVideo() {
+        let path = this.file.dataDirectory + this.mediaFile.name;
+        let url = path.replace(/^file:\/\//, '');
+        let video = this.ownVideo.nativeElement;
+        video.src = url;
+        video.play();
+    }
+
+    captureVideo() {
+        let options : CaptureVideoOptions = {
+            limit: 1,
+            duration: 120
+        };
+
+        this.mediaCapture.captureVideo(options).then((res:MediaFile[]) => {
+            let capturedFile = res[0];
+            console.log("myfile: ", capturedFile);
+            let filename = capturedFile.name;
+            let dir = capturedFile["localURL"].split('/');
+            dir.pop();
+            let fromDirectory = dir.join('/');
+            let toDirectory = this.file.dataDirectory;
+
+            this.file.copyFile(fromDirectory, filename, toDirectory, filename).then((res) => {
+                //let url = res.nativeURL.replace(/^file:\/\//, '');
+                this.saveFile({name: filename, size: capturedFile.size});
+            });
+        });
+
+    }
+
+    saveFile(file) {
+        this.storage.set("video", JSON.stringify(file));
+    }
+
+    hasVideo() : boolean {
+        return this.storage.exists("video");
     }
 
     getNextButtonText() {

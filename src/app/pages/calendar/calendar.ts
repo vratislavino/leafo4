@@ -62,7 +62,7 @@ export class CalendarPage {
     var mensDate: Date = new Date();
     const period: number = 27;
     const activeDays: number = 4;
-    mensDate.setDate(mensDate.getDate() + period);
+    mensDate.setDate(mensDate.getDate() + period); 
     //console.log("===========");
     //console.log("Mens Start");
     //console.log(mensStart);
@@ -140,10 +140,6 @@ export class CalendarPage {
         console.log("NENÍ PROCENTO!");
       }
 
-  }
-
-  myListener(elm) {
-    console.log(elm);
   }
 
   refreshCurrentDateData(mDate = moment()) {

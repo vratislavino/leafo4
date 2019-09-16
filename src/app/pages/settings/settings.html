@@ -117,6 +117,21 @@
       </ion-list>
     </ion-slide>
 
+    <ion-slide>
+      <ion-list lines="none">
+        <ion-list-header>
+          Vytvoření motivačního videa
+        </ion-list-header>
+        <div *ngIf="hasVideo()">
+          <ion-button full (click)="playVideo()">Použít výchozí video</ion-button>
+          <video controls autoplay #ownvideo></video>
+        </div>
+        <ion-button full (click)="captureVideo()">Nahrát své video</ion-button>
+        <ion-button full (click)="useDefaultVideo()">Použít výchozí video</ion-button>
+      <!--<button ion-button color="primNormal" (click)="upload()">Nahrát avatara</button>-->
+      </ion-list>
+    </ion-slide>
+
   </ion-slides>
   <div class="bigBtn">
     <ion-button color="green" (click)="slideRight()">{{ getNextButtonText() }}<ion-icon name="ios-arrow-forward"></ion-icon></ion-button>
