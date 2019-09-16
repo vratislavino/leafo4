@@ -139,6 +139,13 @@ export class CalendarComponent implements OnInit, OnChanges {
     return "r"+ day.details.rating;
   }
 
+  getOvulation(ovulation) {
+    if(ovulation == null || ovulation == "") return "";
+    if(ovulation == "red" || ovulation == "red-start") return "warning";
+    if(ovulation == "plodny_den") return "partly-sunny";
+    if(ovulation == "ovulation") return "sunny";
+  }
+
   getApple(details, app) {
 
     if(details.apple == null)

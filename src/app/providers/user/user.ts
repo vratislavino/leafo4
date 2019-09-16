@@ -27,6 +27,12 @@ export class UserProvider {
 		});
 	}
 
+	public test() {
+		return this.apiRequest.post('testfunc.php', {
+			id_u: this.ac.getUserId()
+		});
+	}
+
 	public register(email, pass, passA, username, fName, sName, addressing, sign, sex) {
 		return this.apiRequest.post(
 			'/registerApi.php', {

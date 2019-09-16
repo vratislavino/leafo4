@@ -18,7 +18,7 @@
 
 <ion-content padding text-center>
     <div class="jc">
-      <h1>Vítej, {{ addressing }}</h1>
+      <h1 (click)="testme()">Vítej, {{ addressing }}</h1>
       <ion-grid>
         <ion-row>
           <ion-col routerLink="/tree" size="6">

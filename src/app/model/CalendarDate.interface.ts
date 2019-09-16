@@ -11,12 +11,57 @@ export class CalendarDate {
         this.selected = selected;
         this.today = today;
 
+        if(this.details != null) {
+            this.ovulation = this.details["ovulation"];
+            switch(this.ovulation) {
+                case "red": { this.details["notes"].push({
+                    text: "Menstruace",
+                    id_n: -1,
+                    icon: "woman"
+                });
+                break;
+                }
+                case "red-start": { this.details["notes"].push({
+                    text: "Začátek menstruace",
+                    id_n: -1,
+                    icon: "woman"
+                });
+                break;
+                }
+                
+                case "plodny_den": { this.details["notes"].push({
+                    text: "Plodný den",
+                    id_n: -1,
+                    icon: "woman"
+                });
+                break;
+                }
+                
+                case "ovulation": { this.details["notes"].push({
+                    text: "Ovulace",
+                    id_n: -1,
+                    icon: "woman"
+                });
+                break;
+                }
+                
+                case "red-start": { this.details["notes"].push({
+                    text: "Začátek menstruace",
+                    id_n: -1,
+                    icon: "woman"
+                });
+                break;
+                }
+            }
+        }
+
         this.dayNumberToShow = this.mDate.format("D");
 
         var q = this.dayInWeek(this.mDate.day());
         this.dayNameToShow = DAYS_LIST[q];
     }
 
+    ovulation:string;
     mDate: moment.Moment;
     keyDate?: string;
     details?: object;
