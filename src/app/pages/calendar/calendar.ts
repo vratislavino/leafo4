@@ -63,33 +63,33 @@ export class CalendarPage {
     const period: number = 27;
     const activeDays: number = 4;
     mensDate.setDate(mensDate.getDate() + period);
-    console.log("===========");
-    console.log("Mens Start");
-    console.log(mensStart);
+    //console.log("===========");
+    //console.log("Mens Start");
+    //console.log(mensStart);
     //console.log(mensStart.getTime());
-    console.log("Date");
-    console.log(mensDate);
+    //console.log("Date");
+    //console.log(mensDate);
     //console.log(mensDate.getTime());
     while(mensStart < mensDate) {
       mensStart.setDate(mensStart.getDate() + period);
     }
-    console.log("Next menses");
-    console.log(mensStart);
+    //console.log("Next menses");
+   // console.log(mensStart);
     //console.log(mensStart.getTime());
-    console.log("===========");
+    //console.log("===========");
     this.currrentDayDownloaded = false;
     if(this.currentDay != undefined)
       this.refreshCurrentDateData(this.currentDay.mDate);
     else
       this.refreshCurrentDateData();
-    console.log("IM BACK HERE!");
+    //console.log("IM BACK HERE!");
 
   }
 
   ionViewDidLoad() {
     this.refreshCurrentDateData();
     
-    console.log("added events");
+    //console.log("added events");
   }
 
   onTouchStart(event) {
