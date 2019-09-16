@@ -45,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: 'quote-popup/:autor',
-    loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsPageModule)
+    loadChildren: () => import('./pages/quote-popup/quote-popup.module').then(m => m.QuotePopupPageModule)
   },
   {
     path: 'graph',
@@ -74,7 +74,9 @@ const routes: Routes = [
   },
   { path: 'calendar/period',  
   loadChildren: () => import('./pages/period/period.module').then(m=>m.PeriodPageModule) 
-  }
+  },
+  { path: 'review', loadChildren: './pages/review/review.module#ReviewPageModule' }
+
 ];
 
 @NgModule({

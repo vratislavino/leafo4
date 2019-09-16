@@ -1,0 +1,49 @@
+.quote {
+    margin-bottom: 12px;
+}
+
+.quote-text {
+    width: 100%;
+    text-align: center;
+    font-family: 'KabanaBook';
+}
+
+ion-label.quote-text p {
+    color: var(--ion-color-sec-light-text);
+}
+
+.action-icons {
+    padding: 0px;
+    padding-top: 6px;
+}
+
+.action-icons ion-icon {
+    color: var(--ion-color-sec-light-text);
+    font-size: 2em;
+    padding: 5px;
+}
+
+.action-icons button {
+    padding: 0;
+    box-shadow: 0;
+}
+
+.item-md.item-block .item-inner {
+    border-bottom: none;
+}
+
+/* HERE THE QUOTES GO */
+.item.md {
+    /* CERVENA */
+    background: var(--ion-color-red);
+    background: -webkit-linear-gradient(to right, var(--ion-color-red), var(--ion-color-red-tint));
+    background: linear-gradient(to right, var(--ion-color-red), var(--ion-color-red-tint));
+
+    /* ZELENA */
+    background: var(--ion-color-green);
+    background: -webkit-linear-gradient(to right, var(--ion-color-green), var(--ion-color-green-tint));
+    background: linear-gradient(to right, var(--ion-color-green), var(--ion-color-green-tint));
+}
+.action-icons .button-md {
+    background-color: transparent;
+}

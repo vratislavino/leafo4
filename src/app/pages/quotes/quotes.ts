@@ -76,7 +76,7 @@ export class QuotesPage {
       });
 
     }, (err) => {
-      console.log("Nejsou žádné výsledky!");
+      console.log(err);
     });
   }
 
@@ -92,7 +92,7 @@ export class QuotesPage {
         this.historyQuotes.push(qm);
       });
     }, (err) => {
-      console.log("Nejsou žádné výsledky!");
+      console.log(err);
     });
   }
 

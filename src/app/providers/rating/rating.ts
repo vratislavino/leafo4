@@ -102,6 +102,13 @@ getMonthDataByMoment(start, end, ratingOnly):Observable<{}> {
     });
   }
 
+  sendReview(text): Observable<{}> {
+    return this.apiRequest.post('/setReview.php', {
+      id_u: this.ac.getUserId(),
+      text: text
+    });
+  }
+
   setDayReview(date, rating): Observable<{}>{
 
     /*

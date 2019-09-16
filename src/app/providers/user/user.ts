@@ -22,13 +22,13 @@ export class UserProvider {
 	}
 
 	public downloadImage() {
-		return this.apiRequest.post('downloadImage.php', {
+		return this.apiRequest.post('/downloadImage.php', {
 			id_u: this.ac.getUserId()
 		});
 	}
 
 	public test() {
-		return this.apiRequest.post('testfunc.php', {
+		return this.apiRequest.post('/testfunc.php', {
 			id_u: this.ac.getUserId()
 		});
 	}

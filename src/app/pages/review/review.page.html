@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar color="primDark">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>Zpětná vazba</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-textarea [(ngModel)]="text" placeholder="Vyplňte prosím text zpětné vazby"></ion-textarea>
+  </ion-item>
+  
+  <ion-item>
+    <ion-button color="orange" expand="full" (click)="sendNewReview()">Odeslat</ion-button>
+  </ion-item>
+
+</ion-content>

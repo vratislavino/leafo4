@@ -26,7 +26,8 @@ export class AppComponent implements OnInit {
     { title: 'Rady', url: 'advices', icon: "happy" },
     { title: 'Kalendář', url: 'calendar', icon: "calendar" },
     { title: 'Strom štěstí', url: 'tree', icon: "leaf" },
-    { title: 'Nastavení', url: 'settings/0', icon: "settings" }
+    { title: 'Nastavení', url: 'settings/0', icon: "settings" },
+    { title: 'Zpětná vazba', url: 'review', icon: "chatboxes" }
   ];
 
   constructor(

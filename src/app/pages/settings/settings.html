@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-toolbar color="primDark">
-      <ion-buttons>
+      <ion-buttons slot="start">
         <ion-back-button></ion-back-button>
       </ion-buttons>
       <ion-title>Nastavení</ion-title>
@@ -15,7 +15,7 @@
   </ion-header>
 
 <ion-content padding>
-  <ion-slides #slider>
+  <ion-slides #slider (ionSlideDidChange)="onSlideChanged()">
     <ion-slide>
       <ion-list lines="none">
         <ion-list-header>
@@ -134,6 +134,6 @@
 
   </ion-slides>
   <div class="bigBtn">
-    <ion-button color="green" (click)="slideRight()">{{ getNextButtonText() }}<ion-icon name="ios-arrow-forward"></ion-icon></ion-button>
+    <ion-button color="green" (click)="slideToRight()">{{ textforbutton }}<ion-icon name="ios-arrow-forward"></ion-icon></ion-button>
   </div>
 </ion-content>

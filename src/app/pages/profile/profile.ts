@@ -15,6 +15,7 @@ export class ProfilePage {
 
   username: string;
   quotes: QuoteModel[];
+  horoscope= {};
   photo:string = "assets/imgs/avatar.png";
   loading;
   level = 0;
@@ -73,8 +74,12 @@ export class ProfilePage {
 
       keys.forEach((key) => {
         var quoteObj = data[key];
-        var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(this.ac.getAddressing());
-        this.quotes.push(qm);
+        if(quoteObj["id_q"] == undefined) {
+          this.horoscope = quoteObj;
+        } else {
+          var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(this.ac.getAddressing());
+          this.quotes.push(qm);
+        }
       });
       
       

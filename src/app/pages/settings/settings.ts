@@ -30,10 +30,10 @@ export class SettingsPage implements OnInit {
     currentUserData: User;
     characteristic: string[] = [];
     minActive: Number = 7;
-    nextText: string = "Další";
     userImage: string = "assets/imgs/avatar.png";
     user: string;
 
+    textforbutton = "Další";
     loading;
     mediaFile;
     
@@ -72,7 +72,7 @@ export class SettingsPage implements OnInit {
         this.ac.getProfileImage().then((data: string) => {
             this.userImage = data;
         });
-        console.log(this.currentUserData);
+        //console.log(this.currentUserData);
         this.fillArray();
         //this.loading.dismiss();
     }
@@ -86,10 +86,13 @@ export class SettingsPage implements OnInit {
                 this.slideToIndex(3);
             }
         });
-
-        this.storage.get("video").then(res=> {
-            this.mediaFile = JSON.parse(res) || {};
-        });
+        if(this.storage.exists("video")) {
+            this.storage.get("video").then(res=> {
+                this.mediaFile = JSON.parse(res) || {};
+            });
+        } else {
+            this.mediaFile = [];
+        }
     }
 
     ionViewDidLoad() {
@@ -115,32 +118,36 @@ export class SettingsPage implements OnInit {
         this.slider.slideTo(slide);
     }
 
-    public slideRight() {
-        let index: number = this.slider.getActiveIndex();
-        if (this.slider.isEnd()) {
-            let array = this.filterCols();//this.userCols == this.currentCols ? null : this.currentCols;
-            //this.userCols = this.userCols == this.currentCols ? this.userCols : this.currentCols;
-
-            if(this.isWorthUpdating(array) || true) {
-                console.log("SENDING");
-                console.log(array);
-                this.userService.updateSettings(this.currentUserData, array).subscribe(val => {
-                    console.log("Updating settings message: " + val);
-                    this.ac.saveLocal(this.currentUserData);
-                }, error => {
-                    console.log("Updating settings message: " + error);
-                });
-            }
-            index = 0;
-            this.nextText = "Další";
-
-
-            this.router.navigate(["/home"]);
-
-        } else {
-            index++;
-        }
-        this.slider.slideTo(index);
+    public slideToRight() {
+        this.slider.getActiveIndex().then((index) => {
+            this.slider.isEnd().then((isend) => {
+                //console.log(index + " is end? " + isend);
+                if (isend) {
+                    let array = this.filterCols();//this.userCols == this.currentCols ? null : this.currentCols;
+                    //this.userCols = this.userCols == this.currentCols ? this.userCols : this.currentCols;
+        
+                    if(this.isWorthUpdating(array) || true) {
+                        console.log("SENDING");
+                        console.log(array);
+                        this.userService.updateSettings(this.currentUserData, array).subscribe(val => {
+                            console.log("Updating settings message: " + val);
+                            this.ac.saveLocal(this.currentUserData);
+                        }, error => {
+                            console.log("Updating settings message: " + error);
+                        });
+                    }
+                    index = 0;
+        
+                    this.router.navigate(["/home"]);
+        
+                } else {
+                    index++;
+                    this.slider.slideTo(index);
+                }
+                //console.log(this.slider.slideTo(index));
+            });
+        });
+        
     }
 
     useDefaultVideo() {
@@ -178,16 +185,18 @@ export class SettingsPage implements OnInit {
 
     }
 
+    onSlideChanged() {
+        this.slider.getActiveIndex().then((index) => {
+            this.textforbutton = index < 5 ? "Další" : "Uložit";
+        });
+    }
+
     saveFile(file) {
         this.storage.set("video", JSON.stringify(file));
     }
 
     hasVideo() : boolean {
         return this.storage.exists("video");
-    }
-
-    getNextButtonText() {
-        return this.slider.isEnd() ? "Uložit" : "Další";
     }
 
     vysledek = [];
@@ -208,7 +217,7 @@ export class SettingsPage implements OnInit {
                 };
                 this.cols.push(obj);
             }
-            console.log("Creattiong buttons!");
+            //console.log("Creattiong buttons!");
             for (var i = 0; i < this.cols.length; i++) {
                 if (i % 3 == 0 && i !== 0) {
                     this.vysledek.push(this.temp);
@@ -217,7 +226,7 @@ export class SettingsPage implements OnInit {
                 this.temp.push(this.cols[i]);
             }
 
-            console.log(this.vysledek);
+            //console.log(this.vysledek);
 
             this.userService.getCharacteristics().subscribe((valU) => {
                 if(valU == undefined || valU == null) {
@@ -237,16 +246,17 @@ export class SettingsPage implements OnInit {
                             }
                         }
                     }
-                    console.log(this.userCols);
+                    //console.log(this.userCols);
                     
                 }
             }, (err) => {
+                
                 console.log("ErrorUserArray: " + err);
-                console.log(JSON.stringify(err));
+                console.log(err);
             });
         }, (err) => {
             console.log("ErrorArray: " + err);
-            console.log(JSON.stringify(err));
+            console.log(err);
         });
     }
 
@@ -271,7 +281,7 @@ export class SettingsPage implements OnInit {
 
     updateBckg(checkbox, isStart = false) {
 
-        console.log("Is Checkbox acive: " + checkbox.active);
+        //console.log("Is Checkbox acive: " + checkbox.active);
 
         if(checkbox.active) {
             checkbox.active = !checkbox.active;
