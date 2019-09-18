@@ -1,6 +1,7 @@
 page-tree {
 	overflow: hidden;
 }
+
 .scroll-content {
 	overflow: hidden;
 }
@@ -49,11 +50,50 @@ page-tree {
 	position: absolute;
 }
 
+/* Padani listu */
+
+.animated {
+	width: 100%;
+	height: auto;
+	img {
+		width: 40px;
+		height: auto;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		animation: 1.5s waving infinite;
+		transition: transform 0.5s;
+	}
+	img.first {
+		left: 12%;
+	}
+	img.second {
+		left: 42%;
+	}
+	img.third {
+		left: 72%;
+	}
+}
+
+/* KeyFrames */
+
 @keyframes opacka {
 	0% {
 		opacity: 0;
 	}
 	100% {
 		opacity: 1;
+	}
+}
+
+@keyframes waving {
+	0% {
+		transform: rotate(0deg) translateX(0px);
+	}
+	50% {
+		transform: rotate(-35deg) translateX(32px);
+	}
+	100% {
+		transform: rotate(0deg) translateX(0px);
 	}
 }

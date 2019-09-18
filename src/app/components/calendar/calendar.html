@@ -16,9 +16,9 @@
         <ion-row *ngFor="let week of weeks" class="day-nums">
           <ion-col *ngFor="let day of week">
           	<div class="day-apple" *ngIf="day.details!=undefined">
+          		<ion-icon color="orange" [name]="getOvulation(day.ovulation)"></ion-icon>
           		<img *ngIf="getApple(day.details, 'id_ra')" src="./../assets/imgs/aNormal.png" />
           		<img *ngIf="getApple(day.details, 'id_ga')" src="./../assets/imgs/aGolden.png" />
-          		<ion-icon color="orange" [name]="getOvulation(day.ovulation)"></ion-icon>
           	</div>
             <div class="day-num disabled-days" *ngIf="!isSelectedMonth(day.mDate)" (click)="selectDate(day)">
               <span class="date-text">{{ day.mDate.date() }} </span>

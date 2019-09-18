@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { AccountProvider } from '../../providers/account/account';
 import { LeafoInfoType } from '../../components/info-leafo/info-leafo';
 import { Router } from '@angular/router';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
 
 /**
  * Generated class for the TreePage page.
@@ -55,6 +56,10 @@ export class TreePage {
     this.initApples();
   }
 
+  ionViewDidEnter() {
+    this.startAnimation();
+  }
+
   setWatering() {
     this.userService.setWatering(this.newWatering).subscribe(val => {
 
@@ -65,6 +70,8 @@ export class TreePage {
 
   initTree() {
     this.userService.getTreeState().subscribe(val => {
+      console.log("Here");
+      console.log(document.getElementsByClassName('animated')[0]);
       this.currentWatering = this.parseTreeState(val["tree_state"]);
       this.lastWatering = val["lastWatering"];
       this.newWatering = this.currentWatering;
@@ -114,6 +121,32 @@ export class TreePage {
       this.apples = arr;
       console.log(this.apples);
     });
+  }
+
+  async startAnimation() {
+    console.log(document.getElementsByClassName('animated')[0]);
+    let animatedC = document.getElementsByClassName('animated')[0];
+    let lFirst: HTMLElement = <HTMLElement>document.getElementsByClassName("first")[0];
+    let lSecond: HTMLElement = <HTMLElement>document.getElementsByClassName("second")[0];
+    let lThird: HTMLElement = <HTMLElement>document.getElementsByClassName("third")[0];
+    let x = 0;
+    let height = window.innerHeight;
+    console.log(height);
+    while(x < height - 100) {
+      x += 1;
+      lFirst.setAttribute("style", "top: " + x + "px;");
+      lSecond.setAttribute("style", "top: " + x + "px;");
+      lThird.setAttribute("style", "top: " + x + "px;");
+      console.log("X: " + x);
+      await this.delay(10);
+    }
+    lFirst.setAttribute("style", "top: " + x + "px;animation: unset;");
+    lSecond.setAttribute("style", "top: " + x + "px;animation: unset;");
+    lThird.setAttribute("style", "top: " + x + "px;animation: unset;");
+  }
+
+  private delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   getSrc(ap) {

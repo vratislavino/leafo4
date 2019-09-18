@@ -1,0 +1,30 @@
+ion-card {
+    border-radius: 8px;
+    //background: transparent url("../../../assets/imgs/pozadi3.png")!important;
+    background-color: #333333!important;
+    background: linear-gradient(
+        to left,
+        rgba(var(--ion-color-orange-rgb), 0.8),
+        rgb(var(--ion-color-orange-rgb), 0.8)
+      ),url("../../../assets/imgs/gradient_test.jpg")!important;
+    background-size: cover!important;
+    p {
+        width: 100%;
+        position: relative;
+        margin-bottom: 16px;
+        color: #f2f2f2;
+        text-align: center;
+    }
+    /*p:not(:last-child):after {
+        width: 1px;
+        height: 8px;
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        content: "";
+        background-color: #C2C2C2;
+    }*/
+}
+ion-card:last-child {
+    background-color: var(--ion-color-yellow-tint)!important;
+}

@@ -73,19 +73,22 @@ h2 {
 }
 
 .day-apple {
-  width: 20px;
+  width: 90%;
   height: 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
   position: absolute;
   top: 0px;
-  left: 0px;
+  left: 5%;
   z-index: 1;
   img {
-    width: 60%;
+    width: 12px;
     height: auto;
+  }
+  * {
+    margin-right: 2px;
   }
 }
 
