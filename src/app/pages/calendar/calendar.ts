@@ -88,7 +88,8 @@ export class CalendarPage {
 
   ionViewDidLoad() {
     this.refreshCurrentDateData();
-    
+    this.isWoman = this.ac.getAuthData().sex == 2;
+    console.log(this.isWoman);
     //console.log("added events");
   }
 

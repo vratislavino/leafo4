@@ -27,20 +27,9 @@ export class HomePage implements OnInit {
   constructor(private platform: Platform, private router: Router, public ac: AccountProvider, public userService: UserProvider) {
   }
 
-
-  testme() {
-
-    this.userService.test().subscribe((data) => {
-      console.log(data);
-    });
-  }
-
   ngOnInit(): void {
 
     this.ac.ready().then(() => {
-
-
-      console.log(this.ac.test());
 
       if (!this.ac.isLoggedIn()) {
         this.router.navigate(["/login"]);
