@@ -16,28 +16,40 @@
 
 
 <ion-content padding>
-
+<div *ngIf="currentAdvice==''">
   <ion-list lines="none">
     <ion-item>
       <h1 class="ma-centered">Od koho potřebuješ poradit?</h1>
     </ion-item>
   
-
-    <ion-item class=" ma-centered">
+    <ion-item>
         <img src="./assets/imgs/avatar2.png" class="advisor-img ma-centered">
     </ion-item>
 
-    <ion-item routerLink='/quote-popup/mother' routerDirection="forward">
-        <ion-button size="large" expand="full" color="green" (click)="adviceMother()">Máma</ion-button>
+    <ion-item>
+        <ion-button size="large" expand="full" color="green" (click)="getNewAdvice(1)"  class="ma-centered">Máma</ion-button>
     </ion-item>
     
-    <ion-item class=" ma-centered">
-        <img src="./assets/imgs/avatar3.png" class="advisor-img">
+    <ion-item>
+        <img src="./assets/imgs/avatar3.png" class="advisor-img ma-centered">
     </ion-item>
 
-    <ion-item routerLink='/quote-popup/friend' routerDirection="forward">
-      <ion-button size="large" expand="full" color="green" (click)="adviceFriend()">Přítel</ion-button>
+    <ion-item>
+      <ion-button class="ma-centered" size="large" expand="full" color="green" (click)="getNewAdvice(2)">Přítel</ion-button>
     </ion-item>
     
   </ion-list>
+</div>
+<div *ngIf="currentAdvice != ''">
+  <ion-row >
+    <ion-col><img [src]="getAdvisorImage()"></ion-col>
+    <ion-col>{{ getAdvisor() }}</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <h3> {{ currentAdvice }} </h3>
+    </ion-col>
+  </ion-row>
+  <h2></h2>
+</div>
 </ion-content>

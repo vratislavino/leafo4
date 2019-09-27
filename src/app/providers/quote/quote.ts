@@ -50,6 +50,23 @@ export class QuoteProvider {
     );
   }
 
+  getAdvice()  : Observable<{}> {
+    return this.reqProvider.post(
+      '/getLastAdvice.php', {
+        id_u: this.ac.getUserId()
+      });
+  }
+
+  getNewAdvice(advisor) : Observable<{}> {
+    return this.reqProvider.post(
+      '/getAdvice.php', {
+        id_u: this.ac.getUserId(),
+        advisor: advisor
+      }
+    );
+
+  }
+
 /*
     return new Promise((resolve, reject) => {
       var qmp = [];
