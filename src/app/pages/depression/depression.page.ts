@@ -19,7 +19,7 @@ export class DepressionPage implements OnInit {
 
     this.userProvider.getDepressionData().subscribe((data)=> {
       this.addressing = this.ac.getAddressing();
-      this.horoscope = this.addressing + ', ' + data['horoscope'];
+      this.horoscope = this.ac.getAddressing() + ', ' + data['horoscope']['text'];
       
       const chars = data['characteristics'];
       if(chars != undefined) {
