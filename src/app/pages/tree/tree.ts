@@ -31,6 +31,9 @@ export class TreePage {
   ];
   wateredAt: string;
   apples = [];
+  remaining = 0;
+
+  goldAnimationRunning = false;
 
   coords = [
     { x: 24, y: 43 },
@@ -57,7 +60,6 @@ export class TreePage {
   }
 
   ionViewDidEnter() {
-    this.startAnimation();
   }
 
   setWatering() {
@@ -71,7 +73,8 @@ export class TreePage {
   initTree() {
     this.userService.getTreeState().subscribe(val => {
       console.log("Here");
-      console.log(document.getElementsByClassName('animated')[0]);
+      //console.log(document.getElementsByClassName('animated')[0]);
+      this.remaining = val["remaining"];
       this.currentWatering = this.parseTreeState(val["tree_state"]);
       this.lastWatering = val["lastWatering"];
       this.newWatering = this.currentWatering;
@@ -231,6 +234,10 @@ export class TreePage {
           this.currentWatering = val["tree_state"];
           this.lastWatering = val["lastWatering"];
           this.wateredAt = this.parseDate(this.lastWatering);
+
+                
+          this.initTree();
+          this.initApples();
         }, error => {
           console.log("Tree state: error");
         });

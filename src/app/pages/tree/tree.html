@@ -23,6 +23,9 @@
     <ion-row>
       <ion-col size="12"><p text-center>Zalito dne: {{ wateredAt }}</p></ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col size="12"><p text-center>{{ remaining > 0 ? "Do dalšího jablka zbývá " + remaining + " dnů" : "Dnes si po zalití můžeš vzít jablko!" }}</p></ion-col>
+    </ion-row>
 
     <ion-row nowrap>
       <ion-col size="4"><ion-input [(ngModel)]="newWatering"></ion-input></ion-col>
@@ -40,7 +43,7 @@
       <div class="kapky">
           <img src="../assets/imgs/kapky.png">
       </div>
-      <div class="animated">
+      <div class="animated" *ngIf="goldAnimationRunning">
         <img src="../assets/imgs/List.png" class="first">
         <img src="../assets/imgs/List.png" class="second">
         <img src="../assets/imgs/List.png" class="third">
