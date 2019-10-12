@@ -31,6 +31,7 @@ import { Component } from '@angular/core';
   "assets/imgs/leafo.png",
   "assets/imgs/aNormal.png",
   "assets/imgs/aGolden.png",
+  "assets/imgs/leafo.png",
   ];
 
   constructor() {
@@ -156,5 +157,6 @@ export enum LeafoInfoType {
   Happy,
   Normal,
   RedApple,
-  GoldenApple
+  GoldenApple,
+  Warning,
 }

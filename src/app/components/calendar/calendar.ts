@@ -97,6 +97,9 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   selectDate(date: CalendarDate): void {
+    console.log("Date seleted!");
+    console.log(date);
+
     this.currentDate = date.mDate;
     
     if(this.selectedDates.length > 0) {
@@ -106,6 +109,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.selectedDates.push(date);
 
     this.onSelectDate.next(date);
+    //this.onSelectDate.emit(date);
     this.generateCalendar();
   }
 

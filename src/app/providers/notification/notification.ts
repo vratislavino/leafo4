@@ -10,19 +10,23 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 @Injectable()
 export class NotificationProvider {
 
-  loc : LocalNotifications;
+  idsForQuotes = [];
+  idsForHoroscopes = [];
+  idsForRating = [];
+  idsForMondays = [];
 
   constructor(private localNotif : LocalNotifications) {
-    this.loc = localNotif;
+    this.localNotif = localNotif;
   }
 
-  
-
-
   setUpNotifications() {
-    this.loc.hasPermission().then(()=> {
-      console.log("ok");
+    this.localNotif.hasPermission().then(()=> {
+      this.planAll();
     });
+
+
+
+
     //if(this.localNotif.hasPermission())
 
     //console.log(this.localNotif.getDefaults());
@@ -34,15 +38,43 @@ export class NotificationProvider {
       text: "THIS IS A TEST!",
       sound: "file://sound.mp3",
       icon: "../assets/imgs/leafo.png",
-      led: "FF0000",
+      led: "00FF00",
       trigger: {
         at: new Date(new Date().getTime() + 1000*10)
       }
     }]);*/
   }
 
-  removeNotifications() {
-    console.log("removing notifications");
+  planAll() {
+    
   }
+
+  planHoroscope() {
+    this.localNotif.hasPermission().then(() => {
+      //this.localNotif.schedule
+    });
+  }
+
+  private removeNotifs(ids: Array<number>) {
+    this.localNotif.clear(ids);
+  }
+
+  private removeQuoteNotifs() {
+    this.removeNotifs(this.idsForQuotes);
+  }
+
+  private removeHoroscopeNotifs() {
+    this.removeNotifs(this.idsForHoroscopes);
+  }
+
+  private removeRatingNotifs() {
+    this.removeNotifs(this.idsForRating);
+  }
+
+  private removeMondaysNotifs() {
+    this.removeNotifs(this.idsForMondays);
+  }
+
+  
 
 }

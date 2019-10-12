@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { AlertController,/*, FabContainer */
 Platform} from '@ionic/angular';
 import { CalendarDate } from '../../model/CalendarDate.interface';
@@ -9,6 +9,8 @@ import { D } from '../../../D';
 import { Router } from '@angular/router';
 import 'hammerjs';
 import {trigger, keyframes, style, animate, transition } from '@angular/animations';
+import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
+import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
 
 @Component({
   selector: 'page-calendar',
@@ -37,7 +39,13 @@ export class CalendarPage {
 
   /*@ViewChild("enterPopUp") enterPopUp: FabContainer;*/
   
-  constructor(public router: Router, private platform:Platform, private alertCtrl: AlertController, public ac: AccountProvider, private rp: RatingProvider) {
+  constructor(
+    public router: Router, 
+    private platform:Platform, 
+    public ac: AccountProvider, 
+    private rp: RatingProvider, 
+    private vc:ViewContainerRef,
+    private leafoCtrl: LeafoInfoProvider) {
     this.platform.ready().then(() => {
       this.ionViewDidEnter();
       this.ionViewDidLoad();
@@ -95,7 +103,7 @@ export class CalendarPage {
 
   onTouchStart(event) {
     this.chooseReview(101);
-    console.log(event);
+    //console.log(event);
   }
 
   onTouchMove(event) {
@@ -162,7 +170,7 @@ export class CalendarPage {
   }*/
 
   onDateSelected(date: CalendarDate) {
-    if(moment().format("M") == date.mDate.format("M")) {
+    //if(moment().format("M") == date.mDate.format("M")) {
       this.currentDay = date;;
       if(this.currentDay.details != null && this.currentDay.details != undefined)
         if(this.currentDay.details["rating"] > -1)
@@ -170,9 +178,9 @@ export class CalendarPage {
         else
           this.reviewText = "Tap!"
       console.log("Yess");
-    } else {
-      console.log("Not rly");
-    }
+    //} else {
+    //  console.log("Not rly");
+    //}
     console.log(date.mDate);
   } 
 
@@ -194,7 +202,7 @@ export class CalendarPage {
   }
 
   chooseReview(review) {
-    console.log(review + " _ " + this.visibleRatings);
+    //console.log(review + " _ " + this.visibleRatings);
     if(review==101 && !this.visibleRatings) {
       this.openReviewButtons();
     } else {
@@ -212,7 +220,9 @@ export class CalendarPage {
           console.log(err);
           this.visibleRatings = false;
         });
-      }
+      } else {
+        this.leafoCtrl.createAndShowLeafoBubble(this.vc, "Tento den ještě nemůžeš hodnotit!", "Chyba!", LeafoInfoType.Warning);
+      } 
       this.closeReviewButtons();
     }
   }
