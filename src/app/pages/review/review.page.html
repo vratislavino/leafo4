@@ -8,12 +8,18 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
+  <ion-item lines="none">
+      <p>Máte svůj názor, nebo nějaký nápad na zlepšení aplikace?</p>
+  </ion-item>
+  <ion-item lines="none">
     <ion-textarea [(ngModel)]="text" placeholder="Vyplňte prosím text zpětné vazby"></ion-textarea>
   </ion-item>
   
   <ion-item>
     <ion-button color="orange" expand="full" (click)="sendNewReview()">Odeslat</ion-button>
+  </ion-item>
+  <ion-item lines="none">
+    <small>- Vaše názory jsou anonymní -</small>
   </ion-item>
 
 </ion-content>

@@ -1,0 +1,32 @@
+ion-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+ion-card {
+    padding: 16px;
+    // border-radius: 0px;
+    box-shadow: none;
+    background-color: white;
+    margin-bottom: 20px;
+    color: #7A7A7A;
+    line-height: 1.65em;
+}
+
+.first {
+    border-right: 8px solid var(--ion-color-green-tint);
+}
+
+.second {
+    border-right: 8px solid var(--ion-color-orange);
+}
+
+.third {
+    border-right: 8px solid var(--ion-color-red);
+}
+
+.fourth {
+    border-right: 8px solid var(--ion-color-primary-tint);
+}

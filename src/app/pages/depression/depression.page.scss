@@ -1,4 +1,4 @@
-ion-card {
+ion-card[color="yellow"] {
     border-radius: 8px;
     //background: transparent url("../../../assets/imgs/pozadi3.png")!important;
     background-color: #333333!important;
@@ -25,6 +25,37 @@ ion-card {
         background-color: #C2C2C2;
     }*/
 }
+
+.nun {
+    display: none;
+}
+
+ion-card:not([color="yellow"]) {
+    padding: 12px;
+    // border-radius: 0px;
+    box-shadow: none;
+    background-color: white;
+    margin-bottom: 12px;
+    color: #7A7A7A;
+    line-height: 1.65em;
+}
+
+.first {
+    border-right: 8px solid var(--ion-color-green-tint);
+}
+
+.second {
+    border-right: 8px solid var(--ion-color-orange);
+}
+
+.third {
+    border-right: 8px solid var(--ion-color-red);
+}
+
+.fourth {
+    border-right: 8px solid var(--ion-color-primary-tint);
+}
+
 ion-card:last-child {
     background-color: var(--ion-color-yellow-tint)!important;
 }
