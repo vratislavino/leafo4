@@ -4,6 +4,9 @@ import { AccountProvider } from '../../providers/account/account';
 import { User } from '../../model/UserModel';
 import { Router } from '@angular/router';
 import { UserProvider } from 'src/app/providers/user/user';
+import { QuoteProvider } from 'src/app/providers/quote/quote';
+import { RatingProvider } from 'src/app/providers/rating/rating';
+import { NotificationProvider } from 'src/app/providers/notification/notification';
 
 /**
  * Generated class for the HomePage page.
@@ -24,7 +27,18 @@ export class HomePage implements OnInit {
   addressing = "";
   private subscription;
 
-  constructor(private platform: Platform, private router: Router, public ac: AccountProvider, public userService: UserProvider) {
+  private todayRated = false;
+  private quoteObtained = false;
+  private horoscopeObtained = false;
+
+
+  constructor(private platform: Platform, 
+    private router: Router, 
+    public ac: AccountProvider, 
+    public userService: UserProvider, 
+    private qp: QuoteProvider, 
+    private rp:RatingProvider,
+    private np:NotificationProvider) {
   }
 
   ngOnInit(): void {
@@ -35,8 +49,23 @@ export class HomePage implements OnInit {
         this.router.navigate(["/login"]);
       } else {
         this.addressing = this.ac.getAddressing();
+        this.initData();
       }
     })
 
+  }
+
+  initData() {
+    /*this.setNotifsForRating();
+    this.setNotifsForQuote();
+    this.*/
+  }
+
+  
+
+  setNotifsForRating() {
+    if(this.todayRated) {
+      this.np.planDayRating();
+    }
   }
 }

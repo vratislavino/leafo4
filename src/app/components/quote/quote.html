@@ -14,15 +14,18 @@
       </button>
     </div>-->
   </ion-item>
+  <!--
   <ion-item-options side="start">
     <button ion-button color="dark" (click)="unread(item)"><ion-icon name="image"></ion-icon></button>
-  </ion-item-options>
+  </ion-item-options>-->
   <ion-item-options side="end">
-    <button ion-button color="light" (click)="onFavedClicked()">
-          <!--<ion-icon *ngIf='quoteObj.faved==1' name="star"></ion-icon>
-          <ion-icon *ngIf='quoteObj.faved==0' name="star-outline"></ion-icon>
-          Favorite-->
-    </button>
-    <button ion-button color="danger"><ion-icon name="share"></ion-icon>Share</button>
+    <ion-item-option color="green" (click)="onFavedClicked()">
+          <!--
+          <ion-icon *ngIf='quoteObj.faved==1' name="star"></ion-icon>
+          -->
+          <ion-icon name="star-outline"></ion-icon>
+          Favorite
+    </ion-item-option>
+    <!--<button ion-button color="danger"><ion-icon name="share"></ion-icon>Share</button>-->
   </ion-item-options>
 </ion-item-sliding>

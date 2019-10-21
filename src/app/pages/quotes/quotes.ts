@@ -68,7 +68,6 @@ export class QuotesPage {
     this.quoteProvider.getFavoriteQuotes().subscribe((data) => {
       this.favoriteQuotes = [];
       var keys = Object.keys(data);
-
       keys.forEach((key) => {
         var quoteObj = data[key];
         var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(this.ac.getAddressing());
