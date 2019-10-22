@@ -42,6 +42,7 @@ export class NotificationProvider {
       trigger: {
         at: new Date(new Date().getTime() + 1000*10)
       }
+
     }]);*/
   }
 
