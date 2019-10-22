@@ -13,21 +13,21 @@
 	opacity: 1;
 	animation: opacka 0.5s linear;
 	z-index: 1000;
-	.logo {
-		float: left;
-		width: 15%;
-		height: auto;
-	}
 	.text {
 		float: right;
-		width: 80%;
+		width: 100%;
 		height: auto;
-		margin-left: 5%;
 		padding: 10px;
 		border: 2px solid wheat;
 		border-radius: 8px;
 		background-color: #EAEAEA;
 		color: #333333;
+		.logo {
+			float: left;
+			width: 15%;
+			height: auto;
+			margin-right: 5%;
+		}
 		h2 {
 			margin-bottom: 0px;
 			font-size: 18px;
