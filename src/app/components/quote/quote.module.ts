@@ -7,7 +7,7 @@ import { QuoteComponent } from './quote';
     QuoteComponent,
   ],
   imports: [
-    IonicModule,
+    IonicModule
   ],
   exports: [
     QuoteComponent

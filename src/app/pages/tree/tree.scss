@@ -75,6 +75,19 @@ page-tree {
 	}
 }
 
+.white {
+	color: white;
+	.first:after {
+		width: 1px;
+		height: 60%;
+		position: absolute;
+		top: 20%;
+		right: 0px;
+		content: "";
+		background-color: #CECECE;
+	}
+}
+
 /* KeyFrames */
 
 @keyframes opacka {
