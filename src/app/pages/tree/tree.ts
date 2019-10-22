@@ -213,6 +213,7 @@ export class TreePage {
   zalij() {
     var date = new Date();
     console.log("Date: " + date.getTime());
+    // jestli je poslední zalití +23h menší jak dnešek -> jestli je dneska nezalito => můžu zalívat
     var bool = new Date(new Date(this.lastWatering).getTime() + 1000 * 60 * 60 * 23).getTime() < new Date().getTime() ? true : false;
     console.log("Bool: " + bool);
     console.log("LastWatering: " + this.lastWatering);
@@ -230,23 +231,29 @@ export class TreePage {
     console.log(kapky);
     if (bool) {
       this.userService.setTreeState().subscribe(succ => {
-        this.userService.getTreeState().subscribe(val => {
-          this.currentWatering = val["tree_state"];
-          this.lastWatering = val["lastWatering"];
-          this.wateredAt = this.parseDate(this.lastWatering);
-
-                
-          this.initTree();
-          this.initApples();
-        }, error => {
-          console.log("Tree state: error");
-        });
+        if(succ["Error"] != undefined) {
+          this.leafoInfo.createAndShowLeafoBubble(this.vc, "Konvice je prázdná, nelze zalít, ohodnoť nejdříve dnešní den!", "Pozor!", LeafoInfoType.Sad);
+          console.log("Nezalivej s prazdnou konvici... To upe nefunguje hele.");
+        } else {
+          this.userService.getTreeState().subscribe(val => {
+            this.currentWatering = val["tree_state"];
+            this.lastWatering = val["lastWatering"];
+            this.wateredAt = this.parseDate(this.lastWatering);
+  
+                  /*
+                  "Safra, nepovedelo se provést selectSELECT u.water_count, u.lastWatering FROM users as u JOIN day_ratings AS dr ON u.id_u=dr.id_u WHERE u.id_u=1 AND YEAR(dr.date)=YEAR(CURRENT_TIME) AND MONTH(dr.date)=MONTH(CURRENT_TIMESTAMP) AND DAY(dr.date)=DAY(CURRENT_TIMESTAMP);"
+                  */ 
+            this.initTree();
+            this.initApples();
+          }, error => {
+            console.log("Tree state: error");
+          });
+        }
       }, error => {
         console.log("Set tree state: error");
       });
     } else {
-      this.leafoInfo.createAndShowLeafoBubble(this.vc, "Konvice je prázdná, nelze zalít, ohodnoť nejdříve den!", "Pozor!", LeafoInfoType.Sad);
-      console.log("Nezalivej s prazdnou konvici... To upe nefunguje hele.");
+      
     }
   }
 
