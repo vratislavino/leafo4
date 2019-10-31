@@ -9,6 +9,13 @@
       <p>{{ text }}</p>
       <button ion-button full large (click)="callFunc(callback1)" class="success">OK</button>
     </div>
+
+    <div *ngIf="leafoInfoType == 6"> 
+      <p>{{ text }}</p>
+      <button ion-button full large (click)="callFunc(callback1)" class="success">Jistě, rád dám zpětnou vazbu!
+      </button>
+      <button ion-button full small (click)="callFunc(callback2)" class="warning">Ne, zavři aplikaci..</button>
+    </div>
     
     <div *ngIf="leafoInfoType == 3">
       <p>{{ text }}</p>

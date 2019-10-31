@@ -9,6 +9,7 @@ import { RatingProvider } from 'src/app/providers/rating/rating';
 import { NotificationProvider } from 'src/app/providers/notification/notification';
 import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
 import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
+import { timingSafeEqual } from 'crypto';
 
 /**
  * Generated class for the HomePage page.
@@ -52,13 +53,64 @@ export class HomePage implements OnInit {
         this.router.navigate(["/login"]);
       } else {
         this.addressing = this.ac.getAddressing();
-        this.initData();
+        this.checkTime().then(this.initData, ()=>this.closeApp(this));
       }
     })
 
   }
 
+  closeApp(hm) {
+    console.log(hm);
+    this.lip.createAndShowLeafoBubble(hm.vc, 
+      "Testovací verze aplikace skončila! Zanechte, prosím, zpětnou vazbu. Ať vím, jak mám aplikaci zlepšit!", 
+      "Konec!", 
+      LeafoInfoType.EndOfApp, 
+      () => {
+        this.router.navigateByUrl('/review', {replaceUrl: true});
+      },
+      () => {
+        navigator['app'].exitApp();
+      });
+  }
+
+  checkTime() {
+    return new Promise((resolve, reject)=> { 
+      this.userService.getRegisterDate().subscribe(data => {
+
+        console.log(data[0].date);
+      
+      var vals = data[0].date.split(" ");
+        console.log(vals);
+        
+      var date = vals[0];
+      var time = vals[1];
+      var dates = date.split("-");
+      var times = time.split(":");
+  
+      var dat = new Date(dates[0], dates[1], dates[2], times[0], times[1], times[2]);
+  
+      var diff = new Date().getTime() - dat.getTime();
+      var days = diff / 1000 / 60 / 60 / 24;
+      console.log(days);
+        if(days > 28) {
+          reject();
+        } else {
+          resolve();
+        }
+  
+      }, err => {
+        console.log(err);
+        reject(err);
+      })
+
+
+    });
+  }
+
   initData() {
+
+    
+    
     this.qp.getHistoryQuotes(1).subscribe(data => console.log(data));
 
 

@@ -21,6 +21,13 @@ export class UserProvider {
 			});
 	}
 
+	public getRegisterDate() {
+		return this.apiRequest.post(
+			'/getRegisterDate.php', {
+				'id_u': this.ac.getUserId()
+			});
+	}
+
 	public downloadImage() {
 		return this.apiRequest.post('/downloadImage.php', {
 			id_u: this.ac.getUserId()

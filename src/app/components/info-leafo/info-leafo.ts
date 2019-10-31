@@ -32,6 +32,7 @@ import { Component } from '@angular/core';
   "assets/imgs/aNormal.png",
   "assets/imgs/aGolden.png",
   "assets/imgs/leafo.png",
+  "assets/imgs/leafo.png",
   ];
 
   constructor() {
@@ -47,6 +48,8 @@ import { Component } from '@angular/core';
   public setLeafoFace(face:LeafoInfoType) {
     this.leafoInfoType = face;
     this.faceUrl = this.faces[<number>face];
+
+    console.log(this.leafoInfoType);
 
     if(this.leafoInfoType == LeafoInfoType.GoldenApple) {
       this.initText();      
@@ -159,4 +162,5 @@ export enum LeafoInfoType {
   RedApple,
   GoldenApple,
   Warning,
+  EndOfApp
 }
