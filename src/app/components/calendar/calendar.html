@@ -16,7 +16,8 @@
         <ion-row *ngFor="let week of weeks" class="day-nums">
           <ion-col *ngFor="let day of week">
           	<div class="day-apple" *ngIf="day.details!=undefined">
-          		<ion-icon color="orange" [name]="getOvulation(day.ovulation)"></ion-icon>
+              <fa-icon color="orange" *ngIf="day.ovulation != undefined && day.ovulation != ''" [icon]='getOvulation(day.ovulation)'></fa-icon>
+          		<!--<ion-icon color="orange" [name]="getOvulation(day.ovulation)"></ion-icon>-->
           		<img *ngIf="getApple(day.details, 'id_ra')" src="./../assets/imgs/aNormal.png" />
           		<img *ngIf="getApple(day.details, 'id_ga')" src="./../assets/imgs/aGolden.png" />
           	</div>
@@ -35,4 +36,6 @@
         </ion-row>
       </div>
     </ion-grid>
+
+
   </div>

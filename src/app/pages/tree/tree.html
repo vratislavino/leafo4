@@ -25,7 +25,7 @@
       <ion-col size="6"><p text-center>{{ remaining > 0 ? "Do dalšího jablka zbývá " + remaining + " dnů" : "Dnes si po zalití můžeš vzít jablko!" }}</p></ion-col>
     </ion-row>
 
-    <ion-row nowrap>
+    <ion-row nowrap *ngIf="false">
       <ion-col size="4"><ion-input [(ngModel)]="newWatering"></ion-input></ion-col>
       <ion-col size="4"><ion-button  size="small" (click)="setWatering()">Set Watering</ion-button></ion-col>
       <ion-col size="4"><ion-button size="small" (click)="goToCalendar()">Ohodnotit den!</ion-button></ion-col>

@@ -9,7 +9,6 @@ import { RatingProvider } from 'src/app/providers/rating/rating';
 import { NotificationProvider } from 'src/app/providers/notification/notification';
 import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
 import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
-import { timingSafeEqual } from 'crypto';
 
 /**
  * Generated class for the HomePage page.
@@ -53,7 +52,8 @@ export class HomePage implements OnInit {
         this.router.navigate(["/login"]);
       } else {
         this.addressing = this.ac.getAddressing();
-        this.checkTime().then(this.initData, ()=>this.closeApp(this));
+        if(false)
+          this.checkTime().then(this.initData, ()=>this.closeApp(this));
       }
     })
 
@@ -113,6 +113,7 @@ export class HomePage implements OnInit {
     
     this.qp.getHistoryQuotes(1).subscribe(data => console.log(data));
 
+    this.rp.getYearNotifications();
 
     return;
     var strs = [];

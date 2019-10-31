@@ -51,8 +51,17 @@ import { NotificationProvider } from './providers/notification/notification';
 import { InfoLeafoComponentModule } from './components/info-leafo/info-leafo.module';
 import { InfoLeafoComponent } from './components/info-leafo/info-leafo';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {fab} from '@fortawesome/free-brands-svg-icons';
+import {fas} from '@fortawesome/free-solid-svg-icons';
+
 import * as Hammer from 'hammerjs';
 import {HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+
+
+library.add(fab);
+library.add(fas);
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -71,7 +80,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    InfoLeafoComponentModule
+    InfoLeafoComponentModule,
+    FontAwesomeModule
   ],
   bootstrap: [AppComponent],
   entryComponents: [

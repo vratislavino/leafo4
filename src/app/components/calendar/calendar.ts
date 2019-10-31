@@ -71,6 +71,10 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   }
 
+  getIcon() {
+    return 'tint';
+  }
+
   fillDates(currentMoment: moment.Moment, firstDayOfGrid, data): CalendarDate[] {
     const start = firstDayOfGrid.date();
     return _.range(start, start + 42)
@@ -145,9 +149,9 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   getOvulation(ovulation) {
     if(ovulation == null || ovulation == "") return "";
-    if(ovulation == "red" || ovulation == "red-start") return "warning";
-    if(ovulation == "plodny_den") return "partly-sunny";
-    if(ovulation == "ovulation") return "sunny";
+    if(ovulation == "red" || ovulation == "red-start") return "tint";
+    if(ovulation == "plodny_den") return "venus";
+    if(ovulation == "ovulation") return "pills";
   }
 
   getApple(details, app) {

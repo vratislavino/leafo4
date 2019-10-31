@@ -22,6 +22,14 @@ export class RatingProvider {
       });
   }
 
+  getYearNotifications() {
+    return this.apiRequest.post(
+      '/getYearNotifications.php', {
+        id_u: this.ac.getUserId()
+      }
+    );
+  }
+
   collectApple(appleId, answers) {
     return this.apiRequest.post(
       '/collectApple.php', {
