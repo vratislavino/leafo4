@@ -231,7 +231,14 @@ export class CalendarPage {
           console.log(data);
           if(this.currentDay)
             this.currentDay.details["rating"] = review;
-            this.reviewText = review + "%";
+          this.reviewText = review + "%";
+          /*
+          var day = document.getElementById("day" + this.currentDay.keyDate);
+          if(day) {
+           var circ =day.nextSibling;
+           (<HTMLElement>circ).classList.remove("r100", "r-1", "r0", "r25", "r50", "r75");
+           circ
+          }*/
         }, (err)=> {
           console.log("Error");
           console.log(err);
