@@ -48,6 +48,7 @@ import { RequestProvider } from './providers/request/request';
 import { SystemInfoProvider } from './providers/system-info/system-info';
 import { LeafoInfoProvider } from './providers/leafo-info/leafo-info';
 import { NotificationProvider } from './providers/notification/notification';
+import { GuideProvider } from './providers/guide/guide';
 import { InfoLeafoComponentModule } from './components/info-leafo/info-leafo.module';
 import { InfoLeafoComponent } from './components/info-leafo/info-leafo';
 
@@ -106,6 +107,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     SystemInfoProvider,
     LeafoInfoProvider,
     NotificationProvider,
+    GuideProvider,
     {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}
   ]
 })

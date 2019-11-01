@@ -1,9 +1,12 @@
 import { UserProvider } from './../../providers/user/user';
-import { Component } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { Component, ViewContainerRef } from '@angular/core';
+import { LoadingController, Platform } from '@ionic/angular';
 import { QuoteModel } from '../../model/QuoteModel.interface';
 import { QuoteProvider } from '../../providers/quote/quote';
 import { AccountProvider } from '../../providers/account/account';
+import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
+import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
+import { GuideProvider } from 'src/app/providers/guide/guide';
 
 @Component({
   selector: 'page-profile',
@@ -24,17 +27,36 @@ export class ProfilePage {
   depkaActive = false;
 
   constructor(
+    private platform: Platform,
     private quoteProvider: QuoteProvider,
     public ac: AccountProvider,
     public loadingCtrl: LoadingController,
-    public userService: UserProvider) {
+    public userService: UserProvider,
+    private lip: LeafoInfoProvider,
+    private vc: ViewContainerRef,
+    private gp: GuideProvider) {
 
       //this.presentLoading().then();
 
-    this.getUsername();
-    this.getQuotes();
-    this.getPhoto();
-    this.initDepka();
+      this.platform.ready().then(() => {
+        this.tryToShowGuide(this.gp);
+        this.getUsername();
+        this.getQuotes();
+        this.getPhoto();
+        this.initDepka();
+      });
+  }
+
+  tryToShowGuide(gp) {
+    let guide = gp.getAvailableGuideToSee("profile");
+    console.log(guide);
+    if(guide)
+      this.lip.createAndShowLeafoBubble(this.vc, guide.text, guide.headline, LeafoInfoType.Normal, ()=>{
+        this.gp.addSeen(guide);
+        //this.gp.showEm();
+        setTimeout(()=>this.tryToShowGuide(gp), 250);
+        
+      });
   }
 
   initDepka() {

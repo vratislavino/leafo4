@@ -25,10 +25,11 @@ export class LeafoInfoProvider {
     callback2 = null
     ) : InfoLeafoComponent {
     const b = this.getLeafoBubble(vc);
+    b.open();
+    b.setLeafoFace(face);
     b.setInfo(text, headline);
     b.setCallbacks(callback1, callback2);
-    b.setLeafoFace(face);
-    b.open();
+    
     return b;
   }
 

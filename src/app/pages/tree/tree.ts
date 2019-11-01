@@ -2,11 +2,11 @@ import { LeafoInfoProvider } from './../../providers/leafo-info/leafo-info';
 import { RatingProvider } from './../../providers/rating/rating';
 import { UserProvider } from './../../providers/user/user';
 import { Component, ViewContainerRef } from '@angular/core';
-import { ToastController } from '@ionic/angular';
 import { AccountProvider } from '../../providers/account/account';
 import { LeafoInfoType } from '../../components/info-leafo/info-leafo';
 import { Router } from '@angular/router';
-import { SelectMultipleControlValueAccessor } from '@angular/forms';
+import { GuideProvider } from 'src/app/providers/guide/guide';
+import { Platform } from '@ionic/angular';
 
 /**
  * Generated class for the TreePage page.
@@ -43,17 +43,34 @@ export class TreePage {
 
   coordsGolden = { x: 46, y: 22 };
 
-  constructor(private router:Router,
+  constructor(
+    private platform:Platform,
+    private router:Router,
     public ac: AccountProvider,
     public userService: UserProvider,
-    private leafoInfo: LeafoInfoProvider,
+    private lip: LeafoInfoProvider,
     private vc: ViewContainerRef,
     private rp: RatingProvider,
-    private toastCtrl: ToastController) {
-      this.ionViewDidLoad();
+    private gp: GuideProvider,) {
+      platform.ready().then(() => {
+        this.ionViewDidLoad();
+      });
+  }
+
+  tryToShowGuide(gp) {
+    let guide = gp.getAvailableGuideToSee("tree");
+    console.log(guide);
+    if(guide)
+      this.lip.createAndShowLeafoBubble(this.vc, guide.text, guide.headline, LeafoInfoType.Normal, ()=>{
+        this.gp.addSeen(guide);
+        //this.gp.showEm();
+        setTimeout(()=>this.tryToShowGuide(gp), 250);
+        
+      });
   }
 
   ionViewDidLoad() {
+    this.tryToShowGuide(this.gp);
     console.log('ionViewDidLoad TreePage');
     this.initTree();
     this.initApples();
@@ -176,7 +193,7 @@ export class TreePage {
 
     if(apple.collectible !== true) {
 
-      this.leafoInfo.createAndShowLeafoBubble(this.vc, apple.collectible, "Chyba", LeafoInfoType.Sad, null, null);
+      this.lip.createAndShowLeafoBubble(this.vc, apple.collectible, "Chyba", LeafoInfoType.Sad, null, null);
       
       return;
     }
@@ -186,18 +203,18 @@ export class TreePage {
 
     console.log(apple);
 
-    this.leafoInfo.createAndShowLeafoBubble(this.vc, apple.text,
+    this.lip.createAndShowLeafoBubble(this.vc, apple.text,
       color == 1 ? "Červené jablko" : "Zlaté jablko",
       color == 1 ? LeafoInfoType.RedApple : LeafoInfoType.GoldenApple, () => {
 
         console.log("Clicked yes!");
-        this.rp.collectApple(appleId, this.leafoInfo.getAnswers()).subscribe((data) => {
+        this.rp.collectApple(appleId, this.lip.getAnswers()).subscribe((data) => {
 
 
           if (data["Answer"] != undefined) {
             this.onAppleTaken(apple);
           } else {
-            this.leafoInfo.createAndShowLeafoBubble(this.vc, data["Error"], "Chyba!", LeafoInfoType.Sad, null, null);
+            this.lip.createAndShowLeafoBubble(this.vc, data["Error"], "Chyba!", LeafoInfoType.Sad, null, null);
           }
         })
       }, () => {
@@ -207,7 +224,7 @@ export class TreePage {
 
   onAppleTaken(apple) {
     this.apples.splice(this.apples.indexOf(apple), 1);
-    this.leafoInfo.createAndShowLeafoBubble(this.vc, "Jablko sebráno", "Hotovo!", LeafoInfoType.Sad, null, null);
+    this.lip.createAndShowLeafoBubble(this.vc, "Jablko sebráno", "Hotovo!", LeafoInfoType.Sad, null, null);
   }
 
   zalij() {
@@ -232,7 +249,7 @@ export class TreePage {
     if (bool) {
       this.userService.setTreeState().subscribe(succ => {
         if(succ["Error"] != undefined) {
-          this.leafoInfo.createAndShowLeafoBubble(this.vc, "Konvice je prázdná, nelze zalít, ohodnoť nejdříve dnešní den!", "Pozor!", LeafoInfoType.Sad);
+          this.lip.createAndShowLeafoBubble(this.vc, "Konvice je prázdná, nelze zalít, ohodnoť nejdříve dnešní den!", "Pozor!", LeafoInfoType.Sad);
           console.log("Nezalivej s prazdnou konvici... To upe nefunguje hele.");
         } else {
           this.userService.getTreeState().subscribe(val => {

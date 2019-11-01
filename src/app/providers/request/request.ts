@@ -38,6 +38,7 @@ export class RequestProvider {
   }
 
   post(url: string, data: any) {
+
     let headers = new HttpHeaders();
     this.setHeaders(headers);
     let body = data ? JSON.stringify(data) : '';

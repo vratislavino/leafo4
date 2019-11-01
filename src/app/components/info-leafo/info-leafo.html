@@ -1,24 +1,25 @@
 <!-- Generated template for the InfoLeafoComponent component -->
-<div id="leafo-info">
+<div id="leafo-info" (click)="testMe()">
   <div class="text">
     <div class="logo">
       <img [src]="faceUrl" />
     </div>
-    <h2>{{ headline }}</h2>
+    <h2 id="headline"></h2>
+
     <div *ngIf="leafoInfoType == 0 || leafoInfoType == 1 || leafoInfoType == 2 || leafoInfoType == 5"> 
-      <p>{{ text }}</p>
+      <p id="text"></p>
       <button ion-button full large (click)="callFunc(callback1)" class="success">OK</button>
     </div>
 
     <div *ngIf="leafoInfoType == 6"> 
-      <p>{{ text }}</p>
+      <p id="text"></p>
       <button ion-button full large (click)="callFunc(callback1)" class="success">Jistě, rád dám zpětnou vazbu!
       </button>
       <button ion-button full small (click)="callFunc(callback2)" class="warning">Ne, zavři aplikaci..</button>
     </div>
     
     <div *ngIf="leafoInfoType == 3">
-      <p>{{ text }}</p>
+      <p id="text"></p>
       <button ion-button full large (click)="callFunc(callback1)" class="success">Splnil jsem úkol!</button>
       <button ion-button full small (click)="callFunc(callback2)" class="warning">Teď ne!</button>
     </div>

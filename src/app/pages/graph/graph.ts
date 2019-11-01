@@ -1,9 +1,12 @@
 import { AccountProvider } from './../../providers/account/account';
 import { RatingProvider } from './../../providers/rating/rating';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Chart } from 'chart.js';
 import { D } from '../../../D';
+import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
+import { GuideProvider } from 'src/app/providers/guide/guide';
+import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
 
 @Component({
   selector: 'page-graph',
@@ -27,13 +30,32 @@ export class GraphPage {
     labels: []
   }
 
-  constructor(public tc: ToastController, public ac: AccountProvider, public ratingProvider: RatingProvider) {
+  constructor(public tc: ToastController, 
+    public ac: AccountProvider, 
+    public ratingProvider: RatingProvider,
+    private gp: GuideProvider,
+    private lip: LeafoInfoProvider,
+    private vc: ViewContainerRef) {
 
     Chart.defaults.global.defaultFontColor = "white";
     this.ionViewDidLoad();
   }
 
+  tryToShowGuide(gp) {
+    let guide = gp.getAvailableGuideToSee("graph");
+    console.log(guide);
+    if(guide)
+      this.lip.createAndShowLeafoBubble(this.vc, guide.text, guide.headline, LeafoInfoType.Normal, ()=>{
+        this.gp.addSeen(guide);
+        //this.gp.showEm();
+        setTimeout(()=>this.tryToShowGuide(gp), 250);
+        
+      });
+  }
+
   ionViewDidLoad() {
+
+    this.tryToShowGuide(this.gp);
     console.log("WWW");
     var dateToGet = D.toKeyDate(new Date())
 

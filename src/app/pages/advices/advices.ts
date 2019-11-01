@@ -1,8 +1,11 @@
 import { PopoverController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { AccountProvider } from '../../providers/account/account';
 import { Router } from '@angular/router';
 import { QuoteProvider } from 'src/app/providers/quote/quote';
+import { GuideProvider } from 'src/app/providers/guide/guide';
+import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
+import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
 
 /**
  * Generated class for the AdvicesPage page.
@@ -22,10 +25,24 @@ export class AdvicesPage implements OnInit {
   currentAdvice: string = "";
   currentAdvisor: string = "";
 
-  constructor(public ac:AccountProvider, private router:Router, private qp: QuoteProvider) {
+  constructor(public ac:AccountProvider, private router:Router, private qp: QuoteProvider, private gp:GuideProvider, private vc: ViewContainerRef, private lip:LeafoInfoProvider) {
+  }
+
+  tryToShowGuide(gp) {
+    let guide = gp.getAvailableGuideToSee("advices");
+    console.log(guide);
+    if(guide)
+      this.lip.createAndShowLeafoBubble(this.vc, guide.text, guide.headline, LeafoInfoType.Normal, ()=>{
+        this.gp.addSeen(guide);
+        //this.gp.showEm();
+        setTimeout(()=>this.tryToShowGuide(gp), 250);
+        
+      });
   }
 
   ngOnInit(): void {
+    this.tryToShowGuide(this.gp);
+
     this.qp.getAdvice().subscribe((data) => {
       if(data == "") {
         this.currentAdvice = "";

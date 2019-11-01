@@ -9,6 +9,8 @@ import { RatingProvider } from 'src/app/providers/rating/rating';
 import { NotificationProvider } from 'src/app/providers/notification/notification';
 import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
 import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
+import { GuideProvider } from 'src/app/providers/guide/guide';
+import { forkJoin } from 'rxjs';
 
 /**
  * Generated class for the HomePage page.
@@ -41,7 +43,8 @@ export class HomePage implements OnInit {
     private rp:RatingProvider,
     private np:NotificationProvider,
     private lip: LeafoInfoProvider,
-    private vc: ViewContainerRef) {
+    private vc: ViewContainerRef,
+    private gp: GuideProvider) {
   }
 
   ngOnInit(): void {
@@ -53,7 +56,9 @@ export class HomePage implements OnInit {
       } else {
         this.addressing = this.ac.getAddressing();
         if(false)
-          this.checkTime().then(this.initData, ()=>this.closeApp(this));
+          this.checkTime().then(this.initData, ()=>this.closeApp(this)); 
+        else
+          this.initData();
       }
     })
 
@@ -107,77 +112,49 @@ export class HomePage implements OnInit {
     });
   }
 
+  tryToShowGuide(gp) {
+    let guide = gp.getAvailableGuideToSee("home");
+    console.log(guide);
+    if(guide)
+      this.lip.createAndShowLeafoBubble(this.vc, guide.text, guide.headline, LeafoInfoType.Normal, ()=>{
+        this.gp.addSeen(guide);
+        //this.gp.showEm();
+        setTimeout(()=>this.tryToShowGuide(gp), 250);
+        
+      });
+  }
+
   initData() {
 
+    this.gp.init();
+    this.tryToShowGuide(this.gp);
     
-    
-    this.qp.getHistoryQuotes(1).subscribe(data => console.log(data));
+    forkJoin([
+      this.rp.getYearNotifications(),
+      this.qp.getHistoryQuotes(1),
+      this.rp.getDayData(new Date(),true)
+    ]).subscribe(res => {
+      console.log(res[0]);
+      console.log(res[1]);
+      console.log(res[2]);
 
-    this.rp.getYearNotifications();
-
-    return;
-    var strs = [];
-    strs.push(this.initQuote());
-    strs.push(this.initRating());
-    strs.push(this.initMonday());
-    console.log(strs);
-    var str = ""
-    for(var i = 0; i < strs.length; i++) {
-      if(strs[i] != undefined) {
-        	str += strs[i] + "<br>";
+      var rating = Object.values(res[2])[0]["rating"];
+      var isNew = res[1][0]["isNew"];
+      var s = "";
+      if(isNew)
+        s += "Na stránce citátů máš nový citát! ";
+      if(rating < 0) {
+        s += "Nemáš ohodnocený dnešní den! "
       }
-    }
-    /* 
-    "SELECT q.id_q AS id_q, q.quote AS quote, q.author AS author, q.date AS qdate, uq.faved AS faved FROM users_quotes AS uq JOIN users AS u ON uq.id_u=u.id_u JOIN quotes AS q ON uq.id_q=q.id_q WHERE uq.id_u=1 AND q.date  > 1569181760 ORDER BY date DESC LIMIT 1; Time: 1571773760"
-    */
-    this.lip.createAndShowLeafoBubble(this.vc, str,"Novinky!", LeafoInfoType.Happy);
-
-    /*this.setNotifsForRating();
-    this.setNotifsForQuote();
-    this.*/
-  }
-
-  initQuote() {
-    this.getLastQuote().then(quote => {
-      console.log(quote);
-      if(quote["isNew"] == 1) { 
-        return "Na stránce citátů máš nový citát!";
+      if(s) 
+      this.lip.createAndShowLeafoBubble(this.vc, s, "Novinky");
+      
+      if(this.platform.is("cordova")) {
+        this.np.replanUserNotifications(res[0]);
+        this.np.replanRatingNotifications();
       } else {
-        return "";
+        console.log("should plan on android!");
       }
-    }).catch(err => {
-      console.error(err);
     });
-    
-  }
-
-  getLastQuote() {
-    return new Promise((resolve, reject)=> {
-      this.qp.getHistoryQuotes(1).subscribe(res => {
-        console.log(res);
-          if(res["length"] > 0)
-            resolve(res[0]);
-          else 
-            reject("Nemá ještě žádný citát!");
-      }, err => {
-        reject(err);
-      });
-    });
-  }  
-
-  initRating() {
-    this.rp.getDayData(new Date(),true).subscribe(data => {
-      console.log(data);
-    });
-  }
-
-  initMonday() {
-
-  }
-
-  setNotifsForRating() {
-    if(this.todayRated) {
-      this.np.planDayRating();
-    }
   }
 }

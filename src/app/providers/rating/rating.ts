@@ -36,7 +36,7 @@ export class RatingProvider {
         id_u: this.ac.getUserId(),
         id_da: appleId,
         answers: answers 
-      })
+      });
   }
 
   getDayData(date, ratingOnly) {

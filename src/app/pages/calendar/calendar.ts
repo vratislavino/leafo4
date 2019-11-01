@@ -11,6 +11,7 @@ import 'hammerjs';
 import {trigger, keyframes, style, animate, transition } from '@angular/animations';
 import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
 import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
+import { GuideProvider } from 'src/app/providers/guide/guide';
 
 @Component({
   selector: 'page-calendar',
@@ -45,12 +46,26 @@ export class CalendarPage {
     public ac: AccountProvider, 
     private rp: RatingProvider, 
     private vc:ViewContainerRef,
-    private leafoCtrl: LeafoInfoProvider) {
+    private lip: LeafoInfoProvider,
+    private gp: GuideProvider
+    ) {
     this.platform.ready().then(() => {
       this.ionViewDidEnter();
       this.ionViewDidLoad();
     });
     
+  }
+
+  tryToShowGuide(gp) {
+    let guide = gp.getAvailableGuideToSee("calendar");
+    console.log(guide);
+    if(guide)
+      this.lip.createAndShowLeafoBubble(this.vc, guide.text, guide.headline, LeafoInfoType.Normal, ()=>{
+        this.gp.addSeen(guide);
+        //this.gp.showEm();
+        setTimeout(()=>this.tryToShowGuide(gp), 250);
+        
+      });
   }
 
   startAnimation(state) {
@@ -91,6 +106,8 @@ export class CalendarPage {
     else
       this.refreshCurrentDateData();
     //console.log("IM BACK HERE!");
+
+    this.tryToShowGuide(this.gp);
 
   }
 
@@ -221,7 +238,7 @@ export class CalendarPage {
           this.visibleRatings = false;
         });
       } else {
-        this.leafoCtrl.createAndShowLeafoBubble(this.vc, "Tento den ještě nemůžeš hodnotit!", "Chyba!", LeafoInfoType.Warning);
+        this.lip.createAndShowLeafoBubble(this.vc, "Tento den ještě nemůžeš hodnotit!", "Chyba!", LeafoInfoType.Warning);
       } 
       this.closeReviewButtons();
     }

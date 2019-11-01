@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
-import { ToastController, LoadingController } from '@ionic/angular';
+import { Component, ViewContainerRef } from '@angular/core';
+import { ToastController, LoadingController, Platform } from '@ionic/angular';
 import { AccountProvider } from '../../providers/account/account';
 import { QuoteModel } from '../../model/QuoteModel.interface';
 import { QuoteProvider } from '../../providers/quote/quote';
+import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
+import { GuideProvider } from 'src/app/providers/guide/guide';
+import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
 
 
 /**
@@ -21,17 +24,38 @@ import { QuoteProvider } from '../../providers/quote/quote';
 export class QuotesPage {
 
   quoteType = "history";
-  loading;
   subCategory = ""; //quotes/me
 
   historyQuotes: QuoteModel[] = [];
   favoriteQuotes: QuoteModel[] = [];
 
-  constructor( private quoteProvider: QuoteProvider, public ac: AccountProvider, public tC: ToastController, public loadingCtrl: LoadingController) {
-    this.getQuotes();
-    this.showLoading().then(()=>
-      this.loading.dismiss()
-    );
+  constructor( 
+    private platform: Platform,
+    private quoteProvider: QuoteProvider, 
+    public ac: AccountProvider, 
+    public tC: ToastController,
+    private gp: GuideProvider,
+    private vc: ViewContainerRef,
+    private lip: LeafoInfoProvider
+    ) {
+
+
+      this.platform.ready().then(() => {
+        this.tryToShowGuide(this.gp);
+        this.getQuotes();
+      });
+  }
+
+  tryToShowGuide(gp) {
+    let guide = gp.getAvailableGuideToSee("quotes");
+    console.log(guide);
+    if(guide)
+      this.lip.createAndShowLeafoBubble(this.vc, guide.text, guide.headline, LeafoInfoType.Normal, ()=>{
+        this.gp.addSeen(guide);
+        //this.gp.showEm();
+        setTimeout(()=>this.tryToShowGuide(gp), 250);
+        
+      });
   }
 
   getQuotes() {
@@ -101,12 +125,7 @@ export class QuotesPage {
 
   ionViewWillLoad() {
   }
-
-  async showLoading() {
-    this.loading = await this.loadingCtrl.create();
-    await this.loading.present();
-  }
-
+  
   async showToast(message) {
     var alert = await this.tC.create({
       message: message,

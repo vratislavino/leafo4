@@ -23,15 +23,13 @@ import { Component } from '@angular/core';
   comp: HTMLElement;
   answers = [];
 
-
-
   faces= [
-  "assets/imgs/leafo.png",
-  "assets/imgs/leafo.png",
-  "assets/imgs/leafo.png",
+  "assets/imgs/leafo_ucul.png",
+  "assets/imgs/leafo_smile.png",
+  "assets/imgs/leafo_zvedavy.png",
   "assets/imgs/aNormal.png",
   "assets/imgs/aGolden.png",
-  "assets/imgs/leafo.png",
+  "assets/imgs/leafo_wink.png",
   "assets/imgs/leafo.png",
   ];
 
@@ -85,6 +83,10 @@ import { Component } from '@angular/core';
     return <HTMLElement>document.getElementById('leafo-info') == undefined;
   }
 
+  testMe() {
+    console.log(this.headline + "\n" + this.text);
+  }
+
   callFunc(func) {
     if(func != null)
       func();
@@ -97,8 +99,18 @@ import { Component } from '@angular/core';
     if(info == undefined)
       return;
     info.setAttribute("style", "display: block; opacity: 1;");
-    console.log(info);
-    console.log("opening!");
+    //console.log(info);
+    //console.log("opening LIP!");
+
+    setTimeout(()=> {
+      var txt = document.getElementById("text");
+      var hl = document.getElementById("headline");
+
+      if(txt)
+        txt.innerHTML = this.text;
+      if(hl)
+        hl.innerHTML = this.headline;
+    },10);
   }
 
   public setCallbacks(call1, call2) {
@@ -110,9 +122,9 @@ import { Component } from '@angular/core';
     let info: HTMLElement = <HTMLElement>document.getElementById('leafo-info');
     if(info == undefined) 
       return;
-    console.log(info);
+    //console.log(info);
     info.setAttribute("style", "dislay:none");
-    console.log("closing!");
+    //console.log("closing!");
   }
 
   public getAnswers() {
