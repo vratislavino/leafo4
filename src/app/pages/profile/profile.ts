@@ -151,6 +151,6 @@ export class ProfilePage {
   getUsername() {
     var data = this.ac.getAuthData();
     this.username = data.username;
-    this.level = parseInt(data.level + 1);
+    this.level = parseInt(data.level);
   }
 }
