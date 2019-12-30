@@ -1,9 +1,11 @@
 import { UserProvider } from './../../providers/user/user';
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { AccountProvider } from '../../providers/account/account';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/UserModel';
+import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
+import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
 
 /**
  * Generated class for the RegisterPage page.
@@ -30,8 +32,15 @@ export class RegisterPage {
 	sign;
   sex;
 
-  constructor(public ac: AccountProvider, 
-    public apiUser: UserProvider, private router: Router, public userService:UserProvider, public tC: ToastController) {
+  souhlas = false;
+  constructor(
+    private router: Router,
+    public ac: AccountProvider, 
+    public tC: ToastController,
+    public apiUser: UserProvider,
+    private leafoProv: LeafoInfoProvider,
+    private viewContainerRef: ViewContainerRef
+    ) {
     
 
   }
@@ -40,18 +49,34 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
 
+  testLeafo() {
+    console.log("testing leafo");
+    
+    this.leafoProv.createAndShowLeafoBubble(this.viewContainerRef, "Služba zatím není k dispozici!", "Chyba", LeafoInfoType.Sad);
+  }
+
   register() {
     
-    this.userService.register(this.email, this.password, this.passwordA, this.username, this.firstname, this.surname, this.addressing, this.sign, this.sex).
+    if(!this.souhlas) {
+      this.leafoProv.createAndShowLeafoBubble(this.viewContainerRef, "Musíte souhlasit se zpracováním údajů!", "Pozor!");
+      return;
+    }
+
+    this.apiUser.register(this.email, this.password, this.passwordA, this.username, this.firstname, this.surname, this.addressing, this.sign, this.sex).
     subscribe(
-      (message: string) => {
+      (message) => {
+        if(message["Error"]) {
+          this.leafoProv.createAndShowLeafoBubble(this.viewContainerRef, message["Error"], "Chyba!");
+        } else {
+          this.apiUser.auth(this.email, this.password).subscribe((data) => {
+            let user = User.createUser(this.email);
+            this.ac.login(user, data, false);
+            
+            this.router.navigate(["settings", 1]);
+          });
+        }
         //this.showToast(JSON.stringify(message));
-        this.apiUser.auth(this.email, this.password).subscribe((data) => {
-          let user = User.createUser(this.email);
-          this.ac.login(user, data, false);
-          
-          this.router.navigate(["settings", 1]);
-        });
+        
       },
        (err:string)=> {
          this.showToast(err);

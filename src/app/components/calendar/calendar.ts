@@ -13,6 +13,8 @@ import {DAYS_LIST} from '../../mocks/days.mocks';
 })
 export class CalendarComponent implements OnInit, OnChanges {
 
+  public static reference : CalendarComponent = undefined;
+
   currentDate = moment();
   dayNames = DAYS_LIST;
   weeks: CalendarDate[][] = [];
@@ -23,6 +25,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Output() onSelectDate = new EventEmitter<CalendarDate>();
 
   constructor(private rp: RatingProvider) { 
+    CalendarComponent.reference = this;
     moment.locale('cs');
     this.currentDate = moment();
   }
@@ -38,8 +41,9 @@ export class CalendarComponent implements OnInit, OnChanges {
         changes.selectedDates.currentValue.length  > 1) {
       // sort on date changes for better performance when range checking
       this.sortedDates = _.sortBy(changes.selectedDates.currentValue, (m: CalendarDate) => m.mDate.valueOf());
-      this.generateCalendar();
+      
     }
+    this.generateCalendar();
   }
 
   generateCalendar() : void {
@@ -69,6 +73,18 @@ export class CalendarComponent implements OnInit, OnChanges {
     });
 
 
+  }
+
+  testRating(keyDate, rating) {
+    for(var i = 0; i < this.weeks.length; i++) {
+      for(var j = 0; j < this.weeks[i].length; j++) {
+        if(this.weeks[i][j] != null && this.weeks[i][j].keyDate == keyDate) {
+          this.weeks[i][j].details["rating"] = rating;
+          return;
+        }
+      }
+    }
+    
   }
 
   getIcon() {

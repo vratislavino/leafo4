@@ -49,20 +49,26 @@ export class HomePage implements OnInit {
 
   ngOnInit(): void {
 
+    
+
+  }
+
+  ionViewDidEnter() {
     this.ac.ready().then(() => {
 
       if (!this.ac.isLoggedIn()) {
         this.router.navigate(["/login"]);
       } else {
         this.addressing = this.ac.getAddressing();
-        if(false)
+        //if(false)
           this.checkTime().then(this.initData, ()=>this.closeApp(this)); 
-        else
-          this.initData();
+        //else
+        //  this.initData();
       }
-    })
-
+    });
   }
+
+  
 
   closeApp(hm) {
     console.log(hm);

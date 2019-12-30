@@ -61,6 +61,7 @@ export class ProfilePage {
 
   initDepka() {
     this.userService.getLastDepression().subscribe((data)=> {
+      
       const date = data["date"];
       if(date != undefined) {
         let dat = new Date(date);
@@ -68,7 +69,7 @@ export class ProfilePage {
 
         let timeDiff = today.getTime() - dat.getTime();
         this.diffDates = Math.ceil(timeDiff/(1000*3600*24));
-        console.log(this.diffDates);
+        console.log("Rozdíl dnů: " + this.diffDates);
       } else {
         console.error("date is undefined!");
       }

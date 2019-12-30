@@ -52,7 +52,7 @@
     <div *ngFor="let quote of quotes">
       <quote [quoteObj]="quote"></quote>
     </div>
-    <div>
+    <div *ngIf="false">
         <horoscope [horoscopeObj]="horoscope"></horoscope>
     </div>
   </ion-list>

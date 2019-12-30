@@ -187,7 +187,7 @@ export class SettingsPage implements OnInit {
 
     onSlideChanged() {
         this.slider.getActiveIndex().then((index) => {
-            this.textforbutton = index < 5 ? "Další" : "Uložit";
+            this.textforbutton = index < 4 ? "Další" : "Uložit";
         });
     }
 
@@ -319,11 +319,14 @@ export class SettingsPage implements OnInit {
                 });
                 this.showToast(mess);
             }, err => {
-                this.showToast(err.message);
+                this.infoLeafo.createAndShowLeafoBubble(this.vc, "Omlouvám se, vyskytla se chyba. Zkus to prosím později.", "Chyba", LeafoInfoType.Sad);
+                //this.showToast("SET PROFILE IMAGE " + err.message);
             });
         }).catch(err => {
+            this.infoLeafo.createAndShowLeafoBubble(this.vc, "Omlouvám se, vyskytla se chyba. Zkus to prosím později.", "Chyba", LeafoInfoType.Sad);
+                
             console.log(err.message);
-            this.showToast(err.message);
+            //this.showToast("GET PICTURE " + err.message);
         });
     }
 

@@ -109,6 +109,7 @@ export class GuideProvider {
   init() {
     //this.saveCurrentToStorage();
     //return;
+    console.log("ALLGUIDS TAKEN FROM STORAGE " + this.motStorage.exists("allguides"));
     if (this.motStorage.exists("allguides")) {
       GuideProvider.allGuides = this.motStorage.get("allguides");
 
@@ -161,6 +162,7 @@ export class GuideProvider {
 
   addSeen(guide) {
     guide.seen = true;
+    //console.log(guide);
     this.saveCurrentToStorage();
   }
 

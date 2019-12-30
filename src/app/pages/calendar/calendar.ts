@@ -1,6 +1,8 @@
 import { Component, ViewContainerRef } from '@angular/core';
-import { AlertController,/*, FabContainer */
-Platform} from '@ionic/angular';
+import {
+  AlertController,/*, FabContainer */
+  Platform
+} from '@ionic/angular';
 import { CalendarDate } from '../../model/CalendarDate.interface';
 import * as moment from 'moment';
 import { AccountProvider } from '../../providers/account/account';
@@ -8,10 +10,11 @@ import { RatingProvider } from '../../providers/rating/rating';
 import { D } from '../../../D';
 import { Router } from '@angular/router';
 import 'hammerjs';
-import {trigger, keyframes, style, animate, transition } from '@angular/animations';
+import { trigger, keyframes, style, animate, transition } from '@angular/animations';
 import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
 import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
 import { GuideProvider } from 'src/app/providers/guide/guide';
+import { CalendarComponent } from 'src/app/components/calendar/calendar';
 
 @Component({
   selector: 'page-calendar',
@@ -21,56 +24,54 @@ import { GuideProvider } from 'src/app/providers/guide/guide';
   animations: [
     trigger('animator', [
       transition('* => pulse', animate(300, keyframes([
-        style({transform: 'scale3d(1, 1, 1)', offset: 0}),
-        style({transform: 'scale3d(1.2, 1.2, 1.2)', offset: .3}),
-        style({transform: 'scale3d(1, 1, 1)', offset: 1}),
+        style({ transform: 'scale3d(1, 1, 1)', offset: 0 }),
+        style({ transform: 'scale3d(1.2, 1.2, 1.2)', offset: .3 }),
+        style({ transform: 'scale3d(1, 1, 1)', offset: 1 }),
       ])))
     ])]
 })
 export class CalendarPage {
 
-  currentDay : CalendarDate;
+  currentDay: CalendarDate;
   currrentDayDownloaded = false;
   visibleRatings = false;
-  reviewText = "Press!";
+  reviewText = "Tap!";
   isWoman = true;
   htmlMove;
-  
-  animationState:string;
 
-  /*@ViewChild("enterPopUp") enterPopUp: FabContainer;*/
-  
+  animationState: string;
+
   constructor(
-    public router: Router, 
-    private platform:Platform, 
-    public ac: AccountProvider, 
-    private rp: RatingProvider, 
-    private vc:ViewContainerRef,
+    public router: Router,
+    private platform: Platform,
+    public ac: AccountProvider,
+    private rp: RatingProvider,
+    private vc: ViewContainerRef,
     private lip: LeafoInfoProvider,
     private gp: GuideProvider
-    ) {
+  ) {
     this.platform.ready().then(() => {
       this.ionViewDidEnter();
       this.ionViewDidLoad();
     });
-    
+
   }
 
   tryToShowGuide(gp) {
     let guide = gp.getAvailableGuideToSee("calendar");
     console.log(guide);
-    if(guide)
-      this.lip.createAndShowLeafoBubble(this.vc, guide.text, guide.headline, LeafoInfoType.Normal, ()=>{
+    if (guide)
+      this.lip.createAndShowLeafoBubble(this.vc, guide.text, guide.headline, LeafoInfoType.Normal, () => {
         this.gp.addSeen(guide);
         //this.gp.showEm();
-        setTimeout(()=>this.tryToShowGuide(gp), 250);
-        
+        setTimeout(() => this.tryToShowGuide(gp), 250);
+
       });
   }
 
   startAnimation(state) {
     console.log(state);
-    if(!this.animationState) {
+    if (!this.animationState) {
       this.animationState = state;
     }
   }
@@ -79,13 +80,13 @@ export class CalendarPage {
     this.animationState = '';
   }
 
-  
+
   ionViewDidEnter() {
     var mensStart: Date = new Date(2019, 7, 18);
     var mensDate: Date = new Date();
     const period: number = 27;
     const activeDays: number = 4;
-    mensDate.setDate(mensDate.getDate() + period); 
+    mensDate.setDate(mensDate.getDate() + period);
     //console.log("===========");
     //console.log("Mens Start");
     //console.log(mensStart);
@@ -93,15 +94,15 @@ export class CalendarPage {
     //console.log("Date");
     //console.log(mensDate);
     //console.log(mensDate.getTime());
-    while(mensStart < mensDate) {
+    while (mensStart < mensDate) {
       mensStart.setDate(mensStart.getDate() + period);
     }
     //console.log("Next menses");
-   // console.log(mensStart);
+    // console.log(mensStart);
     //console.log(mensStart.getTime());
     //console.log("===========");
     this.currrentDayDownloaded = false;
-    if(this.currentDay != undefined)
+    if (this.currentDay != undefined)
       this.refreshCurrentDateData(this.currentDay.mDate);
     else
       this.refreshCurrentDateData();
@@ -124,11 +125,11 @@ export class CalendarPage {
   }
 
   onTouchMove(event) {
-    if(this.visibleRatings) {
+    if (this.visibleRatings) {
       let nula: HTMLElement = <HTMLElement>document.getElementById('review-changer');
       nula.setAttribute("style", "display: none;");
       var current = this.getElementByTouch(event.changedTouches[0]);
-      if(this.htmlMove != undefined && this.htmlMove != null && this.htmlMove != current) {
+      if (this.htmlMove != undefined && this.htmlMove != null && this.htmlMove != current) {
         this.htmlMove.classList.remove("active");
       }
       this.htmlMove = current;
@@ -138,33 +139,32 @@ export class CalendarPage {
     }
   }
 
-  getElementByPoint(x, y) : HTMLElement {
+  getElementByPoint(x, y): HTMLElement {
     return <HTMLElement>document.elementFromPoint(x, y);
   }
 
-  getElementByTouch(touch) : HTMLElement {
+  getElementByTouch(touch): HTMLElement {
 
-      var x = touch.clientX;
-      var y = touch.clientY;
-      return this.getElementByPoint(x,y);
+    var x = touch.clientX;
+    var y = touch.clientY;
+    return this.getElementByPoint(x, y);
   }
 
   onTouchEnd(event) {
-      var doc = this.getElementByTouch(event.changedTouches[0]);
-      var html = doc.innerHTML;
-      let nula: HTMLElement = <HTMLElement>document.getElementById('review-changer');
-      nula.setAttribute("style", "display: flex;");
-      if(this.htmlMove != undefined && this.htmlMove != null) {
-        this.htmlMove.classList.remove("active");
-      }
-      
-      if(html.indexOf("%") > -1) 
-      {
-        html = html.replace("%", "");
-        this.chooseReview(parseInt(html));
-      } else {
-        console.log("NENÍ PROCENTO!");
-      }
+    var doc = this.getElementByTouch(event.changedTouches[0]);
+    var html = doc.innerHTML;
+    let nula: HTMLElement = <HTMLElement>document.getElementById('review-changer');
+    nula.setAttribute("style", "display: flex;");
+    if (this.htmlMove != undefined && this.htmlMove != null) {
+      this.htmlMove.classList.remove("active");
+    }
+
+    if (html.indexOf("%") > -1) {
+      html = html.replace("%", "");
+      this.chooseReview(parseInt(html));
+    } else {
+      console.log("NENÍ PROCENTO!");
+    }
 
   }
 
@@ -174,8 +174,11 @@ export class CalendarPage {
       this.currentDay = new CalendarDate(mDate, keyDate, data[keyDate], true, true);
       this.currrentDayDownloaded = true;
 
-      if(this.currentDay.details != null && this.currentDay.details != undefined)
-        this.reviewText = this.currentDay.details["rating"] + "%";
+      if (this.currentDay.details != null && this.currentDay.details != undefined)
+        if (this.currentDay.details["rating"] != -1)
+          this.reviewText = this.currentDay.details["rating"] + "%";
+        else
+          this.reviewText = "Tap!";
     });
   }
 
@@ -188,18 +191,18 @@ export class CalendarPage {
 
   onDateSelected(date: CalendarDate) {
     //if(moment().format("M") == date.mDate.format("M")) {
-      this.currentDay = date;;
-      if(this.currentDay.details != null && this.currentDay.details != undefined)
-        if(this.currentDay.details["rating"] > -1)
-          this.reviewText = this.currentDay.details["rating"] + "%";
-        else
-          this.reviewText = "Tap!"
-      console.log("Yess");
+    this.currentDay = date;;
+    if (this.currentDay.details != null && this.currentDay.details != undefined)
+      if (this.currentDay.details["rating"] > -1)
+        this.reviewText = this.currentDay.details["rating"] + "%";
+      else
+        this.reviewText = "Tap!"
+    console.log("Yess");
     //} else {
     //  console.log("Not rly");
     //}
     console.log(date.mDate);
-  } 
+  }
 
   getRatingClass() {
     return "r" + this.currentDay.details["rating"];
@@ -218,20 +221,29 @@ export class CalendarPage {
     this.visibleRatings = false;
   }
 
+  getReviewText() {
+
+  }
+
   chooseReview(review) {
     //console.log(review + " _ " + this.visibleRatings);
-    if(review==101 && !this.visibleRatings) {
+    if (review == 101 && !this.visibleRatings) {
       this.openReviewButtons();
     } else {
-      if(review == 101)
+      if (review == 101)
         review = 0;
-      if(new Date(this.currentDay.keyDate + " 0:0").getTime() <= new Date().getTime()) { 
+      if (new Date(this.currentDay.keyDate + " 0:0").getTime() <= new Date().getTime()) {
         this.reviewText = "Tap!";
-        this.rp.setDayReview(this.currentDay.keyDate, review).subscribe((data)=> { 
+        this.rp.setDayReview(this.currentDay.keyDate, review).subscribe((data) => {
           console.log(data);
-          if(this.currentDay)
+          if (this.currentDay)
             this.currentDay.details["rating"] = review;
-          this.reviewText = review + "%";
+          if (review != -1)
+            this.reviewText = review + "%";
+          else
+            this.reviewText = "Tap!";
+
+          CalendarComponent.reference.testRating(this.currentDay.keyDate, review);
           /*
           var day = document.getElementById("day" + this.currentDay.keyDate);
           if(day) {
@@ -239,64 +251,64 @@ export class CalendarPage {
            (<HTMLElement>circ).classList.remove("r100", "r-1", "r0", "r25", "r50", "r75");
            circ
           }*/
-        }, (err)=> {
+        }, (err) => {
           console.log("Error");
           console.log(err);
           this.visibleRatings = false;
         });
       } else {
         this.lip.createAndShowLeafoBubble(this.vc, "Tento den ještě nemůžeš hodnotit!", "Chyba!", LeafoInfoType.Warning);
-      } 
+      }
       this.closeReviewButtons();
     }
   }
 
 
-/*
-  chooseReview(review, fab) {
-
-    if(this.currentDay.details == null || this.currentDay.details == undefined)
-      return;
-      
-    if(new Date(this.currentDay.keyDate + " 0:0").getTime() <= new Date().getTime()) { // pokud je starší než dnešek
-      //let notes: HTMLElement = <HTMLElement>document.getElementsByClassName('notes')[0];
-      if(this.visibleRatings) {
-        this.visibleRatings = false;
-        this.reviewText = "Tap!";
-        notes.setAttribute("style", "visibility: visible;");
-        this.rp.setDayReview(this.currentDay.keyDate, review).subscribe((data)=> {
-          console.log(data);
-          if(review == 101) {
-            this.openReviewButtons();
-            review = 0;
-          }
-          if(this.currentDay)
-          this.currentDay.details["rating"] = review;
-          this.reviewText = review + "%";
+  /*
+    chooseReview(review, fab) {
+  
+      if(this.currentDay.details == null || this.currentDay.details == undefined)
+        return;
+        
+      if(new Date(this.currentDay.keyDate + " 0:0").getTime() <= new Date().getTime()) { // pokud je starší než dnešek
+        //let notes: HTMLElement = <HTMLElement>document.getElementsByClassName('notes')[0];
+        if(this.visibleRatings) {
           this.visibleRatings = false;
-          console.log("WTF");
-        }, (err)=> {
-          console.log("Error");
-          console.log(err);
-          this.visibleRatings = false;
-        });
+          this.reviewText = "Tap!";
+          notes.setAttribute("style", "visibility: visible;");
+          this.rp.setDayReview(this.currentDay.keyDate, review).subscribe((data)=> {
+            console.log(data);
+            if(review == 101) {
+              this.openReviewButtons();
+              review = 0;
+            }
+            if(this.currentDay)
+            this.currentDay.details["rating"] = review;
+            this.reviewText = review + "%";
+            this.visibleRatings = false;
+            console.log("WTF");
+          }, (err)=> {
+            console.log("Error");
+            console.log(err);
+            this.visibleRatings = false;
+          });
+        } else {
+          notes.setAttribute("style", "visibility: hidden;");
+          this.reviewText = "0%";
+          this.visibleRatings = true;
+          console.log("Umm");
+        }
       } else {
-        notes.setAttribute("style", "visibility: hidden;");
-        this.reviewText = "0%";
-        this.visibleRatings = true;
-        console.log("Umm");
+        console.log("Jeste brzo bracho..");
       }
-    } else {
-      console.log("Jeste brzo bracho..");
-    }
-  }*/
+    }*/
 
   openGraph() {
     this.router.navigate(["/graph"]);
   }
 
   openAddNote() {
-    
+
     this.router.navigate(["/add-note", { date: this.currentDay.keyDate }]);
     //this.enterPopUp.close();
   }

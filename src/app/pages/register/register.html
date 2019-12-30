@@ -83,17 +83,22 @@
       </ion-select>
     </ion-item>
   </ion-list>
+  <ion-item>
+    <ion-label color="primNormal" class="ion-text-wrap">Souhlasím se zpracováním osobních údajů podle GDPR.</ion-label>
+    <ion-checkbox slot="end" [(ngModel)]="souhlas"></ion-checkbox>
+  </ion-item>
+  
 
   <ion-list lines="none">
     <ion-item class="login-button" color="primDark" large (click)="register()">
         Registrovat se
     </ion-item>
   </ion-list>
-  
+
   <ion-row class="logos">
       <ion-col size="12">
         <ion-icon name="logo-facebook" item-start (click)="testLeafo()"></ion-icon>
-        <ion-icon name="logo-googleplus" item-start (click)="login()"></ion-icon>
+        <ion-icon name="logo-googleplus" item-start (click)="testLeafo()"></ion-icon>
       </ion-col>
     </ion-row>
 

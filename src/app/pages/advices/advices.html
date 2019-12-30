@@ -41,15 +41,23 @@
   </ion-list>
 </div>
 <div *ngIf="currentAdvice != ''">
-  <ion-row >
-    <ion-col><img [src]="getAdvisorImage()"></ion-col>
-    <ion-col>{{ getAdvisor() }}</ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <h3> {{ currentAdvice }} </h3>
-    </ion-col>
-  </ion-row>
-  <h2>FOOTER: Pro další radu si přijď zítra!</h2>
+
+  <ion-list lines="none">
+      <ion-item>
+        <img [src]="getAdvisorImage()" width="50%" >
+      </ion-item>
+      <ion-item>
+          <h2 id="advisor">{{ getAdvisor() }}</h2>
+      </ion-item>
+      <ion-item>
+          <h3 id="advice"> {{ currentAdvice }} </h3>
+      </ion-item>
+  </ion-list>
 </div>
 </ion-content>
+<ion-footer *ngIf="currentAdvice != ''">
+  <ion-toolbar>
+      <img style="margin-left:35%" src="./assets/imgs/List.png" width="30%">  
+      <ion-title><h3 style="text-align:center; color:white;">Pro další radu si přijď zítra!</h3></ion-title>
+    </ion-toolbar>
+  </ion-footer>

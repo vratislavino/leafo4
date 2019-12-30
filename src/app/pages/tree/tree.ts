@@ -270,7 +270,7 @@ export class TreePage {
         console.log("Set tree state: error");
       });
     } else {
-      
+      this.lip.createAndShowLeafoBubble(this.vc, "Dnes už je zalito!", "Pozor!");
     }
   }
 
@@ -296,7 +296,9 @@ export class TreePage {
     if (this.currentWatering == -1)
       return path + this.uschlyStrom;
 
-    if (this.currentWatering == 1)
+
+
+    if (this.currentWatering == 1 || this.currentWatering == 0)
       return path + this.treeArr[0];
 
     if (this.currentWatering == 2)
