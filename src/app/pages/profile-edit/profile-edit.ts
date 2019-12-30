@@ -20,10 +20,11 @@ export class ProfileEditPage {
 
   currentUserData:User;
   photo = "./assets/imgs/avatar.png";
+  sex = 1;
 
   constructor(private router:Router, public ac: AccountProvider, public userService: UserProvider) {
       this.currentUserData = ac.getCopyOfUser();//AccountProvider.user.copy();
-
+      this.getSex();
   }
 
   save() {
@@ -42,6 +43,18 @@ export class ProfileEditPage {
         this.currentUserData.addressing = value;
     } else if(type == "firstname") {
         this.currentUserData.firstname = value;
+    }
+  }
+
+  getSex() {
+    this.sex = this.currentUserData.sex;
+    console.log("Sex: " + this.sex);
+    if(this.sex == 1) {
+      this.sex = "Muž";
+    } else if(this.sex == 2) {
+      this.sex = "Žena";
+    } else {
+      this.sex = "Jiné";
     }
   }
 

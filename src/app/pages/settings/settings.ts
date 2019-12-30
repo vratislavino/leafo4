@@ -210,9 +210,15 @@ export class SettingsPage implements OnInit {
             var keys = Object.keys(val);
             this.cols = [];
             for (var i = 0; i < keys.length; i++) {
+                var name = val[keys[i]]["name"];
+                if(this.currentUserData.getSex() == 2) {
+                    var charec = name.substring(name.length - 1, name.length);
+                    if(charec == 'ý')
+                    name = name.substring(0, name.length - 1) + 'á';
+                }
                 var obj = {
                     id_ch: val[keys[i]]["id_ch"],
-                    name: val[keys[i]]["name"],
+                    name: name,
                     active: false
                 };
                 this.cols.push(obj);
@@ -235,8 +241,14 @@ export class SettingsPage implements OnInit {
                 var keysU = Object.keys(valU);
                 if (keysU.length > 0) {
                     for (var j = 0; j < keysU.length; j++) {
+                        var name = valU[keysU[j]]["name"];
+                        if(this.currentUserData.getSex() == 2) {
+                            var charec = name.substring(name.length - 1, name.length);
+                            if(charec == 'ý')
+                                name = name.substring(0, name.length - 1) + 'á';
+                        }
                         var obj = {
-                            name: valU[keysU[j]]["name"],
+                            name: name,
                             active: false
                         };
                         this.userCols.push(obj);
