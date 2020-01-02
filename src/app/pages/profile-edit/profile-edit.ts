@@ -48,14 +48,21 @@ export class ProfileEditPage {
 
   getSex() {
     this.sex = this.currentUserData.sex;
+    if(this.sex == 1)
+      return "Můž";
+    if(this.sex == 2)
+      return "Žena";
+    
+    return "Jiné";
+    /*
     console.log("Sex: " + this.sex);
-    if(this.sex == 1) {
+    if(this.sex == "1") {
       this.sex = "Muž";
-    } else if(this.sex == 2) {
+    } else if(this.sex == "2") {
       this.sex = "Žena";
     } else {
       this.sex = "Jiné";
-    }
+    }*/
   }
 
 }

@@ -7,6 +7,7 @@ import { D } from '../../../D';
 import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
 import { GuideProvider } from 'src/app/providers/guide/guide';
 import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
+import { MotStorageProvider } from 'src/app/providers/mot-storage/mot-storage';
 
 @Component({
   selector: 'page-graph',
@@ -35,7 +36,8 @@ export class GraphPage {
     public ratingProvider: RatingProvider,
     private gp: GuideProvider,
     private lip: LeafoInfoProvider,
-    private vc: ViewContainerRef) {
+    private vc: ViewContainerRef,
+    private st: MotStorageProvider) {
 
     Chart.defaults.global.defaultFontColor = "white";
     this.ionViewDidLoad();
@@ -136,6 +138,8 @@ export class GraphPage {
 
   createMonthChart(dateToGet) {
     this.ratingProvider.getMonthData(dateToGet, true).subscribe((data) => {
+
+      console.log(data);
 
       var orderedData = {};
       Object.keys(data).sort().forEach(function (key) {
