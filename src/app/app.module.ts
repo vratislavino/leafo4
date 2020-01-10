@@ -51,6 +51,8 @@ import { NotificationProvider } from './providers/notification/notification';
 import { GuideProvider } from './providers/guide/guide';
 import { InfoLeafoComponentModule } from './components/info-leafo/info-leafo.module';
 import { InfoLeafoComponent } from './components/info-leafo/info-leafo';
+import { RateLeafoComponentModule } from './components/rate-leafo/rate-leafo.module';
+import { RateLeafoComponent } from './components/rate-leafo/rate-leafo';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
@@ -82,11 +84,13 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppRoutingModule,
     HttpClientModule,
     InfoLeafoComponentModule,
+    RateLeafoComponentModule,
     FontAwesomeModule
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    InfoLeafoComponent
+    InfoLeafoComponent,
+    RateLeafoComponent
   ],
   providers: [
     Camera,

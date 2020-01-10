@@ -35,6 +35,14 @@ export class HomePage implements OnInit {
   private quoteObtained = false;
   private horoscopeObtained = false;
 
+  private news=[
+    {
+      title: "Test headline",
+      text: "Test message",
+      page: "home"
+    }
+  ];
+
   constructor(private platform: Platform, 
     private router: Router, 
     public ac: AccountProvider, 
@@ -60,14 +68,18 @@ export class HomePage implements OnInit {
         this.router.navigate(["/login"]);
       } else {
         this.addressing = this.ac.getAddressing();
-        //if(false)
+        if(false)
           this.checkTime().then(this.initData, ()=>this.closeApp(this)); 
-        //else
-        //  this.initData();
+        else
+          this.initData();
       }
     });
   }
 
+
+  testleafo() {
+    this.lip.createAndShowRatingBubble(this.vc, -1, new Date());
+  }
   
 
   closeApp(hm) {
@@ -131,7 +143,7 @@ export class HomePage implements OnInit {
   }
 
   initData() {
-
+    this.news = [];
     this.gp.init();
     this.tryToShowGuide(this.gp);
     
@@ -140,21 +152,29 @@ export class HomePage implements OnInit {
       this.qp.getHistoryQuotes(1),
       this.rp.getDayData(new Date(),true)
     ]).subscribe(res => {
+      console.log("Notification for next year: ");
       console.log(res[0]);
+      console.log("Last Quote: ");
       console.log(res[1]);
+      console.log("Today Data: ");
       console.log(res[2]);
 
       var rating = Object.values(res[2])[0]["rating"];
       var isNew = res[1][0]["isNew"];
       var s = "";
+
       if(isNew)
-        s += "Na stránce citátů máš nový citát! ";
+        this.news.push({title: "Nový citát!", text: "Na stránce citátů máš nový citát!", page: "quotes"});
       if(rating < 0) {
-        s += "Nemáš ohodnocený dnešní den! "
+        this.news.push({title: "Hodnocení dne!", text: "Nemáš hodnocený den!", page: "tree"});
       }
+
+      /*
+      
       if(s) 
       this.lip.createAndShowLeafoBubble(this.vc, s, "Novinky");
-      
+      */
+
       if(this.platform.is("cordova")) {
         this.np.replanUserNotifications(res[0]);
         this.np.replanRatingNotifications();
@@ -162,5 +182,13 @@ export class HomePage implements OnInit {
         console.log("should plan on android!");
       }
     });
+  }
+
+  navigate(page) {
+    this.router.navigate(["/"+page]);
+  }
+
+  tryToCallDepka() {
+    console.log("depka");
   }
 }

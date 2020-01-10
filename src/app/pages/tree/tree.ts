@@ -249,7 +249,10 @@ export class TreePage {
     if (bool) {
       this.userService.setTreeState().subscribe(succ => {
         if(succ["Error"] != undefined) {
+
+
           this.lip.createAndShowLeafoBubble(this.vc, "Konvice je prázdná, nelze zalít, ohodnoť nejdříve dnešní den!", "Pozor!", LeafoInfoType.Sad);
+          
           console.log("Nezalivej s prazdnou konvici... To upe nefunguje hele.");
         } else {
           this.userService.getTreeState().subscribe(val => {
@@ -257,9 +260,6 @@ export class TreePage {
             this.lastWatering = val["lastWatering"];
             this.wateredAt = this.parseDate(this.lastWatering);
   
-                  /*
-                  "Safra, nepovedelo se provést selectSELECT u.water_count, u.lastWatering FROM users as u JOIN day_ratings AS dr ON u.id_u=dr.id_u WHERE u.id_u=1 AND YEAR(dr.date)=YEAR(CURRENT_TIME) AND MONTH(dr.date)=MONTH(CURRENT_TIMESTAMP) AND DAY(dr.date)=DAY(CURRENT_TIMESTAMP);"
-                  */ 
             this.initTree();
             this.initApples();
           }, error => {

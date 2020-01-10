@@ -174,7 +174,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
     if(details.apple == null)
       return false;
-
+    
     if(details.apple[app] != undefined)
       return true;
     return false;

@@ -1,5 +1,6 @@
 import { Injectable, Component, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { InfoLeafoComponent, LeafoInfoType } from '../../components/info-leafo/info-leafo';
+import { RateLeafoComponent } from 'src/app/components/rate-leafo/rate-leafo';
 
 /*
   Generated class for the LeafoInfoProvider provider.
@@ -14,7 +15,8 @@ export class LeafoInfoProvider {
     
   }
 
-  leafo: InfoLeafoComponent = null;
+  infoleafo = null;
+  rateleafo = null;
 
   public createAndShowLeafoBubble(
     vc:ViewContainerRef, 
@@ -33,23 +35,48 @@ export class LeafoInfoProvider {
     return b;
   }
 
+  public createAndShowRatingBubble(
+    vc:ViewContainerRef, 
+    original:number, 
+    day:Date,
+    callback = null
+  ) {
+    const b = this.getRatingBubble(vc);
+    b.open();
+    b.initRating(original, day);
+    b.setCallback(callback);
+    return b;
+  }
+
+  public getRatingBubble(vc:ViewContainerRef) : RateLeafoComponent {
+    if(this.rateleafo != null && !this.rateleafo.isUndefined())
+      return this.rateleafo;
+
+      const compFactory = this.componentFactoryResolver.resolveComponentFactory(RateLeafoComponent);
+      const compRef = vc.createComponent(compFactory);
+  
+      this.rateleafo = <RateLeafoComponent>compRef.instance; 
+      return this.rateleafo;
+
+  }
+
   public getLeafoBubble(vc:ViewContainerRef) : InfoLeafoComponent {
 
-    if(this.leafo != null && !this.leafo.isUndefined())
-      return this.leafo;
+    if(this.infoleafo != null && !this.infoleafo.isUndefined())
+      return this.infoleafo;
 
     const compFactory = this.componentFactoryResolver.resolveComponentFactory(InfoLeafoComponent);
     const compRef = vc.createComponent(compFactory);
 
-    this.leafo = <InfoLeafoComponent>compRef.instance; 
-    return this.leafo;
+    this.infoleafo = <InfoLeafoComponent>compRef.instance; 
+    return this.infoleafo;
   }
 
   public getAnswers() {
-    if(this.leafo == undefined || this.leafo == null)
+    if(this.infoleafo == undefined || this.infoleafo == null)
       return null;
 
-    return this.leafo.getAnswers();
+    return this.infoleafo.getAnswers();
   }
 
 }
