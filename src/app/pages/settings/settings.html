@@ -6,118 +6,131 @@
 -->
 <ion-header>
 
-    <ion-toolbar color="primDark">
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-      <ion-title>Nastavení</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="primDark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nastavení</ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content padding>
   <ion-slides #slider (ionSlideDidChange)="onSlideChanged()">
-    <ion-slide>
-      <ion-list lines="none">
-        <ion-list-header>
-          <ion-icon name="contact"></ion-icon> Přihlašovací údaje
-        </ion-list-header>
+  <ion-slide>
+    <ion-list lines="none">
+      <ion-list-header>
+        <ion-icon name="contact"></ion-icon> Přihlašovací údaje
+      </ion-list-header>
       <ion-item>
         <ion-label color="primNormal" position="floating">
           E-mail
         </ion-label>
-        <ion-input type="email" value="{{ currentUserData.email }}" (input)='onInput("email", $event.target.value);'></ion-input>
+        <ion-input type="email" value="{{ currentUserData.email }}" (input)='onInput("email", $event.target.value);'>
+        </ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primNormal" position="floating">
           Heslo
         </ion-label>
-        <ion-input type="password" value="12345"></ion-input>
+        <ion-input type="password" [(ngModel)]="passInput"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primNormal" position="floating">
+          Heslo znovu
+        </ion-label>
+        <ion-input type="password" [(ngModel)]="passCheckInput"></ion-input>
+      </ion-item>
+      <ion-item>
+        <p>Pokud nechcete měnit heslo, nechte pole prázdné</p>
       </ion-item>
     </ion-list>
-    </ion-slide>
+  </ion-slide>
 
-    <ion-slide>
-        <ion-list lines="none">
-            <ion-list-header>
-              Úprava profilu
-            </ion-list-header>
+  <ion-slide>
+    <ion-list lines="none">
+      <ion-list-header>
+        Úprava profilu
+      </ion-list-header>
       <ion-item>
         <ion-label color="primNormal" position="floating">
           Křestní jméno
         </ion-label>
-        <ion-input type="text" value="{{ currentUserData.firstname }}" (input)='onInput("firstname", $event.target.value);'></ion-input>
+        <ion-input type="text" value="{{ currentUserData.firstname }}"
+          (input)='onInput("firstname", $event.target.value);'></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primNormal" position="floating">
           Oslovení
         </ion-label>
-          <ion-input type="text" value="{{ currentUserData.addressing }}" (input)='onInput("addressing", $event.target.value);'></ion-input>
+        <ion-input type="text" value="{{ currentUserData.addressing }}"
+          (input)='onInput("addressing", $event.target.value);'></ion-input>
       </ion-item>
-      </ion-list>
-    </ion-slide>
+    </ion-list>
+  </ion-slide>
 
-    <ion-slide>
-        <ion-list lines="none">
-            <ion-list-header>
-              Personalizace
-            </ion-list-header>
+  <ion-slide>
+    <ion-list lines="none">
+      <ion-list-header>
+        Personalizace
+      </ion-list-header>
       <ion-item>
-        <ion-select [(ngModel)]="currentUserData.sign">
-          <ion-select-option value="1">Kozoroh</ion-select-option>
-          <ion-select-option value="2">Vodnář</ion-select-option>
-          <ion-select-option value="3" selected>Ryby</ion-select-option>
-          <ion-select-option value="4">Beran</ion-select-option>
-          <ion-select-option value="5">Býk</ion-select-option>
-          <ion-select-option value="6">Blíženec</ion-select-option>
-          <ion-select-option value="7">Rak</ion-select-option>
-          <ion-select-option value="8">Lev</ion-select-option>
-          <ion-select-option value="9">Panna</ion-select-option>
-          <ion-select-option value="10">Váhy</ion-select-option>
-          <ion-select-option value="11">Štír</ion-select-option>
-          <ion-select-option value="12">Střelec</ion-select-option>
-        </ion-select>
+        <ion-grid class="znameni">
+          <ion-row *ngFor="let znam of znameni">
+            <ion-col size="4" *ngFor="let zn of znam">
+              <div [ngClass]="{'active': zn.active}"
+                (click)="updateBckg(col)">
+                <img [src]="zn.image">
+                <p>{{ zn.name }}</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
+    </ion-list>
+  </ion-slide>
+  <ion-slide>
+    <ion-list>
       <ion-item style="margin-top: 20px;">
         <ion-label>Pohlaví</ion-label>
       </ion-item>
-        <ion-item>
-          <ion-select [(ngModel)]="currentUserData.sex">
+      <ion-item>
+        <ion-select [(ngModel)]="currentUserData.sex">
           <ion-select-option value="1" selected>Muž</ion-select-option>
           <ion-select-option value="2">Žena</ion-select-option>
           <ion-select-option value="3">Jiné</ion-select-option>
         </ion-select>
       </ion-item>
-      </ion-list>
-    </ion-slide>
+    </ion-list>
+  </ion-slide>
 
-    <ion-slide>
-        <ion-list lines="none">
-            <ion-list-header>
-              Charakteristiky
-            </ion-list-header>
+  <ion-slide>
+    <ion-list lines="none">
+      <ion-list-header>
+        Charakteristiky
+      </ion-list-header>
       <ion-grid>
         <ion-row *ngFor="let row of vysledek">
           <ion-col size="4" *ngFor="let col of row">
-            <ion-button size="small" [color]="col.active ? 'green' : 'dark'" [ngClass]="{'active': col.active}" (click)="updateBckg(col)">
+            <ion-button size="small" [color]="col.active ? 'green' : 'dark'" [ngClass]="{'active': col.active}"
+              (click)="updateBckg(col)">
               {{ col.name }}
             </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
-      </ion-list>
-    </ion-slide>
+    </ion-list>
+  </ion-slide>
 
-    <ion-slide>
-      <ion-list lines="none">
-        <ion-list-header>
-          Změna avatara
-        </ion-list-header>
-        <img class="profile-img" [src]="userImage" (click)="upload()">
+  <ion-slide>
+    <ion-list lines="none">
+      <ion-list-header>
+        Změna avatara
+      </ion-list-header>
+      <img class="profile-img" [src]="userImage" (click)="upload()">
       <!--<button ion-button color="primNormal" (click)="upload()">Nahrát avatara</button>-->
-      </ion-list>
-    </ion-slide>
-<!--
-  
+    </ion-list>
+  </ion-slide>
+  <!--
     <ion-slide>
       <ion-list lines="none">
         <ion-list-header>
@@ -134,7 +147,10 @@
     </ion-slide>
   -->
   </ion-slides>
+
   <div class="bigBtn">
-    <ion-button color="green" (click)="slideToRight()">{{ textforbutton }}<ion-icon name="ios-arrow-forward"></ion-icon></ion-button>
+    <ion-button size="large" color="green" (click)="slideToRight()">{{ textforbutton }}<ion-icon
+        name="ios-arrow-forward"></ion-icon>
+    </ion-button>
   </div>
 </ion-content>

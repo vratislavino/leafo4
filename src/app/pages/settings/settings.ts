@@ -33,6 +33,29 @@ export class SettingsPage implements OnInit {
     userImage: string = "assets/imgs/avatar.png";
     user: string;
 
+    passInput="";
+    passCheckInput=""
+
+    znameni = [
+        [
+            { name: "Kozoroh", image: "assets/imgs/avatar.png" },
+            { name: "Vodnář", image: "assets/imgs/avatar.png" },
+            { name: "Ryby", image: "assets/imgs/avatar.png" }
+        ],[
+            { name: "Beran", image: "assets/imgs/avatar.png" },
+            { name: "Býk", image: "assets/imgs/avatar.png" },
+            { name: "Blíženec", image: "assets/imgs/avatar.png" }
+        ],[
+            { name: "Rak", image: "assets/imgs/avatar.png" },
+            { name: "Lev", image: "assets/imgs/avatar.png" },
+            { name: "Panna", image: "assets/imgs/avatar.png" }
+        ],[
+            { name: "Váhy", image: "assets/imgs/avatar.png" },
+            { name: "Štír", image: "assets/imgs/avatar.png" },
+            { name: "Střelec", image: "assets/imgs/avatar.png" }
+        ],
+    ]
+
     textforbutton = "Další";
     loading;
     mediaFile;
@@ -119,6 +142,7 @@ export class SettingsPage implements OnInit {
     }
 
     public slideToRight() {
+        console.log(this.passInput, this.passCheckInput);
         this.slider.getActiveIndex().then((index) => {
             this.slider.isEnd().then((isend) => {
                 //console.log(index + " is end? " + isend);
