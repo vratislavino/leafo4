@@ -32,6 +32,26 @@ export class RegisterPage {
 	sign;
   sex;
 
+  znameni = [
+    [
+        { name: "Kozoroh", image: "assets/imgs/avatar.png" },
+        { name: "Vodnář", image: "assets/imgs/avatar.png" },
+        { name: "Ryby", image: "assets/imgs/avatar.png" }
+    ],[
+        { name: "Beran", image: "assets/imgs/avatar.png" },
+        { name: "Býk", image: "assets/imgs/avatar.png" },
+        { name: "Blíženec", image: "assets/imgs/avatar.png" }
+    ],[
+        { name: "Rak", image: "assets/imgs/avatar.png" },
+        { name: "Lev", image: "assets/imgs/avatar.png" },
+        { name: "Panna", image: "assets/imgs/avatar.png" }
+    ],[
+        { name: "Váhy", image: "assets/imgs/avatar.png" },
+        { name: "Štír", image: "assets/imgs/avatar.png" },
+        { name: "Střelec", image: "assets/imgs/avatar.png" }
+    ],
+]
+
   souhlas = false;
   constructor(
     private router: Router,

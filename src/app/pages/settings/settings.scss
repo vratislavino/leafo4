@@ -124,3 +124,39 @@ ion-slide {
 	border-radius: 50%;
 	object-fit: cover;
 }
+
+
+ion-col ion-button.section {
+	height: 60px;
+	margin: 0px;
+	--background: rgba(0, 0, 0, 0.6);
+	color: white;
+	box-shadow: none;
+	font-size: 14px;
+	text-transform: none;
+	text-align: left;
+}
+
+ion-col ion-button.section span {
+	position: absolute;
+	content: "";
+	left: 40px;
+}
+
+ion-col ion-button.section ion-icon {
+	position: absolute;
+	content: "";
+	right: 40px;
+}
+
+ion-slides, .bigBtn {
+	display: none;
+}
+
+ion-grid {
+	margin-top: 24%;
+}
+
+ion-row {
+	margin-bottom: 4%;
+}

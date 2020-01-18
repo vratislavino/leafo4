@@ -11,99 +11,128 @@
 </ion-header>
 
 <ion-content padding>
-
-  <ion-list>
-    <ion-item>
-      <ion-label color="primNormal" position="floating">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="email"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <ion-list>
-    <ion-item>
-      <ion-label color="primNormal" position="floating">Heslo</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="primNormal" position="floating">Heslo znovu</ion-label>
-      <ion-input type="password" [(ngModel)]="passwordA"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <ion-list>
-    <ion-item>
-      <ion-label color="primNormal" position="floating">Přezdívka</ion-label>
-      <ion-input type="text" [(ngModel)]="username"></ion-input>
-    </ion-item>
-  </ion-list>
-
-    <ion-item>
-      <ion-label color="primNormal" position="floating">Oslovení</ion-label>
-      <ion-input type="text" [(ngModel)]="addressing"></ion-input>
-    </ion-item>
-
-  <ion-list>
-    <ion-item>
-      <ion-label color="primNormal" position="floating">Jméno</ion-label>
-      <ion-input type="text" [(ngModel)]="firstname"></ion-input>
-    </ion-item>
-  </ion-list>
-
-    <ion-item>
-      <ion-label color="primNormal" position="floating">Příjmení</ion-label>
-      <ion-input type="text" [(ngModel)]="surname"></ion-input>
-    </ion-item>
-
-  <ion-list>
-    <ion-item>
-      <ion-label color="primNormal" position="floating">Znamení</ion-label>
-      <ion-select [(ngModel)]="sign">
-        <ion-select-option value="1">Kozoroh</ion-select-option>
-        <ion-select-option value="2">Vodnář</ion-select-option>
-        <ion-select-option value="3" selected>Ryby</ion-select-option>
-        <ion-select-option value="4">Beran</ion-select-option>
-        <ion-select-option value="5">Býk</ion-select-option>
-        <ion-select-option value="6">Blíženec</ion-select-option>
-        <ion-select-option value="7">Rak</ion-select-option>
-        <ion-select-option value="8">Lev</ion-select-option>
-        <ion-select-option value="9">Panna</ion-select-option>
-        <ion-select-option value="10">Váhy</ion-select-option>
-        <ion-select-option value="11">Štír</ion-select-option>
-        <ion-select-option value="12">Střelec</ion-select-option>
-      </ion-select>
-    </ion-item>
-    
-    <ion-item>
-      <ion-label color="primNormal" position="floating">Pohlaví</ion-label>
-      <ion-select [(ngModel)]="sex">
-        <ion-select-option value="1">Muž</ion-select-option>
-        <ion-select-option value="2">Žena</ion-select-option>
-        <ion-select-option value="3" selected>Jiné</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-item>
-    <ion-label color="primNormal" class="ion-text-wrap">Souhlasím se zpracováním osobních údajů podle GDPR.</ion-label>
-    <ion-checkbox slot="end" [(ngModel)]="souhlas"></ion-checkbox>
-  </ion-item>
+  <ion-slides #slider (ionSlideDidChange)="onSlideChanged()">
+    <ion-slide>
+      <ion-list lines="none">
+        <ion-list>
+          <ion-item>
+            <ion-label color="primNormal" position="floating">Email</ion-label>
+            <ion-input type="email" [(ngModel)]="email"></ion-input>
+          </ion-item>
+        </ion-list>
+      
+        <ion-list>
+          <ion-item>
+            <ion-label color="primNormal" position="floating">Heslo</ion-label>
+            <ion-input type="password" [(ngModel)]="password"></ion-input>
+          </ion-item>
+        </ion-list>
+        
+        <ion-list>
+          <ion-item>
+            <ion-label color="primNormal" position="floating">Heslo znovu</ion-label>
+            <ion-input type="password" [(ngModel)]="passwordA"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-list>
+    </ion-slide>
   
-
-  <ion-list lines="none">
-    <ion-item class="login-button" color="primDark" large (click)="register()">
-        Registrovat se
-    </ion-item>
-  </ion-list>
-
+    <ion-slide>
+      <ion-list lines="none">
+        <ion-list>
+          <ion-item>
+            <ion-label color="primNormal" position="floating">Přezdívka</ion-label>
+            <ion-input type="text" [(ngModel)]="username"></ion-input>
+          </ion-item>
+        </ion-list>
+      
+        <ion-list>
+          <ion-item>
+            <ion-label color="primNormal" position="floating">Oslovení</ion-label>
+            <ion-input type="text" [(ngModel)]="addressing"></ion-input>
+          </ion-item>
+        </ion-list>
+      
+        <ion-list>
+          <ion-item>
+            <ion-label color="primNormal" position="floating">Příjmení</ion-label>
+            <ion-input type="text" [(ngModel)]="surname"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-list>
+    </ion-slide>
+  
+    <ion-slide class="ilnm">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-grid class="znameni">
+            <ion-row *ngFor="let znam of znameni">
+              <ion-col size="4" *ngFor="let zn of znam">
+                <div [ngClass]="{'active': zn.active}"
+                  (click)="updateBckg(col)">
+                  <img [src]="zn.image">
+                  <p>{{ zn.name }}</p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+  
+    <ion-slide>
+      <ion-list lines="none">
+        <ion-list>
+          <ion-list>
+            <ion-radio-group>
+              <ion-list-header>
+                <ion-label>Pohlaví</ion-label>
+              </ion-list-header>
+          
+              <ion-item>
+                <ion-label>Muž</ion-label>
+                <ion-radio slot="start" value="1" checked></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label>Žena</ion-label>
+                <ion-radio slot="start" value="2"></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label>Jiné</ion-label>
+                <ion-radio slot="start" value="3"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+        </ion-list>
+      </ion-list>
+    </ion-slide>
+  
+    <ion-slide>
+      <ion-list lines="none">
+        <ion-list>
+          <ion-item>
+            <ion-label color="primNormal" class="ion-text-wrap">Souhlasím se zpracováním osobních údajů podle GDPR.</ion-label>
+            <ion-checkbox slot="end" [(ngModel)]="souhlas"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-item class="login-button" color="primDark" large (click)="register()">
+            Registrovat se
+          </ion-item>
+        </ion-list>
+      </ion-list>
+    </ion-slide>
+    </ion-slides>
+</ion-content>
+<ion-footer padding>
   <ion-row class="logos">
       <ion-col size="12">
         <ion-icon name="logo-facebook" item-start (click)="testLeafo()"></ion-icon>
         <ion-icon name="logo-googleplus" item-start (click)="testLeafo()"></ion-icon>
       </ion-col>
     </ion-row>
-
-</ion-content>
-<ion-footer padding>
     <ion-list class="no-acc" lines="none">
         <ion-item menuClose routerLink="/login" color="primNormal" >
             <ion-icon name="person-add" item-start></ion-icon>

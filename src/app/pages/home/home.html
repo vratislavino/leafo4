@@ -64,12 +64,12 @@
         </ion-row>
         <ion-row>
           <ion-col size="6">
-            <ion-button [disabled]="true" routerLink="/advices" color="yellow" class="profile" expand="full">
+            <ion-button routerLink="/advices" color="yellow" class="profile disabled" expand="full">
               <span>Rady</span><ion-icon name="contact" ></ion-icon>
             </ion-button>
           </ion-col>
           <ion-col size="6">
-            <ion-button [disabled]="true" routerLink="/depression" color="orange" class="calendar" expand="full" (click)="tryToCallDepka()">
+            <ion-button [disabled]="true" routerLink="/depression" color="orange" class="calendar disabled" expand="full" (click)="tryToCallDepka()">
               <span>Depka</span>
               <ion-icon name="calendar"></ion-icon>
             </ion-button>

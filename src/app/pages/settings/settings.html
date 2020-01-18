@@ -15,6 +15,41 @@
 </ion-header>
 
 <ion-content padding>
+      
+  <ion-grid class="grid">
+    <ion-row>
+      <ion-col routerLink="/tree" size="12">
+        <ion-button color="green" class="section" expand="full">
+          <span>Přihlašovací údaje</span>
+          <ion-icon name="contact"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col routerLink="/tree" size="12">
+        <ion-button color="red" class="section" expand="full">
+          <span>Profil</span>
+          <ion-icon name="person"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col routerLink="/tree" size="12">
+        <ion-button color="orange" class="section" expand="full">
+          <span>Charakteristiky</span>
+          <ion-icon name="flame"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col routerLink="/tree" size="12">
+        <ion-button color="yellow" class="section" expand="full">
+          <span>Ostatní</span>
+          <ion-icon name="settings"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-slides #slider (ionSlideDidChange)="onSlideChanged()">
   <ion-slide>
     <ion-list lines="none">

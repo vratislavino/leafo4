@@ -33,6 +33,11 @@ ion-list {
     margin-bottom: 12px;
 }
 
+ion-slide.ilnm ion-list {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
 .logos ion-col {
     display: flex;
     flex-direction: row;
@@ -43,4 +48,23 @@ ion-list {
     ion-icon {
         margin-right: 4px;
     }
+}
+
+ion-slides {
+    height: 100%;
+    ion-list {
+        width: 100%;
+    }
+}
+
+.znameni {
+	p {
+        font-size: 12px;
+		text-align: center;
+	}
+
+	img {
+		margin-left: 25%;
+		width: 50%;
+	}
 }
