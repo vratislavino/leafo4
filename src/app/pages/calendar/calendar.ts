@@ -191,7 +191,7 @@ export class CalendarPage {
 
   onDateSelected(date: CalendarDate) {
     //if(moment().format("M") == date.mDate.format("M")) {
-    this.currentDay = date;;
+    this.currentDay = date;
     if (this.currentDay.details != null && this.currentDay.details != undefined)
       if (this.currentDay.details["rating"] > -1)
         this.reviewText = this.currentDay.details["rating"] + "%";

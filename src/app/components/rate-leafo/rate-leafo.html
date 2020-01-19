@@ -5,7 +5,7 @@
       <img [src]="faceUrl" />
     </div>
     <h2 id="day"></h2>
-
+    <p id="text"></p>
     <div> 
       <div class="list">
         <div class="review-button" [ngClass]="{selected: original==0}" (click)="setReview(0)">0%</div>
@@ -14,9 +14,6 @@
         <div class="review-button" [ngClass]="{selected: original==75}" (click)="setReview(75)">75%</div>
         <div class="review-button" [ngClass]="{selected: original==100}" (click)="setReview(100)">100%</div>
       </div>
-
-
-      
       <!--<button ion-button full large (click)="callFunc(callback1)" class="success">OK</button>-->
     </div>
   </div>

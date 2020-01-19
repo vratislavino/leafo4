@@ -29,18 +29,18 @@
 
   <div [ngSwitch]="quoteType">
 
-    <ion-list *ngSwitchCase="'history'" no-lines>
-      <div *ngIf="historyQuotes.length == 0">Nebyly nalezeny žádné výsledky!</div>
-        <div *ngFor="let item of historyQuotes">
+    <ion-list *ngSwitchCase="'history'" lines="none">
+      <ion-item *ngIf="historyQuotes.length == 0">Nebyly nalezeny žádné výsledky!</ion-item>
+        <ion-item *ngFor="let item of historyQuotes">
           <quote [quoteObj]="item" (favedClicked)="onFavedClicked($event)"></quote>
-        </div>
+        </ion-item>
     </ion-list>
 
-    <ion-list *ngSwitchCase="'favorites'" no-lines>
-      <div *ngIf="favoriteQuotes.length == 0">Nebyly nalezeny žádné výsledky!</div>
-      <div *ngFor="let item of favoriteQuotes">
+    <ion-list *ngSwitchCase="'favorites'" lines="none">
+      <ion-item *ngIf="favoriteQuotes.length == 0">Nebyly nalezeny žádné výsledky!</ion-item>
+      <ion-item *ngFor="let item of favoriteQuotes">
         <quote [quoteObj]="item" (favedClicked)="onFavedClicked($event)"></quote>
-      </div>
+      </ion-item>
     </ion-list>
   </div>
 

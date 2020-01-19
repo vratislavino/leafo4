@@ -78,7 +78,7 @@ export class HomePage implements OnInit {
 
 
   testleafo() {
-    this.lip.createAndShowRatingBubble(this.vc, -1, new Date());
+    this.lip.createAndShowRatingBubble(this.vc, -1,"", new Date());
   }
   
 

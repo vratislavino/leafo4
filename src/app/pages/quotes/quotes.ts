@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef, ɵConsole } from '@angular/core';
 import { ToastController, LoadingController, Platform } from '@ionic/angular';
 import { AccountProvider } from '../../providers/account/account';
 import { QuoteModel } from '../../model/QuoteModel.interface';
@@ -78,7 +78,7 @@ export class QuotesPage {
           quote.setFaved(!quote.faved);
           this.getQuotes();
         } else if (data.result == 2) {
-          this.showToast("Dosáhl(a) jste maximálního počtu oblíbených citátů.");
+          this.showToast("Dosáhl(a) jsi maximálního počtu oblíbených citátů.");
         } else {
           this.showToast("Chyba při zpracování příkazu.");
         }
@@ -92,6 +92,11 @@ export class QuotesPage {
     this.quoteProvider.getFavoriteQuotes().subscribe((data) => {
       this.favoriteQuotes = [];
       var keys = Object.keys(data);
+      if(keys.indexOf("Error") > -1) {
+        console.log(data[keys[0]]);
+        console.log("Error detected");
+        return;
+      }
       keys.forEach((key) => {
         var quoteObj = data[key];
         var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(this.ac.getAddressing());
@@ -108,9 +113,14 @@ export class QuotesPage {
       this.historyQuotes = [];
       var keys = Object.keys(data);
 
+      if(keys.indexOf("Error") > -1) {
+        console.log(data[keys[0]]);
+        console.log("Error detected");
+        return;
+      }
       keys.forEach((key) => {
         var quoteObj = data[key];
-        console.log(data[key]);
+        //console.log(data[key]);
         var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(this.ac.getAddressing());
         this.historyQuotes.push(qm);
       });

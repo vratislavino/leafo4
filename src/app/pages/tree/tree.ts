@@ -7,6 +7,7 @@ import { LeafoInfoType } from '../../components/info-leafo/info-leafo';
 import { Router } from '@angular/router';
 import { GuideProvider } from 'src/app/providers/guide/guide';
 import { Platform } from '@ionic/angular';
+import { DateService } from 'src/app/providers/date/date.service';
 
 /**
  * Generated class for the TreePage page.
@@ -51,7 +52,8 @@ export class TreePage {
     private lip: LeafoInfoProvider,
     private vc: ViewContainerRef,
     private rp: RatingProvider,
-    private gp: GuideProvider,) {
+    private gp: GuideProvider,
+    private ds: DateService) {
       platform.ready().then(() => {
         this.ionViewDidLoad();
       });
@@ -249,9 +251,12 @@ export class TreePage {
     if (bool) {
       this.userService.setTreeState().subscribe(succ => {
         if(succ["Error"] != undefined) {
-
-
-          this.lip.createAndShowLeafoBubble(this.vc, "Konvice je prázdná, nelze zalít, ohodnoť nejdříve dnešní den!", "Pozor!", LeafoInfoType.Sad);
+          this.lip.createAndShowRatingBubble(this.vc, -1, "Nemáš hodnocený dnešní den!", new Date(), (rl, dt, rw)=> {
+            this.rp.setDayReview(this.ds.toKeyDate(dt), rw).subscribe(()=> {
+              this.zalij();
+            });
+          });
+          //this.lip.createAndShowLeafoBubble(this.vc, "Konvice je prázdná, nelze zalít, ohodnoť nejdříve dnešní den!", "Pozor!", LeafoInfoType.Sad);
           
           console.log("Nezalivej s prazdnou konvici... To upe nefunguje hele.");
         } else {

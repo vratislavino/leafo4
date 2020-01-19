@@ -44,6 +44,7 @@ import { QuoteProvider } from './providers/quote/quote';
 import { RatingProvider } from './providers/rating/rating';
 import { MotStorageProvider } from './providers/mot-storage/mot-storage';
 import { UserProvider } from './providers/user/user';
+import { DateService } from './providers/date/date.service';
 import { RequestProvider } from './providers/request/request';
 import { SystemInfoProvider } from './providers/system-info/system-info';
 import { LeafoInfoProvider } from './providers/leafo-info/leafo-info';
@@ -111,6 +112,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     SystemInfoProvider,
     LeafoInfoProvider,
     NotificationProvider,
+    DateService,
     GuideProvider,
     {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}
   ]

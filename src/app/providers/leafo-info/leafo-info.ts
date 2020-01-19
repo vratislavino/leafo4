@@ -38,12 +38,13 @@ export class LeafoInfoProvider {
   public createAndShowRatingBubble(
     vc:ViewContainerRef, 
     original:number, 
+    text: string,
     day:Date,
     callback = null
   ) {
     const b = this.getRatingBubble(vc);
     b.open();
-    b.initRating(original, day);
+    b.initRating(original, day, text);
     b.setCallback(callback);
     return b;
   }

@@ -15,6 +15,7 @@ import { Component } from '@angular/core';
 
   original: number;
   day: Date;
+  text:string = "";
   faceUrl="assets/imgs/leafo.png"; 
 
   callback;
@@ -26,8 +27,9 @@ import { Component } from '@angular/core';
     console.log('Hello InfoLeafoComponent Component');
   }
 
-  public initRating(original:number, day:Date) {
+  public initRating(original:number, day:Date, text:string) {
     this.original = original;
+    this.text = text;
     this.day = day;
     this.testMe();
   }
@@ -70,7 +72,7 @@ import { Component } from '@angular/core';
 
   callFunc() {
     if(this.callback != null)
-      this.callback(this);
+      this.callback(this, this.day, this.original);
   }
 
   public open() {
@@ -84,6 +86,14 @@ import { Component } from '@angular/core';
     setTimeout(()=> {
 
       var hl = document.getElementById("day");
+      var text = document.getElementById("text");
+
+      if(this.text != "") {
+        if(text)
+          text.innerHTML = this.text;
+      } else {
+        text.remove();
+      } 
 
       if(hl)
         hl.innerHTML = this.getHeadline();

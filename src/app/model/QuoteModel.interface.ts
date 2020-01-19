@@ -38,7 +38,8 @@ export class QuoteModel {
 
     complete(name: string) {
         this.name = name;
-        this.text = this.text.replace('-n-', this.name);
+        if(this.text)
+            this.text = this.text.replace('-n-', this.name);
         return this;
     }
 }
