@@ -16,7 +16,13 @@
 }
 
 ion-label.quote-text p {
+    padding: 10px 8% 0px 8%;
     color: var(--ion-color-sec-light-text);
+}
+
+ion-label.quote-text p:last-child {
+    padding-bottom: 10px;
+    opacity: 0.6;
 }
 
 .action-icons {

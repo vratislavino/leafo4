@@ -75,7 +75,15 @@ const routes: Routes = [
   { path: 'calendar/period',  
   loadChildren: () => import('./pages/period/period.module').then(m=>m.PeriodPageModule) 
   },
-  { path: 'review', loadChildren: './pages/review/review.module#ReviewPageModule' }
+  { path: 'review', loadChildren: './pages/review/review.module#ReviewPageModule' },  { path: 'account', loadChildren: './settings/account/account.module#AccountPageModule' },
+  { path: 'profile', loadChildren: './settings/profile/profile.module#ProfilePageModule' },
+  { path: 'characteristics', loadChildren: './settings/characteristics/characteristics.module#CharacteristicsPageModule' },
+  { path: 'others', loadChildren: './settings/others/others.module#OthersPageModule' },
+  { path: 's-account', loadChildren: './pages/s-account/s-account.module#SAccountPageModule' },
+  { path: 'sloginfo', loadChildren: './pages/sloginfo/sloginfo.module#SloginfoPageModule' },
+  { path: 'scharacteristics', loadChildren: './pages/scharacteristics/scharacteristics.module#ScharacteristicsPageModule' },
+  { path: 'sothers', loadChildren: './pages/sothers/sothers.module#SothersPageModule' }
+
 
 ];
 

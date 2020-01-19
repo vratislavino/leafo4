@@ -13,20 +13,19 @@ import { Media } from '@ionic-native/media/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { count } from 'rxjs/operators';
 
+@Component({
+  selector: 'app-sothers',
+  templateUrl: './sothers.page.html',
+  styleUrls: ['./sothers.page.scss'],
+})
+export class SothersPage implements OnInit {
+
 /**
  * Generated class for the SettingsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
-@Component({
-    selector: 'page-settings',
-    templateUrl: 'settings.html',
-    styleUrls: ['settings.scss'],
-    providers: [AccountProvider]
-})
-export class SettingsPage implements OnInit {
 
     currentUserData: User;
     characteristic: string[] = [];
@@ -121,17 +120,6 @@ export class SettingsPage implements OnInit {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad SettingsPage');
-    }
-
-    private isWorthUpdating(characteristics) : boolean {
-        var user = this.ac.getCopyOfUser();
-
-        return this.currentUserData.firstname != user.getFirstName() ||
-        this.currentUserData.email != user.getEmail() ||
-        this.currentUserData.addressing != user.getAddressing() ||
-        this.currentUserData.sex != user.getSex() ||
-        this.currentUserData.sign != user.getSign() ||
-			characteristics != null
     }
 
     private filterCols(): Array<any> {
@@ -375,4 +363,5 @@ export class SettingsPage implements OnInit {
         });
         await alert.present();
     }
+
 }

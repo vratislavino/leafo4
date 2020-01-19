@@ -1,0 +1,47 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar color="primDark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list lines="none">
+      <ion-list-header>
+        Úprava profilu
+      </ion-list-header>
+      <ion-item>
+        <ion-label color="primNormal" position="floating">
+          Křestní jméno
+        </ion-label>
+        <ion-input type="text" value="{{ currentUserData.firstname }}"
+          (input)='onInput("firstname", $event.target.value);'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primNormal" position="floating">
+          Oslovení
+        </ion-label>
+        <ion-input type="text" value="{{ currentUserData.addressing }}"
+          (input)='onInput("addressing", $event.target.value);'></ion-input>
+      </ion-item>
+    </ion-list>
+  </ion-slide>
+
+  <ion-slide>
+    <ion-list lines="none">
+      <ion-list-header>
+        Změna avatara
+      </ion-list-header>
+      <img class="profile-img" [src]="userImage" (click)="upload()">
+      <!--<button ion-button color="primNormal" (click)="upload()">Nahrát avatara</button>-->
+    </ion-list>
+</ion-content>
