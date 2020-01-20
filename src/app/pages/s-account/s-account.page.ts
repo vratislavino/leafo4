@@ -1,4 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { User } from 'src/app/model/UserModel';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { AccountProvider } from 'src/app/providers/account/account';
+import { ToastController, LoadingController, Platform } from '@ionic/angular';
+import { UserProvider } from 'src/app/providers/user/user';
+import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
+import { MotStorageProvider } from 'src/app/providers/mot-storage/mot-storage';
+import { MediaCapture, CaptureVideoOptions, MediaFile } from '@ionic-native/media-capture/ngx';
+import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
 
 @Component({
   selector: 'app-s-account',
