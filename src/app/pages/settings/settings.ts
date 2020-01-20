@@ -32,10 +32,7 @@ export class SettingsPage implements OnInit {
     characteristic: string[] = [];
     minActive: Number = 7;
     userImage: string = "assets/imgs/avatar.png";
-    user: string;
-
-    passInput="";
-    passCheckInput=""
+    
 
     znameni = [
         [
@@ -143,7 +140,6 @@ export class SettingsPage implements OnInit {
     }
 
     public slideToRight() {
-        console.log(this.passInput, this.passCheckInput);
         this.slider.getActiveIndex().then((index) => {
             this.slider.isEnd().then((isend) => {
                 //console.log(index + " is end? " + isend);
