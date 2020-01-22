@@ -9,9 +9,7 @@
 </ion-header>
 
 <ion-content padding>
-  <h1>Heeelooooo</h1>
-  <ion-slides #slider (ionSlideDidChange)="onSlideChanged()">
-    <ion-slide>
+  <div *ngIf="page==0">
       <ion-list lines="none">
         <ion-list-header>
           Personalizace
@@ -30,8 +28,8 @@
           </ion-grid>
         </ion-item>
       </ion-list>
-    </ion-slide>
-    <ion-slide>
+    </div>
+    <div *ngIf="page==1">
     <ion-list lines="none">
       <ion-item>
         <ion-label color="primNormal" position="floating">
@@ -47,8 +45,8 @@
         Změna avatara
       </ion-list-header>
       <img class="profile-img" [src]="userImage" (click)="upload()">
-      <!--<button ion-button color="primNormal" (click)="upload()">Nahrát avatara</button>-->
+      
     </ion-list>
-    </ion-slide>
-  </ion-slides>
+  </div>
+  <ion-button color="primNormal" (click)="saveData()">Uložit</ion-button>
 </ion-content>

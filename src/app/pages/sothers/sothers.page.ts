@@ -139,7 +139,7 @@ export class SothersPage implements OnInit {
                     let array = this.filterCols();//this.userCols == this.currentCols ? null : this.currentCols;
                     //this.userCols = this.userCols == this.currentCols ? this.userCols : this.currentCols;
         
-                    if(this.isWorthUpdating(array) || true) {
+                    //if(this.isWorthUpdating(array) || true) {
                         console.log("SENDING");
                         console.log(array);
                         this.userService.updateSettings(this.currentUserData, array).subscribe(val => {
@@ -148,7 +148,7 @@ export class SothersPage implements OnInit {
                         }, error => {
                             console.log("Updating settings message: " + error);
                         });
-                    }
+                    //}
                     index = 0;
         
                     this.router.navigate(["/home"]);
