@@ -15,6 +15,9 @@ import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
   styleUrls: ['./s-account.page.scss'],
 })
 export class SAccountPage implements OnInit {
+    ngOnInit() {
+    }
+    /*
   currentUserData: User;
   characteristic: string[] = [];
   minActive: Number = 7;
@@ -76,7 +79,7 @@ export class SAccountPage implements OnInit {
               
           }    */
 
-
+/*
       //this.loading.present();
       this.currentUserData = this.ac.getCopyOfUser();
 
@@ -361,5 +364,5 @@ export class SAccountPage implements OnInit {
           position: "bottom"
       });
       await alert.present();
-  }
+  }*/
 }

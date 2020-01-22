@@ -22,42 +22,8 @@ export class ScharacteristicsPage implements OnInit {
   currentUserData: User;
   characteristic: string[] = [];
   minActive: Number = 7;
-  userImage: string = "assets/imgs/avatar.png";
-  user: string;
-
-  passInput="";
-  passCheckInput=""
-
-  znameni = [
-      [
-          { name: "Kozoroh", image: "assets/imgs/avatar.png" },
-          { name: "Vodnář", image: "assets/imgs/avatar.png" },
-          { name: "Ryby", image: "assets/imgs/avatar.png" }
-      ],[
-          { name: "Beran", image: "assets/imgs/avatar.png" },
-          { name: "Býk", image: "assets/imgs/avatar.png" },
-          { name: "Blíženec", image: "assets/imgs/avatar.png" }
-      ],[
-          { name: "Rak", image: "assets/imgs/avatar.png" },
-          { name: "Lev", image: "assets/imgs/avatar.png" },
-          { name: "Panna", image: "assets/imgs/avatar.png" }
-      ],[
-          { name: "Váhy", image: "assets/imgs/avatar.png" },
-          { name: "Štír", image: "assets/imgs/avatar.png" },
-          { name: "Střelec", image: "assets/imgs/avatar.png" }
-      ],
-  ]
-
-  textforbutton = "Další";
-  loading;
-  mediaFile;
-  
-  @ViewChild('slider', null) slider;
-  @ViewChild('ownvideo', null) ownVideo;
-  
 
   constructor(private router: Router,
-      private route: ActivatedRoute,
       public ac: AccountProvider,
       public tC: ToastController,
       public camera: Camera,
@@ -65,143 +31,39 @@ export class ScharacteristicsPage implements OnInit {
       public platform: Platform,
       public userService: UserProvider,
       public vc: ViewContainerRef,
-      public infoLeafo: LeafoInfoProvider,
-      private storage:MotStorageProvider,
-      private mediaCapture : MediaCapture,
-      private media : Media,
-      private file : File
+      public infoLeafo: LeafoInfoProvider
       ) {
 
           
-
-      /*
-          const fromReg = this.route.snapshot.paramMap.get("fromRegistration");
-          if(!(fromReg == undefined || fromReg == "false")) {
-              
-          }    */
-
-
-      //this.loading.present();
       this.currentUserData = this.ac.getCopyOfUser();
 
-      this.ac.getProfileImage().then((data: string) => {
-          this.userImage = data;
-      });
-      //console.log(this.currentUserData);
       this.fillArray();
-      //this.loading.dismiss();
   }
 
   ngOnInit() {
-      this.route.params.subscribe((params:Params) => {
-          const fromReg = parseInt(params["fromRegister"]);
-          console.log(fromReg);
-          if(fromReg===1) {
-              console.log("slideRight called twice");
-              this.slideToIndex(3);
-          }
-      });
-      if(this.storage.exists("video")) {
-          this.storage.get("video").then(res=> {
-              this.mediaFile = JSON.parse(res) || {};
-          });
-      } else {
-          this.mediaFile = [];
-      }
-  }
 
-  ionViewDidLoad() {
-      console.log('ionViewDidLoad SettingsPage');
   }
 
   private filterCols(): Array<any> {
       return this.cols.filter((col)=>col.active);
   }
 
-  public slideToIndex(slide) {
-      this.slider.slideTo(slide);
-  }
+  public save() {
+    let array = this.filterCols();//this.userCols == this.currentCols ? null : this.currentCols;
+    //this.userCols = this.userCols == this.currentCols ? this.userCols : this.currentCols;
 
-  public slideToRight() {
-      console.log(this.passInput, this.passCheckInput);
-      this.slider.getActiveIndex().then((index) => {
-          this.slider.isEnd().then((isend) => {
-              //console.log(index + " is end? " + isend);
-              if (isend) {
-                  let array = this.filterCols();//this.userCols == this.currentCols ? null : this.currentCols;
-                  //this.userCols = this.userCols == this.currentCols ? this.userCols : this.currentCols;
-      
-                  if(this.isWorthUpdating(array) || true) {
-                      console.log("SENDING");
-                      console.log(array);
-                      this.userService.updateSettings(this.currentUserData, array).subscribe(val => {
-                          console.log("Updating settings message: " + val);
-                          this.ac.saveLocal(this.currentUserData);
-                      }, error => {
-                          console.log("Updating settings message: " + error);
-                      });
-                  }
-                  index = 0;
-      
-                  this.router.navigate(["/home"]);
-      
-              } else {
-                  index++;
-                  this.slider.slideTo(index);
-              }
-              //console.log(this.slider.slideTo(index));
-          });
-      });
-      
-  }
+    if(/*this.isWorthUpdating(array) || */true) {
+        console.log("SENDING");
+        console.log(array);
+        this.userService.updateSettings(this.currentUserData, array).subscribe(val => {
+            console.log("Updating settings message: " + val);
+            this.ac.saveLocal(this.currentUserData);
+        }, error => {
+            console.log("Updating settings message: " + error);
+        });
+    }
 
-  useDefaultVideo() {
-
-  }
-
-  playVideo() {
-      let path = this.file.dataDirectory + this.mediaFile.name;
-      let url = path.replace(/^file:\/\//, '');
-      let video = this.ownVideo.nativeElement;
-      video.src = url;
-      video.play();
-  }
-
-  captureVideo() {
-      let options : CaptureVideoOptions = {
-          limit: 1,
-          duration: 120
-      };
-
-      this.mediaCapture.captureVideo(options).then((res:MediaFile[]) => {
-          let capturedFile = res[0];
-          console.log("myfile: ", capturedFile);
-          let filename = capturedFile.name;
-          let dir = capturedFile["localURL"].split('/');
-          dir.pop();
-          let fromDirectory = dir.join('/');
-          let toDirectory = this.file.dataDirectory;
-
-          this.file.copyFile(fromDirectory, filename, toDirectory, filename).then((res) => {
-              //let url = res.nativeURL.replace(/^file:\/\//, '');
-              this.saveFile({name: filename, size: capturedFile.size});
-          });
-      });
-
-  }
-
-  onSlideChanged() {
-      this.slider.getActiveIndex().then((index) => {
-          this.textforbutton = index < 4 ? "Další" : "Uložit";
-      });
-  }
-
-  saveFile(file) {
-      this.storage.set("video", JSON.stringify(file));
-  }
-
-  hasVideo() : boolean {
-      return this.storage.exists("video");
+    this.router.navigate(["/home"]);
   }
 
   vysledek = [];
@@ -277,16 +139,6 @@ export class ScharacteristicsPage implements OnInit {
       });
   }
 
-  onInput(type, value) {
-      if (type == "email") {
-          this.currentUserData.email = value;
-      } else if (type == "firstname") {
-          this.currentUserData.firstname = value;
-      } else if (type == "addressing") {
-          this.currentUserData.addressing = value;
-      }
-  }
-
   getCountOfActive() {
       var count = 0;
       this.cols.forEach(btn => {
@@ -311,40 +163,6 @@ export class ScharacteristicsPage implements OnInit {
           else
               checkbox.active = !checkbox.active;
       }
-  }
-
-  upload() {
-      let options = {
-          quality: 50,
-          destinationType: this.camera.DestinationType.DATA_URL,
-          encodingType: this.camera.EncodingType.JPEG,
-          mediaType: this.camera.MediaType.PICTURE,
-          sourceType: this.camera.PictureSourceType.CAMERA,
-          saveToPhotoAlbum: true,
-          correctOrientation: true
-      };
-      this.camera.getPicture(options).then((imageData) => {
-          
-          this.loading.present();
-          let base64Image = 'data:image/jpeg;base64,' + imageData;
-          this.userService.setProfileImage(base64Image).subscribe(mess => {
-              this.ac.setProfileImage(base64Image).then(() => {
-                  this.userImage = base64Image
-                  //console.log(this.userImage);
-                  this.loading.dismiss();
-                  this.showToast("Profilový obrázek uložen");
-              });
-              this.showToast(mess);
-          }, err => {
-              this.infoLeafo.createAndShowLeafoBubble(this.vc, "Omlouvám se, vyskytla se chyba. Zkus to prosím později.", "Chyba", LeafoInfoType.Sad);
-              //this.showToast("SET PROFILE IMAGE " + err.message);
-          });
-      }).catch(err => {
-          this.infoLeafo.createAndShowLeafoBubble(this.vc, "Omlouvám se, vyskytla se chyba. Zkus to prosím později.", "Chyba", LeafoInfoType.Sad);
-              
-          console.log(err.message);
-          //this.showToast("GET PICTURE " + err.message);
-      });
   }
 
   async showToast(message) {

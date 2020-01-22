@@ -55,9 +55,10 @@ export class UserProvider {
 			});
 	}
 
-	public updateSettings(data: User, characteristics: object[]): Observable<{}> {
+	public updateSettings(data: User, characteristics: object[] = undefined): Observable<{}> {
 		//public updateSettings(firstname: string, email: string, addressing: string, sign: number, sex: number)
 		
+		if(characteristics) {
 		return this.apiRequest.post(
 			'/updateSettingsApi.php', {
 				id_u: this.ac.getUserId(),
@@ -67,7 +68,19 @@ export class UserProvider {
 				sign: data.sign,
 				sex: data.sex,
 				characteristics: characteristics
-			});
+			}); 
+		} else {
+			return this.apiRequest.post(
+				'/updateSettingsApi.php', {
+					id_u: this.ac.getUserId(),
+					firstname: data.firstname,
+					email: data.email,
+					addressing: data.addressing,
+					sign: data.sign,
+					sex: data.sex
+				}); 
+		}
+
 	}
 
 	public setProfileImage(base64Image: string) {

@@ -1,0 +1,54 @@
+<ion-header>
+
+  <ion-toolbar color="primDark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h1>Heeelooooo</h1>
+  <ion-slides #slider (ionSlideDidChange)="onSlideChanged()">
+    <ion-slide>
+      <ion-list lines="none">
+        <ion-list-header>
+          Personalizace
+        </ion-list-header>
+        <ion-item>
+          <ion-grid class="znameni">
+            <ion-row *ngFor="let znam of znameni">
+              <ion-col size="4" *ngFor="let zn of znam">
+                <div [ngClass]="{'active': zn.active}"
+                  (click)="selectZnameni(zn)">
+                  <img [src]="zn.image">
+                  <p>{{ zn.name }}</p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label color="primNormal" position="floating">
+          Oslovení
+        </ion-label>
+        <ion-input type="text" value="{{ currentUserData.addressing }}"
+          (input)='onInput("addressing", $event.target.value);'></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list lines="none">
+      <ion-list-header>
+        Změna avatara
+      </ion-list-header>
+      <img class="profile-img" [src]="userImage" (click)="upload()">
+      <!--<button ion-button color="primNormal" (click)="upload()">Nahrát avatara</button>-->
+    </ion-list>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

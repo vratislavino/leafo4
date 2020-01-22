@@ -1,18 +1,19 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { UserProvider } from './../../providers/user/user';
-import { User } from '../../model/UserModel';
+import { UserProvider } from './../../../providers/user/user';
+import { User } from '../../../model/UserModel';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccountProvider } from 'src/app/providers/account/account';
 import { ToastController, LoadingController, Platform } from '@ionic/angular';
 import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
 
 @Component({
-  selector: 'app-sloginfo',
-  templateUrl: './sloginfo.page.html',
-  styleUrls: ['./sloginfo.page.scss'],
+  selector: 'app-account',
+  templateUrl: './account.page.html',
+  styleUrls: ['./account.page.scss'],
 })
-export class SloginfoPage implements OnInit {
+export class AccountPage implements OnInit {
 
+  
   user: string;
 
   passInput = "";
@@ -48,5 +49,4 @@ export class SloginfoPage implements OnInit {
       console.log("Updating settings message: " + error);
     });
   }
-
 }
