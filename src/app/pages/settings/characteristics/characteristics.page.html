@@ -1,9 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>characteristics</ion-title>
+  <ion-toolbar color="primDark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Charakteristiky</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  
+  <ion-list lines="none">
+    <ion-grid>
+      <ion-row *ngFor="let row of vysledek">
+        <ion-col size="4" *ngFor="let col of row">
+          <ion-button size="small" [color]="col.active ? 'green' : 'dark'" [ngClass]="{'active': col.active}"
+            (click)="updateBckg(col)">
+            {{ col.name }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <ion-button (click)="save()">Uložit</ion-button>
 </ion-content>

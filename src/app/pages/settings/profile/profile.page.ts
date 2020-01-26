@@ -23,6 +23,7 @@ export class ProfilePage implements OnInit {
   loading;
   mediaFile;
   page = 0;
+  islocationvisible = false;
 
   @ViewChild('slider', null) slider;
   znameni = [
@@ -74,16 +75,14 @@ export class ProfilePage implements OnInit {
   }
 
 
-  upload() {
-
-    
+  upload(source) {
 
     let options = {
       quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      sourceType: this.camera.PictureSourceType.CAMERA,
+      sourceType: source,
       saveToPhotoAlbum: true,
       correctOrientation: true
     };
@@ -100,11 +99,11 @@ export class ProfilePage implements OnInit {
         });
         this.showToast(mess);
       }, err => {
-        this.infoLeafo.createAndShowLeafoBubble(this.vc, "Omlouvám se, vyskytla se chyba. Zkus to prosím později.", "Chyba", LeafoInfoType.Sad);
+        this.infoLeafo.createAndShowLeafoBubble(this.vc, err, "Chyba", LeafoInfoType.Sad);
         //this.showToast("SET PROFILE IMAGE " + err.message);
       });
     }).catch(err => {
-      this.infoLeafo.createAndShowLeafoBubble(this.vc, "Omlouvám se, vyskytla se chyba. Zkus to prosím později.", "Chyba", LeafoInfoType.Sad);
+      this.infoLeafo.createAndShowLeafoBubble(this.vc, err, "Chyba", LeafoInfoType.Sad);
 
       console.log(err.message);
       //this.showToast("GET PICTURE " + err.message);
@@ -131,7 +130,15 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  async get
+  selectFromGalerie() {
+    this.islocationvisible = !this.islocationvisible;
+    this.upload(this.camera.PictureSourceType.PHOTOLIBRARY);
+  }
+
+  selectFromFotoaparat() {
+    this.islocationvisible = !this.islocationvisible;
+    this.upload(this.camera.PictureSourceType.CAMERA);
+  }
 
   async showToast(message) {
     var alert = await this.tC.create({

@@ -1,9 +1,24 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>others</ion-title>
+  <ion-toolbar color="primDark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ostatní</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list lines="none">
+    <ion-list-header>
+      Vytvoření motivačního videa
+    </ion-list-header>
+    <div *ngIf="hasVideo()">
+      <ion-button full (click)="playVideo()">Použít výchozí video</ion-button>
+      <video controls autoplay #ownvideo></video>
+    </div>
+    <ion-button full (click)="captureVideo()">Nahrát své video</ion-button>
+    <ion-button full (click)="useDefaultVideo()">Použít výchozí video</ion-button>
+  <button ion-button color="primNormal" (click)="upload()">Nahrát avatara</button>
+  </ion-list>
 </ion-content>
+
