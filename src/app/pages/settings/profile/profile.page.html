@@ -9,59 +9,60 @@
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="page==0">
-    <ion-list lines="none">
-      <ion-list-header>
-        Personalizace
-      </ion-list-header>
-      <ion-item>
-        <ion-grid class="znameni">
-          <ion-row *ngFor="let znam of znameni">
-            <ion-col size="4" *ngFor="let zn of znam">
-              <div [ngClass]="{'active': zn.active}" (click)="selectZnameni(zn)">
-                <img [src]="zn.image">
-                <p>{{ zn.name }}</p>
-              </div>
+  <ion-slides #slider pager="true" [options]="slideOpts">
+    <ion-slide>
+      <ion-list lines="none">
+        <ion-list-header>
+          Personalizace
+        </ion-list-header>
+        <ion-item>
+          <ion-grid class="znameni">
+            <ion-row *ngFor="let znam of znameni">
+              <ion-col size="3" *ngFor="let zn of znam">
+                <div class="obj" [ngClass]="{'active': zn.active}" (click)="selectZnameni(zn, this)">
+                  <img [src]="zn.image">
+                  <p>{{ zn.name }}</p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label color="primNormal" position="floating">
+            Oslovení
+          </ion-label>
+          <ion-input type="text" value="{{ currentUserData.addressing }}"
+            (input)='onInput("addressing", $event.target.value);'></ion-input>
+        </ion-item>
+        <ion-item style="margin-top: 20px;">
+          <ion-label>Pohlaví</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-select [(ngModel)]="currentUserData.sex">
+            <ion-select-option value="1" selected>Muž</ion-select-option>
+            <ion-select-option value="2">Žena</ion-select-option>
+            <ion-select-option value="3">Jiné</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-list-header>
+          Změna avatara
+        </ion-list-header>
+        <img class="profile-img" [src]="userImage" (click)="this.islocationvisible = !this.islocationvisible">
+        <ion-grid *ngIf="islocationvisible">
+          <ion-row>
+            <ion-col size="6">
+              <ion-button (click)="selectFromGalerie()">Galerie</ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button (click)="selectFromFotoaparat()">Fotoaparát</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-item>
-    </ion-list>
-  </div>
-  <div *ngIf="page==1">
-    <ion-list lines="none">
-      <ion-item>
-        <ion-label color="primNormal" position="floating">
-          Oslovení
-        </ion-label>
-        <ion-input type="text" value="{{ currentUserData.addressing }}"
-          (input)='onInput("addressing", $event.target.value);'></ion-input>
-      </ion-item>
-      <ion-item style="margin-top: 20px;">
-        <ion-label>Pohlaví</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-select [(ngModel)]="currentUserData.sex">
-          <ion-select-option value="1" selected>Muž</ion-select-option>
-          <ion-select-option value="2">Žena</ion-select-option>
-          <ion-select-option value="3">Jiné</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-list-header>
-        Změna avatara
-      </ion-list-header>
-      <img class="profile-img" [src]="userImage" (click)="this.islocationvisible = !this.islocationvisible">
-      <ion-grid *ngIf="islocationvisible">
-        <ion-row>
-          <ion-col size="6">
-            <ion-button (click)="selectFromGalerie()">Galerie</ion-button>
-          </ion-col>
-          <ion-col size="6">
-            <ion-button (click)="selectFromFotoaparat()">Fotoaparát</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-list>
-  </div>
-  <ion-button color="primNormal" (click)="saveData()">Uložit</ion-button>
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

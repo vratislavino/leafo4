@@ -1,0 +1,32 @@
+.ion-color-dark, .ion-color-green {
+    width: 100%;
+    font-size: 12px;
+    text-transform: none;
+}
+
+.active {
+    --ion-color-base: var(--ion-color-orange);
+    --ion-color-base-rgb: var(--ion-color-orange-rgb);
+    --ion-color-contrast: var(--ion-color-orange-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-orange-contrast-rgb);
+    --ion-color-shade: var(--ion-color-orange-shade);
+    --ion-color-tint: var(--ion-color-orange-tint);
+}
+
+.flex-center {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    bottom: 12px;
+    ion-button {
+        --ion-color-base: var(--ion-color-orange);
+        --ion-color-base-rgb: var(--ion-color-orange-rgb);
+        --ion-color-contrast: var(--ion-color-orange-contrast);
+        --ion-color-contrast-rgb: var(--ion-color-orange-contrast-rgb);
+        --ion-color-shade: var(--ion-color-orange-shade);
+        --ion-color-tint: var(--ion-color-orange-tint);
+    }
+}

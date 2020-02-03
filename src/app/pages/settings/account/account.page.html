@@ -20,23 +20,28 @@
         <ion-label color="primNormal" position="floating">
           E-mail
         </ion-label>
-        <ion-input type="email" (input)='onInput("email", $event.target.value);'>
-        </ion-input>
+        <ion-input type="email" (input)='onInput("email", $event.target.value);'></ion-input>
+        <ion-icon name="mail" slot="start"></ion-icon>
       </ion-item>
       <ion-item>
         <ion-label color="primNormal" position="floating">
           Heslo
         </ion-label>
         <ion-input type="password" [(ngModel)]="passInput"></ion-input>
+        <ion-icon name="lock" slot="start"></ion-icon>
       </ion-item>
       <ion-item>
         <ion-label color="primNormal" position="floating">
           Heslo znovu
         </ion-label>
         <ion-input type="password" [(ngModel)]="passCheckInput"></ion-input>
+        <ion-icon name="lock" slot="start"></ion-icon>
       </ion-item>
       <ion-item>
         <p>Pokud nechcete měnit heslo, nechte pole prázdné</p>
       </ion-item>
-    </ion-list>
+    </ion-list>  
+    <div class="flex-center">
+      <ion-button (click)="save()" color="green">Uložit</ion-button>
+    </div>
   </ion-content>

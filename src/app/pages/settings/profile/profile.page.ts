@@ -28,21 +28,20 @@ export class ProfilePage implements OnInit {
   @ViewChild('slider', null) slider;
   znameni = [
     [
-      { name: "Kozoroh", image: "assets/imgs/avatar.png" },
-      { name: "Vodnář", image: "assets/imgs/avatar.png" },
-      { name: "Ryby", image: "assets/imgs/avatar.png" }
+      { id: 1, name: "Kozoroh", image: "assets/imgs/avatar.png", active: false },
+      { id: 2, name: "Vodnář", image: "assets/imgs/avatar.png", active: false },
+      { id: 3, name: "Ryby", image: "assets/imgs/avatar.png", active: false },
+      { id: 4, name: "Beran", image: "assets/imgs/avatar.png", active: false }
     ], [
-      { name: "Beran", image: "assets/imgs/avatar.png" },
-      { name: "Býk", image: "assets/imgs/avatar.png" },
-      { name: "Blíženec", image: "assets/imgs/avatar.png" }
+      { id: 5, name: "Býk", image: "assets/imgs/avatar.png", active: false },
+      { id: 6, name: "Blíženec", image: "assets/imgs/avatar.png", active: false },
+      { id: 7, name: "Rak", image: "assets/imgs/avatar.png", active: false },
+      { id: 8, name: "Lev", image: "assets/imgs/avatar.png", active: false }
     ], [
-      { name: "Rak", image: "assets/imgs/avatar.png" },
-      { name: "Lev", image: "assets/imgs/avatar.png" },
-      { name: "Panna", image: "assets/imgs/avatar.png" }
-    ], [
-      { name: "Váhy", image: "assets/imgs/avatar.png" },
-      { name: "Štír", image: "assets/imgs/avatar.png" },
-      { name: "Střelec", image: "assets/imgs/avatar.png" }
+      { id: 9, name: "Panna", image: "assets/imgs/avatar.png", active: false },
+      { id: 10, name: "Váhy", image: "assets/imgs/avatar.png", active: false },
+      { id: 11, name: "Štír", image: "assets/imgs/avatar.png", active: false },
+      { id: 12, name: "Střelec", image: "assets/imgs/avatar.png", active: false }
     ],
   ]
 
@@ -114,10 +113,19 @@ export class ProfilePage implements OnInit {
 
   }
 
-  selectZnameni(znameni) {
+  selectZnameni(zn) {
     console.log("znameni :");
-    console.log(znameni);
-    this.page = 1;
+    console.log(zn);
+    for(let arr of this.znameni) {
+      for(let obj of arr) {
+        obj.active = false;
+      }
+    }
+    var s = this.slider;
+    setTimeout(function() {
+      s.slideTo(1);
+    }, 1000);
+    zn.active = !zn.active;
   }
 
   onInput(type, value) {
