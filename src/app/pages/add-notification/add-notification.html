@@ -19,17 +19,22 @@
 		<ion-label position="floating">
 			Poznámka
 		</ion-label>
-		<ion-input type="text" (input)='onInput("note", $event.target.value);'></ion-input>
+		<ion-input type="text" (input)='onInput("note", $event.target.value);' [(ngModel)]="textInpt"></ion-input>
 	</ion-item>
 	<ion-item>
   		<ion-label>Datum</ion-label>
-  		<ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="myDate"></ion-datetime>
+  		<ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="dateInpt"></ion-datetime>
 	</ion-item>
 	<ion-item>
   		<ion-label>Čas</ion-label>
-  		<ion-datetime displayFormat="HH:mm" [(ngModel)]="myTime"></ion-datetime>
+  		<ion-datetime displayFormat="HH:mm" [(ngModel)]="timeInpt"></ion-datetime>
 	</ion-item>
 	<ion-item lines="none">
-		<ion-button (click)="addNotification();" color="orange">Přidat</ion-button>
+		<div *ngIf="edit == false">
+			<ion-button (click)="addNotification();" color="orange">Přidat</ion-button>
+		</div>
+		<div *ngIf="edit == true">
+			<ion-button (click)="editNotification();" color="orange">Uložit</ion-button>
+		</div>
 	</ion-item>
 </ion-content>

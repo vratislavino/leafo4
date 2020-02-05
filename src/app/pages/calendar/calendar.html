@@ -43,14 +43,18 @@
           </ion-item-divider>
           <ion-item text-wrap *ngFor="let notif of currentDay.details['notifications']">
             <ion-icon name="time" item-start></ion-icon>
-            <p> {{ notif.text }} </p>
+            <p (click)="openEditNotification(notif.id_n, notif.text, notif.time)"> {{ notif.text }} </p>
+            <ion-icon name="trash" item-end (click)="deleteNotification(notif.id_n)" class="trash"></ion-icon>
+            <ion-icon name="create" item-end (click)="openEditNotification(notif.id_n, notif.text, notif.time)"></ion-icon>
           </ion-item>
           <ion-item-divider>
             Poznámky
           </ion-item-divider>
           <ion-item text-wrap *ngFor="let note of currentDay.details['notes']">
             <ion-icon [name]="note.icon" item-start></ion-icon>
-            <p> {{ note.text }} </p>
+            <p (click)="openEditNote(note.id_n, note.text)"> {{ note.text }} </p>
+            <ion-icon name="trash" item-end (click)="deleteNote(note.id_n)" class="trash"></ion-icon>
+            <ion-icon name="create" item-end (click)="openEditNote(note.id_n, note.text)"></ion-icon>
           </ion-item>
 
           <ion-item text-wrap *ngIf="currentDay.details['apple'] != null">

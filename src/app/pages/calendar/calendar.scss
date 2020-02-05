@@ -312,6 +312,10 @@ ion-row[padding] {
   color: black;
 }
 
+.notes ion-icon.trash {
+  margin-right: 8px!important;
+}
+
 @keyframes pop {
   0% {
     transform: scale(1);

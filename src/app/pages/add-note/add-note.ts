@@ -19,17 +19,29 @@ import { AccountProvider } from '../../providers/account/account';
 export class AddNotePage {
 
 	note;
-	myDate;
+	dateInpt;
+	textInpt;
+	id_n;
+	text
+	edit: boolean = false;
 
   constructor(private router :Router, private route :ActivatedRoute, public ac: AccountProvider, public rp: RatingProvider) {
 
 		let date = this.route.snapshot.paramMap.get("date");
 		console.log(date);
 		if(date != undefined) {
-			this.myDate = new Date(date).toISOString(); // date.keyDate
-			console.log(this.myDate);
+			this.dateInpt = new Date(date).toISOString(); // date.keyDate
+			console.log(this.dateInpt);
 		} else {
 			console.log("Date not set");
+		}
+		this.text = this.route.snapshot.paramMap.get("text");
+		this.id_n = this.route.snapshot.paramMap.get("id_n");
+		if(this.text != undefined && this.id_n != undefined)
+			this.edit = true;
+
+		if(this.edit) {
+			this.textInpt = this.text;
 		}
 	
 	//TODO--- get date from that
@@ -48,13 +60,23 @@ export class AddNotePage {
 
   addNote() {
     console.log("Adding note.");
-  	this.rp.addNote(this.myDate, this.note, "star").subscribe(val => {
+  	this.rp.addNote(this.dateInpt, this.note, "star").subscribe(val => {
 		  console.log(val);
 		  this.router.navigate(['/calendar']);
   	}, error => {
   		console.log("val: " + error);
   	});
     console.log("idk");
+  }
+
+  editNote() {
+    console.log("Editting note.");
+  	/*this.rp.editNote(this.dateInpt, this.note, "star").subscribe(val => {
+		  console.log(val);
+		  this.router.navigate(['/calendar']);
+  	}, error => {
+  		console.log("val: " + error);
+  	});*/
   }
 
   onInput(type, value) {

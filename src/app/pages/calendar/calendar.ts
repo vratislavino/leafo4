@@ -15,6 +15,7 @@ import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
 import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
 import { GuideProvider } from 'src/app/providers/guide/guide';
 import { CalendarComponent } from 'src/app/components/calendar/calendar';
+import { notEqual } from 'assert';
 
 @Component({
   selector: 'page-calendar',
@@ -308,8 +309,14 @@ export class CalendarPage {
   }
 
   openAddNote() {
-
     this.router.navigate(["/add-note", { date: this.currentDay.keyDate }]);
+    //this.enterPopUp.close();
+  }
+  
+  openEditNote(id_n, text) {
+    console.log(this.currentDay.details["notes"]);
+    console.log("Note ID: " + id_n);
+    this.router.navigate(["/add-note", { date: this.currentDay.keyDate, id_n: id_n, text: text }]);
     //this.enterPopUp.close();
   }
 
@@ -319,6 +326,21 @@ export class CalendarPage {
 
   openAddNotification() {
     this.router.navigate(["/add-notification", { date: this.currentDay.keyDate }]);
+    //this.enterPopUp.close();
+  }
+
+  deleteNotification(id_n) {
+    console.log("==== Deleting notif: " + id_n + " ====");
+  }
+
+  deleteNote(id_n) {
+    console.log("==== Deleting notif: " + id_n + " ====");
+  }
+
+  openEditNotification(id_n, text, time) {
+    console.log("==== Notifications ====");
+    console.log(this.currentDay.details["notifications"]);
+    this.router.navigate(["/add-notification", { date: this.currentDay.keyDate, time: time, id_n: id_n, text: text }]);
     //this.enterPopUp.close();
   }
 }
