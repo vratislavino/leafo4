@@ -49,6 +49,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <!--
   <ion-slides #slider (ionSlideDidChange)="onSlideChanged()">
   <ion-slide>
     <ion-list lines="none">
@@ -161,10 +162,9 @@
         Změna avatara
       </ion-list-header>
       <img class="profile-img" [src]="userImage" (click)="upload()">
-      <!--<button ion-button color="primNormal" (click)="upload()">Nahrát avatara</button>-->
+      <button ion-button color="primNormal" (click)="upload()">Nahrát avatara</button>
     </ion-list>
   </ion-slide>
-  <!--
     <ion-slide>
       <ion-list lines="none">
         <ion-list-header>
@@ -179,8 +179,8 @@
       <button ion-button color="primNormal" (click)="upload()">Nahrát avatara</button>
       </ion-list>
     </ion-slide>
-  -->
   </ion-slides>
+-->
 
   <div class="bigBtn">
     <ion-button size="large" color="green" (click)="slideToRight()">{{ textforbutton }}<ion-icon

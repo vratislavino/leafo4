@@ -81,7 +81,10 @@ export class OthersPage implements OnInit {
           this.file.copyFile(fromDirectory, filename, toDirectory, filename).then((res) => {
               //let url = res.nativeURL.replace(/^file:\/\//, '');
               this.saveFile({name: filename, size: capturedFile.size});
+              this.infoLeafo.createAndShowLeafoBubble(this.vc, "File saved! " + filename + "(" + capturedFile.size + ")", "Done");
           });
+      }, (err) => {
+          this.infoLeafo.createAndShowLeafoBubble(this.vc, err, "Error");
       });
 
   }
