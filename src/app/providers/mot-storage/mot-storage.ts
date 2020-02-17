@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class MotStorageProvider {
-  private static data = {};
+  private static data = {}; 
   private static userData = {};
 
 

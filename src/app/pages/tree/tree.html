@@ -33,7 +33,7 @@
 
       <div class="tree" id="treediv">
           <img [src]="getCurrentTree()">
-          <img *ngFor = "let ap of apples" [src]="getSrc(ap)" class="apple" [id]="'ap'+ap.id_da" (click)="appleClick(ap)" [ngStyle]="{ 'top': getY(ap.y), 'left': getX(ap.x) }"/>
+          <img *ngFor = "let ap of apples" [src]="getSrc(ap)" [ngClass]="{'apple': true, 'collectible': ap.collectible.indexOf('ohodnoc')>-1}" [id]="'ap'+ap.id_da" (click)="appleClick(ap)" [ngStyle]="{ 'top': getY(ap.y), 'left': getX(ap.x) }"/>
       </div>
       <div class="konvicka">
           <img src="../assets/imgs/konvicka.png" (click)="zalij()">

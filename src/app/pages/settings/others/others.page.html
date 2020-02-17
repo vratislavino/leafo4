@@ -12,12 +12,13 @@
     <ion-list-header>
       Vytvoření motivačního videa
     </ion-list-header>
-    <div *ngIf="hasVideo()">
+    <div *ngIf="hasVideo(); else novideo">
       <ion-button full (click)="playVideo()">Použít výchozí video</ion-button>
-      <video controls autoplay #ownvideo></video>
+      <ion-button full (click)="captureVideo()">Nahrát nové video</ion-button>
     </div>
-    <ion-button full (click)="captureVideo()">Nahrát své video</ion-button>
-    <ion-button full (click)="useDefaultVideo()">Použít výchozí video</ion-button>
+    <ng-template #novideo>
+      <ion-button full (click)="captureVideo()">Nahrát své video</ion-button>
+      <ion-button full (click)="useDefaultVideo()">Použít výchozí video</ion-button>
+    </ng-template>
   </ion-list>
 </ion-content>
-

@@ -105,15 +105,16 @@ export class SettingsPage implements OnInit {
             if(fromReg===1) {
                 console.log("slideRight called twice");
                 this.slideToIndex(3);
-            }
+            } 
         });
+        /*
         if(this.storage.exists("video")) {
             this.storage.get("video").then(res=> {
                 this.mediaFile = JSON.parse(res) || {};
             });
         } else {
             this.mediaFile = [];
-        }
+        }*/
     }
 
     ionViewDidLoad() {

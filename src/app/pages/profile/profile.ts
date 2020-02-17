@@ -1,6 +1,6 @@
 import { UserProvider } from './../../providers/user/user';
 import { Component, ViewContainerRef } from '@angular/core';
-import { LoadingController, Platform } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { QuoteModel } from '../../model/QuoteModel.interface';
 import { QuoteProvider } from '../../providers/quote/quote';
 import { AccountProvider } from '../../providers/account/account';
@@ -20,7 +20,6 @@ export class ProfilePage {
   quotes: QuoteModel[];
   horoscope= {};
   photo:string = "assets/imgs/avatar.png";
-  loading;
   level = 0;
 
   diffDates = 1000;
@@ -30,13 +29,10 @@ export class ProfilePage {
     private platform: Platform,
     private quoteProvider: QuoteProvider,
     public ac: AccountProvider,
-    public loadingCtrl: LoadingController,
     public userService: UserProvider,
     private lip: LeafoInfoProvider,
     private vc: ViewContainerRef,
     private gp: GuideProvider) {
-
-      //this.presentLoading().then();
 
       this.platform.ready().then(() => {
         this.tryToShowGuide(this.gp);
@@ -106,11 +102,9 @@ export class ProfilePage {
       });
       
       
-      this.dismissLoading();
     }, (err) => {
       console.log("Nejsou žádné výsledky!");
-      this.dismissLoading();
-    });
+      });
   }
 
   getPhoto() {
@@ -131,22 +125,6 @@ export class ProfilePage {
 
     });
     
-  }
-
-  dismissLoading() {
-    if(this.loading != undefined)
-      this.loading.dismiss();
-  }
-
-  async presentLoading() {
-    this.loading = await this.loadingCtrl.create({
-      spinner: 'crescent'
-    });
-    await this.loading.present();
-  }
-
-  ionViewDidEnter() {
-    //this.presentLoading();
   }
 
   getUsername() {

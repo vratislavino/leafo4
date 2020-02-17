@@ -7,6 +7,7 @@ import { AccountProvider } from './providers/account/account';
 import { SystemInfoProvider } from './providers/system-info/system-info';
 import { NotificationProvider } from './providers/notification/notification';
 import { Router } from '@angular/router';
+import { UserProvider } from './providers/user/user';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   isUserLoggedIn = false;
   version = '';
   user:any = null;
+  treeState;
 
   public pages = [
     { title: 'Domů', url: 'home', icon: "home"},
@@ -39,7 +41,8 @@ export class AppComponent implements OnInit {
     public ac: AccountProvider,
     public systemInfoService : SystemInfoProvider,
     public notifProivder : NotificationProvider,
-    public menuCtrl: MenuController
+    public menuCtrl: MenuController, 
+    public userService:UserProvider
   ) {
     this.initializeApp();
     this.listenToLoginEvents();
@@ -64,13 +67,29 @@ export class AppComponent implements OnInit {
           {
             //this.ac.initUser();
             this.menuCtrl.enable(true);
-
+            this.initTree();
           } else {
             this.menuCtrl.enable(false);
           }
         //this.version = this.systemInfoService.getAppVersion();
       });
     });
+  }
+
+  initTree() {
+    this.userService.getParsedTreeState().then(state => {
+      this.treeState = state;
+      console.log(this.treeState);
+    });
+  }
+
+  getCurrentTree() {
+
+
+    if(this.treeState == undefined) 
+      return "../assets/imgs/4.png";
+    return this.userService.getCurrentTree(this.treeState["tree_state"]);
+    
   }
 
   

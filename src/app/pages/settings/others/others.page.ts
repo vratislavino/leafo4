@@ -14,97 +14,100 @@ import { count } from 'rxjs/operators';
 import { MotStorageProvider } from '../../../providers/mot-storage/mot-storage';
 
 @Component({
-  selector: 'app-others',
-  templateUrl: './others.page.html',
-  styleUrls: ['./others.page.scss'],
+    selector: 'app-others',
+    templateUrl: './others.page.html',
+    styleUrls: ['./others.page.scss'],
 })
 export class OthersPage implements OnInit {
 
-  loading;
-  mediaFile;
-  
-  @ViewChild('ownvideo', null) ownVideo;
+    loading;
+    mediaFile;
 
-  constructor(private router: Router,
-    private route: ActivatedRoute,
-    public ac: AccountProvider,
-    public tC: ToastController,
-    public camera: Camera,
-    public loadingCtrl: LoadingController,
-    public platform: Platform,
-    public userService: UserProvider,
-    public vc: ViewContainerRef,
-    public infoLeafo: LeafoInfoProvider,
-    private storage:MotStorageProvider,
-    private mediaCapture : MediaCapture,
-    private media : Media,
-    private file : File) { }
+    @ViewChild('ownvideo', null) ownVideo;
 
-  ngOnInit() {
-    if(this.storage.exists("video")) {
-      this.storage.get("video").then(res=> {
-          this.mediaFile = JSON.parse(res) || {};
-      });
-  } else {
-      this.mediaFile = [];
-  }
-  }
+    constructor(private router: Router,
+        private route: ActivatedRoute,
+        public ac: AccountProvider,
+        public tC: ToastController,
+        public camera: Camera,
+        public loadingCtrl: LoadingController,
+        public platform: Platform,
+        public userService: UserProvider,
+        public vc: ViewContainerRef,
+        public infoLeafo: LeafoInfoProvider,
+        private storage: MotStorageProvider,
+        private mediaCapture: MediaCapture,
+        private media: Media,
+        private file: File) { }
 
-  
-  useDefaultVideo() {
+    ngOnInit() {
+        
+        if (this.storage.exists("video")) {
+            this.storage.get("video").then(res => {
+                this.mediaFile = JSON.parse(res) || {};
+            });
+        } else {
+            this.mediaFile = [];
+        }
+    }
 
-  }
 
-  playVideo() {
-      let path = this.file.dataDirectory + this.mediaFile.name;
-      let url = path.replace(/^file:\/\//, '');
-      let video = this.ownVideo.nativeElement;
-      video.src = url;
-      video.play();
-  }
+    useDefaultVideo() {
+        this.storage.remove("video");
+        this.router.navigate(["/settings/0"]);
+    }
 
-  captureVideo() {
-      let options : CaptureVideoOptions = {
-          limit: 1,
-          duration: 120
-      };
+    playVideo() {
+        let path = this.file.dataDirectory + this.mediaFile.name;
+        let url = path.replace(/^file:\/\//, '');
+        let video = this.ownVideo.nativeElement;
+        video.src = url;
+        video.play();
+    }
 
-      this.mediaCapture.captureVideo(options).then((res:MediaFile[]) => {
-          let capturedFile = res[0];
-          console.log("myfile: ", capturedFile);
-          let filename = capturedFile.name;
-          let dir = capturedFile["localURL"].split('/');
-          dir.pop();
-          let fromDirectory = dir.join('/');
-          let toDirectory = this.file.dataDirectory;
+    captureVideo() {
+        let options: CaptureVideoOptions = {
+            limit: 1,
+            duration: 120
+        };
 
-          this.file.copyFile(fromDirectory, filename, toDirectory, filename).then((res) => {
-              //let url = res.nativeURL.replace(/^file:\/\//, '');
-              this.saveFile({name: filename, size: capturedFile.size});
-              this.infoLeafo.createAndShowLeafoBubble(this.vc, "File saved! " + filename + "(" + capturedFile.size + ")", "Done");
-          });
-      }, (err) => {
-          this.infoLeafo.createAndShowLeafoBubble(this.vc, err, "Error");
-      });
+        this.mediaCapture.captureVideo(options).then((res: MediaFile[]) => {
+            let capturedFile = res[0];
+            console.log("myfile: ", capturedFile);
+            let filename = capturedFile.name;
+            let dir = capturedFile["localURL"].split('/');
+            dir.pop();
+            let fromDirectory = dir.join('/');
+            let toDirectory = this.file.dataDirectory;
 
-  }
+            this.file.copyFile(fromDirectory, filename, toDirectory, filename).then((res) => {
+                //let url = res.nativeURL.replace(/^file:\/\//, '');
+                this.saveFile({ name: filename, size: capturedFile.size });
+                this.infoLeafo.createAndShowLeafoBubble(this.vc, "File saved! " + toDirectory + "/" + filename + "(" + capturedFile.size + ")", "Done");
+            });
+        }, (err) => {
+            this.saveFile({ name: "fidio.mp4", size: 186135168 });
+            this.infoLeafo.createAndShowLeafoBubble(this.vc, err, "Error");
+        });
 
-  saveFile(file) {
-      this.storage.set("video", JSON.stringify(file));
-  }
+    }
 
-  hasVideo() : boolean {
-      return this.storage.exists("video");
-  }
-  
-  async showToast(message) {
-    var alert = await this.tC.create({
-        message: message,
-        duration: 3000,
-        position: "bottom"
-    });
-    await alert.present();
-}
+    saveFile(file) {
+        this.storage.set("video", JSON.stringify(file));
+    }
+
+    hasVideo(): boolean {
+        return this.storage.exists("video");
+    }
+
+    async showToast(message) {
+        var alert = await this.tC.create({
+            message: message,
+            duration: 3000,
+            position: "bottom"
+        });
+        await alert.present();
+    }
 
 
 }

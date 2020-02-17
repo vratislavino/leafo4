@@ -26,10 +26,7 @@ export class TreePage {
   newWatering = 0;
   lastWatering: Date;
   currentWatering: number = 0;
-  uschlyStrom = "Uschly strom.png";
-  treeArr = [
-    "1.png", "2.png", "3.png", "4.png"
-  ];
+  
   wateredAt: string;
   apples = [];
   remaining = 0;
@@ -90,32 +87,13 @@ export class TreePage {
   }
 
   initTree() {
-    this.userService.getTreeState().subscribe(val => {
-      console.log("Here");
-      //console.log(document.getElementsByClassName('animated')[0]);
+    this.userService.getParsedTreeState().then(val => {
       this.remaining = val["remaining"];
-      this.currentWatering = this.parseTreeState(val["tree_state"]);
       this.lastWatering = val["lastWatering"];
-      this.newWatering = this.currentWatering;
-      var date: Date = new Date(this.lastWatering);
-      //this.wateredAt = date.getDay() + ". " + (date.getMonth() + 1) + ". " + date.getFullYear();
-      this.wateredAt = this.parseDate(this.lastWatering);
-
-      if (new Date(date.getTime() + 1000 * 60 * 60 * 24 * 7).getTime() < new Date().getTime()) {
-        this.currentWatering = -1;
-        console.log("Starší o 7 dní");
-      } else if (new Date(date.getTime() + 1000 * 60 * 60 * 24 * 3).getTime() < new Date().getTime()) {
-        this.currentWatering = -1;
-        console.log("Starší o 3 dny");
-      }
-      console.log("Load");
-      console.log(new Date(date.getTime() + 1000 * 60 * 60 * 24 * 7) + " " + new Date());
-      
-      console.log("TreeState: " + this.currentWatering);
-    }, error => {
-      console.log("Tree state: error");
+      this.currentWatering = val["tree_state"];
+      this.wateredAt = val["wateredAt"];
+      this.newWatering = val["newWatering"];
     });
-
   }
 
   initApples() {
@@ -250,26 +228,15 @@ export class TreePage {
     console.log(kapky);
     if (bool) {
       this.userService.setTreeState().subscribe(succ => {
-        if(succ["Error"] != undefined) {
+        if(succ["Error"] != undefined) { // není hodnocený den!
           this.lip.createAndShowRatingBubble(this.vc, -1, "Nemáš hodnocený dnešní den!", new Date(), (rl, dt, rw)=> {
             this.rp.setDayReview(this.ds.toKeyDate(dt), rw).subscribe(()=> {
               this.zalij();
             });
           });
-          //this.lip.createAndShowLeafoBubble(this.vc, "Konvice je prázdná, nelze zalít, ohodnoť nejdříve dnešní den!", "Pozor!", LeafoInfoType.Sad);
-          
-          console.log("Nezalivej s prazdnou konvici... To upe nefunguje hele.");
         } else {
-          this.userService.getTreeState().subscribe(val => {
-            this.currentWatering = val["tree_state"];
-            this.lastWatering = val["lastWatering"];
-            this.wateredAt = this.parseDate(this.lastWatering);
-  
-            this.initTree();
-            this.initApples();
-          }, error => {
-            console.log("Tree state: error");
-          });
+          this.initTree();
+          this.initApples();
         }
       }, error => {
         console.log("Set tree state: error");
@@ -279,39 +246,7 @@ export class TreePage {
     }
   }
 
-  parseTreeState(ts: number): number {
-    var state: number = 0;
-    if (ts == 0)
-      return ts;
-    else if (ts == 1)
-      return ts;
-    else if (ts == 2)
-      return ts;
-    return ts;
-  }
-
-  parseDate(date): string {
-    var double = date.split(' ');
-    var parts = double[0].split('-');
-    return parts[2] + ". " + parts[1] + ". " + parts[0];
-  }
-
   getCurrentTree() {
-    const path = "../assets/imgs/";
-    if (this.currentWatering == -1)
-      return path + this.uschlyStrom;
-
-
-
-    if (this.currentWatering == 1 || this.currentWatering == 0)
-      return path + this.treeArr[0];
-
-    if (this.currentWatering == 2)
-      return path + this.treeArr[1];
-
-    if (this.currentWatering == 3)
-      return path + this.treeArr[2];
-
-    return path + this.treeArr[3];
+    return this.userService.getCurrentTree(this.currentWatering);
   }
 }
