@@ -40,6 +40,13 @@ export class ProfilePage {
         this.getQuotes();
         this.getPhoto();
         this.initDepka();
+
+
+
+
+
+
+        
       });
   }
 
