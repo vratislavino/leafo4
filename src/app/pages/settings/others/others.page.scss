@@ -1,0 +1,36 @@
+ion-list-header {
+    display: flex;
+    padding-left: 0px;
+    padding-bottom: 20px;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+}
+
+.drop {
+    width: 80%;
+    min-height: 120px;
+    display: flex;
+    margin: 0px 10%;
+    padding: 60px 20px;
+    border: 4px dashed silver;
+    border-radius: 12px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(120, 120, 120, 0.6);
+    color: white;
+    ion-icon {
+        font-size: 80px;
+    }
+}
+
+.center {
+    width: 100%;
+    height: auto;
+    margin: 20px 0px 40px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -13,12 +13,26 @@
       Vytvoření motivačního videa
     </ion-list-header>
     <div *ngIf="hasVideo(); else novideo">
-      <ion-button full (click)="playVideo()">Použít výchozí video</ion-button>
-      <ion-button full (click)="captureVideo()">Nahrát nové video</ion-button>
+      <!--<ion-button full (click)="playVideo()">Použít výchozí video</ion-button>
+      <ion-button full (click)="captureVideo()">Nahrát nové video</ion-button>-->
+      <div class="drop" (click)="captureVideo()">
+        <ion-icon name="videocam"></ion-icon>
+        <p>Nahrát nové video</p>
+      </div>
+      <div class="center">
+        <ion-button full (click)="playVideo()">Použít výchozí video</ion-button>
+      </div>
     </div>
     <ng-template #novideo>
-      <ion-button full (click)="captureVideo()">Nahrát své video</ion-button>
-      <ion-button full (click)="useDefaultVideo()">Použít výchozí video</ion-button>
+      <!--<ion-button full (click)="captureVideo()">Nahrát své video</ion-button>
+      <ion-button full (click)="useDefaultVideo()">Použít výchozí video</ion-button>-->
+      <div class="drop" (click)="captureVideo()">
+        <ion-icon name="videocam"></ion-icon>
+        <p>Nahrát své video</p>
+      </div>
+      <div class="center">
+        <ion-button full (click)="useDefaultVideo()">Použít výchozí video</ion-button>
+      </div>
     </ng-template>
   </ion-list>
 </ion-content>
