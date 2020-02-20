@@ -21,9 +21,9 @@
 
 <ion-content padding text-center>
     <div class="jc">
-      <h1 (click)="testleafo()">Vítej, {{ addressing }}</h1>
+      <h1>Vítej, {{ addressing }}</h1>
       
-        <ion-card *ngFor="let item of news" class="news" color="red" (click)="navigate(item.page)">
+        <ion-card *ngFor="let item of news" class="news" [color]="item.color" (click)="navigate(item.page)">
           <ion-card-header class="title">
             <ion-card-subtitle>
               {{ item.title }}
@@ -64,7 +64,7 @@
         </ion-row>
         <ion-row>
           <ion-col size="6">
-            <ion-button routerLink="/advices" color="yellow" class="profile disabled" expand="full">
+            <ion-button routerLink="/advices" (click)="advicesClicked()" [disabled]="!isAdviceEnabled()" color="yellow" class="profile disabled" expand="full">
               <span>Rady</span><ion-icon name="contact" ></ion-icon>
             </ion-button>
           </ion-col>

@@ -11,6 +11,7 @@ import { LeafoInfoProvider } from 'src/app/providers/leafo-info/leafo-info';
 import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
 import { GuideProvider } from 'src/app/providers/guide/guide';
 import { forkJoin } from 'rxjs';
+import { DateService } from 'src/app/providers/date/date.service';
 
 /**
  * Generated class for the HomePage page.
@@ -35,11 +36,15 @@ export class HomePage implements OnInit {
   private quoteObtained = false;
   private horoscopeObtained = false;
 
+  ratedDaysNeededForAdvices = 5;
+  ratedDaysInTotal = 0;
+
   private news=[
     {
       title: "Test headline",
       text: "Test message",
-      page: "home"
+      page: "home",
+      color: "red"
     }
   ];
 
@@ -47,6 +52,7 @@ export class HomePage implements OnInit {
     private router: Router, 
     public ac: AccountProvider, 
     public userService: UserProvider, 
+    public dp:DateService,
     private qp: QuoteProvider, 
     private rp:RatingProvider,
     private np:NotificationProvider,
@@ -57,8 +63,10 @@ export class HomePage implements OnInit {
 
   ngOnInit(): void {
 
-    
+  }
 
+  isAdviceEnabled() {
+    return this.ratedDaysInTotal > this.ratedDaysNeededForAdvices;
   }
 
   ionViewDidEnter() {
@@ -150,23 +158,44 @@ export class HomePage implements OnInit {
     forkJoin([
       this.rp.getYearNotifications(),
       this.qp.getHistoryQuotes(1),
-      this.rp.getDayData(new Date(),true)
+      this.rp.getDayData(new Date(),true),
+      this.userService.getRatedDays(),
+      this.qp.getLastAdviceDate()
     ]).subscribe(res => {
+      console.log(res);
+      /*
       console.log("Notification for next year: ");
       console.log(res[0]);
       console.log("Last Quote: ");
       console.log(res[1]);
       console.log("Today Data: ");
       console.log(res[2]);
-
+      console.log("Rated Days Count");
+      console.log(res[3]);
+      console.log("LastAdviceDate");
+      console.log(res[4]);
+*/
       var rating = Object.values(res[2])[0]["rating"];
-      var isNew = res[1][0]["isNew"];
+      var isNew = res[1][0]["isNew"] = 1;
       var s = "";
+      this.ratedDaysInTotal = res[3]["count"];
+      var lastDateOfAdvice = res[4]['date'];
+      var dd:Date;
+      var diff:number = 1000;
 
+      if(lastDateOfAdvice != "none") {
+        dd = this.dp.toDate(lastDateOfAdvice);
+        diff = (new Date()).getTime() - dd.getTime();
+        diff = diff / 1000/60/60/24;
+        console.log(diff);
+    }
+
+      if(this.isAdviceEnabled && (diff < 3 || lastDateOfAdvice == "none"))
+        this.news.push({title: "Můžeš si vzít radu!", text: "Na stránce s radami si nyní můžeš nechat poradit!", page: "advices", color: "yellow"});
       if(isNew)
-        this.news.push({title: "Nový citát!", text: "Na stránce citátů máš nový citát!", page: "quotes"});
+        this.news.push({title: "Nový citát!", text: "Na stránce citátů máš nový citát!", page: "quotes", color: "green"});
       if(rating < 0) {
-        this.news.push({title: "Hodnocení dne!", text: "Nemáš hodnocený den!", page: "tree"});
+        this.news.push({title: "Hodnocení dne!", text: "Nemáš hodnocený den!", page: "tree", color: "red"});
       }
 
       /*

@@ -57,6 +57,13 @@ export class QuoteProvider {
       });
   }
 
+  getLastAdviceDate()  : Observable<{}> {
+    return this.reqProvider.post(
+      '/getLastAdviceDate.php', {
+        id_u: this.ac.getUserId()
+      });
+  }
+
   getNewAdvice(advisor) : Observable<{}> {
     return this.reqProvider.post(
       '/getAdvice.php', {

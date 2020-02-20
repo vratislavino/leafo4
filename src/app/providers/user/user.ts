@@ -143,7 +143,27 @@ export class UserProvider {
 				resolve(val);
 			}, (err) => reject(err));
 		})
+	}
+	
+/*
+	public getUnlocked() : Observable<any>{
+		return new Observable((observer) => {
+			this.getRatedDays().subscribe((val) => {
 
+				let count = val["count"];
+
+				observer.next(count);
+
+				observer.complete();
+			}, (err) => observer.error(err));
+		})
+	}*/
+
+	getRatedDays() {
+		return this.apiRequest.post(
+			'/getRatedDays.php', {
+			id_u: this.ac.getUserId()
+		});
 	}
 
 	getCurrentTree(currentWatering) {
