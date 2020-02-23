@@ -4,8 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DateService {
-
+  
   constructor() { }
+
+  getDaysDiff(date1: Date, today: Date) {
+    var diff = today.getTime() - date1.getTime();
+    diff = diff / 1000/60/60/24;
+    return diff;
+}
 
   public toKeyDate(date:Date) : string {
     return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;

@@ -80,7 +80,6 @@ export class AccountProvider {
 		var copy = new User(usr.email);
 		copy.extractUser(usr);
 
-
 		return copy;
 	}
 

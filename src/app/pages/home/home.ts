@@ -36,6 +36,10 @@ export class HomePage implements OnInit {
   private quoteObtained = false;
   private horoscopeObtained = false;
 
+  registrationDate : Date;
+  daysNeededForDepka = 30;
+  daysRegistrationDiff = 0;
+
   ratedDaysNeededForAdvices = 5;
   ratedDaysInTotal = 0;
 
@@ -65,6 +69,10 @@ export class HomePage implements OnInit {
 
   }
 
+  isDepkaEnabled() {
+    return this.daysRegistrationDiff > this.daysNeededForDepka;
+  }
+
   isAdviceEnabled() {
     return this.ratedDaysInTotal > this.ratedDaysNeededForAdvices;
   }
@@ -84,11 +92,25 @@ export class HomePage implements OnInit {
     });
   }
 
-
-  testleafo() {
-    this.lip.createAndShowRatingBubble(this.vc, -1,"", new Date());
+  advicesClicked() {
+    if(this.isAdviceEnabled()) {
+      this.router.navigate(["/advices"]);
+    } else {
+      this.lip.createAndShowLeafoBubble(this.vc, "Ještě není možné přejít na rady! Ještě ti zbývá ohodnotit " +(this.ratedDaysNeededForAdvices - this.ratedDaysInTotal) + " dní", "Pozor!");
+    }
   }
-  
+
+  depressionClicked() {
+    if(this.isDepkaEnabled()) {
+      this.router.navigate(["/depression"]);
+    } else {
+      if(this.daysRegistrationDiff < this.daysNeededForDepka) {
+        this.lip.createAndShowLeafoBubble(this.vc, "Funkce depka se ti otevře za 30 dní používání aplikace!");
+      } else {
+        // if deprese byla využita v posledních 30 dnech....
+      }
+    }
+  }
 
   closeApp(hm) {
     console.log(hm);
@@ -160,7 +182,8 @@ export class HomePage implements OnInit {
       this.qp.getHistoryQuotes(1),
       this.rp.getDayData(new Date(),true),
       this.userService.getRatedDays(),
-      this.qp.getLastAdviceDate()
+      this.qp.getLastAdviceDate(),
+      this.userService.getRegisterDate()
     ]).subscribe(res => {
       console.log(res);
       /*
@@ -183,12 +206,12 @@ export class HomePage implements OnInit {
       var dd:Date;
       var diff:number = 1000;
 
+      var registerDate = res[5][0]['date'];
+      this.registrationDate = this.dp.toDate(registerDate);
+      this.daysRegistrationDiff = this.dp.getDaysDiff(this.registrationDate, new Date());
       if(lastDateOfAdvice != "none") {
-        dd = this.dp.toDate(lastDateOfAdvice);
-        diff = (new Date()).getTime() - dd.getTime();
-        diff = diff / 1000/60/60/24;
-        console.log(diff);
-    }
+        diff = this.dp.getDaysDiff(this.dp.toDate(lastDateOfAdvice), new Date());
+      }
 
       if(this.isAdviceEnabled && (diff < 3 || lastDateOfAdvice == "none"))
         this.news.push({title: "Můžeš si vzít radu!", text: "Na stránce s radami si nyní můžeš nechat poradit!", page: "advices", color: "yellow"});
