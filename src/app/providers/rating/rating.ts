@@ -99,6 +99,25 @@ getMonthDataByMoment(start, end, ratingOnly):Observable<{}> {
         text: text
       });
   }
+  
+  editDeleteNotification(id, edit, text?, date?, time?) {
+    return edit == 1 ? 
+      this.apiRequest.post('/notif.php', {
+        id_u: this.ac.getUserId(),
+        id_note: id,
+        bool: edit,
+        text: text,
+        date: date,
+        time: time
+      }) :
+      this.apiRequest.post('/notif.php',  {
+        id_u: this.ac.getUserId(),
+        id_note: id,
+        bool: edit
+      });
+  }
+
+
 
   addNote(date, text, icon="star"):Observable<{}> {
     return this.apiRequest.post(
@@ -109,6 +128,24 @@ getMonthDataByMoment(start, end, ratingOnly):Observable<{}> {
         icon: icon
     });
   }
+  
+  editDeleteNote(id, edit, text?, date?, icon?) {
+    return edit == 1 ? 
+      this.apiRequest.post('/note.php', {
+        id_u: this.ac.getUserId(),
+        id_note: id,
+        bool: edit,
+        text: text,
+        date: date,
+        icon: icon
+      }) :
+      this.apiRequest.post('/note.php',  {
+        id_u: this.ac.getUserId(),
+        id_note: id,
+        bool: edit
+      });
+  }
+
 
   sendReview(text): Observable<{}> {
     return this.apiRequest.post('/setReview.php', {

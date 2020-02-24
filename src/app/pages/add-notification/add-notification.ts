@@ -71,6 +71,10 @@ export class AddNotificationPage {
 
 	editNotification() {
 		console.log("Edit notification");
+		this.rp.editDeleteNotification(this.id_n, 1, this.textInpt, this.dateInpt, this.timeInpt).subscribe((data) => {
+			console.log("val: " + data);
+			this.router.navigate(['/calendar']);
+		})
 		/*this.rp.editNotification(this.textInpt, this.dateInpt, this.timeInpt).subscribe(val => {
 			console.log("val: " + val);
 			this.router.navigate(['/calendar']);

@@ -118,10 +118,16 @@ export class QuotesPage {
         console.log("Error detected");
         return;
       }
+      let isfirst = true;
       keys.forEach((key) => {
         var quoteObj = data[key];
         //console.log(data[key]);
+        
         var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(this.ac.getAddressing());
+        if(isfirst) {
+          isfirst = !isfirst;
+          qm.isnew = true;
+        }
         this.historyQuotes.push(qm);
       });
     }, (err) => {

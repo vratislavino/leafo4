@@ -11,10 +11,10 @@ import { AccountProvider } from '../../providers/account/account';
  */
 
 @Component({
-  selector: 'page-add-note',
-  templateUrl: 'add-note.html',
-  styleUrls: ['add-note.scss'],
-  providers: [AccountProvider]
+	selector: 'page-add-note',
+	templateUrl: 'add-note.html',
+	styleUrls: ['add-note.scss'],
+	providers: [AccountProvider]
 })
 export class AddNotePage {
 
@@ -25,11 +25,11 @@ export class AddNotePage {
 	text
 	edit: boolean = false;
 
-  constructor(private router :Router, private route :ActivatedRoute, public ac: AccountProvider, public rp: RatingProvider) {
+	constructor(private router: Router, private route: ActivatedRoute, public ac: AccountProvider, public rp: RatingProvider) {
 
 		let date = this.route.snapshot.paramMap.get("date");
 		console.log(date);
-		if(date != undefined) {
+		if (date != undefined) {
 			this.dateInpt = new Date(date).toISOString(); // date.keyDate
 			console.log(this.dateInpt);
 		} else {
@@ -37,52 +37,56 @@ export class AddNotePage {
 		}
 		this.text = this.route.snapshot.paramMap.get("text");
 		this.id_n = this.route.snapshot.paramMap.get("id_n");
-		if(this.text != undefined && this.id_n != undefined)
+		if (this.text != undefined && this.id_n != undefined)
 			this.edit = true;
 
-		if(this.edit) {
+		if (this.edit) {
 			this.textInpt = this.text;
 		}
-	
-	//TODO--- get date from that
-	  /*
-  	if(navParams.get("date") != undefined) {
-  		this.myDate = navParams.get("date").keyDate;
-  		console.log(this.myDate);
-  	} else {
-  		console.log("Date not set");
-  	}*/
-  }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddNotePage');
-  }
+		//TODO--- get date from that
+		/*
+		  if(navParams.get("date") != undefined) {
+			  this.myDate = navParams.get("date").keyDate;
+			  console.log(this.myDate);
+		  } else {
+			  console.log("Date not set");
+		  }*/
+	}
 
-  addNote() {
-    console.log("Adding note.");
-  	this.rp.addNote(this.dateInpt, this.note, "star").subscribe(val => {
-		  console.log(val);
-		  this.router.navigate(['/calendar']);
-  	}, error => {
-  		console.log("val: " + error);
-  	});
-    console.log("idk");
-  }
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad AddNotePage');
+	}
 
-  editNote() {
-    console.log("Editting note.");
-  	/*this.rp.editNote(this.dateInpt, this.note, "star").subscribe(val => {
-		  console.log(val);
-		  this.router.navigate(['/calendar']);
-  	}, error => {
-  		console.log("val: " + error);
-  	});*/
-  }
+	addNote() {
+		console.log("Adding note.");
+		this.rp.addNote(this.dateInpt, this.note, "star").subscribe(val => {
+			console.log(val);
+			this.router.navigate(['/calendar']);
+		}, error => {
+			console.log("val: " + error);
+		});
+		console.log("idk");
+	}
 
-  onInput(type, value) {
-  	if(type == "note") {
-  		this.note = value;
-  	}
-  }
+	editNote() {
+		console.log("Edit note");
+		this.rp.editDeleteNote(this.id_n, 1, this.textInpt, this.dateInpt, "star").subscribe((data) => {
+			console.log(data);
+			this.router.navigate(['/calendar']);
+		})
+		/*this.rp.editNotification(this.textInpt, this.dateInpt, this.timeInpt).subscribe(val => {
+			console.log("val: " + val);
+			this.router.navigate(['/calendar']);
+		}, error => {
+			console.log("val: " + error);
+		});*/
+	}
+
+	onInput(type, value) {
+		if (type == "note") {
+			this.note = value;
+		}
+	}
 
 }

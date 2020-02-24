@@ -8,7 +8,7 @@ export class QuoteModel {
     // optional
     category?: string;
     name?: string;
-    isnew?:bool = false;
+    isnew?:boolean = false;
     tags?: string[];
 
     constructor(id, text, author, faved, category?, name?, tags?, isNew?) {

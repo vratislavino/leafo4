@@ -4,7 +4,7 @@ import { QuoteComponent } from './quote';
 
 @NgModule({
   declarations: [
-    QuoteComponent,
+    QuoteComponent
   ],
   imports: [
     IonicModule

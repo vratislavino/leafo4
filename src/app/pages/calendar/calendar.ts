@@ -329,12 +329,18 @@ export class CalendarPage {
     //this.enterPopUp.close();
   }
 
-  deleteNotification(id_n) {
+  deleteNotification(id_n, element) {
+    this.rp.editDeleteNotification(id_n, 0).subscribe((data) => {
+      element.remove();
+    });
     console.log("==== Deleting notif: " + id_n + " ====");
   }
 
-  deleteNote(id_n) {
-    console.log("==== Deleting notif: " + id_n + " ====");
+  deleteNote(id_n, element) {
+    this.rp.editDeleteNotification(id_n, 0).subscribe((data) => {
+      element.remove();
+    });
+    console.log("==== Deleting note: " + id_n + " ====");
   }
 
   openEditNotification(id_n, text, time) {

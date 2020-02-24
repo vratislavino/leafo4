@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { QuoteModel } from '../../model/QuoteModel.interface';
 
 /**
@@ -16,7 +16,6 @@ export class QuoteComponent {
 
   @Input('quoteObj') quoteObj :QuoteModel;
   @Output() favedClicked = new EventEmitter<QuoteModel>();
-
   quote: QuoteModel;
 
   constructor() {
@@ -28,7 +27,11 @@ export class QuoteComponent {
   }
 
   ngAfterViewInit() {
-    
+    console.log("HEHE");
+    let a = document.getElementById("qt"+this.quoteObj.id);
+    if(this.quoteObj.isnew) {
+      a.classList.add("isnew");
+    }
   }
 
 }
