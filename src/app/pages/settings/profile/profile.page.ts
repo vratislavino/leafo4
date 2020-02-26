@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { User } from 'src/app/model/UserModel';
-import { Camera } from '@ionic-native/camera/ngx';
+import { Camera } from '@ionic-native/camera';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AccountProvider } from 'src/app/providers/account/account';
 import { ToastController, LoadingController, Platform } from '@ionic/angular';
@@ -51,7 +51,6 @@ export class ProfilePage implements OnInit {
     private route: ActivatedRoute,
     public ac: AccountProvider,
     public tC: ToastController,
-    public camera: Camera,
     public loadingCtrl: LoadingController,
     public platform: Platform,
     public userService: UserProvider,
@@ -91,14 +90,14 @@ export class ProfilePage implements OnInit {
 
     let options = {
       quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
+      destinationType: Camera.DestinationType.DATA_URL,
+      encodingType: Camera.EncodingType.JPEG,
+      mediaType: Camera.MediaType.PICTURE,
       sourceType: source,
       saveToPhotoAlbum: true,
       correctOrientation: true
     };
-    this.camera.getPicture(options).then((imageData) => {
+    Camera.getPicture(options).then((imageData) => {
 
       this.loading.present();
       let base64Image = 'data:image/jpeg;base64,' + imageData;
@@ -167,12 +166,12 @@ export class ProfilePage implements OnInit {
 
   selectFromGalerie() {
     this.islocationvisible = !this.islocationvisible;
-    this.upload(this.camera.PictureSourceType.PHOTOLIBRARY);
+    this.upload(Camera.PictureSourceType.PHOTOLIBRARY);
   }
 
   selectFromFotoaparat() {
     this.islocationvisible = !this.islocationvisible;
-    this.upload(this.camera.PictureSourceType.CAMERA);
+    this.upload(Camera.PictureSourceType.CAMERA);
   }
 
   async showToast(message) {
