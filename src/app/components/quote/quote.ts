@@ -26,8 +26,14 @@ export class QuoteComponent {
     this.favedClicked.emit(this.quoteObj);
   }
 
+  getIcon() {
+    if(this.quoteObj.faved == true)
+      return "star";
+    return "star-outline";
+  }
+
   ngAfterViewInit() {
-    console.log("HEHE");
+    
     let a = document.getElementById("qt"+this.quoteObj.id);
     if(this.quoteObj.isnew) {
       a.classList.add("isnew");

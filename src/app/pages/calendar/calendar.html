@@ -41,7 +41,7 @@
           <ion-item-divider>
             Upozornění
           </ion-item-divider>
-          <ion-item text-wrap *ngFor="let notif of currentDay.details['notifications']">
+          <ion-item text-wrap *ngFor="let notif of currentDay.details['notifications']" id="{{'notif'+notif.id_n}}">
             <ion-icon name="time" item-start></ion-icon>
             <p (click)="openEditNotification(notif.id_n, notif.text, notif.time)"> {{ notif.text }} </p>
             <ion-icon name="trash" item-end (click)="deleteNotification(notif.id_n. this)" class="trash"></ion-icon>
@@ -50,7 +50,7 @@
           <ion-item-divider>
             Poznámky
           </ion-item-divider>
-          <ion-item text-wrap *ngFor="let note of currentDay.details['notes']">
+          <ion-item text-wrap *ngFor="let note of currentDay.details['notes']" id="{{'note'+note.id_n}}">
             <ion-icon [name]="note.icon" item-start></ion-icon>
             <p (click)="openEditNote(note.id_n, note.text)"> {{ note.text }} </p>
             <ion-icon name="trash" item-end (click)="deleteNote(note.id_n, this)" class="trash"></ion-icon>

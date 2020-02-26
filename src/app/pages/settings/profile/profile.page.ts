@@ -25,6 +25,8 @@ export class ProfilePage implements OnInit {
   page = 0;
   islocationvisible = false;
 
+  cameFromRegistration: boolean;
+
   @ViewChild('slider', null) slider;
   znameni = [
     [
@@ -46,6 +48,7 @@ export class ProfilePage implements OnInit {
   ]
 
   constructor(private router: Router,
+    private route: ActivatedRoute,
     public ac: AccountProvider,
     public tC: ToastController,
     public camera: Camera,
@@ -57,16 +60,26 @@ export class ProfilePage implements OnInit {
   ) {
 
 
+    const fromReg = this.route.snapshot.paramMap.get("fromRegistration");
+    console.log("CAME FROM REGISTRATION: " + fromReg);
+    if (fromReg == "1") {
+      this.cameFromRegistration = true;
+    }
 
-    /*
-        const fromReg = this.route.snapshot.paramMap.get("fromRegistration");
-        if(!(fromReg == undefined || fromReg == "false")) {
-            
-        }    */
+    console.log("CAME FROM REGISTRATION 2 : " + this.cameFromRegistration);
 
 
     //this.loading.present();
+
+
     this.currentUserData = this.ac.getCopyOfUser();
+    console.log("SIGN: " + this.currentUserData.getSign());
+    for (var i = 0; i < this.znameni.length; i++) {
+      for (var j = 0; j < this.znameni[i].length; j++) {
+        if (this.znameni[i][j].id == this.currentUserData.getSign())
+          this.znameni[i][j].active = true;
+      }
+    }
 
     this.ac.getProfileImage().then((data: string) => {
       this.userImage = data;
@@ -91,18 +104,18 @@ export class ProfilePage implements OnInit {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.userService.setProfileImage(base64Image).subscribe(mess => {
         this.ac.setProfileImage(base64Image).then(() => {
-          this.userImage = base64Image
+          this.userImage = base64Image;
           //console.log(this.userImage);
           this.loading.dismiss();
           this.showToast("Profilový obrázek uložen");
         });
         this.showToast(mess);
       }, err => {
-        this.infoLeafo.createAndShowLeafoBubble(this.vc, err, "Chyba", LeafoInfoType.Sad);
+        this.infoLeafo.createAndShowLeafoBubble(this.vc, err, "Chyba1", LeafoInfoType.Sad);
         //this.showToast("SET PROFILE IMAGE " + err.message);
       });
     }).catch(err => {
-      this.infoLeafo.createAndShowLeafoBubble(this.vc, err, "Chyba", LeafoInfoType.Sad);
+      this.infoLeafo.createAndShowLeafoBubble(this.vc, err, "Chyba2", LeafoInfoType.Sad);
 
       console.log(err.message);
       //this.showToast("GET PICTURE " + err.message);
@@ -111,21 +124,35 @@ export class ProfilePage implements OnInit {
 
   saveData() {
 
+    this.userService.updateSettings(this.currentUserData).subscribe((data) => {
+      this.ac.saveLocal(this.currentUserData);
+      if (this.cameFromRegistration) {
+        this.router.navigate(["home"]);
+      } else {
+        this.router.navigate(["settings", 0]);
+      }
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   selectZnameni(zn) {
     console.log("znameni :");
     console.log(zn);
-    for(let arr of this.znameni) {
-      for(let obj of arr) {
+    for (let arr of this.znameni) {
+      for (let obj of arr) {
         obj.active = false;
       }
     }
     var s = this.slider;
-    setTimeout(function() {
-      s.slideTo(1);
-    }, 1000);
-    zn.active = !zn.active;
+    this.currentUserData.setSign(zn.id);
+    this.userService.updateSettings(this.currentUserData).subscribe((data) => {
+      this.ac.saveLocal(this.currentUserData);
+      setTimeout(function () {
+        s.slideTo(1);
+      }, 1000);
+      zn.active = !zn.active;
+    }, (error) => { console.log(error) });
   }
 
   onInput(type, value) {
@@ -158,6 +185,11 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      const fromReg = parseInt(params["fromRegister"]);
+      console.log(fromReg);
+      this.cameFromRegistration = fromReg === 1;
+    });
   }
 
 }

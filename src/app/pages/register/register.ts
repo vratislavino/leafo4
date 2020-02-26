@@ -25,12 +25,6 @@ export class RegisterPage {
 	email;
 	password;
 	passwordA;
-	username;
-	firstname;
-	surname;
-  addressing;
-	sign;
-  sex;
 
   znameni = [
     [
@@ -82,7 +76,12 @@ export class RegisterPage {
       return;
     }
 
-    this.apiUser.register(this.email, this.password, this.passwordA, this.username, this.firstname, this.surname, this.addressing, this.sign, this.sex).
+    if(this.password != this.passwordA) {
+      this.leafoProv.createAndShowLeafoBubble(this.viewContainerRef, "Hesla se musí shodovat!", "Pozor!");
+      return;
+    }
+
+    this.apiUser.register(this.email, this.password).
     subscribe(
       (message) => {
         if(message["Error"]) {
@@ -92,7 +91,7 @@ export class RegisterPage {
             let user = User.createUser(this.email);
             this.ac.login(user, data, false);
             
-            this.router.navigate(["settings", 1]);
+            this.router.navigate(["setprofile", 1]);
           });
         }
         //this.showToast(JSON.stringify(message));

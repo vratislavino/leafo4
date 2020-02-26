@@ -35,8 +35,7 @@
           <ion-label color="primNormal" position="floating">
             Oslovení
           </ion-label>
-          <ion-input type="text" value="{{ currentUserData.addressing }}"
-            (input)='onInput("addressing", $event.target.value);'></ion-input>
+          <ion-input type="text" [(ngModel)]="currentUserData.addressing"></ion-input>
         </ion-item>
         <ion-item style="margin-top: 20px;">
           <ion-label>Pohlaví</ion-label>
@@ -63,6 +62,9 @@
           </ion-row>
         </ion-grid>
       </ion-list>
+    <ion-list>
+      <ion-button (click)="saveData()">Uložit</ion-button>
+    </ion-list>
     </ion-slide>
   </ion-slides>
 </ion-content>

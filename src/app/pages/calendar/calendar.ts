@@ -329,16 +329,17 @@ export class CalendarPage {
     //this.enterPopUp.close();
   }
 
-  deleteNotification(id_n, element) {
+  deleteNotification(id_n) {
     this.rp.editDeleteNotification(id_n, 0).subscribe((data) => {
-      element.remove();
+      document.getElementById("notif"+id_n).remove();
     });
     console.log("==== Deleting notif: " + id_n + " ====");
   }
 
-  deleteNote(id_n, element) {
-    this.rp.editDeleteNotification(id_n, 0).subscribe((data) => {
-      element.remove();
+  deleteNote(id_n) {
+    this.rp.editDeleteNote(id_n, 0).subscribe((data) => {
+      console.log(data);
+      document.getElementById("note"+id_n).remove();
     });
     console.log("==== Deleting note: " + id_n + " ====");
   }

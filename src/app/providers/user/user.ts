@@ -45,18 +45,18 @@ export class UserProvider {
 		});
 	}
 
-	public register(email, pass, passA, username, fName, sName, addressing, sign, sex) {
+	public register(email, pass) {
+		console.log("SENDING: " + email + " : "+ pass );
 		return this.apiRequest.post(
 			'/registerApi.php', {
 			email: email,
-			pass: pass,
-			passA: passA,
+			pass: pass/*,
 			username: username,
 			firstname: fName,
 			surname: sName,
 			addressing: addressing,
 			sign: sign,
-			sex: sex
+			sex: sex*/
 		});
 	}
 

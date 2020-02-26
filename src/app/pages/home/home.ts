@@ -213,9 +213,10 @@ export class HomePage implements OnInit {
         diff = this.dp.getDaysDiff(this.dp.toDate(lastDateOfAdvice), new Date());
       }
 
-      if(this.isAdviceEnabled && (diff < 3 || lastDateOfAdvice == "none"))
+      if(this.isAdviceEnabled() && (diff < 3 || lastDateOfAdvice == "none")) {
         this.news.push({title: "Můžeš si vzít radu!", text: "Na stránce s radami si nyní můžeš nechat poradit!", page: "advices", color: "yellow"});
-      if(isNew)
+      }
+        if(isNew)
         this.news.push({title: "Nový citát!", text: "Na stránce citátů máš nový citát!", page: "quotes", color: "green"});
       if(rating < 0) {
         this.news.push({title: "Hodnocení dne!", text: "Nemáš hodnocený den!", page: "tree", color: "red"});

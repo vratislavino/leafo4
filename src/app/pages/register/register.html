@@ -11,30 +11,42 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-list lines="none">
+    <ion-item>
+      <ion-label color="primNormal" position="floating">
+        E-mail
+      </ion-label>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
+      <ion-icon name="mail" slot="start"></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primNormal" position="floating">
+        Heslo
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+      <ion-icon name="lock" slot="start"></ion-icon>
+    </ion-item>
+    <ion-item>                        
+      <ion-label color="primNormal" position="floating">
+        Heslo znovu
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="passwordA"></ion-input>
+      <ion-icon name="lock" slot="start"></ion-icon>
+    </ion-item>
+  </ion-list>  
+  <ion-list>
+    <ion-item>
+      <ion-label color="primNormal" class="ion-text-wrap">Souhlasím se zpracováním osobních údajů podle GDPR.</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="souhlas"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <div class="flex-center">
+    <ion-button (click)="register()" color="green">Registrovat</ion-button>
+  </div>
+  <!--
   <ion-slides #slider (ionSlideDidChange)="onSlideChanged()">
     <ion-slide>
-      <ion-list lines="none">
-        <ion-list>
-          <ion-item>
-            <ion-label color="primNormal" position="floating">Email</ion-label>
-            <ion-input type="email" [(ngModel)]="email"></ion-input>
-          </ion-item>
-        </ion-list>
       
-        <ion-list>
-          <ion-item>
-            <ion-label color="primNormal" position="floating">Heslo</ion-label>
-            <ion-input type="password" [(ngModel)]="password"></ion-input>
-          </ion-item>
-        </ion-list>
-        
-        <ion-list>
-          <ion-item>
-            <ion-label color="primNormal" position="floating">Heslo znovu</ion-label>
-            <ion-input type="password" [(ngModel)]="passwordA"></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-list>
     </ion-slide>
   
     <ion-slide>
@@ -119,12 +131,13 @@
         </ion-list>
         <ion-list>
           <ion-item class="login-button" color="primDark" large (click)="register()">
-            Registrovat se
+            Registrovat se  
           </ion-item>
         </ion-list>
       </ion-list>
     </ion-slide>
     </ion-slides>
+    -->
 </ion-content>
 <ion-footer padding>
   <ion-row class="logos">

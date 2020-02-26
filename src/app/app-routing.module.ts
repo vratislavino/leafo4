@@ -79,7 +79,7 @@ const routes: Routes = [
   { path: 
     'setaccount', 
     loadChildren: () => import('./pages/settings/account/account.module').then(m=>m.AccountPageModule) },
-  { path: 'setprofile', loadChildren: './pages/settings/profile/profile.module#ProfilePageModule' },
+  { path: 'setprofile/:fromRegister', loadChildren: './pages/settings/profile/profile.module#ProfilePageModule' },
   { path: 'setcharacteristics', loadChildren: './pages/settings/characteristics/characteristics.module#CharacteristicsPageModule' },
   { path: 'setothers', loadChildren: './pages/settings/others/others.module#OthersPageModule' }
 ];

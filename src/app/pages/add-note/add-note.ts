@@ -71,6 +71,7 @@ export class AddNotePage {
 
 	editNote() {
 		console.log("Edit note");
+		console.log(this.dateInpt + " : " + this.id_n);
 		this.rp.editDeleteNote(this.id_n, 1, this.textInpt, this.dateInpt, "star").subscribe((data) => {
 			console.log(data);
 			this.router.navigate(['/calendar']);

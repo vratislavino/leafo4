@@ -11,7 +11,7 @@ export class QuoteModel {
     isnew?:boolean = false;
     tags?: string[];
 
-    constructor(id, text, author, faved, category?, name?, tags?, isNew?) {
+    constructor(id, text, author, faved:boolean, category?, name?, tags?, isNew?) {
         this.id = id;
         this.text = text;
         this.author = author;
@@ -28,7 +28,7 @@ export class QuoteModel {
         } */
     }
 
-    setFaved(newfaved) {
+    setFaved(newfaved:boolean) {
         this.faved = newfaved;
     }
 

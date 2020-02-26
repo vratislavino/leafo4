@@ -29,11 +29,13 @@ export class DepressionPage implements OnInit {
       this.horoscope = this.ac.getAddressing() + ', ' + data['horoscope']['text'];
       
       const chars = data['characteristics'];
-      if(chars != undefined) {
+      if(chars != undefined && chars["Error"] == undefined) {
         this.characteristics += chars[0];
         for(let i = 1; i < chars.length; i++) {
           this.characteristics += ', ' + chars[i];
         }
+      } else {
+        
       }
     });
   }
