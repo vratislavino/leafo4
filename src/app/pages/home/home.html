@@ -64,12 +64,12 @@
         </ion-row>
         <ion-row>
           <ion-col size="6">
-            <ion-button (click)="advicesClicked()"  color="yellow" [ngClass]="{'disabled':!isAdviceEnabled(), 'profile': true }" expand="full">
+            <ion-button (click)="advicesClicked()" color="blue" [ngClass]="{'disabled':!isAdviceEnabled(), 'profile': true }" expand="full">
               <span>Rady</span><ion-icon name="contact" ></ion-icon>
             </ion-button>
           </ion-col>
           <ion-col size="6">
-            <ion-button (click)="depressionClicked()" color="orange" [ngClass]="{'disabled':!isDepkaEnabled(), 'calendar': true}"  expand="full" (click)="tryToCallDepka()">
+            <ion-button (click)="depressionClicked()" color="darkgray" [ngClass]="{'disabled':!isDepkaEnabled(), 'calendar': true}"  expand="full" (click)="tryToCallDepka()">
               <span>Depka</span>
               <ion-icon name="calendar"></ion-icon>
             </ion-button>
