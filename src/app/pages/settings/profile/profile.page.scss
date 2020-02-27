@@ -23,6 +23,17 @@
     border: 2px solid #393939;
 }
 
+ion-icon {
+    display: flex;
+    margin: 0px;
+    padding: 20px 20px 20px 0px;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    color: var(--ion-color-orange-tint);
+    font-size: 20px;
+}
+
 @keyframes bounce {
     0% {
         transform: translateY(0px);

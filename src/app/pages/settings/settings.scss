@@ -104,6 +104,8 @@ ion-list-header {
 
 ion-slide {
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 }
 
