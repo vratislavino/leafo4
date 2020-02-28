@@ -63,6 +63,7 @@ export class UserProvider {
 	public updateSettings(data: User, characteristics: object[] = undefined): Observable<{}> {
 		//public updateSettings(firstname: string, email: string, addressing: string, sign: number, sex: number)
 
+		console.log(characteristics);
 		if (characteristics) {
 			return this.apiRequest.post(
 				'/updateSettingsApi.php', {

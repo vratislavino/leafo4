@@ -54,13 +54,15 @@ public save() {
       console.log(array);
       this.userService.updateSettings(this.currentUserData, array).subscribe(val => {
           console.log("Updating settings message: " + val);
+          console.log(array);
           this.ac.saveLocal(this.currentUserData);
+          
+            //this.router.navigate(["/home"]);
       }, error => {
           console.log("Updating settings message: " + error);
       });
   }
 
-  this.router.navigate(["/home"]);
 }
 
 vysledek = [];

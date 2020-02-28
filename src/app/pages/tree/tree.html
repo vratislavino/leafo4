@@ -18,11 +18,11 @@
   </ion-header>
 
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <ion-grid>
     <ion-row class="white">
-      <ion-col size="6" class="first"><p text-center>Zalito dne<br />{{ wateredAt }}</p></ion-col>
-      <ion-col size="6"><p text-center>{{ remaining > 0 ? "Do dalšího jablka zbývá " + remaining + " dnů" : "Dnes si po zalití můžeš vzít jablko!" }}</p></ion-col>
+      <ion-col size="6" class="first"><p class="ion-text-center">Zalito dne<br />{{ wateredAt }}</p></ion-col>
+      <ion-col size="6"><p class="ion-text-center">{{ remaining > 0 ? "Do dalšího jablka zbývá " + remaining + " dnů" : "Dnes si po zalití můžeš vzít jablko!" }}</p></ion-col>
     </ion-row>
 
     <ion-row nowrap *ngIf="false">
@@ -33,7 +33,7 @@
 
       <div class="tree" id="treediv">
           <img [src]="getCurrentTree()">
-          <img *ngFor = "let ap of apples" [src]="getSrc(ap)" [ngClass]="{'apple': true, 'collectible': ap.collectible.indexOf('ohodnoc')>-1}" [id]="'ap'+ap.id_da" (click)="appleClick(ap)" [ngStyle]="{ 'top': getY(ap.y), 'left': getX(ap.x) }"/>
+          <img *ngFor = "let ap of apples" [src]="getSrc(ap)" [ngClass]="{'apple': true, 'collectible': (ap.collectible==true ? true : (ap.collectible.indexOf('ohodnoc') > -1))}" [id]="'ap'+ap.id_da" (click)="appleClick(ap)" [ngStyle]="{ 'top': getY(ap.y), 'left': getX(ap.x) }"/>
       </div>
       <div class="konvicka">
           <img src="../assets/imgs/konvicka.png" (click)="zalij()">
