@@ -35,6 +35,15 @@ export class QuoteProvider {
     );
   }
 
+  updateSeen(id_q) : Observable<{}> {
+    return this.reqProvider.post(
+      '/updateSeenQuote.php', {
+        id_q: id_q,
+        id_u: this.ac.getUserId(),
+      }
+    );
+  }
+
   getProfileQuotes(num?:number) : Observable<{}> {
     return this.reqProvider.post(
       '/quotesApi.php', num == null ? {

@@ -8,10 +8,10 @@ export class QuoteModel {
     // optional
     category?: string;
     name?: string;
-    isnew?:boolean = false;
+    seen?:boolean = false;
     tags?: string[];
 
-    constructor(id, text, author, faved:boolean, category?, name?, tags?, isNew?) {
+    constructor(id, text, author, faved:boolean, category?, name?, tags?, seen?) {
         this.id = id;
         this.text = text;
         this.author = author;
@@ -19,7 +19,7 @@ export class QuoteModel {
         this.category = category;
         this.name = name;
         this.tags = tags;
-        this.isnew = isNew;
+        this.seen = seen;
         if(tags == undefined)
             this.tags = [];
 

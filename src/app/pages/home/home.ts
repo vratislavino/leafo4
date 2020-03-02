@@ -84,10 +84,11 @@ export class HomePage implements OnInit {
         this.router.navigate(["/login"]);
       } else {
         this.addressing = this.ac.getAddressing();
-        if(false)
-          this.checkTime().then(this.initData, ()=>this.closeApp(this)); 
-        else
-          this.initData();
+        var home = this;
+        //if(false)
+          this.checkTime().then(() => this.initData(home), ()=>this.closeApp(this)); 
+        //else
+        //  this.initData();
       }
     });
   }
@@ -172,18 +173,19 @@ export class HomePage implements OnInit {
       });
   }
 
-  initData() {
-    this.news = [];
-    this.gp.init();
-    this.tryToShowGuide(this.gp);
+  initData(home) {
+    console.log(this);
+    home.news = [];
+    home.gp.init();
+    home.tryToShowGuide(this.gp);
     
     forkJoin([
-      this.rp.getYearNotifications(),
-      this.qp.getHistoryQuotes(1),
-      this.rp.getDayData(new Date(),true),
-      this.userService.getRatedDays(),
-      this.qp.getLastAdviceDate(),
-      this.userService.getRegisterDate()
+      home.rp.getYearNotifications(),
+      home.qp.getHistoryQuotes(1),
+      home.rp.getDayData(new Date(),true),
+      home.userService.getRatedDays(),
+      home.qp.getLastAdviceDate(),
+      home.userService.getRegisterDate()
     ]).subscribe(res => {
       console.log(res);
       /*
@@ -199,27 +201,27 @@ export class HomePage implements OnInit {
       console.log(res[4]);
 */
       var rating = Object.values(res[2])[0]["rating"];
-      var isNew = res[1][0]["isNew"] = 1;
+      var isNew = res[1][0]["seen"] == 0;
       var s = "";
-      this.ratedDaysInTotal = res[3]["count"];
+      home.ratedDaysInTotal = res[3]["count"];
       var lastDateOfAdvice = res[4]['date'];
       var dd:Date;
       var diff:number = 1000;
 
       var registerDate = res[5][0]['date'];
-      this.registrationDate = this.dp.toDate(registerDate);
-      this.daysRegistrationDiff = this.dp.getDaysDiff(this.registrationDate, new Date());
+      home.registrationDate = home.dp.toDate(registerDate);
+      home.daysRegistrationDiff = home.dp.getDaysDiff(home.registrationDate, new Date());
       if(lastDateOfAdvice != "none") {
-        diff = this.dp.getDaysDiff(this.dp.toDate(lastDateOfAdvice), new Date());
+        diff = home.dp.getDaysDiff(home.dp.toDate(lastDateOfAdvice), new Date());
       }
 
-      if(this.isAdviceEnabled() && (diff < 3 || lastDateOfAdvice == "none")) {
-        this.news.push({title: "Můžeš si vzít radu!", text: "Na stránce s radami si nyní můžeš nechat poradit!", page: "advices", color: "yellow"});
+      if(home.isAdviceEnabled() && (diff < 3 || lastDateOfAdvice == "none")) {
+        home.news.push({title: "Můžeš si vzít radu!", text: "Na stránce s radami si nyní můžeš nechat poradit!", page: "advices", color: "yellow"});
       }
         if(isNew)
-        this.news.push({title: "Nový citát!", text: "Na stránce citátů máš nový citát!", page: "quotes", color: "green"});
+        home.news.push({title: "Nový citát!", text: "Na stránce citátů máš nový citát!", page: "quotes", color: "green"});
       if(rating < 0) {
-        this.news.push({title: "Hodnocení dne!", text: "Nemáš hodnocený den!", page: "tree", color: "red"});
+        home.news.push({title: "Hodnocení dne!", text: "Nemáš hodnocený den!", page: "tree", color: "red"});
       }
 
       /*
@@ -228,9 +230,9 @@ export class HomePage implements OnInit {
       this.lip.createAndShowLeafoBubble(this.vc, s, "Novinky");
       */
 
-      if(this.platform.is("cordova")) {
-        this.np.replanUserNotifications(res[0]);
-        this.np.replanRatingNotifications();
+      if(home.platform.is("cordova")) {
+        home.np.replanUserNotifications(res[0]);
+        home.np.replanRatingNotifications();
       } else {
         console.log("should plan on android!");
       }

@@ -34,8 +34,9 @@ export class QuoteComponent {
 
   ngAfterViewInit() {
     
+    console.log(this.quoteObj);
     let a = document.getElementById("qt"+this.quoteObj.id);
-    if(this.quoteObj.isnew) {
+    if(this.quoteObj.seen == false) {
       a.classList.add("isnew");
     }
   }

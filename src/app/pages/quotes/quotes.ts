@@ -28,6 +28,7 @@ export class QuotesPage {
 
   historyQuotes: QuoteModel[] = [];
   favoriteQuotes: QuoteModel[] = [];
+  shouldUpdateSeen = -1;
 
   constructor( 
     private platform: Platform,
@@ -100,6 +101,7 @@ export class QuotesPage {
       keys.forEach((key) => {
         var quoteObj = data[key];
         var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(this.ac.getAddressing());
+        qm.seen = quoteObj['seen'];
         this.favoriteQuotes.push(qm);
       });
 
@@ -124,12 +126,19 @@ export class QuotesPage {
         //console.log(data[key]);
         
         var qm: QuoteModel = new QuoteModel(quoteObj["id_q"], quoteObj["quote"], quoteObj["author"], quoteObj["faved"]).complete(this.ac.getAddressing());
-        if(isfirst) {
-          isfirst = !isfirst;
-          qm.isnew = true;
+        qm.seen = quoteObj['seen'];
+        if(this.shouldUpdateSeen==-1 && qm.seen == false) {
+          this.shouldUpdateSeen = qm.id;
         }
         this.historyQuotes.push(qm);
       });
+
+      if(this.shouldUpdateSeen) {
+        this.quoteProvider.updateSeen(this.shouldUpdateSeen).subscribe((data) => {
+          console.log(this.shouldUpdateSeen + ": " + " seen updated!")
+        }, (err) => {console.log(err)});
+      }
+
     }, (err) => {
       console.log(err);
     });

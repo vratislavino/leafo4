@@ -190,7 +190,9 @@ export class TreePage {
         console.log("Clicked yes!");
         this.rp.collectApple(appleId, this.lip.getAnswers()).subscribe((data) => {
 
-
+          console.log("APPLE BUSINESS");
+          console.log(data);
+          console.log(appleId);
           if (data["Answer"] != undefined) {
             this.onAppleTaken(apple);
           } else {
