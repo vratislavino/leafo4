@@ -1,10 +1,10 @@
 import { LeafoInfoProvider } from './../../providers/leafo-info/leafo-info';
 import { RatingProvider } from './../../providers/rating/rating';
 import { UserProvider } from './../../providers/user/user';
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef, OnInit } from '@angular/core';
 import { AccountProvider } from '../../providers/account/account';
 import { LeafoInfoType } from '../../components/info-leafo/info-leafo';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GuideProvider } from 'src/app/providers/guide/guide';
 import { Platform } from '@ionic/angular';
 import { DateService } from 'src/app/providers/date/date.service';
@@ -22,11 +22,13 @@ import { DateService } from 'src/app/providers/date/date.service';
   styleUrls: ['tree.scss'],
   providers: [AccountProvider]
 })
-export class TreePage {
+export class TreePage implements OnInit {
   newWatering = 0;
   lastWatering: Date;
   currentWatering: number = 0;
   
+  registeredAtDate:Date
+  wateredAtDate:Date;
   wateredAt: string;
   apples = [];
   remaining = 0;
@@ -43,6 +45,7 @@ export class TreePage {
 
   constructor(
     private platform:Platform,
+    private route: ActivatedRoute,
     private router:Router,
     public ac: AccountProvider,
     public userService: UserProvider,
@@ -55,6 +58,29 @@ export class TreePage {
         this.ionViewDidLoad();
       });
   }
+
+  ngOnInit() {
+    this.route.params.subscribe((params:Params) => {
+        const fromReg = parseInt(params["date"]);
+        console.log(fromReg);
+        if(fromReg===1) {
+          this.lip.createAndShowRatingBubble(this.vc, -1, "Nemáš hodnocený dnešní den!", new Date(), (rl, dt, rw)=> {
+            console.log("Review:" + rw);
+            this.rp.setDayReview(this.ds.toKeyDate(dt), rw).subscribe(()=> {
+              this.zalij();
+            });
+          });
+        } 
+    });
+    /*
+    if(this.storage.exists("video")) {
+        this.storage.get("video").then(res=> {
+            this.mediaFile = JSON.parse(res) || {};
+        });
+    } else {
+        this.mediaFile = [];
+    }*/
+}
 
   tryToShowGuide(gp) {
     let guide = gp.getAvailableGuideToSee("tree");
@@ -72,7 +98,6 @@ export class TreePage {
     this.tryToShowGuide(this.gp);
     console.log('ionViewDidLoad TreePage');
     this.initTree();
-    this.initApples();
   }
 
   ionViewDidEnter() {
@@ -92,7 +117,16 @@ export class TreePage {
       this.lastWatering = val["lastWatering"];
       this.currentWatering = val["tree_state"];
       this.wateredAt = val["wateredAt"];
+      this.wateredAtDate = this.ac.getCopyOfUser().parseDateCz(this.wateredAt);
+      this.registeredAtDate = this.ac.getCopyOfUser().registrationDate;
+      console.log("-------------------------");
+      console.log(this.registeredAtDate);
       this.newWatering = val["newWatering"];
+
+      if(this.currentWatering > 3)
+        this.initApples();
+
+
     });
   }
 
@@ -213,8 +247,8 @@ export class TreePage {
     var date = new Date();
     console.log("Date: " + date.getTime());
     // jestli je poslední zalití +23h menší jak dnešek -> jestli je dneska nezalito => můžu zalívat
-    var bool = new Date(new Date(this.lastWatering).getTime() + 1000 * 60 * 60 * 23).getTime() < new Date().getTime() ? true : false;
-    console.log("Bool: " + bool);
+    //var bool = new Date(new Date(this.lastWatering).getTime() + 1000 * 60 * 60 * 23).getTime() < new Date().getTime() ? true : false;
+    //console.log("Bool: " + bool);
     console.log("LastWatering: " + this.lastWatering);
     let konev: HTMLElement = <HTMLElement>document.getElementsByClassName('konvicka')[0];
     let kapky: HTMLElement = <HTMLElement>document.getElementsByClassName('kapky')[0];
@@ -228,27 +262,50 @@ export class TreePage {
     }, 1000);
     console.log(konev);
     console.log(kapky);
-    if (bool) {
       this.userService.setTreeState().subscribe(succ => {
-        if(succ["Error"] != undefined) { // není hodnocený den!
-          this.lip.createAndShowRatingBubble(this.vc, -1, "Nemáš hodnocený dnešní den!", new Date(), (rl, dt, rw)=> {
-            this.rp.setDayReview(this.ds.toKeyDate(dt), rw).subscribe(()=> {
-              this.zalij();
+        if(succ["Error"] != undefined) { // je tam errorek!
+          if(succ["ErrorCode"] == 1) {
+            this.lip.createAndShowLeafoBubble(this.vc, succ["Error"],"Pozor!");
+          } else if(succ["ErrorCode"] == 2) {
+            this.lip.createAndShowRatingBubble(this.vc, -1, succ["Error"], new Date(), (rl, dt, rw)=> {
+              this.rp.setDayReview(this.ds.toKeyDate(dt), rw).subscribe(()=> {
+                this.zalij();
+              });
             });
-          });
+          } else {
+            this.lip.createAndShowLeafoBubble(this.vc, "Něco se pokazilo...", "Omlouvám se");
+          }
         } else {
           this.initTree();
           this.initApples();
         }
       }, error => {
-        console.log("Set tree state: error");
+        console.log(error);
       });
-    } else {
-      this.lip.createAndShowLeafoBubble(this.vc, "Dnes už je zalito!", "Pozor!");
-    }
   }
 
   getCurrentTree() {
     return this.userService.getCurrentTree(this.currentWatering);
+  }
+
+  getRemaining() {
+    if(this.remaining == 0)
+      return "Dnes si můžeš vzít jablko!";
+    if(this.remaining == -1) 
+      return "Dnes už sis vzal jablko!";
+
+    return "Do dalšího jablka zbývá " + this.remaining + " dnů";
+  }
+
+  getZalito() {
+    if(this.wateredAtDate == undefined || this.registeredAtDate == undefined)
+      return "";
+    
+//console.log(this.wateredAtDate);
+//console.log(this.registeredAtDate);
+
+    if(this.currentWatering > 0)
+      return this.wateredAt;
+   return this.wateredAtDate.getTime() <= this.registeredAtDate.getTime() ? "nikdy" : this.wateredAt;
   }
 }

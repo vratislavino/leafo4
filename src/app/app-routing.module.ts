@@ -36,7 +36,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/calendar/calendar.module').then(m => m.CalendarPageModule)
   },
   {
-    path: 'tree',
+    path: 'tree/:date',
     loadChildren: () => import('./pages/tree/tree.module').then(m => m.TreePageModule)
   },
   {
@@ -69,7 +69,7 @@ const routes: Routes = [
   { path: 'testing', 
     loadChildren: () => import('./pages/testing/testing.module').then(m => m.TestingPageModule) 
   },
-  { path: 'tree/how-to',  
+  { path: 'how-to',  
   loadChildren: () => import('./pages/how-to/how-to.module').then(m=>m.HowToPageModule) 
   },
   { path: 'calendar/period',  

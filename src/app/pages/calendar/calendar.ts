@@ -235,6 +235,7 @@ export class CalendarPage {
         review = 0;
       if (new Date(this.currentDay.keyDate + " 0:0").getTime() <= new Date().getTime()) {
         this.reviewText = "Tap!";
+        console.log("Review: " +  review);
         this.rp.setDayReview(this.currentDay.keyDate, review).subscribe((data) => {
           console.log(data);
           if (this.currentDay)

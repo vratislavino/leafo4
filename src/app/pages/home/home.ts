@@ -12,6 +12,8 @@ import { LeafoInfoType } from 'src/app/components/info-leafo/info-leafo';
 import { GuideProvider } from 'src/app/providers/guide/guide';
 import { forkJoin } from 'rxjs';
 import { DateService } from 'src/app/providers/date/date.service';
+import { Network } from '@ionic-native/network/ngx';
+import { HomePageModule } from './home.module';
 
 /**
  * Generated class for the HomePage page.
@@ -28,7 +30,6 @@ import { DateService } from 'src/app/providers/date/date.service';
 })
 export class HomePage implements OnInit {
 
-
   addressing = "";
   private subscription;
 
@@ -36,12 +37,18 @@ export class HomePage implements OnInit {
   private quoteObtained = false;
   private horoscopeObtained = false;
 
+  errors = "";
+
   registrationDate : Date;
   daysNeededForDepka = 30;
   daysRegistrationDiff = 0;
 
   ratedDaysNeededForAdvices = 5;
   ratedDaysInTotal = 0;
+
+  testingDays = 30;
+
+  private inited: boolean;
 
   private news=[
     {
@@ -62,11 +69,12 @@ export class HomePage implements OnInit {
     private np:NotificationProvider,
     private lip: LeafoInfoProvider,
     private vc: ViewContainerRef,
-    private gp: GuideProvider) {
+    private gp: GuideProvider,
+    private network: Network) {
   }
 
   ngOnInit(): void {
-
+    this.ionViewDidEnter();
   }
 
   isDepkaEnabled() {
@@ -78,7 +86,24 @@ export class HomePage implements OnInit {
   }
 
   ionViewDidEnter() {
+
     this.ac.ready().then(() => {
+
+        console.log(this.network.type);
+        if(this.network.type == "none") {
+          this.errors += "not connected!";
+        }
+        let qwe = this;
+        console.log(this.network);
+        let connectSubscription = this.network.onConnect().subscribe(() => {
+          console.log('network connected!');
+          // We just got a connection but we need to wait briefly
+           // before we determine the connection type. Might need to wait.
+          // prior to doing any api requests as well.
+          setTimeout(() => {
+              qwe.errors += this.network.type;
+          }, 3000);
+        });
 
       if (!this.ac.isLoggedIn()) {
         this.router.navigate(["/login"]);
@@ -97,7 +122,7 @@ export class HomePage implements OnInit {
     if(this.isAdviceEnabled()) {
       this.router.navigate(["/advices"]);
     } else {
-      this.lip.createAndShowLeafoBubble(this.vc, "Ještě není možné přejít na rady! Ještě ti zbývá ohodnotit " +(this.ratedDaysNeededForAdvices - this.ratedDaysInTotal) + " dní", "Pozor!");
+      this.lip.createAndShowLeafoBubble(this.vc, "Pro odemknutí této funkce musíš mít ohodnocených " + this.ratedDaysNeededForAdvices + " dnů! Ještě ti zbývá ohodnotit " +(this.ratedDaysNeededForAdvices - this.ratedDaysInTotal) + " dní", "Pozor!");
     }
   }
 
@@ -106,7 +131,7 @@ export class HomePage implements OnInit {
       this.router.navigate(["/depression"]);
     } else {
       if(this.daysRegistrationDiff < this.daysNeededForDepka) {
-        this.lip.createAndShowLeafoBubble(this.vc, "Funkce depka se ti otevře za 30 dní používání aplikace!");
+        this.lip.createAndShowLeafoBubble(this.vc, "Funkce depka se ti otevře po 30 dnech používání aplikace!");
       } else {
         // if deprese byla využita v posledních 30 dnech....
       }
@@ -141,17 +166,21 @@ export class HomePage implements OnInit {
       var dates = date.split("-");
       var times = time.split(":");
   
-      var dat = new Date(dates[0], dates[1], dates[2], times[0], times[1], times[2]);
+      var dat = new Date(dates[0], dates[1]-1, dates[2], times[0], times[1], times[2]);
   
+      console.log(dat);
+      console.log(new Date());
+
       var diff = new Date().getTime() - dat.getTime();
+
       var days = diff / 1000 / 60 / 60 / 24;
+      console.log("DNŮ TESTOVÁNÍ: ");
       console.log(days);
-        if(days > 28) {
+        if(days > this.testingDays) {
           reject();
         } else {
           resolve();
         }
-  
       }, err => {
         console.log(err);
         reject(err);
@@ -176,6 +205,7 @@ export class HomePage implements OnInit {
   initData(home) {
     console.log(this);
     home.news = [];
+    //home.gp.deleteAllViewed();
     home.gp.init();
     home.tryToShowGuide(this.gp);
     
@@ -194,12 +224,12 @@ export class HomePage implements OnInit {
       console.log("Last Quote: ");
       console.log(res[1]);
       console.log("Today Data: ");
-      console.log(res[2]);
+      console.log(res[2]);*/  
       console.log("Rated Days Count");
       console.log(res[3]);
       console.log("LastAdviceDate");
       console.log(res[4]);
-*/
+
       var rating = Object.values(res[2])[0]["rating"];
       var isNew = res[1][0]["seen"] == 0;
       var s = "";
@@ -215,13 +245,19 @@ export class HomePage implements OnInit {
         diff = home.dp.getDaysDiff(home.dp.toDate(lastDateOfAdvice), new Date());
       }
 
-      if(home.isAdviceEnabled() && (diff < 3 || lastDateOfAdvice == "none")) {
+      console.log("ROZDÍL VE DNECH");
+      console.log(diff);
+      console.log("IS ENABLED");
+      console.log(home.isAdviceEnabled());
+      home.news = [];
+  
+      if(home.isAdviceEnabled() && (diff > 3 || lastDateOfAdvice == "none")) {
         home.news.push({title: "Můžeš si vzít radu!", text: "Na stránce s radami si nyní můžeš nechat poradit!", page: "advices", color: "yellow"});
       }
         if(isNew)
         home.news.push({title: "Nový citát!", text: "Na stránce citátů máš nový citát!", page: "quotes", color: "green"});
       if(rating < 0) {
-        home.news.push({title: "Hodnocení dne!", text: "Nemáš hodnocený den!", page: "tree", color: "red"});
+        home.news.push({title: "Hodnocení dne!", text: "Nemáš hodnocený den!", page: "tree//1", color: "red"});
       }
 
       /*
@@ -240,7 +276,12 @@ export class HomePage implements OnInit {
   }
 
   navigate(page) {
-    this.router.navigate(["/"+page]);
+    if(page.indexOf("//") > -1) {
+      let pole = page.split("//");
+      this.router.navigate(["/"+pole[0], pole[1]]);
+    } else {
+      this.router.navigate(["/"+page]);
+    }
   }
 
   tryToCallDepka() {

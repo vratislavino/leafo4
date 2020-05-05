@@ -7,6 +7,7 @@ export class User {
     public firstname: string;
     public lastname: string;
     public addressing: string;
+    public registrationDate: Date;
     public sign: number;
     public sex: number;
 
@@ -34,11 +35,15 @@ export class User {
     }
 
     public extractUser(data: any) {
+
+        //console.log("Je "+data.registrationDate+" data string? " + (typeof data.registrationDate == "string"));
+
         this.fillUser(
             data.id,
             data.level,
             data.username,
             data.addressing,
+            (typeof data.registrationDate) == "string" ? this.parseDate(data.registrationDate) : data.registrationDate,
             data.firstname,
             data.surname,
             data.sign,
@@ -46,12 +51,30 @@ export class User {
         );
     }
 
-    public fillUser(id: number, level: number, username: string, addressing: string, firstname: string, lastname: string, sign: number, sex: number) {
+    public parseDate(date:string) : Date {
+
+        let pole = date.split("-");
+        //console.log(pole);
+        var d = new Date(parseInt(pole[0]), parseInt(pole[1]), parseInt(pole[2]));
+        //console.log(d);
+        return d;
+
+    }
+    
+    public parseDateCz(date:string) : Date {
+
+        let pole = date.split(".");
+        return new Date(parseInt(pole[2]), parseInt(pole[1]), parseInt(pole[0]));
+
+    }
+
+    public fillUser(id: number, level: number, username: string, addressing: string, registrationDate: Date, firstname: string, lastname: string, sign: number, sex: number) {
         this.id = id;
         this.level = level;
     	this.username = username;
     	this.firstname = firstname;
-    	this.lastname = lastname;
+        this.lastname = lastname;
+        this.registrationDate = registrationDate;
         this.addressing = addressing;
         this.sign = sign;
         this.sex = sex;
@@ -80,9 +103,13 @@ export class User {
     public setAddressing(val: string) {
         this.addressing = val;
     }
-
+    
     public getAddressing(): string {
     	return this.addressing;
+    }
+    
+    public getRegistrationDate(): Date {
+    	return this.registrationDate;
     }
 
     public setUsername(val: string) {

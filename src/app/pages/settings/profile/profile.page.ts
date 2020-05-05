@@ -90,17 +90,18 @@ export class ProfilePage implements OnInit {
   upload(source) {
 
     let options = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: source,
-      saveToPhotoAlbum: true,
-      correctOrientation: true
+      saveToPhotoAlbum: false,
+      correctOrientation: false
     };
     this.camera.getPicture(options).then((imageData) => {
 
       this.loading.present();
+      this.infoLeafo.createAndShowLeafoBubble(this.vc, imageData, "Recovered image data");
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.userService.setProfileImage(base64Image).subscribe(mess => {
         this.ac.setProfileImage(base64Image).then(() => {
@@ -111,11 +112,11 @@ export class ProfilePage implements OnInit {
         });
         this.showToast(mess);
       }, err => {
-        this.infoLeafo.createAndShowLeafoBubble(this.vc, err, "Chyba1", LeafoInfoType.Sad);
+        this.infoLeafo.createAndShowLeafoBubble(this.vc, err.message, "Chyba1", LeafoInfoType.Sad);
         //this.showToast("SET PROFILE IMAGE " + err.message);
       });
     }).catch(err => {
-      this.infoLeafo.createAndShowLeafoBubble(this.vc, err, "Chyba2", LeafoInfoType.Sad);
+      this.infoLeafo.createAndShowLeafoBubble(this.vc, err.message, "Chyba2", LeafoInfoType.Sad);
 
       console.log(err.message);
       //this.showToast("GET PICTURE " + err.message);

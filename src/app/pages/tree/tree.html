@@ -12,7 +12,7 @@
       </ion-buttons>
       <ion-title>Strom štěstí</ion-title>
       <ion-buttons slot="end">
-        <ion-button routerLink="/tree/how-to"><ion-icon name="help"></ion-icon></ion-button>
+        <ion-button routerLink="/how-to"><ion-icon name="help"></ion-icon></ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
@@ -21,8 +21,8 @@
 <ion-content class="ion-padding">
   <ion-grid>
     <ion-row class="white">
-      <ion-col size="6" class="first"><p class="ion-text-center">Zalito dne<br />{{ wateredAt }}</p></ion-col>
-      <ion-col size="6"><p class="ion-text-center">{{ remaining > 0 ? "Do dalšího jablka zbývá " + remaining + " dnů" : "Dnes si po zalití můžeš vzít jablko!" }}</p></ion-col>
+      <ion-col size="6" class="first"><p class="ion-text-center">Zalito dne<br />{{ getZalito() }}</p></ion-col>
+      <ion-col size="6"><p class="ion-text-center">{{ getRemaining() }}</p></ion-col>
     </ion-row>
 
     <ion-row nowrap *ngIf="false">
@@ -36,7 +36,7 @@
           <img *ngFor = "let ap of apples" [src]="getSrc(ap)" [ngClass]="{'apple': true, 'collectible': (ap.collectible==true ? true : (ap.collectible.indexOf('ohodnoc') > -1))}" [id]="'ap'+ap.id_da" (click)="appleClick(ap)" [ngStyle]="{ 'top': getY(ap.y), 'left': getX(ap.x) }"/>
       </div>
       <div class="konvicka">
-          <img src="../assets/imgs/konvicka.png" (click)="zalij()">
+          <img src="../assets/imgs/konvicka.png">
       </div>
       <div class="kapky">
           <img src="../assets/imgs/kapky.png">
@@ -47,5 +47,8 @@
         <img src="../assets/imgs/List.png" class="third">
       </div>
       <img src="../assets/imgs/trava.png" class="grass" />
+      
+      <div class="clickable-konvicka" (click)="zalij()">
+    </div>
     </ion-grid>
 </ion-content>

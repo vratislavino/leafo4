@@ -52,12 +52,17 @@ public save() {
   if(/*this.isWorthUpdating(array) || */true) {
       console.log("SENDING");
       console.log(array);
+    
+      for(let i = 0; i < array.length; i++) {
+          array[i].name = this.changeToWomanIfNeeded(array[i].name,'á','ý');
+      }
+
       this.userService.updateSettings(this.currentUserData, array).subscribe(val => {
           console.log("Updating settings message: " + val);
           console.log(array);
           this.ac.saveLocal(this.currentUserData);
           
-            //this.router.navigate(["/home"]);
+            this.router.navigate(["/home"]);
       }, error => {
           console.log("Updating settings message: " + error);
       });
@@ -76,12 +81,10 @@ fillArray() {
         var keys = Object.keys(val);
         this.cols = [];
         for (var i = 0; i < keys.length; i++) {
+            
             var name = val[keys[i]]["name"];
-            if(this.currentUserData.getSex() == 2) {
-                var charec = name.substring(name.length - 1, name.length);
-                if(charec == 'ý')
-                name = name.substring(0, name.length - 1) + 'á';
-            }
+            name = this.changeToWomanIfNeeded(name,'ý','á');
+            
             var obj = {
                 id_ch: val[keys[i]]["id_ch"],
                 name: name,
@@ -108,11 +111,7 @@ fillArray() {
             if (keysU.length > 0) {
                 for (var j = 0; j < keysU.length; j++) {
                     var name = valU[keysU[j]]["name"];
-                    if(this.currentUserData.getSex() == 2) {
-                        var charec = name.substring(name.length - 1, name.length);
-                        if(charec == 'ý')
-                            name = name.substring(0, name.length - 1) + 'á';
-                    }
+                    name = this.changeToWomanIfNeeded(name,'ý','á');
                     var obj = {
                         name: name,
                         active: false
@@ -136,6 +135,15 @@ fillArray() {
         console.log("ErrorArray: " + err);
         console.log(err);
     });
+}
+
+changeToWomanIfNeeded(name, originc, newc) : string {
+    if(this.currentUserData.getSex() == 2) {
+        var charec = name.substring(name.length - 1, name.length);
+        if(charec == originc)
+            name = name.substring(0, name.length - 1) + newc;
+    }
+    return name;
 }
 
 getCountOfActive() {

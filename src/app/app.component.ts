@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Platform, Events, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AccountProvider } from './providers/account/account';
+import { Network, Connection } from '@ionic-native/network/ngx';
 import { SystemInfoProvider } from './providers/system-info/system-info';
 import { NotificationProvider } from './providers/notification/notification';
 import { Router } from '@angular/router';
@@ -42,7 +42,8 @@ export class AppComponent implements OnInit {
     public systemInfoService : SystemInfoProvider,
     public notifProivder : NotificationProvider,
     public menuCtrl: MenuController, 
-    public userService:UserProvider
+    public userService:UserProvider,
+    private network: Network
   ) {
     this.initializeApp();
     this.listenToLoginEvents();

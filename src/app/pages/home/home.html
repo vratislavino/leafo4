@@ -20,7 +20,10 @@
 
 
 <ion-content padding text-center>
-    <div class="jc">
+  <p>
+  {{ errors }}
+  </p>
+  <div class="jc">
       <h1>Vítej, {{ addressing }}</h1>
       
         <ion-card *ngFor="let item of news" class="news" [color]="item.color" (click)="navigate(item.page)">
@@ -36,7 +39,7 @@
       
       <ion-grid>
         <ion-row>
-          <ion-col routerLink="/tree" size="6">
+          <ion-col routerLink="/tree/0" size="6">
             <ion-button color="green" class="tree" expand="full">
               <span>Strom</span>
               <ion-icon name="leaf"></ion-icon>

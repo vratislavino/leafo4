@@ -166,7 +166,7 @@ getMonthDataByMoment(start, end, ratingOnly):Observable<{}> {
       '/setRatings.php', {
         id_u: this.ac.getUserId(),
         date: date,
-        rating: rating
+        rating: rating == 0 ? 101 : rating
       });
   }
 /*

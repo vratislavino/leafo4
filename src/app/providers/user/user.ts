@@ -126,6 +126,7 @@ export class UserProvider {
 				//this.wateredAt = date.getDay() + ". " + (date.getMonth() + 1) + ". " + date.getFullYear();
 				let wateredAt = this.parseDate(lastWatering);
 
+				
 				if (new Date(date.getTime() + 1000 * 60 * 60 * 24 * 7).getTime() < new Date().getTime()) {
 					currentWatering = -1;
 					console.log("Starší o 7 dní");
@@ -246,13 +247,13 @@ export class UserProvider {
 		});
 	}
 
-	public setOvulationData(date, length, lasting) {
+	public setOvulationData(date, length, period_end) {
 		return this.apiRequest.post(
 			'/setOvulationData.php', {
 			id_u: this.ac.getUserId(),
 			date: date,
 			length: length,
-			lasting: lasting
+			period_end: period_end
 		});
 	}
 	/*

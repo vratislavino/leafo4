@@ -42,7 +42,7 @@ export class GuideProvider {
         order: 0,
         seen: false,
         headline: "Stránka citátů",
-        text: "Zde najdeš každý den nový citát! Budeš o něm upozorněn už na hlavní stránce. Přetažením doleva si můžeš uložit citát do oblíbených. Pozor! V historii můžeš mít jen 10 citátů, o nejstarší přijdeš!"
+        text: "Zde najdeš každý den nový citát! Budeš o něm upozorněn už na hlavní stránce. Citát si můžeš přidat do oblíbených. Pozor! V historii můžeš mít jen 10 citátů, o nejstarší přijdeš!"
       }]
     }, {
       page: "review",
@@ -104,6 +104,10 @@ export class GuideProvider {
 
   constructor(private motStorage: MotStorageProvider) {
 
+  }
+
+  deleteAllViewed() {
+    this.motStorage.remove("allguides");
   }
 
   init() {

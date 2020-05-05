@@ -21,7 +21,7 @@ export class NotificationProvider {
 
   replanRatingNotifications() {
     this.localNotif.hasPermission().then(() => {
-      this.localNotif.clear(this.idsForRating).then(() => {
+      this.localNotif.clear(this.idsForRating.map(x=>x.id)).then(() => {
 
         let arr = [];
 
@@ -96,6 +96,7 @@ export class NotificationProvider {
   }
 
   private removeNotifs(ids: Array<object>) {
+    console.log("-- REMOVING NOTIFICATIONS --")
     var idss = ids.map(a => a["id"]);
     console.log(idss);
     this.localNotif.clear(idss);

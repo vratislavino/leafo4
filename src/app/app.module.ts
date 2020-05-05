@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 // 3rd party packages
 //import { ChartsModule } from 'ng2-charts';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Network } from '@ionic-native/network/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { IonicStorageModule } from '@ionic/storage';
@@ -114,6 +115,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     NotificationProvider,
     DateService,
     GuideProvider,
+    Network,
     {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}
   ]
 })
