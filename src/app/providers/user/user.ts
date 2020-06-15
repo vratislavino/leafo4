@@ -168,6 +168,14 @@ export class UserProvider {
 		});
 	}
 
+	getIgnoringRatedDays() {
+		console.log("Tady");
+		return this.apiRequest.post(
+			'/getIgnoringRatedDays.php', {
+			id_u: this.ac.getUserId()
+		});
+	}
+
 	getCurrentTree(currentWatering) {
 		const path = "../assets/imgs/";
 		if (currentWatering == -1)

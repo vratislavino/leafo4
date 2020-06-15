@@ -214,7 +214,7 @@ export class HomePage implements OnInit {
       home.rp.getYearNotifications(),
       home.qp.getHistoryQuotes(1),
       home.rp.getDayData(new Date(),true),
-      home.userService.getRatedDays(),
+      home.userService.getIgnoringRatedDays(),
       home.qp.getLastAdviceDate(),
       home.userService.getRegisterDate()
     ]).subscribe(res => {
