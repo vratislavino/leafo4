@@ -163,7 +163,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     return "r"+ day.details.rating;
   }
 
-  getOvulation(ovulation) {
+    getOvulation(ovulation) {
     if(ovulation == null || ovulation == "") return "";
     if(ovulation == "red" || ovulation == "red-start") return "tint";
     if(ovulation == "plodny_den") return "venus";
@@ -178,5 +178,22 @@ export class CalendarComponent implements OnInit, OnChanges {
     if(details.apple[app] != undefined)
       return true;
     return false;
-  }
+    }
+
+    showNote(day) {
+        //console.log(day);
+        if (day.notes == undefined)
+            return false;
+        if (day.ovulation != undefined && day.ovulation != '') {
+            return day.notes.length > 1;
+        } else {
+            return day.notes.length > 0;
+        }
+    }
+
+    showNotification(day) {
+        if (day.notifications == undefined)
+            return false;
+        return day.notifications.length > 0;
+    }
 }

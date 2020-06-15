@@ -15,12 +15,14 @@
       <div *ngIf="downloaded">
         <ion-row *ngFor="let week of weeks; let wi=index" class="day-nums">
           <ion-col *ngFor="let day of week; let di=index" (click)="selectDate(day)">
-          	<div class="day-apple" *ngIf="day.details!=undefined" >
-              <fa-icon color="orange" *ngIf="day.ovulation != undefined && day.ovulation != ''" [icon]='getOvulation(day.ovulation)'></fa-icon>
-          		<!--<ion-icon color="orange" [name]="getOvulation(day.ovulation)"></ion-icon>-->
-          		<img *ngIf="getApple(day.details, 'id_ra')" src="./../assets/imgs/aNormal.png" />
-          		<img *ngIf="getApple(day.details, 'id_ga')" src="./../assets/imgs/aGolden.png" />
-          	</div>
+              <div class="day-apple" *ngIf="day.details!=undefined">
+                  <fa-icon color="orange" *ngIf="day.details.ovulation != undefined && day.details.ovulation != ''" [icon]='getOvulation(day.details.ovulation)'></fa-icon>
+                  <fa-icon color="orange" *ngIf="showNote(day.details)" icon="sticky-note"></fa-icon>
+                  <fa-icon color="orange" *ngIf="showNotification(day.details)" icon="bell"></fa-icon>
+                  <!--<ion-icon color="orange" [name]="getOvulation(day.ovulation)"></ion-icon>-->
+                  <img *ngIf="getApple(day.details, 'id_ra')" src="./../assets/imgs/aNormal.png" />
+                  <img *ngIf="getApple(day.details, 'id_ga')" src="./../assets/imgs/aGolden.png" />
+              </div>
             <div class="day-num disabled-days" *ngIf="!isSelectedMonth(day.mDate)">
               <span class="date-text">{{ day.mDate.date() }} </span>
             </div>

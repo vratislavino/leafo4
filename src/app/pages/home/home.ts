@@ -89,6 +89,7 @@ export class HomePage implements OnInit {
 
     this.ac.ready().then(() => {
 
+        /*
         console.log(this.network.type);
         if(this.network.type == "none") {
           this.errors += "not connected!";
@@ -104,7 +105,7 @@ export class HomePage implements OnInit {
               qwe.errors += this.network.type;
           }, 3000);
         });
-
+        */
       if (!this.ac.isLoggedIn()) {
         this.router.navigate(["/login"]);
       } else {

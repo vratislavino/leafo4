@@ -90,33 +90,36 @@ export class ProfilePage implements OnInit {
   upload(source) {
 
     let options = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: source,
       saveToPhotoAlbum: false,
-      correctOrientation: false
+      correctOrientation: true
     };
+
+    var prof = this;
+
     this.camera.getPicture(options).then((imageData) => {
 
-      this.loading.present();
-      this.infoLeafo.createAndShowLeafoBubble(this.vc, imageData, "Recovered image data");
+      //this.loading.present();
+      //prof.infoLeafo.createAndShowLeafoBubble(this.vc, imageData, "Recovered image data");
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.userService.setProfileImage(base64Image).subscribe(mess => {
-        this.ac.setProfileImage(base64Image).then(() => {
-          this.userImage = base64Image;
+      prof.userService.setProfileImage(base64Image).subscribe(mess => {
+        prof.ac.setProfileImage(base64Image).then(() => {
+          prof.userImage = base64Image;
           //console.log(this.userImage);
-          this.loading.dismiss();
-          this.showToast("Profilový obrázek uložen");
+          //this.loading.dismiss();
+          prof.showToast("Profilový obrázek uložen");
         });
-        this.showToast(mess);
+        prof.showToast(mess);
       }, err => {
-        this.infoLeafo.createAndShowLeafoBubble(this.vc, err.message, "Chyba1", LeafoInfoType.Sad);
+        prof.infoLeafo.createAndShowLeafoBubble(prof.vc, err.message, "Chyba1", LeafoInfoType.Sad);
         //this.showToast("SET PROFILE IMAGE " + err.message);
       });
     }).catch(err => {
-      this.infoLeafo.createAndShowLeafoBubble(this.vc, err.message, "Chyba2", LeafoInfoType.Sad);
+      prof.infoLeafo.createAndShowLeafoBubble(prof.vc, err.message, "Chyba2", LeafoInfoType.Sad);
 
       console.log(err.message);
       //this.showToast("GET PICTURE " + err.message);
